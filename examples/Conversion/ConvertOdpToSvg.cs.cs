@@ -3,36 +3,32 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace OdpToSvgConverter
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Input ODP file path
-        string inputPath = "input.odp";
-        // Output SVG file path
-        string outputSvgPath = "output.svg";
-
-        // Override paths with command line arguments if provided
-        if (args.Length >= 1)
+        static void Main(string[] args)
         {
-            inputPath = args[0];
-        }
-        if (args.Length >= 2)
-        {
-            outputSvgPath = args[1];
-        }
+            // Define data directory and file paths
+            string dataDir = @"C:\Data";
+            string inputOdpPath = Path.Combine(dataDir, "input.odp");
+            string outputSvgPath = Path.Combine(dataDir, "output.svg");
+            string outputPptxPath = Path.Combine(dataDir, "output.pptx");
 
-        // Load the ODP presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
+            // Load the ODP presentation
+            Presentation pres = new Presentation(inputOdpPath);
 
-        // Export the first slide to SVG
-        using (System.IO.FileStream outStream = new System.IO.FileStream(outputSvgPath, System.IO.FileMode.Create))
-        {
-            pres.Slides[0].WriteAsSvg(outStream);
+            // Export the first slide as SVG
+            using (FileStream svgStream = new FileStream(outputSvgPath, FileMode.Create))
+            {
+                pres.Slides[0].WriteAsSvg(svgStream);
+            }
+
+            // Save the presentation (required before exit)
+            pres.Save(outputPptxPath, SaveFormat.Pptx);
+
+            // Clean up
+            pres.Dispose();
         }
-
-        // Save the presentation before exiting (optional)
-        string tempSavePath = "temp.pptx";
-        pres.Save(tempSavePath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
