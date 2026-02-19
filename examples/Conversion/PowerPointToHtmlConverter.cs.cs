@@ -1,37 +1,25 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace PowerPointToHtml
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Input and output file paths
-            string inputPath = "input.pptx";
-            string outputPath = "output.html";
+        // Path to the source presentation
+        System.String inputPath = "input.pptx";
+        // Path for the generated HTML file
+        System.String outputPath = "output.html";
 
-            // Fonts to exclude from linking (none in this example)
-            string[] fontExclude = new string[0];
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-            // Create a controller that links all fonts in the presentation
-            EmbedAllFontsHtmlController embedController = new EmbedAllFontsHtmlController(fontExclude);
+        // Set HTML export options (default DPI is used)
+        Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
+        htmlOptions.SvgResponsiveLayout = true; // optional responsive layout
 
-            // Set up HTML export options with a custom formatter using the controller
-            HtmlOptions htmlOptions = new HtmlOptions
-            {
-                HtmlFormatter = HtmlFormatter.CreateCustomFormatter(embedController)
-            };
+        // Save the presentation as HTML
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
 
-            // Load the presentation
-            Presentation presentation = new Presentation(inputPath);
-
-            // Save the presentation as HTML with linked fonts
-            presentation.Save(outputPath, SaveFormat.Html, htmlOptions);
-
-            // Dispose the presentation object
-            presentation.Dispose();
-        }
+        // Release resources
+        presentation.Dispose();
     }
 }
