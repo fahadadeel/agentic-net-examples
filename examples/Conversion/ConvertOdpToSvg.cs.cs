@@ -3,16 +3,16 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace OdpToSvgConverter
+namespace ConvertOdpToSvg
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Input ODP file path (first argument) or default
+            // Input ODP file path (first argument or default)
             string inputPath = args.Length > 0 ? args[0] : "input.odp";
 
-            // Output directory for SVG files (second argument) or default
+            // Output directory for SVG files (second argument or default)
             string outputDir = args.Length > 1 ? args[1] : "output";
 
             // Ensure output directory exists
@@ -22,21 +22,22 @@ namespace OdpToSvgConverter
             }
 
             // Load the ODP presentation
-            Presentation pres = new Presentation(inputPath);
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
 
-            // Convert each slide to an individual SVG file
+            // Iterate through each slide and save as SVG
             for (int i = 0; i < pres.Slides.Count; i++)
             {
-                string svgFilePath = Path.Combine(outputDir, $"slide_{i + 1}.svg");
-                using (FileStream svgStream = new FileStream(svgFilePath, FileMode.Create))
+                Aspose.Slides.ISlide slide = pres.Slides[i];
+                string svgPath = Path.Combine(outputDir, $"slide_{i + 1}.svg");
+
+                using (FileStream outStream = new FileStream(svgPath, FileMode.Create))
                 {
-                    pres.Slides[i].WriteAsSvg(svgStream);
+                    slide.WriteAsSvg(outStream);
                 }
             }
 
-            // Save the presentation (required before exit)
-            string savedPresentationPath = Path.Combine(outputDir, "converted.pptx");
-            pres.Save(savedPresentationPath, SaveFormat.Pptx);
+            // Save the presentation (required by authoring rules)
+            pres.Save(inputPath, SaveFormat.Odp);
         }
     }
 }
