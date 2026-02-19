@@ -1,25 +1,39 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace SlideToHtmlExample
 {
-    static void Main()
+    class Program
     {
-        // Path to the source presentation
-        string inputPath = "input.pptx";
-        // Path where the HTML output will be saved
-        string outputPath = "output.html";
+        static void Main(string[] args)
+        {
+            // Input PowerPoint file path
+            string inputPath = "input.pptx";
+            // Output HTML file path for the specific slide
+            string outputPath = "slide1.html";
+            // Index of the slide to convert (0‑based)
+            int slideIndex = 0;
 
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+            // Load the source presentation
+            Presentation sourcePresentation = new Presentation(inputPath);
 
-        // Set HTML export options with responsive SVG layout
-        Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
-        htmlOptions.SvgResponsiveLayout = true;
+            // Create a new presentation that will contain only the selected slide
+            Presentation singleSlidePresentation = new Presentation();
 
-        // Save the presentation as HTML
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
+            // Insert a clone of the desired slide into the new presentation
+            singleSlidePresentation.Slides.InsertClone(0, sourcePresentation.Slides[slideIndex]);
 
-        // Release resources
-        presentation.Dispose();
+            // Configure HTML export options (responsive SVG layout)
+            HtmlOptions htmlOptions = new HtmlOptions();
+            htmlOptions.SvgResponsiveLayout = true;
+
+            // Save the single‑slide presentation as HTML
+            singleSlidePresentation.Save(outputPath, SaveFormat.Html, htmlOptions);
+
+            // Clean up resources
+            sourcePresentation.Dispose();
+            singleSlidePresentation.Dispose();
+        }
     }
 }
