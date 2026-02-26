@@ -1,78 +1,46 @@
 using System;
-using System.IO;
-using System.Drawing;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-namespace ManagePresentationText
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Define output directory
-            string outDir = "Output";
-            if (!Directory.Exists(outDir))
-                Directory.CreateDirectory(outDir);
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Get the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Add a rectangle auto shape to hold the text
+        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle,
+            50,   // x
+            50,   // y
+            400,  // width
+            300   // height
+        );
 
-            // Add a rectangle shape to hold the bullet list
-            Aspose.Slides.IAutoShape autoShape = slide.Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Rectangle, 50, 50, 500, 300);
+        // Access the text frame of the shape
+        Aspose.Slides.ITextFrame textFrame = shape.TextFrame;
 
-            // Access the text frame of the shape
-            Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
+        // Remove the default empty paragraph
+        textFrame.Paragraphs.RemoveAt(0);
 
-            // Remove the default empty paragraph
-            textFrame.Paragraphs.RemoveAt(0);
+        // Create a paragraph with numbered bullet
+        Aspose.Slides.Paragraph paragraph = new Aspose.Slides.Paragraph();
+        paragraph.Text = "Why Use Numbered Lists?";
+        paragraph.ParagraphFormat.Depth = 0;
+        paragraph.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Numbered;
+        paragraph.ParagraphFormat.Bullet.NumberedBulletStartWith = (short)1;
 
-            // Common bullet settings
-            int bulletCharCode = 8226; // •
-            float bulletIndent = 20f;
-            System.Drawing.Color bulletColor = System.Drawing.Color.Black;
+        // Add the paragraph to the text frame
+        textFrame.Paragraphs.Add(paragraph);
 
-            // First bullet point
-            Aspose.Slides.Paragraph para1 = new Aspose.Slides.Paragraph();
-            para1.Text = "Clarity";
-            para1.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Symbol;
-            para1.ParagraphFormat.Bullet.Char = Convert.ToChar(bulletCharCode);
-            para1.ParagraphFormat.Indent = bulletIndent;
-            para1.ParagraphFormat.Bullet.Color.ColorType = Aspose.Slides.ColorType.RGB;
-            para1.ParagraphFormat.Bullet.Color.Color = bulletColor;
-            para1.ParagraphFormat.Bullet.IsBulletHardColor = Aspose.Slides.NullableBool.True;
-            textFrame.Paragraphs.Add(para1);
+        // Save the presentation as PPTX
+        presentation.Save("NumberedListPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-            // Second bullet point
-            Aspose.Slides.Paragraph para2 = new Aspose.Slides.Paragraph();
-            para2.Text = "Organization";
-            para2.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Symbol;
-            para2.ParagraphFormat.Bullet.Char = Convert.ToChar(bulletCharCode);
-            para2.ParagraphFormat.Indent = bulletIndent;
-            para2.ParagraphFormat.Bullet.Color.ColorType = Aspose.Slides.ColorType.RGB;
-            para2.ParagraphFormat.Bullet.Color.Color = bulletColor;
-            para2.ParagraphFormat.Bullet.IsBulletHardColor = Aspose.Slides.NullableBool.True;
-            textFrame.Paragraphs.Add(para2);
-
-            // Third bullet point
-            Aspose.Slides.Paragraph para3 = new Aspose.Slides.Paragraph();
-            para3.Text = "Emphasis";
-            para3.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Symbol;
-            para3.ParagraphFormat.Bullet.Char = Convert.ToChar(bulletCharCode);
-            para3.ParagraphFormat.Indent = bulletIndent;
-            para3.ParagraphFormat.Bullet.Color.ColorType = Aspose.Slides.ColorType.RGB;
-            para3.ParagraphFormat.Bullet.Color.Color = bulletColor;
-            para3.ParagraphFormat.Bullet.IsBulletHardColor = Aspose.Slides.NullableBool.True;
-            textFrame.Paragraphs.Add(para3);
-
-            // Save the presentation as PPTX
-            presentation.Save(Path.Combine(outDir, "BulletListPresentation.pptx"),
-                Aspose.Slides.Export.SaveFormat.Pptx);
-
-            // Dispose the presentation object
-            presentation.Dispose();
-        }
+        // Dispose the presentation object
+        presentation.Dispose();
     }
 }
