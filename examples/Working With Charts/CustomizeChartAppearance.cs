@@ -1,30 +1,40 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
+using System.Drawing;
 
 class Program
 {
     static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
         // Access the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a pie chart to the slide
+        // Add a clustered column chart to the slide
         Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.Pie,
-            0f, 0f, 500f, 500f);
+            Aspose.Slides.Charts.ChartType.ClusteredColumn,
+            50,   // X position
+            50,   // Y position
+            500,  // Width
+            400   // Height
+        );
 
-        // Enable leader lines for data labels
-        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLeaderLines = true;
+        // Customize the chart border
+        chart.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        chart.LineFormat.Style = Aspose.Slides.LineStyle.Single;
 
-        // Customize the first data label
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowValue = true;
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowCategoryName = true;
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowPercentage = true;
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.Separator = ", ";
+        // Enable rounded corners for the chart area
+        chart.HasRoundedCorners = true;
 
-        // Save the presentation
-        pres.Save("CustomDataLabelChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Set a solid fill color for the chart area
+        chart.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        chart.FillFormat.SolidFillColor.Color = Color.LightBlue;
+
+        // Save the presentation to a PPTX file
+        presentation.Save("CustomizedChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
