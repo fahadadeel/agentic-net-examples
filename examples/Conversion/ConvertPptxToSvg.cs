@@ -3,30 +3,38 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace PPTXToSVG
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Path to the source PPTX file
-        string sourcePath = "input.pptx";
-
-        // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+        static void Main(string[] args)
         {
-            // Convert each slide to an SVG file
-            for (int i = 0; i < presentation.Slides.Count; i++)
+            // Path to the source PPTX file
+            string inputPath = "input.pptx";
+
+            // Load the presentation using the Aspose.Slides Presentation class
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
             {
-                Aspose.Slides.ISlide slide = presentation.Slides[i];
-                string svgPath = $"slide_{i + 1}.svg";
-
-                using (FileStream svgStream = File.Create(svgPath))
+                // Iterate through all slides in the presentation
+                for (int index = 0; index < presentation.Slides.Count; index++)
                 {
-                    slide.WriteAsSvg(svgStream);
-                }
-            }
+                    // Get the current slide
+                    Aspose.Slides.ISlide slide = presentation.Slides[index];
 
-            // Save the presentation before exiting
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                    // Define the output SVG file name for the current slide
+                    string svgFileName = $"slide_{index + 1}.svg";
+
+                    // Create a file stream to write the SVG content
+                    using (FileStream svgStream = File.Create(svgFileName))
+                    {
+                        // Save the slide as SVG using the WriteAsSvg method
+                        slide.WriteAsSvg(svgStream);
+                    }
+                }
+
+                // Save the presentation before exiting (as required by authoring rules)
+                presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            }
         }
     }
 }
