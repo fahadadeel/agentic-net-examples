@@ -4,29 +4,27 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Verify command‑line arguments: input file and output TIFF file
-        if (args.Length < 2)
-        {
-            Console.WriteLine("Usage: <inputFilePath> <outputTiffPath>");
-            return;
-        }
+        // Load the source PowerPoint presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        string inputFilePath = args[0];
-        string outputTiffPath = args[1];
+        // Create TIFF export options
+        Aspose.Slides.Export.TiffOptions tiffOptions = new Aspose.Slides.Export.TiffOptions();
 
-        // Load the source presentation (PPT or PPTX)
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputFilePath))
-        {
-            // Configure TIFF options to include notes on each slide
-            Aspose.Slides.Export.TiffOptions tiffOptions = new Aspose.Slides.Export.TiffOptions();
-            Aspose.Slides.Export.NotesCommentsLayoutingOptions notesLayout = new Aspose.Slides.Export.NotesCommentsLayoutingOptions();
-            notesLayout.NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull;
-            tiffOptions.SlidesLayoutOptions = notesLayout;
+        // Configure notes layout so that notes appear at the bottom of each page
+        Aspose.Slides.Export.NotesCommentsLayoutingOptions notesOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions();
+        notesOptions.NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull;
+        tiffOptions.SlidesLayoutOptions = notesOptions;
 
-            // Save the presentation as a multi‑page TIFF with notes
-            presentation.Save(outputTiffPath, Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
-        }
+        // Optional: set image resolution (DPI)
+        tiffOptions.DpiX = 200;
+        tiffOptions.DpiY = 200;
+
+        // Save the presentation as a multi‑page TIFF file with notes
+        presentation.Save("output.tiff", Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
