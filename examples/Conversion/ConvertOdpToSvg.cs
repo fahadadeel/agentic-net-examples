@@ -1,43 +1,32 @@
 using System;
 using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // Path to the source ODP file
-        string inputPath = "sample.odp";
+        var inputPath = "input.odp";
 
-        // Directory where SVG files will be saved
-        string outputDir = "SvgOutput";
-
-        // Ensure the output directory exists
-        if (!Directory.Exists(outputDir))
-        {
-            Directory.CreateDirectory(outputDir);
-        }
+        // Folder where SVG files will be saved
+        var outputFolder = "output_svg";
+        Directory.CreateDirectory(outputFolder);
 
         // Load the ODP presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-        // Convert each slide to an SVG file
-        for (int i = 0; i < presentation.Slides.Count; i++)
+        using (var pres = new Aspose.Slides.Presentation(inputPath))
         {
-            Aspose.Slides.ISlide slide = presentation.Slides[i];
-            string svgFilePath = Path.Combine(outputDir, $"slide_{i + 1}.svg");
-            using (FileStream fileStream = File.Create(svgFilePath))
+            // Convert each slide to an SVG file
+            for (int i = 0; i < pres.Slides.Count; i++)
             {
-                slide.WriteAsSvg(fileStream);
+                var svgPath = Path.Combine(outputFolder, $"slide_{i + 1}.svg");
+                using (var fs = File.Create(svgPath))
+                {
+                    pres.Slides[i].WriteAsSvg(fs);
+                }
             }
+
+            // Save the presentation before exiting
+            pres.Save("saved_output.odp", Aspose.Slides.Export.SaveFormat.Odp);
         }
-
-        // Save the presentation (required by authoring rules)
-        string savedPresentationPath = "saved_output.pptx";
-        presentation.Save(savedPresentationPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Clean up resources
-        presentation.Dispose();
     }
 }
