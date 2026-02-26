@@ -2,9 +2,9 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+public class Program
 {
-    static void Main()
+    public static void Main(string[] args)
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
@@ -19,10 +19,10 @@ class Program
         // Add a table to the slide
         Aspose.Slides.ITable table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
 
-        // Apply a built‑in style to the table
+        // Apply a predefined table style
         table.StylePreset = Aspose.Slides.TableStylePreset.MediumStyle2Accent1;
 
         // Save the presentation
-        presentation.Save("StyledTable.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("ApplyTableStyle_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
