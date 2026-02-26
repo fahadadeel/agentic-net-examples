@@ -1,26 +1,45 @@
 using System;
-using Aspose.Slides;
+using System.IO;
 
-class Program
+namespace AddFallbackFontExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Path to the external font file
+            string fontPath = "C:\\fonts\\MyFont.ttf";
+            // Path where the presentation will be saved
+            string outputPath = "C:\\output\\FallbackDemo.pptx";
 
-        // Get the fallback rules collection from the FontsManager
-        Aspose.Slides.IFontFallBackRulesCollection fallbackRules = presentation.FontsManager.FontFallBackRulesCollection;
+            // Load the font data from the file
+            byte[] fontData = System.IO.File.ReadAllBytes(fontPath);
+            // Register the external font with Aspose.Slides
+            Aspose.Slides.FontsLoader.LoadExternalFont(fontData);
 
-        // Create a new fallback rule for a Unicode range with a fallback font
-        Aspose.Slides.IFontFallBackRule fallbackRule = new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman");
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Add an additional fallback font to the rule
-        fallbackRule.AddFallBackFonts("Arial");
+            // Create a fallback rule for a Unicode range using the loaded font
+            Aspose.Slides.IFontFallBackRule fallbackRule = new Aspose.Slides.FontFallBackRule(0x0u, 0xFFFFu, "MyFont");
+            // Optionally add additional fallback fonts
+            // fallbackRule.AddFallBackFonts("AnotherFont");
 
-        // Add the rule to the collection
-        fallbackRules.Add(fallbackRule);
+            // Create a collection and add the rule
+            Aspose.Slides.IFontFallBackRulesCollection fallbackRules = new Aspose.Slides.FontFallBackRulesCollection();
+            fallbackRules.Add(fallbackRule);
 
-        // Save the presentation before exiting
-        presentation.Save("FallbackFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Assign the collection to the presentation's FontsManager
+            pres.FontsManager.FontFallBackRulesCollection = fallbackRules;
+
+            // Save the presentation
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Clear the font cache
+            Aspose.Slides.FontsLoader.ClearCache();
+
+            // Dispose the presentation
+            pres.Dispose();
+        }
     }
 }
