@@ -1,6 +1,8 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-namespace Example
+namespace DesignPresentationDefaultFont
 {
     class Program
     {
@@ -9,12 +11,15 @@ namespace Example
             // Create a new presentation
             Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Configure PDF save options to use Arial as the default font
-            Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
-            pdfOptions.DefaultRegularFont = "Arial";
+            // Set default regular font using PptxOptions (concrete SaveOptions)
+            Aspose.Slides.Export.PptxOptions pptxOptions = new Aspose.Slides.Export.PptxOptions();
+            pptxOptions.DefaultRegularFont = "Arial";
 
-            // Save the presentation as PDF with the specified default font
-            presentation.Save("PresentationWithArial.pdf", Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+            // Save the presentation with the specified default font
+            presentation.Save("DefaultFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx, pptxOptions);
+
+            // Dispose the presentation
+            presentation.Dispose();
         }
     }
 }
