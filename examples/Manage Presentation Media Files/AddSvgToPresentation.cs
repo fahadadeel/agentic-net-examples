@@ -1,38 +1,38 @@
 using System;
 using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace AsposeSlidesSvgExample
 {
-    static void Main()
+    class Program
     {
-        // Path to the SVG file to be added
-        string svgFilePath = "example.svg";
-        // Path where the resulting presentation will be saved
-        string outputPresentationPath = "output.pptx";
-
-        // Create a new presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+        static void Main(string[] args)
         {
-            // Load the SVG image from file
-            Aspose.Slides.ISvgImage svgImage = new Aspose.Slides.SvgImage(svgFilePath);
+            // Create a new presentation
+            Presentation presentation = new Presentation();
+
+            // Load SVG content from a file
+            string svgPath = "example.svg";
+            string svgContent = File.ReadAllText(svgPath);
+            ISvgImage svgImage = new SvgImage(svgContent);
 
             // Add the SVG image to the presentation's image collection
-            Aspose.Slides.IPPImage ppImage = presentation.Images.AddImage(svgImage);
+            IPPImage addedImage = presentation.Images.AddImage(svgImage);
 
-            // Insert the SVG image onto the first slide as a picture frame
-            Aspose.Slides.IShape shape = presentation.Slides[0].Shapes.AddPictureFrame(
-                Aspose.Slides.ShapeType.Rectangle,
-                50, 50, 400, 300,
-                ppImage);
+            // Add the SVG image to the first slide as a picture frame
+            // Parameters: shape type, X, Y, width, height, image
+            presentation.Slides[0].Shapes.AddPictureFrame(
+                ShapeType.Rectangle,
+                50f,
+                50f,
+                400f,
+                300f,
+                addedImage
+            );
 
-            // Optional: Export the inserted shape as an SVG file
-            using (FileStream shapeSvgStream = new FileStream("shape_output.svg", FileMode.Create))
-            {
-                shape.WriteAsSvg(shapeSvgStream);
-            }
-
-            // Save the presentation to disk
-            presentation.Save(outputPresentationPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation to a PPTX file
+            presentation.Save("PresentationWithSvg.pptx", SaveFormat.Pptx);
         }
     }
 }
