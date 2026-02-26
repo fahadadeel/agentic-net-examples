@@ -1,28 +1,30 @@
 using System;
 using System.Drawing;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+namespace ThemeAccessExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Path to the external theme file (.thmx)
-        string themePath = "CustomTheme.thmx";
+            // Get the master theme of the presentation
+            Aspose.Slides.Theme.IMasterTheme masterTheme = pres.MasterTheme;
 
-        // Get the first master slide in the presentation
-        Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
+            // Change the first line style fill color to Red
+            masterTheme.FormatScheme.LineStyles[0].FillFormat.SolidFillColor.Color = Color.Red;
 
-        // Apply the external theme to the master slide and all dependent slides
-        Aspose.Slides.IMasterSlide newMaster = masterSlide.ApplyExternalThemeToDependingSlides(themePath);
+            // Set the third fill style to solid and change its color to ForestGreen
+            masterTheme.FormatScheme.FillStyles[2].FillType = Aspose.Slides.FillType.Solid;
+            masterTheme.FormatScheme.FillStyles[2].SolidFillColor.Color = Color.ForestGreen;
 
-        // Modify an element of the master theme (e.g., change the first line style color to Red)
-        presentation.MasterTheme.FormatScheme.LineStyles[0].FillFormat.SolidFillColor.Color = Color.Red;
+            // Modify the outer shadow distance of the third effect style
+            masterTheme.FormatScheme.EffectStyles[2].EffectFormat.OuterShadowEffect.Distance = 10f;
 
-        // Save the presentation to a file
-        presentation.Save("PresentationWithTheme.pptx", SaveFormat.Pptx);
+            // Save the presentation before exiting
+            pres.Save("ThemeAccessOutput.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
