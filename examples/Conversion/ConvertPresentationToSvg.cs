@@ -3,37 +3,38 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace AsposeSlidesSvgConversion
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Verify that a source file path is provided
-        if (args.Length == 0)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Please provide the path to a PPT or PPTX file as an argument.");
-            return;
-        }
+            // Path to the source PowerPoint file
+            string sourcePath = "input.pptx";
 
-        string sourcePath = args[0];
+            // Directory where SVG files will be saved
+            string outputDirectory = "output_svgs";
+            Directory.CreateDirectory(outputDirectory);
 
-        // Load the presentation from the specified file
-        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(sourcePath))
-        {
-            // Convert each slide to an individual SVG file
-            for (int i = 0; i < pres.Slides.Count; i++)
+            // Load the presentation
+            using (Presentation presentation = new Presentation(sourcePath))
             {
-                string svgFileName = Path.GetFileNameWithoutExtension(sourcePath) + "_slide_" + (i + 1) + ".svg";
-                string svgFullPath = Path.Combine(Path.GetDirectoryName(sourcePath), svgFileName);
-
-                using (FileStream svgStream = File.Create(svgFullPath))
+                // Iterate through each slide in the presentation
+                for (int index = 0; index < presentation.Slides.Count; index++)
                 {
-                    pres.Slides[i].WriteAsSvg(svgStream);
-                }
-            }
+                    ISlide slide = presentation.Slides[index];
+                    string svgFilePath = Path.Combine(outputDirectory, $"slide_{index + 1}.svg");
 
-            // Save the presentation before exiting (optional, as per authoring rule)
-            string savedPath = Path.Combine(Path.GetDirectoryName(sourcePath), Path.GetFileNameWithoutExtension(sourcePath) + "_saved.pptx");
-            pres.Save(savedPath, SaveFormat.Pptx);
+                    // Save the current slide as an SVG file
+                    using (FileStream fileStream = File.Create(svgFilePath))
+                    {
+                        slide.WriteAsSvg(fileStream);
+                    }
+                }
+
+                // Save the presentation before exiting (as required by authoring rules)
+                presentation.Save("output.pptx", SaveFormat.Pptx);
+            }
         }
     }
 }
