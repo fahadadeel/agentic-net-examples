@@ -1,31 +1,42 @@
 using System;
 using System.IO;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace PresentationMediaExample
 {
-    static void Main()
+    class Program
     {
-        // Path to the image file to be added
-        string imagePath = "large_image.jpg";
-
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
-
-        // Open the image file stream and add the image to the presentation with KeepLocked behavior
-        using (FileStream imageStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+        static void Main(string[] args)
         {
-            Aspose.Slides.IPPImage img = pres.Images.AddImage(imageStream, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Add a picture frame containing the image to the first slide
-            Aspose.Slides.IPictureFrame pictureFrame = pres.Slides[0].Shapes.AddPictureFrame(
-                Aspose.Slides.ShapeType.Rectangle, 0, 0, 300, 200, img);
+            // Get the first slide
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
+
+            // Load image from file
+            using (FileStream imageStream = new FileStream("image.jpg", FileMode.Open, FileAccess.Read))
+            {
+                // Add image to the presentation's image collection
+                Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
+
+                // Retrieve image dimensions
+                float imageWidth = image.Width;
+                float imageHeight = image.Height;
+
+                // Add a picture frame to the slide using the image dimensions
+                Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
+                    Aspose.Slides.ShapeType.Rectangle,
+                    0,
+                    0,
+                    imageWidth,
+                    imageHeight,
+                    image);
+            }
+
+            // Save the presentation
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
-
-        // Save the presentation to a file
-        pres.Save("presentationWithLargeImage.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Dispose the presentation object
-        pres.Dispose();
     }
 }
