@@ -4,25 +4,26 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Path to the source presentation
-        string inputPath = "input.pptx";
-        // Path to the output presentation
-        string outputPath = "output.pptx";
+        // Load the presentation from a file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Load the presentation from file
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+        // Get the slide collection
+        Aspose.Slides.ISlideCollection slides = presentation.Slides;
+
+        // Iterate through each slide by index
+        for (int i = 0; i < slides.Count; i++)
         {
-            // Iterate through all slides in the presentation
-            foreach (Aspose.Slides.ISlide slide in presentation.Slides)
-            {
-                // Example operation: write the slide number to the console
-                Console.WriteLine("Slide Number: " + slide.SlideNumber);
-            }
-
-            // Save the presentation before exiting
-            presentation.Save(outputPath, SaveFormat.Pptx);
+            Aspose.Slides.ISlide slide = slides[i];
+            Console.WriteLine("Processing slide index: " + i);
+            // Additional slide processing can be performed here
         }
+
+        // Save the presentation before exiting
+        presentation.Save("output.pptx", SaveFormat.Pptx);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
