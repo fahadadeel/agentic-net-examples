@@ -1,28 +1,27 @@
 using System;
-using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Path to the source presentation
-        var sourcePath = "input.pptx";
-        // Path to the output HTML file
-        var outputPath = "output.html";
+        // Path to the source PowerPoint file
+        System.String inputPath = "input.pptx";
+        // Path where the HTML output will be saved
+        System.String outputPath = "output.html";
+        // Path or URL to the CSS file that defines the new style
+        System.String cssPath = "style.css";
 
         // Load the presentation
-        using (var presentation = new Aspose.Slides.Presentation(sourcePath))
-        {
-            // Configure HTML export options for high‑quality images
-            var htmlOptions = new Aspose.Slides.Export.HtmlOptions();
-            // Use the default slide image format (raster) and set maximum JPEG quality
-            htmlOptions.SlideImageFormat = new Aspose.Slides.Export.SlideImageFormat();
-            htmlOptions.JpegQuality = 100;
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-            // Save the presentation as HTML with the specified options
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
-        }
+        // Configure HTML export options with a custom formatter that uses the CSS file
+        Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
+        htmlOptions.HtmlFormatter = Aspose.Slides.Export.HtmlFormatter.CreateDocumentFormatter(cssPath, true);
+
+        // Save the presentation as HTML using the new CSS style
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
