@@ -1,21 +1,37 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.SlideShow;
 using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Set the transition type for the first slide
-        presentation.Slides[0].SlideShowTransition.Type = Aspose.Slides.SlideShow.TransitionType.Circle;
+        // Access the first slide
+        Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
 
-        // Optionally set the transition duration (in milliseconds)
-        presentation.Slides[0].SlideShowTransition.Duration = 3000;
+        // Apply a Circle transition
+        firstSlide.SlideShowTransition.Type = Aspose.Slides.SlideShow.TransitionType.Circle;
+        // Set transition duration to 2000 ms (2 seconds)
+        firstSlide.SlideShowTransition.Duration = 2000;
+        // Advance on click and after 3000 ms (3 seconds)
+        firstSlide.SlideShowTransition.AdvanceOnClick = true;
+        firstSlide.SlideShowTransition.AdvanceAfter = true;
+        firstSlide.SlideShowTransition.AdvanceAfterTime = 3000;
 
-        // Save the presentation to disk
-        presentation.Save("SlideTransition_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Add a second slide using the layout of the first slide
+        Aspose.Slides.ILayoutSlide layout = presentation.Slides[0].LayoutSlide;
+        Aspose.Slides.ISlide secondSlide = presentation.Slides.AddEmptySlide(layout);
+
+        // Apply a Fade transition to the second slide
+        secondSlide.SlideShowTransition.Type = Aspose.Slides.SlideShow.TransitionType.Fade;
+        secondSlide.SlideShowTransition.Duration = 1500;
+        secondSlide.SlideShowTransition.AdvanceOnClick = true;
+
+        // Save the presentation
+        presentation.Save("SlideTransitions_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
