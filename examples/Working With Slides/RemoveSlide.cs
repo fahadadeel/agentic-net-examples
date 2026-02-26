@@ -6,18 +6,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Path to the source presentation file
-        string sourcePath = "input.pptx";
-        // Path to the output presentation file
+        // Path to the source presentation
+        string inputPath = "input.pptx";
+        // Path to the output presentation
         string outputPath = "output.pptx";
-        // Zero‑based index of the slide to remove
-        int slideIndex = 2;
 
-        // Load the presentation from disk
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+        // Load the presentation
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Remove the slide at the specified index
-            presentation.Slides.RemoveAt(slideIndex);
+            // Ensure there is at least one slide to remove
+            if (presentation.Slides.Count > 0)
+            {
+                // Remove the first slide (index 0)
+                presentation.Slides.RemoveAt(0);
+            }
 
             // Save the modified presentation
             presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
