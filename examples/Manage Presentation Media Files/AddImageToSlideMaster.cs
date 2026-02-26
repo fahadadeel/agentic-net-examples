@@ -3,44 +3,42 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace AddImageToSlideMaster
+namespace ManagePresentationMediaFiles
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Define paths
-            string dataDir = Path.Combine(Environment.CurrentDirectory, "Data");
+            // Define the data directory
+            string dataDir = Path.Combine(Directory.GetCurrentDirectory(), "Data");
             if (!Directory.Exists(dataDir))
-            {
                 Directory.CreateDirectory(dataDir);
-            }
-            string imagePath = Path.Combine(dataDir, "image.png");
-            string outputPath = Path.Combine(dataDir, "PresentationWithMasterImage.pptx");
 
-            // Read image bytes
-            byte[] imageData = File.ReadAllBytes(imagePath);
+            // Path to the image file to be added to the master slide
+            string imageFileName = "heading.png";
+            string imagePath = Path.Combine(dataDir, imageFileName);
 
             // Create a new presentation
             Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-            // Add image to the presentation's image collection
-            Aspose.Slides.IPPImage img = pres.Images.AddImage(imageData);
+            // Get the first master slide
+            Aspose.Slides.IMasterSlide masterSlide = pres.Masters[0];
 
-            // Get the master slide of the first slide
-            Aspose.Slides.IMasterSlide masterSlide = pres.Slides[0].LayoutSlide.MasterSlide;
+            // Add the image to the presentation's image collection
+            Aspose.Slides.IPPImage img = pres.Images.AddImage(File.ReadAllBytes(imagePath));
 
-            // Add picture frame to the master slide
+            // Add a picture frame to the master slide (covering the whole slide)
             masterSlide.Shapes.AddPictureFrame(
                 Aspose.Slides.ShapeType.Rectangle,
-                10f,   // X position
-                10f,   // Y position
-                100f,  // Width
-                100f,  // Height
+                0,
+                0,
+                pres.SlideSize.Size.Width,
+                pres.SlideSize.Size.Height,
                 img);
 
             // Save the presentation
-            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            string outPath = Path.Combine(dataDir, "PresentationWithMasterImage.pptx");
+            pres.Save(outPath, SaveFormat.Pptx);
 
             // Clean up
             pres.Dispose();
