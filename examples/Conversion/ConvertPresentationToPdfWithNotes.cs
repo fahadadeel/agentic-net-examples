@@ -1,45 +1,33 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace ConvertPresentationToPdfWithNotes
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Verify command‑line arguments
-        if (args.Length < 2)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Usage: ConvertToPdfWithNotes <input-ppt-or-pptx> <output-pdf>");
-            return;
-        }
+            // Input PowerPoint file path
+            System.String inputPath = "input.pptx";
+            // Output PDF file path
+            System.String outputPath = "output.pdf";
 
-        string inputPath = args[0];
-        string outputPath = args[1];
+            // Load the presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-        // Load the source presentation (PPT or PPTX)
-        using (Aspose.Slides.Presentation sourcePresentation = new Aspose.Slides.Presentation(inputPath))
-        {
-            // Create a new presentation that will hold slides with notes layout
-            using (Aspose.Slides.Presentation notesPresentation = new Aspose.Slides.Presentation())
+            // Create PDF options and configure notes layout
+            Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+            pdfOptions.SlidesLayoutOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions()
             {
-                // Clone each slide from the source into the notes presentation
-                for (int i = 0; i < sourcePresentation.Slides.Count; i++)
-                {
-                    Aspose.Slides.ISlide sourceSlide = sourcePresentation.Slides[i];
-                    notesPresentation.Slides.InsertClone(i, sourceSlide);
-                }
+                NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull
+            };
 
-                // Set slide size to standard PDF page size (8.5" x 11" = 612pt x 792pt)
-                notesPresentation.SlideSize.SetSize(612F, 792F, Aspose.Slides.SlideSizeScaleType.EnsureFit);
+            // Save the presentation as PDF with notes
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
 
-                // Configure PDF options to include notes at the bottom of each page
-                Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
-                pdfOptions.SlidesLayoutOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions()
-                {
-                    NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull
-                };
-
-                // Save the presentation as PDF with notes
-                notesPresentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
-            }
+            // Release resources
+            presentation.Dispose();
         }
     }
 }
