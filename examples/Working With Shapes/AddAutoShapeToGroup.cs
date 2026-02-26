@@ -1,40 +1,28 @@
 using System;
-using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Define output folder and file
-        string outputFolder = "Output" + Path.DirectorySeparatorChar;
-        if (!Directory.Exists(outputFolder))
-            Directory.CreateDirectory(outputFolder);
-        string outputFile = outputFolder + "GroupShape_out.pptx";
-
         // Create a new presentation
-        Presentation pres = new Presentation();
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
         // Get the first slide
-        ISlide slide = pres.Slides[0];
+        Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Access the shape collection of the slide
-        IShapeCollection slideShapes = slide.Shapes;
+        // Add a group shape to the slide
+        Aspose.Slides.IGroupShape group = slide.Shapes.AddGroupShape();
 
-        // Add an empty group shape to the slide
-        IGroupShape groupShape = slideShapes.AddGroupShape();
+        // Add initial auto shapes to the group
+        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 100, 50);
+        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Ellipse, 250, 100, 100, 50);
 
-        // Add auto shapes inside the group shape
-        groupShape.Shapes.AddAutoShape(ShapeType.Rectangle, 300, 100, 100, 100);
-        groupShape.Shapes.AddAutoShape(ShapeType.Rectangle, 500, 100, 100, 100);
-        groupShape.Shapes.AddAutoShape(ShapeType.Rectangle, 300, 300, 100, 100);
-        groupShape.Shapes.AddAutoShape(ShapeType.Rectangle, 500, 300, 100, 100);
-
-        // Set the frame for the group shape
-        groupShape.Frame = new ShapeFrame(100, 300, 500, 40, NullableBool.False, NullableBool.False, 0);
+        // Add another auto shape to the same group
+        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Triangle, 175, 200, 100, 80);
 
         // Save the presentation
-        pres.Save(outputFile, SaveFormat.Pptx);
+        pres.Save("GroupShapeExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
