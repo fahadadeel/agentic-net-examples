@@ -5,36 +5,37 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // Path to the source ODP file
         string inputPath = "input.odp";
 
-        // Folder where SVG files will be saved
-        string outputFolder = "output_svg";
+        // Directory to store generated SVG files
+        string outputDir = "output_svgs";
 
-        // Create output folder if it does not exist
-        if (!Directory.Exists(outputFolder))
+        // Ensure the output directory exists
+        if (!Directory.Exists(outputDir))
         {
-            Directory.CreateDirectory(outputFolder);
+            Directory.CreateDirectory(outputDir);
         }
 
         // Load the ODP presentation
-        using (Presentation presentation = new Presentation(inputPath))
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Iterate through all slides and save each as an SVG file
-            for (int i = 0; i < presentation.Slides.Count; i++)
+            // Iterate through each slide and save it as an SVG file
+            for (int index = 0; index < presentation.Slides.Count; index++)
             {
-                ISlide slide = presentation.Slides[i];
-                string svgPath = Path.Combine(outputFolder, $"slide_{i + 1}.svg");
-                using (FileStream fileStream = File.Create(svgPath))
+                Aspose.Slides.ISlide slide = presentation.Slides[index];
+                string svgFilePath = Path.Combine(outputDir, $"slide_{index + 1}.svg");
+
+                using (FileStream fileStream = File.Create(svgFilePath))
                 {
                     slide.WriteAsSvg(fileStream);
                 }
             }
 
-            // Save the presentation before exiting (optional, as per authoring rule)
-            presentation.Save("output.odp", SaveFormat.Odp);
+            // Save the presentation before exiting (optional re-save)
+            presentation.Save("saved_output.odp", Aspose.Slides.Export.SaveFormat.Odp);
         }
     }
 }
