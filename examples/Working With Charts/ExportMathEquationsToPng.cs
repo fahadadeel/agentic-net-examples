@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Aspose.Slides;
-using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 using Aspose.Slides.MathText;
 
@@ -12,27 +11,28 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add a rectangle auto shape to host a mathematical equation
-        Aspose.Slides.IAutoShape mathShape = presentation.Slides[0].Shapes.AddMathShape(0, 0, 500, 50);
+        // Add a rectangle auto shape to host the mathematical equation
+        Aspose.Slides.IAutoShape mathShape = presentation.Slides[0].Shapes.AddMathShape(0f, 0f, 720f, 150f);
+
+        // Retrieve the math paragraph from the first portion of the shape
         Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
 
-        // Create a math block using the constructor that takes an IMathElement to avoid ambiguity
-        Aspose.Slides.MathText.MathBlock mathBlock = new Aspose.Slides.MathText.MathBlock(new Aspose.Slides.MathText.MathematicalText("x"));
-        // Add the math block to the paragraph
-        mathParagraph.Add(mathBlock);
+        // Build the equation a² + b² = c² and add it to the paragraph
+        mathParagraph.Add(
+            new Aspose.Slides.MathText.MathematicalText("a").SetSuperscript("2")
+                .Join(" + ")
+                .Join(new Aspose.Slides.MathText.MathematicalText("b").SetSuperscript("2"))
+                .Join(" = ")
+                .Join(new Aspose.Slides.MathText.MathematicalText("c").SetSuperscript("2"))
+        );
 
-        // Add a chart (required by the get-chart-image rule) – the chart itself will be used to obtain an image
-        Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            0, 100, 500, 300);
+        // Export the shape (containing the equation) as a high‑resolution PNG image
+        Aspose.Slides.IImage shapeImage = mathShape.GetImage();
+        string imagePath = "math_equation.png";
+        shapeImage.Save(imagePath, Aspose.Slides.ImageFormat.Png);
 
-        // Get the chart image (this demonstrates the get-chart-image rule)
-        Aspose.Slides.IImage chartImage = chart.GetImage();
-
-        // Save the image as PNG – this represents the exported math equation image
-        chartImage.Save("mathEquation.png", Aspose.Slides.ImageFormat.Png);
-
-        // Save the presentation before exiting
-        presentation.Save("ExportMathEquationsToPng.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation
+        string presentationPath = "math_equation.pptx";
+        presentation.Save(presentationPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
