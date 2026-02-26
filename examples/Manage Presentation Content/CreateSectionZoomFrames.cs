@@ -1,26 +1,47 @@
 using System;
+using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace ManagePresentationContent
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Output directory
+            string outDir = Path.Combine(Directory.GetCurrentDirectory(), "Output");
+            if (!Directory.Exists(outDir))
+                Directory.CreateDirectory(outDir);
 
-        // Add additional slides
-        Aspose.Slides.ISlide slide1 = pres.Slides.AddEmptySlide(pres.LayoutSlides[0]);
-        Aspose.Slides.ISlide slide2 = pres.Slides.AddEmptySlide(pres.LayoutSlides[0]);
+            // Output file path (PPT format)
+            string resultPath = Path.Combine(outDir, "SectionZoom.ppt");
 
-        // Create sections and associate them with slides
-        Aspose.Slides.ISection section1 = pres.Sections.AddSection("Section 1", slide1);
-        Aspose.Slides.ISection section2 = pres.Sections.AddSection("Section 2", slide2);
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Add a Section Zoom frame on the first slide linking to the second section
-        Aspose.Slides.ISectionZoomFrame zoomFrame = pres.Slides[0].Shapes.AddSectionZoomFrame(150f, 20f, 50f, 50f, section2);
+            // Add a slide that will belong to the new section
+            Aspose.Slides.ISlide sectionSlide = pres.Slides.AddEmptySlide(pres.Slides[0].LayoutSlide);
 
-        // Save the presentation
-        pres.Save("SectionZoomDemo.pptx", SaveFormat.Pptx);
+            // Add a second slide that the section zoom will navigate to
+            Aspose.Slides.ISlide targetSlide = pres.Slides.AddEmptySlide(pres.Slides[0].LayoutSlide);
+
+            // Add a section containing the first slide
+            Aspose.Slides.ISection section = pres.Sections.AddSection("Section 1", sectionSlide);
+
+            // Load a custom image to be used in the section zoom frame
+            string imagePath = Path.Combine(outDir, "image1.png"); // Ensure this image exists
+            Aspose.Slides.IImage img = Aspose.Slides.Images.FromFile(imagePath);
+            Aspose.Slides.IPPImage ppImg = pres.Images.AddImage(img);
+
+            // Add a Section Zoom frame on the first slide with the custom image
+            Aspose.Slides.ISectionZoomFrame zoomFrame = pres.Slides[0].Shapes.AddSectionZoomFrame(100, 100, 200, 100, section, ppImg);
+
+            // Save the presentation in PPT format
+            pres.Save(resultPath, Aspose.Slides.Export.SaveFormat.Ppt);
+
+            // Clean up
+            pres.Dispose();
+        }
     }
 }
