@@ -1,31 +1,30 @@
 using System;
-using Aspose.Slides;
+using System.IO;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Path to the source presentation
-        string sourcePath = "largePresentation.pptx";
-        // Path to save the modified presentation
-        string outputPath = "outputPresentation.pptx";
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
 
-        // Create load options with BLOB management settings
-        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
-        // Configure BLOB management options
-        loadOptions.BlobManagementOptions = new Aspose.Slides.BlobManagementOptions();
-        loadOptions.BlobManagementOptions.IsTemporaryFilesAllowed = true;
-        loadOptions.BlobManagementOptions.PresentationLockingBehavior = Aspose.Slides.PresentationLockingBehavior.KeepLocked;
-
-        // Open the presentation with the specified load options
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath, loadOptions))
+        // Verify that the input file exists
+        if (!File.Exists(inputPath))
         {
-            // Example operation: write slide count to console
-            int slideCount = presentation.Slides.Count;
-            Console.WriteLine("Number of slides: " + slideCount);
-
-            // Save the presentation
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            Console.WriteLine("Input file not found: " + inputPath);
+            return;
         }
+
+        // Open the presentation using the fully-qualified Aspose.Slides type
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+        // Save the presentation before exiting
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
+        presentation.Dispose();
+
+        Console.WriteLine("Presentation opened and saved to " + outputPath);
     }
 }
