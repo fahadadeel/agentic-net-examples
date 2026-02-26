@@ -1,21 +1,19 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load the source PPTX file
+        // Load the existing PPTX presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Specify which slide(s) to export (slide numbers start at 1)
-        int[] slideIndices = new int[] { 1 };
+        // Create PDF export options (default options)
+        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
 
-        // Export the selected slide(s) to a PDF file
-        presentation.Save("output.pdf", slideIndices, Aspose.Slides.Export.SaveFormat.Pdf);
+        // Export the presentation (all slides) to a PDF file
+        presentation.Save("output.pdf", Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
 
-        // Release resources
-        presentation.Dispose();
+        // Save the presentation before exiting (no modifications made)
+        presentation.Save("input.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
