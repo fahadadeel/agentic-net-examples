@@ -2,27 +2,39 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace ConfigurePresentationFallbackFonts
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Create a new empty presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Input and output file paths
+            string inputFile = "input.pptx";
+            string outputPresentation = "output.pptx";
+            string outputImage = "slide.png";
 
-        // Retrieve the collection of font fallback rules from the presentation's FontsManager
-        Aspose.Slides.IFontFallBackRulesCollection fallbackRules = presentation.FontsManager.FontFallBackRulesCollection;
+            // Load the presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputFile);
 
-        // Define a new fallback rule for a specific Unicode range with a primary font
-        Aspose.Slides.FontFallBackRule rule = new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman");
+            // Create a new fallback rules collection
+            Aspose.Slides.IFontFallBackRulesCollection rules = new Aspose.Slides.FontFallBackRulesCollection();
 
-        // Add additional fallback fonts to the rule
-        rule.AddFallBackFonts("Arial");
-        rule.AddFallBackFonts(new string[] { "Tahoma", "Verdana" });
+            // Add a fallback rule for a Unicode range (example: Basic Latin)
+            rules.Add(new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman"));
 
-        // Add the configured rule to the collection
-        fallbackRules.Add(rule);
+            // Assign the fallback rules to the presentation's FontsManager
+            pres.FontsManager.FontFallBackRulesCollection = rules;
 
-        // Save the presentation to a file before exiting
-        presentation.Save("FallbackFontsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Render the first slide to an image using default scaling
+            Aspose.Slides.IImage img = pres.Slides[0].GetImage(1f, 1f);
+
+            // Save the rendered image as PNG
+            img.Save(outputImage, Aspose.Slides.ImageFormat.Png);
+            img.Dispose();
+
+            // Save the modified presentation
+            pres.Save(outputPresentation, Aspose.Slides.Export.SaveFormat.Pptx);
+            pres.Dispose();
+        }
     }
 }
