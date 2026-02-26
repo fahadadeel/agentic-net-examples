@@ -1,4 +1,6 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -17,8 +19,7 @@ class Program
                 // Clone each slide from source to destination
                 for (int i = 0; i < sourceSlides.Count; i++)
                 {
-                    Aspose.Slides.ISlide sourceSlide = sourceSlides[i];
-                    destSlides.AddClone(sourceSlide);
+                    destSlides.AddClone(sourceSlides[i]);
                 }
 
                 // Save the destination presentation
