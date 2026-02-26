@@ -3,55 +3,30 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace ManagePresentationMediaFiles
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Path to the EMF image file
+        string emfFilePath = "image.emf";
+
+        // Create a new presentation
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
         {
-            // Output directory for the generated PPTX file
-            string outDir = "Output";
-            if (!Directory.Exists(outDir))
-                Directory.CreateDirectory(outDir);
-
-            // Directory containing EMF image files
-            string dataDir = "Data";
-            if (!Directory.Exists(dataDir))
-                Directory.CreateDirectory(dataDir);
-
-            // Create a new presentation
-            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
-
-            // Get all EMF files from the data directory
-            string[] emfFiles = Directory.GetFiles(dataDir, "*.emf");
-
-            foreach (string emfPath in emfFiles)
+            // Load the EMF image into the presentation's image collection
+            using (FileStream emfStream = new FileStream(emfFilePath, FileMode.Open, FileAccess.Read))
             {
-                // Read EMF file into a byte array
-                byte[] imageData = File.ReadAllBytes(emfPath);
+                Aspose.Slides.IPPImage emfImage = presentation.Images.AddImage(emfStream);
 
-                // Add the EMF image to the presentation's image collection
-                Aspose.Slides.IPPImage img = pres.Images.AddImage(imageData);
+                // Get the first slide
+                Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-                // Add a new empty slide to host the image
-                Aspose.Slides.ISlide slide = pres.Slides.AddEmptySlide(pres.Slides[0].LayoutSlide);
-
-                // Insert the image as a picture frame covering the entire slide
-                slide.Shapes.AddPictureFrame(
-                    Aspose.Slides.ShapeType.Rectangle,
-                    0,
-                    0,
-                    pres.SlideSize.Size.Width,
-                    pres.SlideSize.Size.Height,
-                    img);
+                // Add the EMF image as a picture frame (acting as a heading)
+                slide.Shapes.AddPictureFrame(ShapeType.Rectangle, 50, 20, 600, 100, emfImage);
             }
 
-            // Save the presentation in PPTX format
-            string outPath = Path.Combine(outDir, "AddEmfImages_out.pptx");
-            pres.Save(outPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-            // Release resources
-            pres.Dispose();
+            // Save the presentation to a PPTX file
+            presentation.Save("PresentationWithEmfHeading.pptx", SaveFormat.Pptx);
         }
     }
 }
