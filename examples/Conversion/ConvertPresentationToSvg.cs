@@ -3,38 +3,28 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace AsposeSlidesSvgConversion
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Load the PowerPoint presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx");
+
+        // Convert each slide to an SVG file
+        for (int i = 0; i < pres.Slides.Count; i++)
         {
-            // Path to the source PowerPoint file
-            string sourcePath = "input.pptx";
-
-            // Directory where SVG files will be saved
-            string outputDirectory = "output_svgs";
-            Directory.CreateDirectory(outputDirectory);
-
-            // Load the presentation
-            using (Presentation presentation = new Presentation(sourcePath))
+            // Create a file stream for the SVG output
+            using (FileStream svgStream = File.Create($"slide_{i + 1}.svg"))
             {
-                // Iterate through each slide in the presentation
-                for (int index = 0; index < presentation.Slides.Count; index++)
-                {
-                    ISlide slide = presentation.Slides[index];
-                    string svgFilePath = Path.Combine(outputDirectory, $"slide_{index + 1}.svg");
-
-                    // Save the current slide as an SVG file
-                    using (FileStream fileStream = File.Create(svgFilePath))
-                    {
-                        slide.WriteAsSvg(fileStream);
-                    }
-                }
-
-                // Save the presentation before exiting (as required by authoring rules)
-                presentation.Save("output.pptx", SaveFormat.Pptx);
+                // Write the current slide as SVG
+                pres.Slides[i].WriteAsSvg(svgStream);
             }
         }
+
+        // Save the (unchanged) presentation before exiting
+        pres.Save("output.pptx", SaveFormat.Pptx);
+
+        // Release resources
+        pres.Dispose();
     }
 }
