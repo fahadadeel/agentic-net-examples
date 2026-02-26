@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
@@ -10,23 +9,33 @@ class Program
         // Path to the source PowerPoint file
         string inputPath = "input.pptx";
 
+        // Directory where SVG files will be saved
+        string outputDir = "output";
+
+        // Create output directory if it does not exist
+        if (!Directory.Exists(outputDir))
+        {
+            Directory.CreateDirectory(outputDir);
+        }
+
         // Load the presentation
         using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Convert each slide to an individual SVG file
-            for (int i = 0; i < presentation.Slides.Count; i++)
+            // Iterate through all slides and save each as an SVG file
+            for (int index = 0; index < presentation.Slides.Count; index++)
             {
-                Aspose.Slides.ISlide slide = presentation.Slides[i];
-                string svgFileName = $"slide_{i + 1}.svg";
+                Aspose.Slides.ISlide slide = presentation.Slides[index];
+                string svgFilePath = Path.Combine(outputDir, $"slide_{index + 1}.svg");
 
-                using (FileStream svgStream = File.Create(svgFileName))
+                using (FileStream svgStream = File.Create(svgFilePath))
                 {
                     slide.WriteAsSvg(svgStream);
                 }
             }
 
-            // Save the presentation before exiting (no modifications made)
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation before exiting (optional, demonstrates saving)
+            string savedPresentationPath = Path.Combine(outputDir, "saved.pptx");
+            presentation.Save(savedPresentationPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
