@@ -1,6 +1,8 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-namespace SlideToHtml
+namespace ConvertSlideToHtml
 {
     class Program
     {
@@ -8,18 +10,20 @@ namespace SlideToHtml
         {
             // Input PowerPoint file
             string inputPath = "input.pptx";
-            // Output HTML file
-            string outputPath = "output.html";
+            // Output HTML file for the specific slide
+            string outputPath = "slide1.html";
 
             // Load the presentation
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
-            {
-                // Create HTML export options (optional)
-                Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-                // Save the presentation as HTML
-                presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
-            }
+            // Specify the slide index (1‑based) to convert
+            int[] slideIndices = new int[] { 1 };
+
+            // Save the specified slide as HTML
+            presentation.Save(outputPath, slideIndices, Aspose.Slides.Export.SaveFormat.Html);
+
+            // Release resources
+            presentation.Dispose();
         }
     }
 }
