@@ -1,26 +1,25 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Input and output file paths
+        System.String inputPath = "input.pptx";
+        System.String outputPath = "output.pptx";
 
-        // Set slide size to a predefined type (16:9) without scaling existing content
-        presentation.SlideSize.SetSize(Aspose.Slides.SlideSizeType.OnScreen16x9, Aspose.Slides.SlideSizeScaleType.DoNotScale);
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-        // Set a custom slide size: 10 inches wide by 7.5 inches high
-        // 1 inch = 72 points, so convert inches to points
-        float widthInPoints = 10f * 72f;
-        float heightInPoints = 7.5f * 72f;
-        presentation.SlideSize.SetSize(widthInPoints, heightInPoints, Aspose.Slides.SlideSizeScaleType.EnsureFit);
+        // Set custom slide size with content scaling to ensure fit
+        presentation.SlideSize.SetSize(540f, 720f, Aspose.Slides.SlideSizeScaleType.EnsureFit);
 
-        // Save the presentation before exiting
-        presentation.Save("SlideSizeExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Set slide size to A4 paper with content maximized
+        presentation.SlideSize.SetSize(Aspose.Slides.SlideSizeType.A4Paper, Aspose.Slides.SlideSizeScaleType.Maximize);
 
-        // Release resources
-        presentation.Dispose();
+        // Save the modified presentation
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
