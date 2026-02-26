@@ -4,16 +4,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Path to the source presentation (any supported format)
-        string sourcePath = "input.pptx";
-        // Path where the PDF will be saved
+        // Path to the source PPTX file
+        string inputPath = "input.pptx";
+        // Path for the resulting PDF file
         string outputPath = "output.pdf";
 
         // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Export the presentation to PDF format
+            // Export to PDF format
             presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf);
         }
+        // Presentation is disposed automatically by the using block
     }
 }
