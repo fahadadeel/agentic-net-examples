@@ -1,6 +1,5 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
@@ -9,22 +8,17 @@ class Program
         // Load the source presentation
         using (Aspose.Slides.Presentation sourcePres = new Aspose.Slides.Presentation("source.pptx"))
         {
-            // Create a new destination presentation
-            using (Aspose.Slides.Presentation destPres = new Aspose.Slides.Presentation())
-            {
-                // Get slide collections
-                Aspose.Slides.ISlideCollection sourceSlides = sourcePres.Slides;
-                Aspose.Slides.ISlideCollection destSlides = destPres.Slides;
+            // Get the slide collection
+            Aspose.Slides.ISlideCollection slideCollection = sourcePres.Slides;
 
-                // Clone each slide from source to destination
-                for (int i = 0; i < sourceSlides.Count; i++)
-                {
-                    destSlides.AddClone(sourceSlides[i]);
-                }
+            // Clone the first slide and add it to the end of the collection
+            Aspose.Slides.ISlide clonedSlide1 = slideCollection.AddClone(slideCollection[0]);
 
-                // Save the destination presentation
-                destPres.Save("cloned_output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            }
+            // Clone the second slide and add it to the end of the collection
+            Aspose.Slides.ISlide clonedSlide2 = slideCollection.AddClone(slideCollection[1]);
+
+            // Save the modified presentation
+            sourcePres.Save("cloned_output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
