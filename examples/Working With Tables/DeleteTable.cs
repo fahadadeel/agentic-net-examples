@@ -6,30 +6,26 @@ class Program
 {
     static void Main()
     {
-        // Load an existing presentation
-        Presentation presentation = new Presentation("input.pptx");
-
-        // Access the first slide (adjust index as needed)
-        ISlide slide = presentation.Slides[0];
-
-        // Locate the first table shape on the slide
-        IShape tableShape = null;
-        foreach (IShape shape in slide.Shapes)
+        // Load the existing presentation
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx"))
         {
-            if (shape is ITable)
+            // Access the first slide (adjust index as needed)
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
+
+            // Iterate through shapes to find a table
+            for (int i = 0; i < slide.Shapes.Count; i++)
             {
-                tableShape = shape;
-                break;
+                Aspose.Slides.IShape shape = slide.Shapes[i];
+                if (shape is Aspose.Slides.ITable)
+                {
+                    // Remove the table shape from the slide
+                    slide.Shapes.Remove(shape);
+                    break; // Assuming only one table needs to be removed
+                }
             }
-        }
 
-        // If a table was found, remove it from the slide
-        if (tableShape != null)
-        {
-            slide.Shapes.Remove(tableShape);
+            // Save the modified presentation
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
-
-        // Save the modified presentation
-        presentation.Save("output.pptx", SaveFormat.Pptx);
     }
 }
