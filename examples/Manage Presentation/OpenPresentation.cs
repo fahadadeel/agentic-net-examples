@@ -4,20 +4,19 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Source presentation file
-        System.String srcFile = "input.pptx";
-        // Destination file after saving
-        System.String destFile = "output.pptx";
+        // Path to the source presentation file (any supported format)
+        string sourcePath = "sample.pptx";
 
-        // Open the presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(srcFile);
+        // Path where the presentation will be saved
+        string destinationPath = "converted.pptx";
 
-        // Save the presentation in PPTX format
-        pres.Save(destFile, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Release resources
-        pres.Dispose();
+        // Open the presentation using the fully-qualified type
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+        {
+            // Save the presentation in PPTX format before exiting
+            presentation.Save(destinationPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
