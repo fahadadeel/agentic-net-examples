@@ -2,39 +2,32 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace PlaceholderDemo
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation())
-            {
-                // Access the first layout slide
-                Aspose.Slides.ILayoutSlide layout = pres.LayoutSlides[0];
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-                // Add a picture placeholder to the layout slide
-                Aspose.Slides.IAutoShape picturePlaceholder = layout.PlaceholderManager.AddPicturePlaceholder(20f, 20f, 200f, 200f);
+        // Output file path
+        System.String outputPath = "ManagedPlaceholders.pptx";
 
-                // Add a new slide based on the modified layout
-                Aspose.Slides.ISlide slide = pres.Slides.AddEmptySlide(layout);
+        // Get a blank layout slide
+        Aspose.Slides.ILayoutSlide layoutSlide = presentation.LayoutSlides.GetByType(Aspose.Slides.SlideLayoutType.Blank);
 
-                // Iterate through shapes on the slide and set text for placeholders
-                foreach (Aspose.Slides.IShape shape in slide.Shapes)
-                {
-                    if (shape.Placeholder != null && shape is Aspose.Slides.IAutoShape)
-                    {
-                        ((Aspose.Slides.IAutoShape)shape).TextFrame.Text = "Placeholder Text";
-                    }
-                }
+        // Get the placeholder manager for the layout slide
+        Aspose.Slides.ILayoutPlaceholderManager placeholderManager = layoutSlide.PlaceholderManager;
 
-                // Set footer text for all slides in the presentation
-                pres.HeaderFooterManager.SetAllFootersText("My Footer");
+        // Add different types of placeholders to the layout
+        placeholderManager.AddContentPlaceholder(10, 10, 300, 200);
+        placeholderManager.AddVerticalTextPlaceholder(350, 10, 200, 300);
+        placeholderManager.AddChartPlaceholder(10, 350, 300, 300);
+        placeholderManager.AddTablePlaceholder(350, 350, 300, 200);
 
-                // Save the presentation
-                pres.Save("ManagedPlaceholders_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            }
-        }
+        // Create a new slide based on the modified layout
+        Aspose.Slides.ISlide newSlide = presentation.Slides.AddEmptySlide(layoutSlide);
+
+        // Save the presentation before exiting
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
