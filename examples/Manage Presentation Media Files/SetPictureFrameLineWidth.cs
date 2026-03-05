@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
@@ -10,23 +9,23 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Load an image from file
-        FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read);
-        Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
-        imageStream.Close();
-
-        // Add a picture frame to the first slide
+        // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
-        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
-            Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 150, image);
 
-        // Set the line width of the picture frame
-        pictureFrame.LineFormat.Width = 5.0;
+        // Load an image file into the presentation's image collection
+        using (FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read))
+        {
+            Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
 
-        // Save the presentation
-        presentation.Save("output.pptx", SaveFormat.Pptx);
+            // Add a picture frame to the slide
+            Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
+                Aspose.Slides.ShapeType.Rectangle, 100f, 100f, 200f, 150f, image);
 
-        // Dispose the presentation
-        presentation.Dispose();
+            // Set the line width of the picture frame (in points)
+            pictureFrame.LineFormat.Width = 5.0;
+        }
+
+        // Save the presentation before exiting
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
