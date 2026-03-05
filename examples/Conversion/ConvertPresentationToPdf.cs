@@ -2,22 +2,19 @@ using System;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Path to the input PowerPoint file
-        string inputPath = "input.pptx";
-        // Path to the output PDF file
+        // Path to the source PPT file
+        string inputPath = "input.ppt";
+
+        // Path for the resulting PDF file
         string outputPath = "output.pdf";
 
-        // Load the presentation
+        // Load the PPT presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-        // Create PDF options and set the password
-        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
-        pdfOptions.Password = "myPassword";
-
-        // Save the presentation as a password‑protected PDF
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+        // Convert and save the presentation as PDF
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf);
 
         // Release resources
         presentation.Dispose();
