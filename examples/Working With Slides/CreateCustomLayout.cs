@@ -1,22 +1,24 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Load an existing PPTX file
+        Presentation presentation = new Presentation("input.pptx");
 
-        // Get the first master slide
-        Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
+        // Get the first master slide from the presentation
+        IMasterSlide masterSlide = presentation.Masters[0];
 
         // Add a custom layout slide to the presentation
-        Aspose.Slides.ILayoutSlide customLayout = presentation.LayoutSlides.Add(masterSlide, Aspose.Slides.SlideLayoutType.Custom, "MyCustomLayout");
+        ILayoutSlide customLayout = presentation.LayoutSlides.Add(masterSlide, SlideLayoutType.Custom, "MyCustomLayout");
 
-        // Add a new empty slide using the custom layout
-        Aspose.Slides.ISlide newSlide = presentation.Slides.AddEmptySlide(customLayout);
+        // Add a new empty slide that uses the custom layout
+        ISlide newSlide = presentation.Slides.AddEmptySlide(customLayout);
 
-        // Save the presentation
-        presentation.Save("CustomLayoutPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the modified presentation
+        presentation.Save("output.pptx", SaveFormat.Pptx);
     }
 }
