@@ -1,32 +1,39 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace CloneMultipleSlides
+namespace SlideCloner
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            // Path to the source presentation
+            string sourcePath = "source.pptx";
+            // Path to the target presentation (will be created)
+            string targetPath = "target.pptx";
 
-            // Add a shape to the first slide (so we have something to clone)
-            presentation.Slides[0].Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Rectangle,
-                50, 50, 200, 100);
-
-            // Get the slide collection
-            Aspose.Slides.ISlideCollection slides = presentation.Slides;
-
-            // Clone the first slide multiple times (e.g., 3 additional copies)
-            for (int i = 0; i < 3; i++)
+            // Load the source presentation
+            using (Aspose.Slides.Presentation srcPres = new Aspose.Slides.Presentation(sourcePath))
             {
-                slides.AddClone(slides[0]);
-            }
+                // Create a new (empty) destination presentation
+                using (Aspose.Slides.Presentation destPres = new Aspose.Slides.Presentation())
+                {
+                    // Get the slide collections
+                    Aspose.Slides.ISlideCollection srcSlides = srcPres.Slides;
+                    Aspose.Slides.ISlideCollection destSlides = destPres.Slides;
 
-            // Save the presentation
-            presentation.Save("ClonedSlides_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                    // Clone each slide from source to destination
+                    for (int i = 0; i < srcSlides.Count; i++)
+                    {
+                        Aspose.Slides.ISlide srcSlide = srcSlides[i];
+                        // AddClone clones the slide and its master if needed
+                        destSlides.AddClone(srcSlide);
+                    }
+
+                    // Save the destination presentation
+                    destPres.Save(targetPath, Aspose.Slides.Export.SaveFormat.Pptx);
+                }
+            }
         }
     }
 }
