@@ -2,25 +2,29 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the fallback rules collection from the FontsManager
-        Aspose.Slides.IFontFallBackRulesCollection fallbackRules = presentation.FontsManager.FontFallBackRulesCollection;
+        // Create a new fallback rules collection
+        Aspose.Slides.IFontFallBackRulesCollection rules = new Aspose.Slides.FontFallBackRulesCollection();
 
-        // Create a new fallback rule for Unicode range 0x400-0x4FF with primary font "Times New Roman"
-        Aspose.Slides.FontFallBackRule rule = new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman");
+        // Add fallback rules for specific Unicode ranges
+        rules.Add(new Aspose.Slides.FontFallBackRule(0x400u, 0x4FFu, "Times New Roman"));
+        rules.Add(new Aspose.Slides.FontFallBackRule(0x3040u, 0x309Fu, "MS Mincho"));
 
-        // Add additional fallback fonts to the rule
-        rule.AddFallBackFonts("Arial");
-        rule.AddFallBackFonts(new string[] { "Calibri", "Verdana" });
+        // Add fallback rule for emoji range with multiple fonts
+        string[] emojiFonts = new string[] { "Segoe UI Emoji", "Apple Color Emoji" };
+        rules.Add(new Aspose.Slides.FontFallBackRule(0x1F600u, 0x1F64Fu, emojiFonts));
 
-        // Add the rule to the collection
-        fallbackRules.Add(rule);
+        // Assign the collection to the presentation's FontsManager
+        presentation.FontsManager.FontFallBackRulesCollection = rules;
 
         // Save the presentation
-        presentation.Save("FallbackFontsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("FallbackFonts.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
