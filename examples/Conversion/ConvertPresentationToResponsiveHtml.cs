@@ -1,25 +1,31 @@
 using System;
-using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace ConvertPptToHtml
 {
-    static void Main()
+    class Program
     {
-        // Load the presentation from a file
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx"))
+        static void Main(string[] args)
         {
-            // Create HTML export options
-            Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
+            // Path to the source PowerPoint file
+            string sourcePath = "input.pptx";
 
-            // Configure slide image format to SVG
-            Aspose.Slides.Export.SVGOptions svgOptions = new Aspose.Slides.Export.SVGOptions();
-            htmlOptions.SlideImageFormat = Aspose.Slides.Export.SlideImageFormat.Svg(svgOptions);
+            // Path where the responsive HTML will be saved
+            string htmlPath = "output.html";
 
-            // Enable responsive layout (remove width/height attributes from SVG)
-            htmlOptions.SvgResponsiveLayout = true;
+            // Load the presentation from the file
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+            {
+                // Create HTML export options (default options are sufficient for responsive HTML)
+                Aspose.Slides.Export.HtmlOptions options = new Aspose.Slides.Export.HtmlOptions();
 
-            // Save the presentation as responsive HTML
-            presentation.Save("output.html", Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
+                // Save the presentation as responsive HTML
+                presentation.Save(htmlPath, Aspose.Slides.Export.SaveFormat.Html, options);
+            }
+
+            // Indicate completion
+            Console.WriteLine("Presentation has been converted to responsive HTML.");
         }
     }
 }
