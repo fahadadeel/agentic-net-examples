@@ -1,39 +1,36 @@
 using System;
 using System.IO;
 using System.Net.Http;
-using System.Threading.Tasks;
+using Aspose.Slides;
 using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // URL of the image to be added
+        // URL of the image to download
         string imageUrl = "https://example.com/image.jpg";
 
-        // Download the image data into a byte array
-        byte[] imageBytes;
-        using (HttpClient httpClient = new HttpClient())
-        {
-            Task<byte[]> downloadTask = httpClient.GetByteArrayAsync(imageUrl);
-            downloadTask.Wait();
-            imageBytes = downloadTask.Result;
-        }
+        // Download image data from the web
+        HttpClient httpClient = new HttpClient();
+        byte[] imageBytes = httpClient.GetByteArrayAsync(imageUrl).Result;
 
         // Create a new presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
-        {
-            // Add the downloaded image to the presentation
-            Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageBytes);
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Get the first slide in the presentation
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Add the downloaded image to the presentation
+        Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageBytes);
 
-            // Insert the image onto the slide as a picture frame
-            slide.Shapes.AddPictureFrame(Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 300, image);
+        // Insert the image onto the first slide as a picture frame
+        presentation.Slides[0].Shapes.AddPictureFrame(
+            Aspose.Slides.ShapeType.Rectangle,
+            50,   // X position
+            50,   // Y position
+            400,  // Width
+            300,  // Height
+            image);
 
-            // Save the presentation to a PPTX file
-            presentation.Save("PresentationWithWebImage.pptx", SaveFormat.Pptx);
-        }
+        // Save the presentation to a PPTX file
+        presentation.Save("ImageFromWeb.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
