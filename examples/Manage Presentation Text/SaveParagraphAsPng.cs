@@ -1,40 +1,41 @@
 using System;
-using System.Drawing;
-using Aspose.Slides;
-using Aspose.Slides.Export;
+using System.IO;
 
 class Program
 {
     static void Main()
     {
-        // Output file paths
-        string outputPptx = "output.pptx";
-        string outputPng = "paragraph2.png";
+        // Define input and output directories
+        string dataDir = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+        if (!Directory.Exists(dataDir))
+            Directory.CreateDirectory(dataDir);
 
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        // Paths for the source PPTX and the resulting PNG
+        string pptxPath = Path.Combine(dataDir, "input.pptx");
+        string outPngPath = Path.Combine(dataDir, "paragraph.png");
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(pptxPath);
 
-        // Add a rectangle shape with a text frame
-        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 200);
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add two paragraphs to the shape's text frame
-        shape.TextFrame.Text = "First paragraph.\nSecond paragraph.";
+        // Assume the first shape is an AutoShape containing the paragraph
+        Aspose.Slides.IAutoShape autoShape = slide.Shapes[0] as Aspose.Slides.IAutoShape;
+        if (autoShape != null)
+        {
+            // Render the shape (paragraph) to an image
+            Aspose.Slides.IImage shapeImage = autoShape.GetImage();
 
-        // Access the second paragraph (index 1)
-        Aspose.Slides.IParagraph secondParagraph = shape.TextFrame.Paragraphs[1];
+            // Save the image as PNG
+            shapeImage.Save(outPngPath, Aspose.Slides.ImageFormat.Png);
+        }
 
-        // Generate a thumbnail image of the shape (which contains the paragraphs)
-        Aspose.Slides.IImage shapeImage = shape.GetImage(
-            Aspose.Slides.ShapeThumbnailBounds.Shape, 1f, 1f);
+        // Save the (potentially modified) presentation before exiting
+        string outPptxPath = Path.Combine(dataDir, "output.pptx");
+        presentation.Save(outPptxPath, Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Save the thumbnail as PNG (represents the paragraph image)
-        shapeImage.Save(outputPng, Aspose.Slides.ImageFormat.Png);
-
-        // Save the presentation
-        pres.Save(outputPptx, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Release resources
+        presentation.Dispose();
     }
 }
