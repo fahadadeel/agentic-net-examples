@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
@@ -13,26 +11,27 @@ class Program
         // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Load image file into a stream
-        FileStream imageStream = new FileStream("example.jpg", FileMode.Open, FileAccess.Read);
-        // Add image to the presentation's image collection
-        Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
-        // Close the image stream
-        imageStream.Close();
+        // Load an image from file and add it to the presentation's image collection
+        using (FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read))
+        {
+            Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
 
-        // Add a picture frame to the slide
-        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
-            Aspose.Slides.ShapeType.Rectangle,
-            50f,   // X position
-            50f,   // Y position
-            300f,  // Width
-            200f,  // Height
-            image);
+            // Add a picture frame to the slide
+            Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
+                Aspose.Slides.ShapeType.Rectangle,   // shape type
+                100f,                               // X position (points)
+                100f,                               // Y position (points)
+                200f,                               // Width (points)
+                150f,                               // Height (points)
+                image                               // image to display
+            );
 
-        // Save the presentation
-        presentation.Save("PictureFrameExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Set relative scaling (e.g., 50% width, 75% height of the original image)
+            pictureFrame.RelativeScaleWidth = 0.5f;
+            pictureFrame.RelativeScaleHeight = 0.75f;
+        }
 
-        // Dispose the presentation
-        presentation.Dispose();
+        // Save the presentation to disk
+        presentation.Save("PictureFrameRelativeScale.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
