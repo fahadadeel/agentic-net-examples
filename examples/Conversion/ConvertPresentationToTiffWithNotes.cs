@@ -1,25 +1,28 @@
 using System;
-using System.IO;
+using System.Drawing;
 
 class Program
 {
     static void Main()
     {
-        // Load the source presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Paths to the source PPTX and the target TIFF file
+        string dataDir = "C:\\Data\\";
+        string inputPath = System.IO.Path.Combine(dataDir, "input.pptx");
+        string outputPath = System.IO.Path.Combine(dataDir, "output.tiff");
 
-        // Save the presentation before exiting (as required)
-        presentation.Save("saved_output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-        // Create TIFF export options
+        // Configure TIFF options to include notes
         Aspose.Slides.Export.TiffOptions tiffOptions = new Aspose.Slides.Export.TiffOptions();
+        Aspose.Slides.Export.NotesCommentsLayoutingOptions notesOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions();
+        notesOptions.NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull;
+        tiffOptions.SlidesLayoutOptions = notesOptions;
 
-        // Configure notes layout to include notes at the bottom of each page
-        Aspose.Slides.Export.NotesCommentsLayoutingOptions notesLayout = new Aspose.Slides.Export.NotesCommentsLayoutingOptions();
-        notesLayout.NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull;
-        tiffOptions.SlidesLayoutOptions = notesLayout;
+        // Save the presentation as a multi‑page TIFF with notes
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
 
-        // Export the presentation to a multi‑page TIFF file with notes
-        presentation.Save("output_with_notes.tiff", Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
+        // Release resources
+        presentation.Dispose();
     }
 }
