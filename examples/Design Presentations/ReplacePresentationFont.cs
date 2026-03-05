@@ -1,25 +1,24 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace FontReplacementDemo
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            // Load an existing presentation
-            Presentation presentation = new Presentation("input.pptx");
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
 
-            // Define source and destination fonts
-            IFontData sourceFont = new FontData("Arial");
-            IFontData destinationFont = new FontData("Times New Roman");
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-            // Replace the source font with the destination font throughout the presentation
-            presentation.FontsManager.ReplaceFont(sourceFont, destinationFont);
+        // Define source and destination fonts
+        Aspose.Slides.IFontData sourceFont = new Aspose.Slides.FontData("Arial");
+        Aspose.Slides.IFontData destFont = new Aspose.Slides.FontData("Times New Roman");
 
-            // Save the modified presentation
-            presentation.Save("output.pptx", SaveFormat.Pptx);
-        }
+        // Replace the source font with the destination font
+        presentation.FontsManager.ReplaceFont(sourceFont, destFont);
+
+        // Save the modified presentation
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
