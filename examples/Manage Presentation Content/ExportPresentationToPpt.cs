@@ -7,31 +7,32 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Input presentation file path (e.g., a large PPTX file)
-        string inputPath = "input.pptx";
-        // Output PPT file path
+        // Path to the source presentation file
+        string sourcePath = "input.pptx";
+
+        // Path to the output PPT file
         string outputPath = "output.ppt";
 
-        // Read the entire presentation file into a byte array (BLOB)
-        byte[] presentationData = File.ReadAllBytes(inputPath);
+        // Load the presentation from the source file
+        Presentation presentation = new Presentation(sourcePath);
 
-        // Create a PresentationFactory instance
-        PresentationFactory factory = new PresentationFactory();
+        // Create a memory stream to act as a BLOB container
+        using (MemoryStream blobStream = new MemoryStream())
+        {
+            // Save the presentation into the memory stream in PPT format
+            presentation.Save(blobStream, SaveFormat.Ppt);
 
-        // Load the presentation from the BLOB
-        IPresentation presentation = factory.ReadPresentation(presentationData);
+            // Reset the stream position to the beginning before reading
+            blobStream.Position = 0;
 
-        // Prepare a memory stream to hold the exported PPT data
-        MemoryStream outputStream = new MemoryStream();
+            // Write the BLOB data to the output file
+            using (FileStream fileStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
+            {
+                blobStream.CopyTo(fileStream);
+            }
+        }
 
-        // Save the presentation to the stream in PPT format
-        presentation.Save(outputStream, SaveFormat.Ppt);
-
-        // Write the stream contents to the output file
-        File.WriteAllBytes(outputPath, outputStream.ToArray());
-
-        // Clean up resources
-        outputStream.Close();
+        // Dispose the presentation to release resources
         presentation.Dispose();
     }
 }
