@@ -1,35 +1,40 @@
 using System;
 using System.Collections.Generic;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+namespace RemoveSlidesExample
 {
-    static void Main()
+    class Program
     {
-        // Load the existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
-
-        // Indices of slides to remove (zero‑based)
-        List<int> slideIndices = new List<int>();
-        slideIndices.Add(1);
-        slideIndices.Add(3);
-        slideIndices.Add(5);
-
-        // Sort indices in descending order to avoid shifting problems
-        slideIndices.Sort();
-        slideIndices.Reverse();
-
-        // Remove each slide by index
-        foreach (int index in slideIndices)
+        static void Main(string[] args)
         {
-            presentation.Slides.RemoveAt(index);
+            // Path to the source presentation
+            string sourcePath = "input.pptx";
+            // Path to the output presentation
+            string outputPath = "output.pptx";
+
+            // Load the presentation
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+            {
+                // List of slide indices to remove (zero‑based)
+                List<int> indicesToRemove = new List<int> { 2, 4, 6 };
+
+                // Sort indices in descending order to avoid shifting issues
+                indicesToRemove.Sort((a, b) => b.CompareTo(a));
+
+                // Remove slides at specified indices
+                foreach (int index in indicesToRemove)
+                {
+                    // Ensure the index is within the current slide count
+                    if (index >= 0 && index < presentation.Slides.Count)
+                    {
+                        presentation.Slides.RemoveAt(index);
+                    }
+                }
+
+                // Save the modified presentation
+                presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            }
         }
-
-        // Save the modified presentation
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Clean up resources
-        presentation.Dispose();
     }
 }
