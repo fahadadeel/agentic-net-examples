@@ -1,31 +1,29 @@
 using System;
 
-namespace AsposeSlidesDemo
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main()
-        {
-            // Input and output file paths
-            System.String inputPath = "input.pptx";
-            System.String outputPath = "output.pptx";
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
 
-            // Load the presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-            // Access built‑in document properties
-            Aspose.Slides.IDocumentProperties docProps = presentation.DocumentProperties;
+        // Access document properties
+        Aspose.Slides.IDocumentProperties documentProperties = presentation.DocumentProperties;
 
-            // Retrieve and display title, author, and slide count
-            System.Console.WriteLine("Title: " + docProps.Title);
-            System.Console.WriteLine("Author: " + docProps.Author);
-            System.Console.WriteLine("Slide Count: " + presentation.Slides.Count);
+        // Display some built‑in properties
+        Console.WriteLine("Author: " + documentProperties.Author);
+        Console.WriteLine("Title: " + documentProperties.Title);
+        Console.WriteLine("Subject: " + documentProperties.Subject);
+        Console.WriteLine("Created Time: " + documentProperties.CreatedTime);
+        Console.WriteLine("Last Saved By: " + documentProperties.LastSavedBy);
+        Console.WriteLine("Number of Slides: " + documentProperties.Slides);
 
-            // Save the presentation before exiting (required by authoring rules)
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-            // Release resources
-            presentation.Dispose();
-        }
+        // Save the presentation (required before exit)
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Dispose();
     }
 }
