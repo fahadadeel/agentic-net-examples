@@ -1,26 +1,29 @@
 using System;
-using Aspose.Slides;
 
-class Program
+namespace AddRectangleShape
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+            {
+                // Get the first slide
+                Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+                // Add a rectangle auto shape to the slide
+                Aspose.Slides.IAutoShape rectangle = slide.Shapes.AddAutoShape(
+                    Aspose.Slides.ShapeType.Rectangle,
+                    50f,   // X position
+                    50f,   // Y position
+                    200f,  // Width
+                    100f   // Height
+                );
 
-        // Add a rectangle auto shape to the slide
-        Aspose.Slides.IAutoShape rectangle = slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle, // Shape type
-            50,    // X position (points)
-            150,   // Y position (points)
-            300,   // Width (points)
-            200    // Height (points)
-        );
-
-        // Save the presentation to a PPTX file
-        presentation.Save("MediaPresentation_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                // Save the presentation to a PPTX file
+                presentation.Save("RectangleShape.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            }
+        }
     }
 }
