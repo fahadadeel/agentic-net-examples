@@ -1,31 +1,57 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Create load options and set default proofing language
-        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
-        loadOptions.DefaultTextLanguage = "en-US";
+        // Path to the source presentation
+        string sourcePath = "input.pptx";
+        // Path to the output presentation
+        string outputPath = "output.pptx";
 
-        // Load the presentation with the specified load options
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx", loadOptions))
+        // Load the presentation from file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
+
+        // Iterate through all slides
+        for (int slideIndex = 0; slideIndex < presentation.Slides.Count; slideIndex++)
         {
-            // Access the first shape on the first slide (assumed to be an AutoShape)
-            Aspose.Slides.IShape shape = presentation.Slides[0].Shapes[0];
-            Aspose.Slides.IAutoShape autoShape = shape as Aspose.Slides.IAutoShape;
+            Aspose.Slides.ISlide slide = presentation.Slides[slideIndex];
 
-            if (autoShape != null && autoShape.TextFrame != null &&
-                autoShape.TextFrame.Paragraphs.Count > 0 &&
-                autoShape.TextFrame.Paragraphs[0].Portions.Count > 0)
+            // Iterate through all shapes on the slide
+            for (int shapeIndex = 0; shapeIndex < slide.Shapes.Count; shapeIndex++)
             {
-                // Get the first portion of text and set its proofing language
-                Aspose.Slides.IPortion portion = autoShape.TextFrame.Paragraphs[0].Portions[0];
-                portion.PortionFormat.LanguageId = "en-US";
-            }
+                Aspose.Slides.IShape shape = slide.Shapes[shapeIndex];
 
-            // Save the modified presentation
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                // Process only AutoShape objects that contain a TextFrame
+                Aspose.Slides.IAutoShape autoShape = shape as Aspose.Slides.IAutoShape;
+                if (autoShape != null && autoShape.TextFrame != null)
+                {
+                    Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
+
+                    // Iterate through all paragraphs in the TextFrame
+                    for (int paraIndex = 0; paraIndex < textFrame.Paragraphs.Count; paraIndex++)
+                    {
+                        Aspose.Slides.IParagraph paragraph = textFrame.Paragraphs[paraIndex];
+
+                        // Iterate through all portions in the paragraph
+                        for (int portionIndex = 0; portionIndex < paragraph.Portions.Count; portionIndex++)
+                        {
+                            Aspose.Slides.IPortion portion = paragraph.Portions[portionIndex];
+
+                            // Set the proofing language (e.g., French - France)
+                            portion.PortionFormat.LanguageId = "fr-FR";
+                        }
+                    }
+                }
+            }
         }
+
+        // Save the modified presentation as PPTX
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Dispose the presentation object
+        presentation.Dispose();
     }
 }
