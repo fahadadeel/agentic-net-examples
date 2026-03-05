@@ -7,31 +7,38 @@ class Program
 {
     static void Main()
     {
-        // Paths to the input presentation, extracted audio, and output presentation
-        string inputPath = "input.pptx";
-        string outputAudioPath = "transition_sound.wav";
-        string outputPresPath = "output.pptx";
+        // Load the presentation from file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Load the presentation
-        Presentation pres = new Presentation(inputPath);
-
-        // Access the first slide (adjust index as needed)
-        ISlide slide = pres.Slides[0];
-
-        // Retrieve the slide show transition object
-        ISlideShowTransition transition = slide.SlideShowTransition;
-
-        // Extract the embedded transition sound, if any
-        IAudio audio = transition.Sound;
-        if (audio != null && audio.BinaryData != null)
+        // Iterate through all slides
+        for (int i = 0; i < presentation.Slides.Count; i++)
         {
-            File.WriteAllBytes(outputAudioPath, audio.BinaryData);
+            // Get the current slide
+            Aspose.Slides.ISlide slide = presentation.Slides[i];
+
+            // Access the slide show transition of the slide
+            Aspose.Slides.ISlideShowTransition transition = slide.SlideShowTransition;
+
+            // Get the embedded sound for the transition, if any
+            Aspose.Slides.IAudio transitionSound = transition.Sound;
+
+            if (transitionSound != null)
+            {
+                // Extract the binary audio data
+                byte[] audioData = transitionSound.BinaryData;
+
+                // Define output file name for the extracted sound
+                string outputFile = $"Slide_{i + 1}_TransitionSound.bin";
+
+                // Write the audio data to a file
+                File.WriteAllBytes(outputFile, audioData);
+            }
         }
 
-        // Save the (potentially unchanged) presentation before exiting
-        pres.Save(outputPresPath, SaveFormat.Pptx);
+        // Save the presentation (no modifications made) before exiting
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Clean up resources
-        pres.Dispose();
+        // Dispose the presentation object
+        presentation.Dispose();
     }
 }
