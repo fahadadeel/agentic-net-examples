@@ -9,25 +9,23 @@ class Program
     {
         // Path to the image file to be added as a BLOB
         string imagePath = "large_image.jpg";
+        // Path where the resulting presentation will be saved
+        string outputPath = "presentationWithLargeImage.pptx";
 
         // Create a new presentation
-        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation())
+        using (Presentation pres = new Presentation())
         {
             // Open the image file as a stream
-            using (FileStream fileStream = new FileStream(imagePath, FileMode.Open))
+            using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
             {
-                // Add the image to the presentation using KeepLocked behavior
-                Aspose.Slides.IPPImage img = pres.Images.AddImage(fileStream, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
-
-                // Insert the image onto the first slide as a picture frame
-                pres.Slides[0].Shapes.AddPictureFrame(
-                    Aspose.Slides.ShapeType.Rectangle,
-                    0, 0, 300, 200,
-                    img);
+                // Add the image to the presentation with KeepLocked behavior
+                Aspose.Slides.IPPImage img = pres.Images.AddImage(fs, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
+                // Insert the image into the first slide as a picture frame
+                pres.Slides[0].Shapes.AddPictureFrame(Aspose.Slides.ShapeType.Rectangle, 0, 0, 300, 200, img);
             }
 
-            // Save the presentation in PPT format
-            pres.Save("presentationWithLargeImage.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
+            // Save the presentation in PPTX format
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
