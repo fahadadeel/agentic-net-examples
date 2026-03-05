@@ -1,23 +1,26 @@
 using System;
 using Aspose.Slides;
 
-class Program
+namespace AsposeSlidesExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first master slide from the presentation
-        Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
+            // Get the first master slide
+            Aspose.Slides.IMasterSlide master = presentation.Masters[0];
 
-        // Select a predefined layout slide from the master (e.g., the first layout)
-        Aspose.Slides.ILayoutSlide layoutSlide = masterSlide.LayoutSlides[0];
+            // Get the first layout slide from the master
+            Aspose.Slides.ILayoutSlide layout = master.LayoutSlides[0];
 
-        // Add a new empty slide based on the selected layout
-        Aspose.Slides.ISlide newSlide = presentation.Slides.AddEmptySlide(layoutSlide);
+            // Add a new empty slide based on the selected layout
+            Aspose.Slides.ISlide newSlide = presentation.Slides.AddEmptySlide(layout);
 
-        // Save the presentation to a file
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
