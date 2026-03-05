@@ -1,56 +1,56 @@
 using System;
 using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Path to the source PPTX file
         string inputPath = "input.pptx";
-        // Directory where extracted embedded files will be saved
         string outputDir = "ExtractedFiles";
+        Directory.CreateDirectory(outputDir);
 
-        // Ensure the output directory exists
-        if (!Directory.Exists(outputDir))
-            Directory.CreateDirectory(outputDir);
-
-        // Load the presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
-
-        // Counter for naming extracted files
-        int fileIndex = 0;
-
-        // Iterate through all slides and shapes to find OLE object frames
-        foreach (Aspose.Slides.ISlide slide in pres.Slides)
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            foreach (Aspose.Slides.IShape shape in slide.Shapes)
+            // Extract embedded videos
+            for (int i = 0; i < presentation.Videos.Count; i++)
             {
-                if (shape is Aspose.Slides.OleObjectFrame)
+                Aspose.Slides.IVideo video = presentation.Videos[i];
+                using (Stream videoStream = video.GetStream())
                 {
-                    Aspose.Slides.OleObjectFrame oleFrame = shape as Aspose.Slides.OleObjectFrame;
-
-                    // Get the embedded file data and its extension
-                    byte[] embeddedData = oleFrame.EmbeddedData.EmbeddedFileData;
-                    string fileExtension = oleFrame.EmbeddedData.EmbeddedFileExtension;
-
-                    // Build the output file path
-                    string outFilePath = Path.Combine(outputDir, "embedded_" + fileIndex + fileExtension);
-
-                    // Write the embedded data to disk
-                    using (FileStream fs = new FileStream(outFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+                    string extension = Path.GetExtension(video.ContentType);
+                    if (string.IsNullOrEmpty(extension))
                     {
-                        fs.Write(embeddedData, 0, embeddedData.Length);
+                        extension = ".bin";
                     }
-
-                    fileIndex++;
+                    string outputPath = Path.Combine(outputDir, "video_" + i + extension);
+                    using (FileStream fileStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
+                    {
+                        videoStream.CopyTo(fileStream);
+                    }
                 }
             }
-        }
 
-        // Save the presentation (required by authoring rules)
-        pres.Save("output.pptx", SaveFormat.Pptx);
-        pres.Dispose();
+            // Extract embedded audios
+            for (int i = 0; i < presentation.Audios.Count; i++)
+            {
+                Aspose.Slides.IAudio audio = presentation.Audios[i];
+                using (Stream audioStream = audio.GetStream())
+                {
+                    string extension = Path.GetExtension(audio.ContentType);
+                    if (string.IsNullOrEmpty(extension))
+                    {
+                        extension = ".bin";
+                    }
+                    string outputPath = Path.Combine(outputDir, "audio_" + i + extension);
+                    using (FileStream fileStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
+                    {
+                        audioStream.CopyTo(fileStream);
+                    }
+                }
+            }
+
+            // Save the presentation (unchanged) before exiting
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
