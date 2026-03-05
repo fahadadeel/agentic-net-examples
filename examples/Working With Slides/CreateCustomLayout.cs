@@ -1,27 +1,22 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace CustomLayoutExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Presentation presentation = new Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Get the first master slide
-            IMasterSlide masterSlide = presentation.Masters[0];
+        // Get the first master slide
+        Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
 
-            // Add a custom layout slide to the presentation
-            ILayoutSlide customLayout = presentation.LayoutSlides.Add(masterSlide, SlideLayoutType.Custom, "MyCustomLayout");
+        // Add a custom layout slide to the presentation
+        Aspose.Slides.ILayoutSlide customLayout = presentation.LayoutSlides.Add(masterSlide, Aspose.Slides.SlideLayoutType.Custom, "MyCustomLayout");
 
-            // Add a new slide using the custom layout
-            ISlide newSlide = presentation.Slides.AddEmptySlide(customLayout);
+        // Add a new empty slide using the custom layout
+        Aspose.Slides.ISlide newSlide = presentation.Slides.AddEmptySlide(customLayout);
 
-            // Save the presentation
-            presentation.Save("CustomLayoutPresentation.pptx", SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save("CustomLayoutPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
