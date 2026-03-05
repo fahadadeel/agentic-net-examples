@@ -1,29 +1,46 @@
 using System;
+using System.Collections.Generic;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace DeleteCommentsAndAuthors
 {
-    static void Main()
+    class Program
     {
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
-
-        // Remove all comments from each slide
-        foreach (Aspose.Slides.ISlide slide in presentation.Slides)
+        static void Main(string[] args)
         {
-            Aspose.Slides.IComment[] comments = slide.GetSlideComments(null);
-            foreach (Aspose.Slides.IComment comment in comments)
+            // Input and output file paths
+            string inputPath = "input.pptx";
+            string outputPath = "output.pptx";
+
+            // Load the presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+            // Get the collection of comment authors
+            Aspose.Slides.ICommentAuthorCollection authors = presentation.CommentAuthors;
+
+            // Copy authors to a list to avoid modification during enumeration
+            List<Aspose.Slides.ICommentAuthor> authorList = new List<Aspose.Slides.ICommentAuthor>();
+            foreach (Aspose.Slides.ICommentAuthor author in authors)
             {
-                comment.Remove();
+                authorList.Add(author);
             }
+
+            // Remove all comments and authors
+            foreach (Aspose.Slides.ICommentAuthor author in authorList)
+            {
+                // Clear all comments made by this author
+                author.Comments.Clear();
+
+                // Remove the author from the collection
+                author.Remove();
+            }
+
+            // Save the modified presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Dispose the presentation object
+            presentation.Dispose();
         }
-
-        // Clear all comment authors
-        presentation.CommentAuthors.Clear();
-
-        // Save the modified presentation in PPT format
-        presentation.Save("output.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
-
-        // Release resources
-        presentation.Dispose();
     }
 }
