@@ -1,32 +1,32 @@
 using System;
 using System.Drawing;
-using Aspose.Slides;
 using Aspose.Slides.Export;
-using Aspose.Slides.Theme;
 
-namespace ManagePresentationColor
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Set the background of the first slide to solid blue
-            presentation.Slides[0].Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
-            presentation.Slides[0].Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-            presentation.Slides[0].Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.Blue;
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Access the master theme's color scheme and change Accent1 to red
-            Aspose.Slides.Theme.ColorScheme masterColorScheme = (Aspose.Slides.Theme.ColorScheme)presentation.MasterTheme.ColorScheme;
-            masterColorScheme.Accent1.Color = System.Drawing.Color.Red;
+        // Set slide background to LightBlue
+        slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
+        slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        slide.Background.FillFormat.SolidFillColor.Color = Color.LightBlue;
 
-            // Save the presentation in PPTX format
-            presentation.Save("ManagedPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Add a rectangle shape and set its fill color to Accent1 from the theme
+        Aspose.Slides.IAutoShape shape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 50, 150, 200, 100);
+        shape.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        shape.FillFormat.SolidFillColor.SchemeColor = Aspose.Slides.SchemeColor.Accent1;
 
-            // Release resources
-            presentation.Dispose();
-        }
+        // Save the presentation as PPT
+        presentation.Save("ManagedContentColor.ppt", SaveFormat.Ppt);
+
+        // Dispose the presentation
+        presentation.Dispose();
     }
 }
