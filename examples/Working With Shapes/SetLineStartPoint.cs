@@ -1,6 +1,4 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 using System.Drawing;
 
 class Program
@@ -10,28 +8,30 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
+        // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a line shape to the slide
-        Aspose.Slides.IAutoShape line = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Line, 50, 150, 300, 0);
+        // Add a line shape (auto shape) to the slide
+        Aspose.Slides.IAutoShape lineShape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Line, 0, 0, 100, 0);
 
-        // Set the start point (X, Y) of the line
-        line.X = 100; // new start X coordinate
-        line.Y = 200; // new start Y coordinate
+        // Create a geometry path to define the line's start and end points
+        Aspose.Slides.GeometryPath geometryPath = new Aspose.Slides.GeometryPath();
 
-        // Optional: format the line appearance
-        line.LineFormat.Style = Aspose.Slides.LineStyle.ThickBetweenThin;
-        line.LineFormat.Width = 10;
-        line.LineFormat.DashStyle = Aspose.Slides.LineDashStyle.DashDot;
-        line.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        line.LineFormat.FillFormat.SolidFillColor.Color = Color.Maroon;
+        // Set the start point of the line at (50, 50)
+        geometryPath.MoveTo(50f, 50f);
 
-        // Save the presentation before exiting
-        presentation.Save("SetLineStartPoint_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Set the end point of the line at (150, 50)
+        geometryPath.LineTo(150f, 50f);
 
-        // Release resources
-        presentation.Dispose();
+        // Apply the custom geometry path to the line shape
+        Aspose.Slides.GeometryShape geometryShape = lineShape as Aspose.Slides.GeometryShape;
+        if (geometryShape != null)
+        {
+            geometryShape.SetGeometryPath(geometryPath);
+        }
+
+        // Save the presentation
+        presentation.Save("LineStartPoint.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
