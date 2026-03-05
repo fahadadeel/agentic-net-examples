@@ -1,28 +1,45 @@
 using System;
-using System.Drawing.Imaging;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Load an existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Output file paths
+        string outputPptx = "output.pptx";
+        string outputPng = "shape.png";
+
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
         // Access the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+        Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Access the first shape on the slide
-        Aspose.Slides.IShape shape = slide.Shapes[0];
+        // Add a rectangle shape
+        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle,
+            50,   // X position
+            50,   // Y position
+            200,  // Width
+            100   // Height
+        );
 
-        // Generate a thumbnail image for the shape
-        Aspose.Slides.IImage shapeImage = shape.GetImage();
+        // Set shape fill to no fill
+        shape.FillFormat.FillType = Aspose.Slides.FillType.NoFill;
 
-        // Save the shape thumbnail to a PNG file
-        shapeImage.Save("shape_thumbnail.png", ImageFormat.Png);
+        // Set line sketch type
+        shape.LineFormat.SketchFormat.SketchType = Aspose.Slides.LineSketchType.Scribble;
 
-        // Save the presentation before exiting
-        presentation.Save("output.pptx", SaveFormat.Pptx);
+        // Generate thumbnail image of the shape (full scale)
+        Aspose.Slides.IImage shapeImage = shape.GetImage(
+            Aspose.Slides.ShapeThumbnailBounds.Shape,
+            1f,   // Scale X
+            1f    // Scale Y
+        );
+
+        // Save the thumbnail as PNG
+        shapeImage.Save(outputPng, Aspose.Slides.ImageFormat.Png);
+
+        // Save the presentation
+        pres.Save(outputPptx, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
