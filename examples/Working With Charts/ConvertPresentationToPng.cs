@@ -1,45 +1,30 @@
 using System;
-using System.IO;
-using System.Drawing.Imaging;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace ConvertPresentationToPng
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        // Path to the source PowerPoint file
+        System.String inputPath = "input.pptx";
+        // Format string for output PNG files
+        System.String outputFormat = "slide_{0}.png";
+
+        // Load the presentation
+        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath))
         {
-            // Path to the source presentation (contains math equations)
-            string inputPath = "input.pptx";
-
-            // Folder where PNG images and the saved presentation will be stored
-            string outputFolder = "output";
-
-            // Ensure the output directory exists
-            if (!Directory.Exists(outputFolder))
-                Directory.CreateDirectory(outputFolder);
-
-            // Load the presentation
-            Presentation presentation = new Presentation(inputPath);
-
             // Convert each slide to a PNG image
-            for (int index = 0; index < presentation.Slides.Count; index++)
+            for (int index = 0; index < pres.Slides.Count; index++)
             {
-                ISlide slide = presentation.Slides[index];
-                using (IImage slideImage = slide.GetImage())
+                Aspose.Slides.ISlide slide = pres.Slides[index];
+                using (Aspose.Slides.IImage image = slide.GetImage())
                 {
-                    string imagePath = Path.Combine(outputFolder, $"slide_{index}.png");
-                    slideImage.Save(imagePath, ImageFormat.Png);
+                    System.String outputPath = System.String.Format(outputFormat, index);
+                    image.Save(outputPath, Aspose.Slides.ImageFormat.Png);
                 }
             }
 
-            // Save the presentation before exiting (as required)
-            string savedPresentationPath = Path.Combine(outputFolder, "converted.pptx");
-            presentation.Save(savedPresentationPath, SaveFormat.Pptx);
-
-            // Clean up resources
-            presentation.Dispose();
+            // Save the presentation before exiting
+            pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
