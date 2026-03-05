@@ -1,27 +1,23 @@
 using System;
 
-class Program
+namespace DeleteSlideExample
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Path to the source presentation
-        string sourcePath = "input.pptx";
-        // Path to the output presentation
-        string outputPath = "output.pptx";
-        // Index of the slide to delete (zero-based)
-        int slideIndex = 1;
-
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
-
-        // Verify that the index is valid
-        if (slideIndex >= 0 && slideIndex < presentation.Slides.Count)
+        static void Main(string[] args)
         {
-            // Remove the slide at the specified index
-            presentation.Slides.RemoveAt(slideIndex);
-        }
+            // Input and output file paths
+            string inputPath = "input.pptx";
+            string outputPath = "output.pptx";
 
-        // Save the modified presentation
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Load the presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+            // Remove the slide at index 0
+            presentation.Slides.RemoveAt(0);
+
+            // Save the modified presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
