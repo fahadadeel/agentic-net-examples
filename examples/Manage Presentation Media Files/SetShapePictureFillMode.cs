@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -8,19 +10,24 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
+        // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle shape to the slide
-        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 300, 150);
+        // Load an image from file and add it to the presentation's image collection
+        FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read);
+        Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
+        imageStream.Close();
 
-        // Set the fill type of the shape to picture
-        shape.FillFormat.FillType = Aspose.Slides.FillType.Picture;
+        // Add a picture frame shape to the slide
+        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
+            Aspose.Slides.ShapeType.Rectangle,
+            50f, 50f, 200f, 200f,
+            image);
 
-        // Set the picture fill mode (e.g., Stretch)
-        shape.FillFormat.PictureFillFormat.PictureFillMode = Aspose.Slides.PictureFillMode.Stretch;
+        // Set the picture fill mode to Tile
+        pictureFrame.PictureFormat.PictureFillMode = Aspose.Slides.PictureFillMode.Tile;
 
-        // Save the presentation
-        presentation.Save("PictureFillModeExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation in PPTX format
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
