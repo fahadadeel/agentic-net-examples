@@ -7,56 +7,44 @@ namespace ManageOleObjectFrames
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            // Path to the source PPT presentation
-            System.String inputPath = "input.ppt";
-            // Path to the output PPT presentation
-            System.String outputPath = "output.ppt";
+            // Input PPT file containing OLE objects
+            string inputPath = "input.ppt";
+            // Output PPT file after processing
+            string outputPath = "output.ppt";
 
             // Load the presentation
             Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-            // Access the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+            int oleObjectIndex = 0;
 
-            // Iterate through all shapes on the slide
-            foreach (Aspose.Slides.IShape shape in slide.Shapes)
+            // Iterate through all slides
+            foreach (Aspose.Slides.ISlide slide in presentation.Slides)
             {
-                // Try to cast the shape to an OLE object frame
-                Aspose.Slides.IOleObjectFrame oleFrame = shape as Aspose.Slides.IOleObjectFrame;
-                if (oleFrame != null)
+                // Iterate through all shapes on the slide
+                foreach (Aspose.Slides.IShape shape in slide.Shapes)
                 {
-                    // Output basic information about the OLE object
-                    Console.WriteLine("Found OLE Object Frame:");
-                    Console.WriteLine(" - Alternative Text: " + oleFrame.AlternativeText);
-                    Console.WriteLine(" - Link Path (Relative): " + oleFrame.LinkPathRelative);
-                    Console.WriteLine(" - Embedded File Name: " + oleFrame.EmbeddedFileName);
-
-                    // If the OLE object is embedded, extract its data
-                    if (oleFrame.IsObjectLink == false && oleFrame.EmbeddedData != null)
+                    // Cast shape to OleObjectFrame if possible
+                    Aspose.Slides.OleObjectFrame oleObjectFrame = shape as Aspose.Slides.OleObjectFrame;
+                    if (oleObjectFrame != null)
                     {
-                        // Get the embedded file data and its extension
-                        System.Byte[] embeddedData = oleFrame.EmbeddedData.EmbeddedFileData;
-                        System.String fileExtension = oleFrame.EmbeddedData.EmbeddedFileExtension;
+                        // Access embedded OLE data
+                        Aspose.Slides.IOleEmbeddedDataInfo embeddedData = oleObjectFrame.EmbeddedData;
+                        byte[] fileData = embeddedData.EmbeddedFileData;
+                        string fileExtension = embeddedData.EmbeddedFileExtension;
 
-                        // Build a file name for the extracted content
-                        System.String extractedFileName = "extracted_ole" + fileExtension;
+                        // Save the extracted OLE file to disk
+                        string extractedFilePath = $"extracted_{oleObjectIndex}{fileExtension}";
+                        File.WriteAllBytes(extractedFilePath, fileData);
 
-                        // Write the embedded data to disk
-                        using (System.IO.FileStream fileStream = new System.IO.FileStream(extractedFileName, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.Read))
-                        {
-                            fileStream.Write(embeddedData, 0, embeddedData.Length);
-                        }
-
-                        Console.WriteLine(" - Extracted embedded data to: " + extractedFileName);
+                        oleObjectIndex++;
                     }
                 }
             }
 
-            // Save the (potentially modified) presentation
+            // Save the presentation before exiting
             presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
-            // Dispose the presentation object
             presentation.Dispose();
         }
     }
