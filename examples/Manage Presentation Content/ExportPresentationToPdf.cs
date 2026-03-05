@@ -1,29 +1,29 @@
 using System;
-using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace AsposeSlidesBlobExport
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Load the PPTX presentation from file
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Input PPTX file path
+        System.String sourcePath = "input.pptx";
+        // Output PDF file path
+        System.String outputPath = "output.pdf";
 
-            // Create a memory stream to act as a BLOB for the PDF output
-            MemoryStream pdfBlob = new MemoryStream();
+        // Configure load options to keep the source file locked (BLOB handling)
+        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
+        loadOptions.BlobManagementOptions.PresentationLockingBehavior = Aspose.Slides.PresentationLockingBehavior.KeepLocked;
 
-            // Save the presentation as PDF into the memory stream
-            presentation.Save(pdfBlob, Aspose.Slides.Export.SaveFormat.Pdf);
+        // Load the presentation with the specified load options
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath, loadOptions);
 
-            // Write the PDF BLOB to a physical file
-            File.WriteAllBytes("output.pdf", pdfBlob.ToArray());
+        // Set PDF export options (optional: include OLE data)
+        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+        pdfOptions.IncludeOleData = true;
 
-            // Clean up resources
-            pdfBlob.Dispose();
-            presentation.Dispose();
-        }
+        // Export the presentation to PDF
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+
+        // Ensure the presentation is saved before exiting
+        presentation.Dispose();
     }
 }
