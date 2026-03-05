@@ -1,46 +1,53 @@
 using System;
+using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace SaveParagraphAsImage
 {
-    static void Main()
+    class Program
     {
-        // Output file paths
-        string outputPptx = "ParagraphImage.pptx";
-        string outputPng = "ParagraphShape.png";
+        static void Main(string[] args)
+        {
+            // Define output directory and ensure it exists
+            string outDir = "Output";
+            if (!Directory.Exists(outDir))
+                Directory.CreateDirectory(outDir);
 
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+            // Define file paths
+            string pptxPath = Path.Combine(outDir, "presentation.pptx");
+            string imgPath = Path.Combine(outDir, "paragraph.png");
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+            // Create a new presentation
+            Presentation presentation = new Presentation();
 
-        // Define shape dimensions
-        float x = 100f;
-        float y = 100f;
-        float width = 400f;
-        float height = 200f;
+            // Access the first slide
+            ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle auto shape
-        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, x, y, width, height);
+            // Add a rectangle auto shape to hold the paragraph
+            IAutoShape autoShape = slide.Shapes.AddAutoShape(ShapeType.Rectangle, 50, 50, 400, 100);
 
-        // Set shape formatting
-        shape.FillFormat.FillType = Aspose.Slides.FillType.NoFill;
-        shape.LineFormat.SketchFormat.SketchType = Aspose.Slides.LineSketchType.Scribble;
+            // Get the text frame of the shape
+            ITextFrame textFrame = autoShape.TextFrame;
 
-        // Add paragraph text to the shape
-        shape.TextFrame.Text = "This is a paragraph saved as an image.";
+            // Create a new paragraph with desired text
+            Paragraph paragraph = new Paragraph();
+            paragraph.Text = "This paragraph will be saved as an image.";
 
-        // Generate an image of the shape (including the paragraph)
-        float scaleX = 1f;
-        float scaleY = 1f;
-        Aspose.Slides.IImage shapeImage = shape.GetImage(Aspose.Slides.ShapeThumbnailBounds.Shape, scaleX, scaleY);
+            // Add the paragraph to the text frame
+            textFrame.Paragraphs.Add(paragraph);
 
-        // Save the shape image as PNG
-        shapeImage.Save(outputPng, Aspose.Slides.ImageFormat.Png);
+            // Render the shape (which contains the paragraph) to an image
+            IImage shapeImage = autoShape.GetImage();
 
-        // Save the presentation
-        pres.Save(outputPptx, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the rendered image as PNG
+            shapeImage.Save(imgPath, ImageFormat.Png);
+
+            // Save the presentation as PPTX
+            presentation.Save(pptxPath, SaveFormat.Pptx);
+
+            // Clean up resources
+            presentation.Dispose();
+        }
     }
 }
