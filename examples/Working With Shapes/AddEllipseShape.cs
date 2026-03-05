@@ -1,7 +1,6 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 using System.Drawing;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -10,23 +9,28 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
+        // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Add an ellipse shape to the slide
         Aspose.Slides.IAutoShape ellipse = slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Ellipse, 50, 150, 200, 100);
+            Aspose.Slides.ShapeType.Ellipse, // shape type
+            100, 100,                       // X and Y position
+            200, 150);                      // Width and Height
 
-        // Set the fill to solid blue
+        // Set solid fill color for the ellipse
         ellipse.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        ellipse.FillFormat.SolidFillColor.Color = Color.Blue;
+        ellipse.FillFormat.SolidFillColor.Color = Color.LightBlue;
 
-        // Set the outline to a solid black line
-        ellipse.LineFormat.Width = 2;
+        // Set line (border) format
         ellipse.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        ellipse.LineFormat.FillFormat.SolidFillColor.Color = Color.Black;
+        ellipse.LineFormat.FillFormat.SolidFillColor.Color = Color.DarkBlue;
+        ellipse.LineFormat.Width = 3;
 
         // Save the presentation
-        presentation.Save("EllipsePresentation.pptx", SaveFormat.Pptx);
+        presentation.Save("EllipsePresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
