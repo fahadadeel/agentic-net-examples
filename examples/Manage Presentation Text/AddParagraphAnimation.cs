@@ -1,44 +1,38 @@
 using System;
-using Aspose.Slides;
 
 class Program
 {
     static void Main()
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
         // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add an AutoShape with two paragraphs of text
-        Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle, 50, 100, 400, 100);
-        autoShape.AddTextFrame("First paragraph.\nSecond paragraph.");
+        // Get the first shape as an AutoShape
+        Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)slide.Shapes[0];
 
-        // Get the first paragraph
-        Aspose.Slides.IParagraph paragraph1 = autoShape.TextFrame.Paragraphs[0];
-        // Add Fly animation effect to the first paragraph
-        Aspose.Slides.Animation.IEffect effect1 = slide.Timeline.MainSequence.AddEffect(
-            paragraph1,
-            Aspose.Slides.Animation.EffectType.Fly,
-            Aspose.Slides.Animation.EffectSubtype.Left,
-            Aspose.Slides.Animation.EffectTriggerType.OnClick);
-        // Set animate text type to ByLetter
-        effect1.AnimateTextType = Aspose.Slides.Animation.AnimateTextType.ByLetter;
+        // Iterate through all paragraphs in the shape's text frame
+        for (int i = 0; i < autoShape.TextFrame.Paragraphs.Count; i++)
+        {
+            Aspose.Slides.IParagraph paragraph = autoShape.TextFrame.Paragraphs[i];
 
-        // Get the second paragraph
-        Aspose.Slides.IParagraph paragraph2 = autoShape.TextFrame.Paragraphs[1];
-        // Add Fade animation effect to the second paragraph
-        Aspose.Slides.Animation.IEffect effect2 = slide.Timeline.MainSequence.AddEffect(
-            paragraph2,
-            Aspose.Slides.Animation.EffectType.Fade,
-            Aspose.Slides.Animation.EffectSubtype.None,
-            Aspose.Slides.Animation.EffectTriggerType.AfterPrevious);
-        // Set animate text type to ByWord
-        effect2.AnimateTextType = Aspose.Slides.Animation.AnimateTextType.ByWord;
+            // Add a Fly animation effect to the paragraph
+            Aspose.Slides.Animation.IEffect effect = slide.Timeline.MainSequence.AddEffect(
+                paragraph,
+                Aspose.Slides.Animation.EffectType.Fly,
+                Aspose.Slides.Animation.EffectSubtype.Left,
+                Aspose.Slides.Animation.EffectTriggerType.OnClick);
 
-        // Save the presentation
-        presentation.Save("ParagraphAnimations_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Set the animate text type (e.g., by letter)
+            effect.AnimateTextType = Aspose.Slides.Animation.AnimateTextType.ByLetter;
+        }
+
+        // Save the modified presentation
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
