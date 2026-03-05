@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Drawing.Imaging;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
@@ -8,54 +7,61 @@ class Program
 {
     static void Main()
     {
-        // Input PPTX file path
+        // Paths for input presentation and output directory
         string inputPath = "input.pptx";
-        // Output PPTX file path (saved after processing)
-        string outputPath = "output.pptx";
-        // Directory to store extracted raster images
-        string imagesDirectory = "ExtractedImages";
+        string outputDir = "ExtractedImages";
 
-        // Ensure the images directory exists
-        System.IO.Directory.CreateDirectory(imagesDirectory);
+        // Ensure the output directory exists
+        if (!Directory.Exists(outputDir))
+        {
+            Directory.CreateDirectory(outputDir);
+        }
 
         // Load the presentation
         Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
 
-        // Iterate through all slides
-        for (int slideIndex = 0; slideIndex < pres.Slides.Count; slideIndex++)
+        int imageIndex = 0;
+
+        // Iterate through all slides and shapes
+        foreach (Aspose.Slides.ISlide slide in pres.Slides)
         {
-            Aspose.Slides.ISlide slide = pres.Slides[slideIndex];
-
-            // Iterate through all shapes on the slide
-            for (int shapeIndex = 0; shapeIndex < slide.Shapes.Count; shapeIndex++)
+            foreach (Aspose.Slides.IShape shape in slide.Shapes)
             {
-                Aspose.Slides.IShape shape = slide.Shapes[shapeIndex];
-
-                // Check if the shape is a picture (implements ISlidesPicture)
-                Aspose.Slides.ISlidesPicture pictureShape = shape as Aspose.Slides.ISlidesPicture;
-                if (pictureShape != null)
+                // Check if the shape is a picture frame
+                Aspose.Slides.IPictureFrame pictureFrame = shape as Aspose.Slides.IPictureFrame;
+                if (pictureFrame != null)
                 {
-                    // Get the embedded image (IPPImage)
-                    Aspose.Slides.IPPImage ppImage = pictureShape.Image;
-                    if (ppImage != null)
-                    {
-                        // Retrieve the raster image (IImage) from the IPPImage
-                        Aspose.Slides.IImage rasterImage = ppImage.Image;
-                        if (rasterImage != null)
-                        {
-                            // Build a unique file name for each extracted image
-                            string imageFileName = $"slide{slideIndex}_shape{shapeIndex}.png";
-                            string imagePath = System.IO.Path.Combine(imagesDirectory, imageFileName);
+                    // Get the embedded image
+                    Aspose.Slides.IPPImage ppImage = pictureFrame.PictureFormat.Picture.Image;
 
-                            // Save the raster image as PNG
-                            rasterImage.Save(imagePath, ImageFormat.Png);
+                    // Retrieve the binary data of the image
+                    byte[] imageData = ppImage.BinaryData;
+
+                    // Determine file extension from content type (e.g., "image/png" -> ".png")
+                    string extension = ".bin";
+                    string contentType = ppImage.ContentType;
+                    if (!string.IsNullOrEmpty(contentType))
+                    {
+                        int slashPos = contentType.LastIndexOf('/');
+                        if (slashPos >= 0 && slashPos < contentType.Length - 1)
+                        {
+                            extension = "." + contentType.Substring(slashPos + 1);
                         }
                     }
+
+                    // Save the image to the output directory
+                    string outPath = Path.Combine(outputDir, $"image_{imageIndex}{extension}");
+                    File.WriteAllBytes(outPath, imageData);
+                    imageIndex++;
                 }
             }
         }
 
-        // Save the (potentially modified) presentation before exiting
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the (unchanged) presentation before exiting
+        string savedPath = Path.Combine(outputDir, "presentation_saved.pptx");
+        pres.Save(savedPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up resources
+        pres.Dispose();
     }
 }
