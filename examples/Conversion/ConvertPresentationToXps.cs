@@ -1,23 +1,23 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load the source presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx");
+        // Paths to source presentations
+        string pptPath = "sample.ppt";
+        string pptxPath = "sample.pptx";
 
-        // Create XPS options with custom settings
-        Aspose.Slides.Export.XpsOptions options = new Aspose.Slides.Export.XpsOptions();
-        options.SaveMetafilesAsPng = true;      // Convert metafiles to PNG
-        options.DrawSlidesFrame = true;         // Draw black frame around each slide
+        // Convert PPT to XPS using default options
+        Aspose.Slides.Presentation pptPresentation = new Aspose.Slides.Presentation(pptPath);
+        pptPresentation.Save("sample_converted_from_ppt.xps", Aspose.Slides.Export.SaveFormat.Xps);
+        pptPresentation.Dispose();
 
-        // Save the presentation as XPS using the custom options
-        pres.Save("output.xps", Aspose.Slides.Export.SaveFormat.Xps, options);
-
-        // Release resources
-        pres.Dispose();
+        // Convert PPTX to XPS using custom XpsOptions
+        Aspose.Slides.Presentation pptxPresentation = new Aspose.Slides.Presentation(pptxPath);
+        Aspose.Slides.Export.XpsOptions xpsOptions = new Aspose.Slides.Export.XpsOptions();
+        xpsOptions.SaveMetafilesAsPng = true; // Example custom option
+        pptxPresentation.Save("sample_converted_from_pptx.xps", Aspose.Slides.Export.SaveFormat.Xps, xpsOptions);
+        pptxPresentation.Dispose();
     }
 }
