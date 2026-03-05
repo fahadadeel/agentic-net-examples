@@ -1,21 +1,25 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Path to the source presentation file
-        string sourcePath = "input.pptx";
-        // Path to the output presentation file
-        string outputPath = "output.pptx";
+        // Load an existing presentation from file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
-        {
-            // (Optional) modify the presentation here
+        // Get the first slide
+        Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
 
-            // Save the presentation in PPTX format
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Add a rectangle shape to the first slide as a simple modification
+        Aspose.Slides.IShape rectangle = firstSlide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+
+        // Save the modified presentation to a new file
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
