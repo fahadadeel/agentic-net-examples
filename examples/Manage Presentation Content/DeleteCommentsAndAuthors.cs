@@ -1,46 +1,41 @@
 using System;
-using System.Collections.Generic;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace DeleteCommentsAndAuthors
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
+
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+        // Get the collection of comment authors
+        Aspose.Slides.ICommentAuthorCollection authors = presentation.CommentAuthors;
+
+        // Copy authors to an array to avoid modification during iteration
+        Aspose.Slides.ICommentAuthor[] authorArray = new Aspose.Slides.ICommentAuthor[authors.Count];
+        for (int i = 0; i < authors.Count; i++)
         {
-            // Input and output file paths
-            string inputPath = "input.pptx";
-            string outputPath = "output.pptx";
-
-            // Load the presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-            // Get the collection of comment authors
-            Aspose.Slides.ICommentAuthorCollection authors = presentation.CommentAuthors;
-
-            // Copy authors to a list to avoid modification during enumeration
-            List<Aspose.Slides.ICommentAuthor> authorList = new List<Aspose.Slides.ICommentAuthor>();
-            foreach (Aspose.Slides.ICommentAuthor author in authors)
-            {
-                authorList.Add(author);
-            }
-
-            // Remove all comments and authors
-            foreach (Aspose.Slides.ICommentAuthor author in authorList)
-            {
-                // Clear all comments made by this author
-                author.Comments.Clear();
-
-                // Remove the author from the collection
-                author.Remove();
-            }
-
-            // Save the modified presentation
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-            // Dispose the presentation object
-            presentation.Dispose();
+            authorArray[i] = authors[i];
         }
+
+        // Remove all comments and authors
+        for (int i = 0; i < authorArray.Length; i++)
+        {
+            Aspose.Slides.ICommentAuthor author = authorArray[i];
+            // Clear comments of the author
+            author.Comments.Clear();
+            // Remove the author from the collection
+            authors.Remove(author);
+        }
+
+        // Save the modified presentation
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Dispose the presentation
+        presentation.Dispose();
     }
 }
