@@ -1,36 +1,39 @@
 using System;
 using System.IO;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Input audio and image files
-        string audioPath = "sample2.mp3";
-        string imagePath = "eagle.jpeg";
-        // Output presentation file
-        string outputPath = "AudioFrameThumbnail_out.pptx";
-
         // Create a new presentation
         Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+
+        // Get the first slide
         Aspose.Slides.ISlide slide = pres.Slides[0];
 
+        // Load the audio file stream
+        System.IO.FileStream audioStream = new System.IO.FileStream("sample2.mp3", System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
         // Add an audio frame to the slide
-        FileStream audioStream = new FileStream(audioPath, FileMode.Open, FileAccess.Read);
         Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(150f, 100f, 50f, 50f, audioStream);
         audioStream.Dispose();
 
-        // Add an image to the presentation resources
-        FileStream imageStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read);
+        // Load the image stream for the thumbnail
+        System.IO.FileStream imageStream = new System.IO.FileStream("eagle.jpeg", System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+        // Add the image to the presentation's image collection
         Aspose.Slides.IPPImage audioImage = pres.Images.AddImage(imageStream);
         imageStream.Dispose();
 
-        // Set the image as the audio frame's thumbnail/preview
+        // Set the thumbnail image for the audio frame
         audioFrame.PictureFormat.Picture.Image = audioImage;
 
-        // Save the presentation
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation in PPTX format
+        pres.Save("example_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Dispose the presentation
         pres.Dispose();
     }
 }
