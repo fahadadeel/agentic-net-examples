@@ -1,5 +1,6 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
 namespace ConvertPptxToPng
 {
@@ -9,30 +10,27 @@ namespace ConvertPptxToPng
         {
             // Path to the source PPTX file
             System.String inputPath = "input.pptx";
-            // Output file name pattern, {0} will be replaced by slide index
+
+            // Output file name pattern (e.g., slide_0.png, slide_1.png, ...)
             System.String outputFormat = "slide_{0}.png";
 
             // Load the presentation
-            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
-
-            // Iterate through all slides
-            for (int index = 0; index < pres.Slides.Count; index++)
+            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath))
             {
-                // Get the current slide
-                Aspose.Slides.ISlide slide = pres.Slides[index];
-
-                // Render the slide to an image
-                using (Aspose.Slides.IImage image = slide.GetImage())
+                // Iterate through each slide and export it as PNG
+                for (int index = 0; index < pres.Slides.Count; index++)
                 {
-                    // Build the output file name
-                    System.String outputPath = System.String.Format(outputFormat, index);
-                    // Save the image as PNG
-                    image.Save(outputPath, Aspose.Slides.ImageFormat.Png);
+                    Aspose.Slides.ISlide slide = pres.Slides[index];
+                    using (Aspose.Slides.IImage image = slide.GetImage())
+                    {
+                        System.String outputPath = System.String.Format(outputFormat, index);
+                        image.Save(outputPath, Aspose.Slides.ImageFormat.Png);
+                    }
                 }
-            }
 
-            // Save (optional) and release resources
-            pres.Dispose();
+                // Save the presentation (required by authoring rules)
+                pres.Save(inputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            }
         }
     }
 }
