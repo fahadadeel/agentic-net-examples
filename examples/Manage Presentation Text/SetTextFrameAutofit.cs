@@ -1,5 +1,4 @@
 using System;
-using Aspose.Slides.Export;
 
 class Program
 {
@@ -15,14 +14,14 @@ class Program
         Aspose.Slides.IAutoShape autoShape = slide.Shapes.AddAutoShape(
             Aspose.Slides.ShapeType.Rectangle, 30, 30, 350, 100);
 
-        // Add a TextFrame with sample text
-        Aspose.Slides.ITextFrame textFrame = autoShape.AddTextFrame("Sample text for autofit.");
+        // Add a text frame to the shape
+        autoShape.AddTextFrame("Sample text");
 
-        // Access the TextFrame format and set AutofitType
+        // Set the autofit type for the text frame
         Aspose.Slides.ITextFrameFormat textFrameFormat = autoShape.TextFrame.TextFrameFormat;
         textFrameFormat.AutofitType = Aspose.Slides.TextAutofitType.Shape;
 
         // Save the presentation
-        presentation.Save("AutofitPresentation.pptx", SaveFormat.Pptx);
+        presentation.Save("AutofitShape.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
