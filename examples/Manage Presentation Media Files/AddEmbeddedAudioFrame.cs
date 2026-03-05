@@ -8,26 +8,24 @@ class Program
     static void Main()
     {
         // Create a new presentation
-        using (Presentation pres = new Presentation())
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
         {
             // Get the first slide
-            ISlide slide = pres.Slides[0];
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Load the WAV file into a stream
-            FileStream audioStream = new FileStream("sampleaudio.wav", FileMode.Open, FileAccess.Read);
+            // Load the WAV audio file into a stream
+            using (FileStream audioStream = new FileStream("sampleaudio.wav", FileMode.Open, FileAccess.Read))
+            {
+                // Add an embedded audio frame to the slide
+                Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audioStream);
 
-            // Add an embedded audio frame to the slide
-            IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audioStream);
-
-            // Set audio playback properties
-            audioFrame.PlayMode = AudioPlayModePreset.Auto;
-            audioFrame.Volume = AudioVolumeMode.Loud;
-
-            // Close the audio stream
-            audioStream.Close();
+                // Set playback options
+                audioFrame.PlayMode = AudioPlayModePreset.Auto;
+                audioFrame.Volume = AudioVolumeMode.Loud;
+            }
 
             // Save the presentation
-            pres.Save("AudioFrameEmbed_out.pptx", SaveFormat.Pptx);
+            presentation.Save("AudioFrameEmbed_out.pptx", SaveFormat.Pptx);
         }
     }
 }
