@@ -2,20 +2,36 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace ImportSlidesExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Path to the source presentation file
+        string sourcePath = "source.pptx";
+        // Path to the destination presentation file
+        string destinationPath = "merged.pptx";
+
+        // Load the source presentation
+        Aspose.Slides.Presentation sourcePresentation = new Aspose.Slides.Presentation(sourcePath);
+        // Create a new empty destination presentation
+        Aspose.Slides.Presentation destinationPresentation = new Aspose.Slides.Presentation();
+
+        // Get slide collections from both presentations
+        Aspose.Slides.ISlideCollection sourceSlides = sourcePresentation.Slides;
+        Aspose.Slides.ISlideCollection destinationSlides = destinationPresentation.Slides;
+
+        // Clone each slide from the source into the destination
+        for (int index = 0; index < sourceSlides.Count; index++)
         {
-            // Create a new presentation that will hold the imported slides
-            Aspose.Slides.Presentation targetPresentation = new Aspose.Slides.Presentation();
-
-            // Import slides from a PDF document (different file format) and add them to the end of the collection
-            targetPresentation.Slides.AddFromPdf("source.pdf");
-
-            // Save the resulting presentation in PPTX format
-            targetPresentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            Aspose.Slides.ISlide sourceSlide = sourceSlides[index];
+            destinationSlides.AddClone(sourceSlide);
         }
+
+        // Save the merged presentation
+        destinationPresentation.Save(destinationPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up resources
+        sourcePresentation.Dispose();
+        destinationPresentation.Dispose();
     }
 }
