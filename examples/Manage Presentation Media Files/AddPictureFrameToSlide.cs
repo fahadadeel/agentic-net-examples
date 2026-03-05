@@ -7,34 +7,24 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Define directories and file paths
-        string dataDir = Path.Combine(Directory.GetCurrentDirectory(), "Data");
-        if (!Directory.Exists(dataDir))
-        {
-            Directory.CreateDirectory(dataDir);
-        }
-        string imagePath = Path.Combine(dataDir, "sample.jpg");
-        string outputPath = Path.Combine(dataDir, "output.pptx");
-
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Load the image from file using Aspose.Slides IImage
-        Aspose.Slides.IImage image = Aspose.Slides.Images.FromFile(imagePath);
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add the image to the presentation's image collection
-        Aspose.Slides.IPPImage ppImage = presentation.Images.AddImage(image);
+        // Load image file into presentation images collection
+        string imagePath = "sample.jpg";
+        byte[] imageBytes = File.ReadAllBytes(imagePath);
+        Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageBytes);
 
-        // Add a picture frame using the image's original width and height
-        Aspose.Slides.IPictureFrame pictureFrame = presentation.Slides[0].Shapes.AddPictureFrame(
+        // Add picture frame to slide
+        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
             Aspose.Slides.ShapeType.Rectangle,
-            0f,
-            0f,
-            (float)ppImage.Width,
-            (float)ppImage.Height,
-            ppImage);
+            50f, 50f, 300f, 200f,
+            image);
 
         // Save the presentation
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
