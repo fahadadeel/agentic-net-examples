@@ -1,40 +1,51 @@
 using System;
 
-class Program
+namespace HyperlinkDemo
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Get the first slide
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle shape
-        Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 150, 150, 150, 50);
+            // Add a rectangle auto shape
+            Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 150, 150, 150, 50);
 
-        // Cast to AutoShape
-        Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)shape;
+            // Cast to AutoShape to work with text
+            Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)shape;
 
-        // Add a text frame and set text
-        autoShape.AddTextFrame("");
-        Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
-        textFrame.Paragraphs[0].Portions[0].Text = "Aspose.Slides";
+            // Add a text frame
+            autoShape.AddTextFrame("");
 
-        // Get the portion to apply hyperlink
-        Aspose.Slides.IPortion portion = textFrame.Paragraphs[0].Portions[0];
+            // Get the text frame
+            Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
 
-        // Set an external hyperlink on click
-        Aspose.Slides.IHyperlinkManager hyperlinkManager = portion.PortionFormat.HyperlinkManager;
-        hyperlinkManager.SetExternalHyperlinkClick("http://www.aspose.com");
+            // Set text for the portion
+            textFrame.Paragraphs[0].Portions[0].Text = "Visit Aspose";
 
-        // Add a new slide to link to
-        Aspose.Slides.ISlide targetSlide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
+            // Get hyperlink manager for the portion
+            Aspose.Slides.IHyperlinkManager hyperlinkManager = textFrame.Paragraphs[0].Portions[0].PortionFormat.HyperlinkManager;
 
-        // Set an internal hyperlink on click to the new slide
-        hyperlinkManager.SetInternalHyperlinkClick(targetSlide);
+            // Set external hyperlink on click
+            hyperlinkManager.SetExternalHyperlinkClick("https://www.aspose.com");
 
-        // Save the presentation
-        presentation.Save("HyperlinksDemo.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
+            // Add another shape to demonstrate internal hyperlink
+            Aspose.Slides.IShape targetShape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Ellipse, 350, 150, 100, 100);
+            Aspose.Slides.IAutoShape targetAutoShape = (Aspose.Slides.IAutoShape)targetShape;
+            targetAutoShape.AddTextFrame("Target Slide");
+
+            // Set internal hyperlink from the first shape's text to the same slide
+            hyperlinkManager.SetInternalHyperlinkClick(slide);
+
+            // Save the presentation
+            presentation.Save("HyperlinkDemo_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Dispose the presentation
+            presentation.Dispose();
+        }
     }
 }
