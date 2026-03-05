@@ -7,56 +7,49 @@ class Program
 {
     static void Main()
     {
-        // Path to the source presentation
+        // Input PPTX file path
         string inputPath = "input.pptx";
 
-        // Directory where extracted audio files will be saved
+        // Directory to save extracted audio files
         string outputDir = "ExtractedAudio";
+
+        // Ensure the output directory exists
         if (!Directory.Exists(outputDir))
         {
             Directory.CreateDirectory(outputDir);
         }
 
         // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+        Presentation pres = new Presentation(inputPath);
+
+        // Get the collection of embedded audios
+        IAudioCollection audioCollection = pres.Audios;
+
+        // Iterate through each audio and save it to a file
+        for (int i = 0; i < audioCollection.Count; i++)
         {
-            // Get the collection of embedded audio files
-            Aspose.Slides.IAudioCollection audioCollection = presentation.Audios;
+            IAudio audio = audioCollection[i];
+            byte[] data = audio.BinaryData;
 
-            // Iterate through each audio and save it to a file
-            for (int i = 0; i < audioCollection.Count; i++)
+            // Determine file extension from content type, default to bin if unavailable
+            string extension = "bin";
+            if (audio.ContentType != null)
             {
-                Aspose.Slides.IAudio audio = audioCollection[i];
-                byte[] audioData = audio.BinaryData;
-
-                // Determine file extension based on content type
-                string extension = GetExtension(audio.ContentType);
-                string outputPath = Path.Combine(outputDir, $"audio_{i + 1}{extension}");
-
-                File.WriteAllBytes(outputPath, audioData);
+                int slashPos = audio.ContentType.LastIndexOf('/');
+                if (slashPos >= 0 && slashPos < audio.ContentType.Length - 1)
+                {
+                    extension = audio.ContentType.Substring(slashPos + 1);
+                }
             }
 
-            // Save the presentation (even if unchanged) before exiting
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            string outPath = Path.Combine(outputDir, $"audio_{i}.{extension}");
+            File.WriteAllBytes(outPath, data);
         }
-    }
 
-    // Helper method to map MIME types to file extensions
-    private static string GetExtension(string contentType)
-    {
-        if (contentType == null)
-            return ".bin";
+        // Save the presentation before exiting (even if unchanged)
+        pres.Save("output.pptx", SaveFormat.Pptx);
 
-        string lower = contentType.ToLowerInvariant();
-        if (lower == "audio/mpeg")
-            return ".mp3";
-        if (lower == "audio/wav")
-            return ".wav";
-        if (lower == "audio/mp4")
-            return ".mp4";
-        if (lower == "audio/ogg")
-            return ".ogg";
-
-        return ".bin";
+        // Dispose the presentation to release resources
+        pres.Dispose();
     }
 }
