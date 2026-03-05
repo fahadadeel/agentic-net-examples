@@ -3,46 +3,53 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace ExtractFlashObjects
 {
-    static void Main()
+    class Program
     {
-        // Input PPTX file path
-        string inputPath = "input.pptx";
-        // Output file for extracted flash binary
-        string outputPath = "flash.bin";
-
-        // Load the presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
-
-        // Get the collection of controls on the first slide
-        Aspose.Slides.IControlCollection controls = pres.Slides[0].Controls;
-
-        // Variable to hold the flash control if found
-        Aspose.Slides.Control flashControl = null;
-
-        // Iterate through controls to find the ShockwaveFlash object
-        foreach (Aspose.Slides.IControl control in controls)
+        static void Main(string[] args)
         {
-            if (control.Name == "ShockwaveFlash1")
+            // Input presentation path
+            string inputPath = "input.pptx";
+            // Output directory for extracted flash files
+            string outputDir = "FlashOutput";
+            Directory.CreateDirectory(outputDir);
+
+            // Load the presentation
+            using (Presentation pres = new Presentation(inputPath))
             {
-                flashControl = (Aspose.Slides.Control)control;
-                break;
+                // Iterate through all slides
+                for (int slideIndex = 0; slideIndex < pres.Slides.Count; slideIndex++)
+                {
+                    // Get the collection of ActiveX controls on the current slide
+                    IControlCollection controls = pres.Slides[slideIndex].Controls;
+                    Control flashControl = null;
+
+                    // Find the ShockwaveFlash control by name
+                    foreach (IControl control in controls)
+                    {
+                        if (control.Name == "ShockwaveFlash1")
+                        {
+                            flashControl = (Control)control;
+                            break;
+                        }
+                    }
+
+                    // If a flash control is found, extract its binary data
+                    if (flashControl != null)
+                    {
+                        byte[] flashData = flashControl.ActiveXControlBinary;
+                        string flashFilePath = Path.Combine(outputDir, $"flash_slide{slideIndex}.swf");
+                        using (FileStream fs = new FileStream(flashFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+                        {
+                            fs.Write(flashData, 0, flashData.Length);
+                        }
+                    }
+                }
+
+                // Save the presentation (required by lifecycle rules)
+                pres.Save("output.pptx", SaveFormat.Pptx);
             }
         }
-
-        // If flash control is found, extract its binary data
-        if (flashControl != null)
-        {
-            byte[] data = flashControl.ActiveXControlBinary;
-            using (FileStream fs = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
-            {
-                fs.Write(data, 0, data.Length);
-            }
-        }
-
-        // Save the (potentially unchanged) presentation before exiting
-        pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        pres.Dispose();
     }
 }
