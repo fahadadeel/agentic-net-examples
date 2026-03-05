@@ -1,50 +1,45 @@
 using System;
 using System.Drawing;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace CustomShapeExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            using (Presentation pres = new Presentation())
+            {
+                // Add a rectangle auto shape to the first slide
+                IAutoShape autoShape = pres.Slides[0].Shapes.AddAutoShape(ShapeType.Rectangle, 100, 100, 200, 100);
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+                // Cast the auto shape to GeometryShape to allow custom geometry
+                GeometryShape geometryShape = autoShape as GeometryShape;
 
-        // Add a rectangle auto shape and cast it to GeometryShape for custom geometry
-        Aspose.Slides.GeometryShape shape = (Aspose.Slides.GeometryShape)slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 100);
+                // Define a custom triangular geometry path
+                GeometryPath geometryPath = new GeometryPath();
+                geometryPath.MoveTo(0, 0);
+                geometryPath.LineTo(geometryShape.Width, 0);
+                geometryPath.LineTo(geometryShape.Width / 2, geometryShape.Height);
+                geometryPath.CloseFigure();
 
-        // Define the first geometry path (upper part)
-        Aspose.Slides.GeometryPath path0 = new Aspose.Slides.GeometryPath();
-        path0.MoveTo(0, 0);
-        path0.LineTo(shape.Width, 0);
-        path0.LineTo(shape.Width, shape.Height / 3);
-        path0.LineTo(0, shape.Height / 3);
-        path0.CloseFigure();
+                // Apply the custom geometry to the shape
+                geometryShape.SetGeometryPath(geometryPath);
 
-        // Define the second geometry path (lower part)
-        Aspose.Slides.GeometryPath path1 = new Aspose.Slides.GeometryPath();
-        path1.MoveTo(0, shape.Height / 3 * 2);
-        path1.LineTo(shape.Width, shape.Height / 3 * 2);
-        path1.LineTo(shape.Width, shape.Height);
-        path1.LineTo(0, shape.Height);
-        path1.CloseFigure();
+                // Set solid fill color
+                geometryShape.FillFormat.FillType = FillType.Solid;
+                geometryShape.FillFormat.SolidFillColor.Color = Color.Yellow;
 
-        // Apply the composite geometry to the shape
-        shape.SetGeometryPaths(new Aspose.Slides.IGeometryPath[] { path0, path1 });
+                // Set line (stroke) formatting
+                geometryShape.LineFormat.Width = 3;
+                geometryShape.LineFormat.FillFormat.FillType = FillType.Solid;
+                geometryShape.LineFormat.FillFormat.SolidFillColor.Color = Color.Black;
 
-        // Set solid fill color for the shape
-        shape.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        shape.FillFormat.SolidFillColor.Color = Color.FromArgb(255, 0, 0, 255); // Blue fill
-
-        // Set stroke (outline) for the shape
-        shape.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        shape.LineFormat.FillFormat.SolidFillColor.Color = Color.Black;
-        shape.LineFormat.Width = 2;
-
-        // Save the presentation
-        pres.Save("CustomShape.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        pres.Dispose();
+                // Save the presentation
+                pres.Save("CustomShape.pptx", SaveFormat.Pptx);
+            }
+        }
     }
 }
