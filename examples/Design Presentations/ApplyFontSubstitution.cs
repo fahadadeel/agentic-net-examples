@@ -1,33 +1,31 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Load an existing presentation
-        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions(Aspose.Slides.LoadFormat.Auto);
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx", loadOptions);
+        // Input and output file paths
+        System.String inputPath = "input.pptx";
+        System.String outputPath = "output.pptx";
+
+        // Load the presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
 
         // Define source and destination fonts
-        Aspose.Slides.IFontData sourceFont = new Aspose.Slides.FontData("Calibri");
-        Aspose.Slides.IFontData destFont = new Aspose.Slides.FontData("Arial");
+        Aspose.Slides.IFontData sourceFont = new Aspose.Slides.FontData("Arial");
+        Aspose.Slides.IFontData destFont = new Aspose.Slides.FontData("Times New Roman");
 
-        // Create a font substitution rule
-        Aspose.Slides.FontSubstRule substRule = new Aspose.Slides.FontSubstRule(sourceFont, destFont);
+        // Create a font substitution rule (replace when the source font is inaccessible)
+        Aspose.Slides.IFontSubstRule substRule = new Aspose.Slides.FontSubstRule(sourceFont, destFont, Aspose.Slides.FontSubstCondition.WhenInaccessible);
 
-        // Apply the substitution rule to the presentation
-        pres.FontsManager.ReplaceFont(substRule);
+        // Create a collection of substitution rules and add the rule
+        Aspose.Slides.IFontSubstRuleCollection substRules = new Aspose.Slides.FontSubstRuleCollection();
+        substRules.Add(substRule);
 
-        // List font substitutions after replacement
-        System.Collections.Generic.IEnumerable<Aspose.Slides.FontSubstitutionInfo> substitutions = pres.FontsManager.GetSubstitutions();
-        foreach (Aspose.Slides.FontSubstitutionInfo info in substitutions)
-        {
-            Console.WriteLine("{0} -> {1}", info.OriginalFontName, info.SubstitutedFontName);
-        }
+        // Assign the substitution rules to the presentation
+        pres.FontsManager.FontSubstRuleList = substRules;
 
         // Save the modified presentation
-        pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
