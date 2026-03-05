@@ -3,39 +3,36 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace HyperlinkSoundExtractor
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Path to the input PPT file
-        string inputPath = "input.ppt";
-        // Path to the output PPT file (can be the same as input if no changes)
-        string outputPath = "output.ppt";
-
-        // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+        static void Main(string[] args)
         {
-            // Get the first slide
+            // Load the presentation from a PPTX file
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+
+            // Access the first slide
             Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Get the first shape on the slide
+            // Access the first shape on the slide
             Aspose.Slides.IShape shape = slide.Shapes[0];
 
-            // Access the hyperlink associated with the shape (click action)
-            Aspose.Slides.IHyperlink link = shape.HyperlinkClick;
+            // Get the hyperlink associated with the shape click action
+            Aspose.Slides.IHyperlink hyperlink = shape.HyperlinkClick;
 
-            // Check if the hyperlink has an associated sound
-            if (link != null && link.Sound != null)
+            // Check if the hyperlink and its sound are present
+            if (hyperlink != null && hyperlink.Sound != null)
             {
                 // Extract the sound data as a byte array
-                byte[] audioData = link.Sound.BinaryData;
+                byte[] audioData = hyperlink.Sound.BinaryData;
 
-                // Example: write the extracted sound to a file
-                File.WriteAllBytes("hyperlink_sound.wav", audioData);
+                // Save the extracted sound to a file
+                File.WriteAllBytes("hyperlink_sound.bin", audioData);
             }
 
             // Save the presentation before exiting
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
