@@ -1,25 +1,21 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Path to the source presentation file
-        string sourcePath = "Sample.pptx";
-        // Path to the output presentation file
-        string outputPath = "OutputPresentation.pptx";
+        // Path to the existing PPTX file
+        System.String sourcePath = "input.pptx";
+        // Path where the presentation will be saved
+        System.String destinationPath = "output.pptx";
 
-        // Open the presentation using Aspose.Slides
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
-        {
-            // Display basic information about the presentation
-            Console.WriteLine("Number of slides: " + presentation.Slides.Count);
-            Console.WriteLine("First slide number: " + presentation.FirstSlideNumber);
+        // Open the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
 
-            // Save the presentation before exiting
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation in PPTX format
+        presentation.Save(destinationPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
