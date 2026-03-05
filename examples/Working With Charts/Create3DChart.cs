@@ -1,9 +1,6 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
 
-namespace Create3DChartExample
+namespace AsposeSlides3DChartExample
 {
     class Program
     {
@@ -18,22 +15,22 @@ namespace Create3DChartExample
             // Add a 3D clustered column chart to the slide
             Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
                 Aspose.Slides.Charts.ChartType.ClusteredColumn3D,
-                50f, 50f, 600f, 400f);
+                50f,   // X position
+                50f,   // Y position
+                600f,  // Width
+                400f   // Height
+            );
 
-            // Configure 3D rotation properties
-            // HeightPercents and DepthPercents define the chart's 3D size
-            chart.Rotation3D.HeightPercents = 150; // 150% of chart width
-            chart.Rotation3D.DepthPercents = 200;  // 200% of chart width
-
-            // Set rotation angles around X and Y axes
-            chart.Rotation3D.RotationX = -30; // tilt upward
-            chart.Rotation3D.RotationY = 40;  // rotate to the right
-
-            // Optionally enable right-angle axes for a more orthogonal view
-            chart.Rotation3D.RightAngleAxes = true;
+            // Configure 3D rotation and depth
+            Aspose.Slides.Charts.IRotation3D rotation = chart.Rotation3D;
+            rotation.RotationX = 20;        // Rotate around X axis (degrees)
+            rotation.RotationY = 30;        // Rotate around Y axis (degrees)
+            rotation.DepthPercents = 150;   // Depth as percentage of chart width
+            rotation.HeightPercents = 100;  // Height as percentage of chart width
 
             // Save the presentation to a PPTX file
-            presentation.Save("3DChartOutput.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            string outputPath = "3DChartPresentation.pptx";
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
