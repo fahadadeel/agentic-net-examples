@@ -1,20 +1,26 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
 
-        // Access the tag collection
+        // Load the existing presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+        // Add a custom tag to the presentation
         Aspose.Slides.ITagCollection tags = presentation.CustomData.Tags;
-
-        // Add a custom tag
         tags["MyTag"] = "My Tag Value";
 
-        // Save the presentation to a file
-        presentation.Save("TaggedPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation with the new tag
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up resources
+        presentation.Dispose();
     }
 }
