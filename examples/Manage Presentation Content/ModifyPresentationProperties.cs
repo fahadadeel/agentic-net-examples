@@ -4,22 +4,46 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create a new presentation instance
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.ppt";
+
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+        // Access document properties
+        Aspose.Slides.IDocumentProperties documentProperties = presentation.DocumentProperties;
+
+        // Modify built‑in properties
+        documentProperties.Author = "John Doe";
+        documentProperties.Title = "Sample Title";
+        documentProperties.Subject = "Sample Subject";
+
+        // Add custom properties
+        documentProperties["CustomInt"] = 123;
+        documentProperties["CustomString"] = "Hello";
+        documentProperties["CustomDate"] = DateTime.Now;
+
+        // Update existing custom properties (example: append index)
+        for (int i = 0; i < documentProperties.CountOfCustomProperties; i++)
         {
-            // Get the document properties object
-            Aspose.Slides.IDocumentProperties docProps = presentation.DocumentProperties;
+            string propName = documentProperties.GetCustomPropertyName(i);
+            object propValue = documentProperties[propName];
 
-            // Modify built‑in properties
-            docProps.Author = "John Doe";
-            docProps.Title = "Sample Presentation";
-            docProps.Subject = "Demo";
-            docProps.Category = "Examples";
-            docProps.Comments = "Created with Aspose.Slides";
-            docProps.Company = "Acme Corp";
-
-            // Save the presentation in PPT format
-            presentation.Save("ModifiedPresentation.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
+            if (propValue is int intValue)
+            {
+                documentProperties[propName] = intValue + (i + 1);
+            }
+            else if (propValue is string strValue)
+            {
+                documentProperties[propName] = strValue + (i + 1);
+            }
         }
+
+        // Save the presentation in PPT format
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
