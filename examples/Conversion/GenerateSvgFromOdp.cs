@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -12,18 +14,17 @@ class Program
         for (int i = 0; i < presentation.Slides.Count; i++)
         {
             Aspose.Slides.ISlide slide = presentation.Slides[i];
-            string svgPath = $"slide_{i + 1}.svg";
-
-            using (FileStream fileStream = File.Create(svgPath))
+            string svgFileName = $"slide_{i + 1}.svg";
+            using (FileStream fileStream = File.Create(svgFileName))
             {
                 slide.WriteAsSvg(fileStream);
             }
         }
 
-        // Save the presentation (optional output format)
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation before exiting
+        presentation.Save("output.odp", Aspose.Slides.Export.SaveFormat.Odp);
 
-        // Release resources
+        // Clean up resources
         presentation.Dispose();
     }
 }
