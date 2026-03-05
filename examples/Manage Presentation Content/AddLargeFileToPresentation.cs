@@ -1,39 +1,39 @@
 using System;
-using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+namespace ManageLargePresentation
 {
-    static void Main()
+    class Program
     {
-        // Path to the original large presentation
-        System.String sourcePath = "largePresentation.pptx";
-        // Path where the copy will be saved
-        System.String copyPath = "largePresentation_copy.pptx";
-
-        // Load options with BLOB management to keep the source locked
-        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions
+        static void Main(string[] args)
         {
-            BlobManagementOptions = new Aspose.Slides.BlobManagementOptions
+            // Path to the original large PPT file
+            System.String sourcePath = "largePresentation.ppt";
+            // Path where the copy will be saved
+            System.String copyPath = "largePresentationCopy.ppt";
+
+            // Load options with BLOB management to keep the source file locked during processing
+            Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions
             {
-                PresentationLockingBehavior = Aspose.Slides.PresentationLockingBehavior.KeepLocked
-            }
-        };
+                BlobManagementOptions = new Aspose.Slides.BlobManagementOptions
+                {
+                    PresentationLockingBehavior = Aspose.Slides.PresentationLockingBehavior.KeepLocked
+                }
+            };
 
-        // Open the large presentation using the load options
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath, loadOptions);
+            // Open the large presentation using the specified load options
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath, loadOptions);
 
-        // Rename the first slide (example operation)
-        presentation.Slides[0].Name = "RenamedSlide";
+            // Rename the first slide (optional demonstration)
+            presentation.Slides[0].Name = "RenamedSlide";
 
-        // Save the presentation copy in PPTX format
-        presentation.Save(copyPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation in PPT format
+            presentation.Save(copyPath, Aspose.Slides.Export.SaveFormat.Ppt);
 
-        // Dispose the presentation to release resources and unlock the source file
-        presentation.Dispose();
+            // Release resources
+            presentation.Dispose();
 
-        // Delete the original large file
-        System.IO.File.Delete(sourcePath);
+            // Delete the original file now that it is no longer locked
+            System.IO.File.Delete(sourcePath);
+        }
     }
 }
