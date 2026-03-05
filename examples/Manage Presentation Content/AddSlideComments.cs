@@ -1,44 +1,37 @@
 using System;
 using System.Drawing;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
-namespace AsposeSlidesComments
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
-            {
-                // Add a comment author
-                Aspose.Slides.ICommentAuthor author = presentation.CommentAuthors.AddAuthor("John Doe", "JD");
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-                // Define comment position
-                System.Drawing.PointF position = new System.Drawing.PointF();
-                position.X = 0.2f;
-                position.Y = 0.2f;
+        // Add an empty slide based on the first layout slide
+        pres.Slides.AddEmptySlide(pres.LayoutSlides[0]);
 
-                // Add a comment to the first slide
-                Aspose.Slides.IComment comment = author.Comments.AddComment(
-                    "This is a comment on slide 1",
-                    presentation.Slides[0],
-                    position,
-                    System.DateTime.Now);
+        // Add a comment author
+        Aspose.Slides.ICommentAuthor author = pres.CommentAuthors.AddAuthor("Jawad", "MF");
 
-                // Add another comment to the second slide if it exists
-                if (presentation.Slides.Count > 1)
-                {
-                    Aspose.Slides.IComment comment2 = author.Comments.AddComment(
-                        "Comment on slide 2",
-                        presentation.Slides[1],
-                        position,
-                        System.DateTime.Now);
-                }
+        // Define comment position
+        System.Drawing.PointF position = new System.Drawing.PointF(0.2f, 0.2f);
 
-                // Save the presentation
-                presentation.Save("Comments_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            }
-        }
+        // Add comment to the first slide
+        author.Comments.AddComment("Hello Jawad, this is slide comment", pres.Slides[0], position, DateTime.Now);
+
+        // Add a second empty slide to have a second slide
+        pres.Slides.AddEmptySlide(pres.LayoutSlides[0]);
+
+        // Add comment to the second slide
+        author.Comments.AddComment("Hello Jawad, this is second slide comment", pres.Slides[1], position, DateTime.Now);
+
+        // Save the presentation in PPTX format
+        pres.Save("Comments_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Dispose the presentation object
+        pres.Dispose();
     }
 }
