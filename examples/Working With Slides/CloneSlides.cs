@@ -1,24 +1,32 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace CloneMultipleSlides
 {
-    static void Main()
+    class Program
     {
-        // Load the source presentation
-        using (Aspose.Slides.Presentation sourcePres = new Aspose.Slides.Presentation("source.pptx"))
+        static void Main(string[] args)
         {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+
+            // Add a shape to the first slide (so we have something to clone)
+            presentation.Slides[0].Shapes.AddAutoShape(
+                Aspose.Slides.ShapeType.Rectangle,
+                50, 50, 200, 100);
+
             // Get the slide collection
-            Aspose.Slides.ISlideCollection slideCollection = sourcePres.Slides;
+            Aspose.Slides.ISlideCollection slides = presentation.Slides;
 
-            // Clone the first slide and add it to the end of the collection
-            Aspose.Slides.ISlide clonedSlide1 = slideCollection.AddClone(slideCollection[0]);
+            // Clone the first slide multiple times (e.g., 3 additional copies)
+            for (int i = 0; i < 3; i++)
+            {
+                slides.AddClone(slides[0]);
+            }
 
-            // Clone the second slide and add it to the end of the collection
-            Aspose.Slides.ISlide clonedSlide2 = slideCollection.AddClone(slideCollection[1]);
-
-            // Save the modified presentation
-            sourcePres.Save("cloned_output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("ClonedSlides_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
