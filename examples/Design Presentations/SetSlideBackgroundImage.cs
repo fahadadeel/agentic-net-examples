@@ -1,9 +1,8 @@
 using System;
 using System.IO;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace AsposeSlidesExample
+namespace SetSlideBackgroundImage
 {
     class Program
     {
@@ -20,17 +19,16 @@ namespace AsposeSlidesExample
             slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Picture;
             slide.Background.FillFormat.PictureFillFormat.PictureFillMode = Aspose.Slides.PictureFillMode.Stretch;
 
-            // Load image from file and add it to the presentation's image collection
+            // Load the image from file
             string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "background.jpg");
             Aspose.Slides.IImage image = Aspose.Slides.Images.FromFile(imagePath);
-            Aspose.Slides.IPPImage imageInPresentation = presentation.Images.AddImage(image);
+            Aspose.Slides.IPPImage imageX = presentation.Images.AddImage(image);
 
             // Assign the image to the slide background
-            slide.Background.FillFormat.PictureFillFormat.Picture.Image = imageInPresentation;
+            slide.Background.FillFormat.PictureFillFormat.Picture.Image = imageX;
 
             // Save the presentation
-            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "SlideWithImageBackground.pptx");
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            presentation.Save("ImageBackground.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
