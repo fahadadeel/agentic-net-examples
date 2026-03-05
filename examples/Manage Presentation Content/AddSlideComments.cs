@@ -1,41 +1,44 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 using System.Drawing;
+using Aspose.Slides;
 
-class Program
+namespace AsposeSlidesComments
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+            {
+                // Add a comment author
+                Aspose.Slides.ICommentAuthor author = presentation.CommentAuthors.AddAuthor("John Doe", "JD");
 
-        // Add an empty slide (now we have two slides: index 0 and 1)
-        pres.Slides.AddEmptySlide(pres.LayoutSlides[0]);
+                // Define comment position
+                System.Drawing.PointF position = new System.Drawing.PointF();
+                position.X = 0.2f;
+                position.Y = 0.2f;
 
-        // Add a comment author
-        Aspose.Slides.ICommentAuthor author = pres.CommentAuthors.AddAuthor("Author Name", "AN");
+                // Add a comment to the first slide
+                Aspose.Slides.IComment comment = author.Comments.AddComment(
+                    "This is a comment on slide 1",
+                    presentation.Slides[0],
+                    position,
+                    System.DateTime.Now);
 
-        // Define comment position on the slide
-        System.Drawing.PointF position = new System.Drawing.PointF(10f, 10f);
+                // Add another comment to the second slide if it exists
+                if (presentation.Slides.Count > 1)
+                {
+                    Aspose.Slides.IComment comment2 = author.Comments.AddComment(
+                        "Comment on slide 2",
+                        presentation.Slides[1],
+                        position,
+                        System.DateTime.Now);
+                }
 
-        // Add a comment to the first slide
-        author.Comments.AddComment("First slide comment", pres.Slides[0], position, System.DateTime.Now);
-
-        // Add a comment to the second slide
-        author.Comments.AddComment("Second slide comment", pres.Slides[1], position, System.DateTime.Now);
-
-        // (Optional) Retrieve comments for each slide
-        Aspose.Slides.ISlide slide0 = pres.Slides[0];
-        Aspose.Slides.IComment[] slide0Comments = slide0.GetSlideComments(author);
-
-        Aspose.Slides.ISlide slide1 = pres.Slides[1];
-        Aspose.Slides.IComment[] slide1Comments = slide1.GetSlideComments(null);
-
-        // Save the presentation in PPT format
-        pres.Save("AddSlideComments_out.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
-
-        // Dispose the presentation object
-        pres.Dispose();
+                // Save the presentation
+                presentation.Save("Comments_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            }
+        }
     }
 }
