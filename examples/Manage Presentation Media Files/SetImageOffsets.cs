@@ -1,52 +1,36 @@
 using System;
 using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace ImageOffsetExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
-            {
-                // Get the first slide
-                Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-                // Load an image from file into the presentation's image collection
-                using (FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read))
-                {
-                    Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-                    // Add a picture frame shape to the slide
-                    Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
-                        Aspose.Slides.ShapeType.Rectangle,
-                        50f,   // X position
-                        50f,   // Y position
-                        300f,  // Width
-                        200f,  // Height
-                        image);
+        // Add a picture frame shape to the slide
+        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
+            Aspose.Slides.ShapeType.Rectangle, // shape type
+            50f,                               // X position (points)
+            50f,                               // Y position (points)
+            300f,                              // Width (points)
+            200f,                              // Height (points)
+            presentation.Images.AddImage(File.ReadAllBytes("sample.jpg")) // image
+        );
 
-                    // Access the picture fill format of the shape
-                    Aspose.Slides.IPictureFillFormat pictureFillFormat = pictureFrame.FillFormat.PictureFillFormat;
+        // Get the picture fill format of the shape
+        Aspose.Slides.IPictureFillFormat pictureFillFormat = pictureFrame.FillFormat.PictureFillFormat;
 
-                    // Set the fill mode to Tile so offsets take effect
-                    pictureFillFormat.PictureFillMode = Aspose.Slides.PictureFillMode.Tile;
+        // Set the fill mode to Tile
+        pictureFillFormat.PictureFillMode = Aspose.Slides.PictureFillMode.Tile;
 
-                    // Specify horizontal and vertical offsets (in points) from the shape's origin
-                    pictureFillFormat.TileOffsetX = 20f;   // Move texture 20 points to the right
-                    pictureFillFormat.TileOffsetY = -10f; // Move texture 10 points up
+        // Specify the horizontal offset from the left edge of the shape's bounding box (percentage)
+        pictureFillFormat.StretchOffsetLeft = 10f; // 10% inset from the left edge
 
-                    // Optionally, set stretch offsets (percentage of the shape's bounding box)
-                    pictureFillFormat.StretchOffsetLeft = 5f; // Inset 5% from the left edge
-                    pictureFillFormat.StretchOffsetTop = 5f;  // Inset 5% from the top edge
-                }
-
-                // Save the presentation to a file
-                presentation.Save("ImageOffsetResult.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            }
-        }
+        // Save the presentation
+        presentation.Save("ImageOffsetExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
