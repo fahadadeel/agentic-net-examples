@@ -4,21 +4,25 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        var inputPath = "input.pptx";
-        var outputPath = "output.tiff";
+        // Load an existing presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx");
 
-        using (var presentation = new Aspose.Slides.Presentation(inputPath))
-        {
-            var tiffOptions = new Aspose.Slides.Export.TiffOptions();
+        // Create TIFF export options
+        Aspose.Slides.Export.TiffOptions options = new Aspose.Slides.Export.TiffOptions();
 
-            var notesLayout = new Aspose.Slides.Export.NotesCommentsLayoutingOptions();
-            notesLayout.NotesPosition = Aspose.Slides.Export.NotesPositions.BottomTruncated;
+        // Configure notes layouting options
+        Aspose.Slides.Export.NotesCommentsLayoutingOptions notesOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions();
+        notesOptions.NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull;
 
-            tiffOptions.SlidesLayoutOptions = notesLayout;
+        // Assign the notes layouting options to the TIFF options
+        options.SlidesLayoutOptions = notesOptions;
 
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
-        }
+        // Save the presentation as a TIFF file with the specified options
+        pres.Save("output.tiff", Aspose.Slides.Export.SaveFormat.Tiff, options);
+
+        // Clean up
+        pres.Dispose();
     }
 }
