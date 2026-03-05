@@ -1,33 +1,50 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace EmbeddedFontsDemo
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Load custom fonts from folder
-        string[] fontFolders = new string[] { "customfonts" };
-        Aspose.Slides.FontsLoader.LoadExternalFonts(fontFolders);
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            // Get the first slide
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Add a rectangle shape with a text frame
+            Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+            Aspose.Slides.ITextFrame textFrame = ((Aspose.Slides.IAutoShape)shape).AddTextFrame("Sample text with custom font");
 
-        // Add a rectangle autoshape
-        Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+            // Set the font of the text
+            textFrame.Paragraphs[0].Portions[0].PortionFormat.LatinFont = new Aspose.Slides.FontData("Arial");
 
-        // Add text to the shape
-        autoShape.AddTextFrame("Hello with custom font");
+            // Embed all fonts used in the presentation that are not already embedded
+            Aspose.Slides.IFontData[] allFonts = presentation.FontsManager.GetFonts();
+            Aspose.Slides.IFontData[] embeddedFonts = presentation.FontsManager.GetEmbeddedFonts();
 
-        // Set custom font for the text
-        Aspose.Slides.IPortion portion = autoShape.TextFrame.Paragraphs[0].Portions[0];
-        portion.PortionFormat.LatinFont = new Aspose.Slides.FontData("MyCustomFont");
+            foreach (Aspose.Slides.IFontData font in allFonts)
+            {
+                bool alreadyEmbedded = false;
+                foreach (Aspose.Slides.IFontData embedded in embeddedFonts)
+                {
+                    if (embedded.FontName == font.FontName)
+                    {
+                        alreadyEmbedded = true;
+                        break;
+                    }
+                }
 
-        // Save the presentation
-        presentation.Save("CustomFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                if (!alreadyEmbedded)
+                {
+                    presentation.FontsManager.AddEmbeddedFont(font, Aspose.Slides.Export.EmbedFontCharacters.All);
+                }
+            }
 
-        // Clear font cache
-        Aspose.Slides.FontsLoader.ClearCache();
+            // Save the presentation
+            presentation.Save("EmbeddedFontsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
