@@ -1,59 +1,27 @@
 using System;
-using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Input and output file paths
-        string inputPath = "input.ppt";
-        string outputPath = "output.ppt";
-
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-        // Set footer text for all slides and make it visible
-        presentation.HeaderFooterManager.SetAllFootersText("Confidential");
-        presentation.HeaderFooterManager.SetAllFootersVisibility(true);
-
-        // Update header placeholder text in the master notes slide (if it exists)
-        Aspose.Slides.IMasterNotesSlide masterNotes = presentation.MasterNotesSlideManager.MasterNotesSlide;
-        if (masterNotes != null)
+        // Create a new presentation
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
         {
-            foreach (Aspose.Slides.IShape shape in masterNotes.Shapes)
-            {
-                if (shape.Placeholder != null && shape.Placeholder.Type == Aspose.Slides.PlaceholderType.Header)
-                {
-                    ((Aspose.Slides.IAutoShape)shape).TextFrame.Text = "Header Text";
-                }
-            }
+            // Add a rectangle shape that will contain the tip text
+            Aspose.Slides.IAutoShape tipShape = presentation.Slides[0].Shapes.AddAutoShape(
+                Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+
+            // Add a text frame with the tip
+            tipShape.AddTextFrame("Tip: Review the content before finalizing.");
+
+            // Optionally set the fill color of the shape
+            tipShape.FillFormat.FillType = FillType.Solid;
+            tipShape.FillFormat.SolidFillColor.Color = System.Drawing.Color.LightYellow;
+
+            // Save the presentation in PPT format
+            presentation.Save("ContentTip.ppt", SaveFormat.Ppt);
         }
-
-        // Update placeholder prompt text (title and subtitle) on the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-        foreach (Aspose.Slides.IShape shape in slide.Shapes)
-        {
-            if (shape.Placeholder != null && shape is Aspose.Slides.IAutoShape)
-            {
-                string newText = null;
-                if (shape.Placeholder.Type == Aspose.Slides.PlaceholderType.CenteredTitle)
-                {
-                    newText = "New Title";
-                }
-                else if (shape.Placeholder.Type == Aspose.Slides.PlaceholderType.Subtitle)
-                {
-                    newText = "New Subtitle";
-                }
-
-                if (newText != null)
-                {
-                    ((Aspose.Slides.IAutoShape)shape).TextFrame.Text = newText;
-                }
-            }
-        }
-
-        // Save the modified presentation in PPT format
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
-        presentation.Dispose();
     }
 }
