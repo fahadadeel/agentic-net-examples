@@ -1,20 +1,23 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load the presentation from a file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("DemoFile.pptx");
+        // Path to the source PPTX file
+        string sourcePath = "input.pptx";
+        // Path to the output TIFF file
+        string outputPath = "output.tiff";
 
-        // Create TIFF options and set a custom pixel format
-        Aspose.Slides.Export.TiffOptions options = new Aspose.Slides.Export.TiffOptions();
-        options.PixelFormat = Aspose.Slides.Export.ImagePixelFormat.Format8bppIndexed;
+        // Load the presentation from the PPTX file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
 
-        // Save the presentation as a multi‑page TIFF using the specified options
-        presentation.Save("Tiff_With_Custom_Image_Pixel_Format_out.tiff", Aspose.Slides.Export.SaveFormat.Tiff, options);
+        // Save the presentation as a multi‑page TIFF image
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Tiff);
 
-        // Clean up resources
+        // Release resources
         presentation.Dispose();
     }
 }
