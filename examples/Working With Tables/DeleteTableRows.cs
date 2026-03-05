@@ -1,32 +1,28 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Input and output file paths
-        string inputPath = "input.pptx";
-        string outputPath = "output.pptx";
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Load the presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
-
-        // Access the first slide
+        // Access the first slide (automatically added)
         Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Get the first shape on the slide and cast it to a table
-        Aspose.Slides.ITable table = slide.Shapes[0] as Aspose.Slides.ITable;
-        if (table == null)
-        {
-            // No table found; save and exit
-            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-            return;
-        }
+        // Define column widths and row heights for the table
+        double[] columnWidths = new double[] { 100, 100, 100 };
+        double[] rowHeights = new double[] { 50, 50, 50, 50 };
+
+        // Add a table shape to the slide
+        Aspose.Slides.ITable table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
 
         // Remove the second row (index 1) without deleting attached rows
         table.Rows.RemoveAt(1, false);
 
-        // Save the modified presentation
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation to disk
+        pres.Save("output.pptx", SaveFormat.Pptx);
     }
 }
