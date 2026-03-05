@@ -4,20 +4,17 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load an existing presentation from file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Create a new presentation instance
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
+        // Modify the presentation: add a line shape to the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
+        slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Line, 50, 150, 300, 0);
 
-        // Add a rectangle shape to the first slide as a simple modification
-        Aspose.Slides.IShape rectangle = firstSlide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
-
-        // Save the modified presentation to a new file
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the modified presentation as PPTX
+        presentation.Save("ModifiedPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
         // Release resources
         presentation.Dispose();
