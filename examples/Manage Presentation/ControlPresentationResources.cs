@@ -5,21 +5,21 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Path to the source presentation
+        // Input presentation path
         string inputPath = Path.Combine(Directory.GetCurrentDirectory(), "input.pptx");
-        // Path for the output presentation
+        // Output presentation path
         string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.pptx");
 
-        // Create load options and configure to delete embedded binary objects (e.g., VBA, OLE, ActiveX)
+        // Create load options to control external resources (delete embedded binaries)
         Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
         loadOptions.DeleteEmbeddedBinaryObjects = true;
 
-        // Open the presentation with the specified load options
+        // Load the presentation with the specified load options
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath, loadOptions);
 
-        // Save the presentation after processing
+        // Save the presentation before exiting
         presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
 
         // Release resources
