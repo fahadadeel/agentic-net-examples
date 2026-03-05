@@ -1,27 +1,21 @@
 using System;
-using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace ConvertToTiff
+namespace AsposeSlidesTiffConversion
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Input PowerPoint file path
-            string inputPath = "input.pptx";
-            // Output TIFF file path
-            string outputPath = "output.tiff";
+            // Path to the source PowerPoint file
+            string sourceFile = "input.pptx";
+            // Path to the output TIFF file
+            string outputFile = "output.tiff";
 
             // Load the presentation
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourceFile))
             {
-                // Create TIFF options (default settings)
-                Aspose.Slides.Export.TiffOptions tiffOptions = new Aspose.Slides.Export.TiffOptions();
-
-                // Save the presentation as a multi-page TIFF file
-                presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
+                // Save the presentation as a multi‑page TIFF image
+                presentation.Save(outputFile, Aspose.Slides.Export.SaveFormat.Tiff);
             }
         }
     }
