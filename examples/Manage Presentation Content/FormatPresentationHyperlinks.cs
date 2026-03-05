@@ -1,10 +1,8 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+public class Program
 {
-    static void Main()
+    public static void Main()
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
@@ -13,25 +11,34 @@ class Program
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Add a rectangle auto shape
-        Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 150, 150, 150, 50);
+        Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 150, 150, 150, 50);
 
-        // Cast to IAutoShape to work with text
+        // Cast to AutoShape to work with text
         Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)shape;
 
-        // Add an empty text frame
+        // Add a text frame
         autoShape.AddTextFrame("");
 
-        // Access the text frame
+        // Get the first portion and set its text
         Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
+        Aspose.Slides.IParagraph paragraph = textFrame.Paragraphs[0];
+        Aspose.Slides.IPortion portion = paragraph.Portions[0];
+        portion.Text = "Visit Aspose";
 
-        // Set the display text
-        textFrame.Paragraphs[0].Portions[0].Text = "Visit Aspose";
-
-        // Obtain the hyperlink manager for the text portion
-        Aspose.Slides.IHyperlinkManager hyperlinkManager = textFrame.Paragraphs[0].Portions[0].PortionFormat.HyperlinkManager;
-
-        // Assign an external hyperlink to be opened on click
+        // Set an external hyperlink on click
+        Aspose.Slides.IHyperlinkManager hyperlinkManager = portion.PortionFormat.HyperlinkManager;
         hyperlinkManager.SetExternalHyperlinkClick("https://www.aspose.com");
+
+        // Add a second slide to demonstrate an internal hyperlink
+        Aspose.Slides.ISlide secondSlide = presentation.Slides.AddEmptySlide(
+            presentation.Slides[0].LayoutSlide);
+
+        // Set an internal hyperlink on click (overwrites previous external link)
+        hyperlinkManager.SetInternalHyperlinkClick(secondSlide);
+
+        // Remove any hyperlink set for mouse over
+        hyperlinkManager.RemoveHyperlinkMouseOver();
 
         // Save the presentation in PPT format
         presentation.Save("HyperlinkDemo.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
