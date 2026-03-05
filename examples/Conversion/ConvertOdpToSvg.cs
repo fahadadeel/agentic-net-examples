@@ -8,33 +8,27 @@ class Program
     static void Main(string[] args)
     {
         // Path to the source ODP file
-        string inputPath = "input.odp";
-
-        // Directory where SVG files will be saved
-        string outputDir = "output_svg";
-
-        // Create output directory if it does not exist
-        if (!Directory.Exists(outputDir))
-        {
-            Directory.CreateDirectory(outputDir);
-        }
+        string inputFile = "input.odp";
 
         // Load the ODP presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
-        {
-            // Iterate through each slide and save it as an SVG file
-            for (int i = 0; i < presentation.Slides.Count; i++)
-            {
-                Aspose.Slides.ISlide slide = presentation.Slides[i];
-                string svgPath = Path.Combine(outputDir, $"slide_{i + 1}.svg");
-                using (FileStream fileStream = File.Create(svgPath))
-                {
-                    slide.WriteAsSvg(fileStream);
-                }
-            }
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputFile);
 
-            // Save the presentation before exiting (optional, saves back to the same file)
-            presentation.Save(inputPath, SaveFormat.Odp);
+        // Convert each slide to an individual SVG file
+        for (int index = 0; index < presentation.Slides.Count; index++)
+        {
+            Aspose.Slides.ISlide slide = presentation.Slides[index];
+            string svgFile = $"slide_{index + 1}.svg";
+
+            using (FileStream svgStream = File.Create(svgFile))
+            {
+                slide.WriteAsSvg(svgStream);
+            }
         }
+
+        // Save the presentation before exiting (rewriting the original file)
+        presentation.Save("output.odp", SaveFormat.Odp);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
