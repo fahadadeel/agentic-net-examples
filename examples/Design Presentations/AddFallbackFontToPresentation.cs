@@ -1,23 +1,26 @@
 using System;
-using Aspose.Slides;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Create a new empty presentation
+        // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Retrieve the collection of fallback font rules from the presentation's FontsManager
+        // Get the fallback rules collection from the FontsManager
         Aspose.Slides.IFontFallBackRulesCollection fallbackRules = presentation.FontsManager.FontFallBackRulesCollection;
 
-        // Define a fallback rule for Unicode range 0x400-0x4FF using "Times New Roman" as the fallback font
-        Aspose.Slides.IFontFallBackRule fallbackRule = new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman");
+        // Create a new fallback rule for a Unicode range with a primary font
+        Aspose.Slides.IFontFallBackRule fallbackRule = new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Arial");
 
-        // Add the newly created rule to the collection
+        // Add additional fallback fonts to the rule
+        fallbackRule.AddFallBackFonts("Times New Roman");
+        fallbackRule.AddFallBackFonts(new string[] { "Tahoma", "Verdana" });
+
+        // Add the rule to the collection
         fallbackRules.Add(fallbackRule);
 
-        // Save the presentation to a file
+        // Save the presentation before exiting
         presentation.Save("FallbackFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
