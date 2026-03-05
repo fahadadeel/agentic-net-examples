@@ -4,16 +4,16 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        Presentation presentation = new Presentation();
 
-        // Configure save options with a default regular font
-        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+        // Define default regular font to be used when saving
+        PdfOptions pdfOptions = new PdfOptions();
         pdfOptions.DefaultRegularFont = "Arial";
 
-        // Save the presentation using the configured default font
-        presentation.Save("DefaultFontPresentation.pdf", Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+        // Save the presentation with the specified default font
+        presentation.Save("DefaultFontPresentation.pdf", SaveFormat.Pdf, pdfOptions);
     }
 }
