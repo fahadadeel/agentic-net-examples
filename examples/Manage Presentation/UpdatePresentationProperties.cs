@@ -9,21 +9,20 @@ class Program
         // Path where the updated presentation will be saved
         string outputPath = "output.pptx";
 
-        // Load presentation information and bind it to the file
+        // Obtain presentation information using the factory
         Aspose.Slides.IPresentationInfo presentationInfo = Aspose.Slides.PresentationFactory.Instance.GetPresentationInfo(sourcePath);
 
-        // Retrieve the current document properties
-        Aspose.Slides.IDocumentProperties docProps = presentationInfo.ReadDocumentProperties();
+        // Read the current document properties
+        Aspose.Slides.IDocumentProperties documentProperties = presentationInfo.ReadDocumentProperties();
 
         // Update desired properties
-        docProps.Title = "Updated Title";
-        docProps.Subject = "Updated Subject";
-        docProps.Author = "Aspose.Slides Example";
+        documentProperties.Title = "New Title";
+        documentProperties.Subject = "Updated Subject";
 
         // Apply the updated properties back to the binded presentation
-        presentationInfo.UpdateDocumentProperties(docProps);
+        presentationInfo.UpdateDocumentProperties(documentProperties);
 
-        // Save the modified presentation to a new file
+        // Save the presentation before exiting
         presentationInfo.WriteBindedPresentation(outputPath);
     }
 }
