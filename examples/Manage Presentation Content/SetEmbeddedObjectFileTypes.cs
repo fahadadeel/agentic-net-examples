@@ -9,19 +9,13 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access document properties
-        Aspose.Slides.IDocumentProperties docProps = presentation.DocumentProperties;
+        // Set the content type to PPTX format for embedded objects
+        presentation.DocumentProperties.ContentType = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
-        // Set the content type for PPT format
-        docProps.ContentType = "application/vnd.ms-powerpoint";
+        // Save the presentation
+        presentation.Save("EmbeddedObjectFileType.pptx", SaveFormat.Pptx);
 
-        // Set the presentation format description
-        docProps.PresentationFormat = "PPT";
-
-        // Save the presentation in PPT format
-        presentation.Save("ManagedPresentation.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
-
-        // Dispose the presentation
+        // Clean up
         presentation.Dispose();
     }
 }
