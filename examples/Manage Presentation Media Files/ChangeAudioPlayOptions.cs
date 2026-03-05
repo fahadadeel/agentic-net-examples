@@ -1,50 +1,43 @@
 using System;
-using System.IO;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace AudioPlayOptionsDemo
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Paths to the input presentation, audio file, and output presentation
-        string dataDir = "C:\\Data";
-        string inputPath = Path.Combine(dataDir, "input.pptx");
-        string audioPath = Path.Combine(dataDir, "sampleaudio.wav");
-        string outputPath = Path.Combine(dataDir, "output.pptx");
+        static void Main(string[] args)
+        {
+            // Load an existing presentation that contains an audio frame
+            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("AudioFrameEmbed_out.pptx"))
+            {
+                // Get the first slide
+                Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Load the existing presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
+                // Retrieve the first shape on the slide and cast it to AudioFrame
+                Aspose.Slides.AudioFrame audioFrame = (Aspose.Slides.AudioFrame)slide.Shapes[0];
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+                // Change audio play mode to play on click
+                audioFrame.PlayMode = Aspose.Slides.AudioPlayModePreset.OnClick;
 
-        // Open the audio file stream
-        FileStream audioStream = new FileStream(audioPath, FileMode.Open, FileAccess.Read);
+                // Set audio volume to low
+                audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Low;
 
-        // Add an embedded audio frame to the slide
-        Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audioStream);
+                // Enable playing the audio across all slides
+                audioFrame.PlayAcrossSlides = true;
 
-        // Change audio play options
-        audioFrame.PlayMode = Aspose.Slides.AudioPlayModePreset.OnClick;      // Play on click
-        audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Low;               // Low volume
-        audioFrame.PlayAcrossSlides = true;                                 // Play across slides
-        audioFrame.PlayLoopMode = false;                                    // No looping
-        audioFrame.HideAtShowing = true;                                    // Hide during slide show
-        audioFrame.RewindAudio = true;                                      // Rewind after playing
+                // Disable looping of the audio
+                audioFrame.PlayLoopMode = false;
 
-        // Set fade in/out durations (in milliseconds)
-        audioFrame.FadeInDuration = 200f;                                   // Fade in 200 ms
-        audioFrame.FadeOutDuration = 500f;                                  // Fade out 500 ms
+                // Hide the audio frame during the slide show
+                audioFrame.HideAtShowing = true;
 
-        // Set trimming times (in milliseconds)
-        audioFrame.TrimFromStart = 1500f;                                   // Trim first 1.5 seconds
-        audioFrame.TrimFromEnd = 2000f;                                     // Trim last 2 seconds
+                // Rewind the audio to the start after it finishes playing
+                audioFrame.RewindAudio = true;
 
-        // Save the modified presentation
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Clean up resources
-        audioStream.Close();
-        pres.Dispose();
+                // Save the modified presentation
+                pres.Save("AudioFrameEmbed_changed.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            }
+        }
     }
 }
