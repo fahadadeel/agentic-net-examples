@@ -5,28 +5,24 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Load the existing presentation
+        // Load an existing presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Retrieve all text frames from the presentation (including master slides)
+        // Retrieve all text frames from the presentation, including master slides
         Aspose.Slides.ITextFrame[] textFrames = Aspose.Slides.Util.SlideUtil.GetAllTextFrames(presentation, true);
 
-        // Iterate through each text frame and set its vertical anchoring type
+        // Set the vertical anchoring type for each text frame
         foreach (Aspose.Slides.ITextFrame textFrame in textFrames)
         {
-            // Access the text frame format
+            // Access the text frame format (read/write)
             Aspose.Slides.ITextFrameFormat format = textFrame.TextFrameFormat;
-
-            // Set the anchoring type (e.g., Bottom)
-            format.AnchoringType = Aspose.Slides.TextAnchorType.Bottom;
+            // Set anchoring to center (other options: Top, Bottom, etc.)
+            format.AnchoringType = Aspose.Slides.TextAnchorType.Center;
         }
 
-        // Save the updated presentation as PPTX
+        // Save the modified presentation
         presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Dispose the presentation object
-        presentation.Dispose();
     }
 }
