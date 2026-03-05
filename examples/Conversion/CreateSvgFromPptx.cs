@@ -8,26 +8,24 @@ class Program
     static void Main(string[] args)
     {
         // Path to the source PPTX file
-        string sourcePath = "input.pptx";
+        string inputPath = "input.pptx";
 
         // Load the presentation
-        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(sourcePath))
+        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath))
         {
             // Iterate through all slides and save each as an SVG file
             for (int i = 0; i < pres.Slides.Count; i++)
             {
-                // Define the SVG file name for the current slide
-                string svgPath = $"slide_{i + 1}.svg";
+                Aspose.Slides.ISlide slide = pres.Slides[i];
+                string outputSvg = $"slide_{i}.svg";
 
-                // Create a file stream for the SVG output
-                using (FileStream svgStream = File.Create(svgPath))
+                using (FileStream fileStream = File.Create(outputSvg))
                 {
-                    // Write the slide content to the SVG stream
-                    pres.Slides[i].WriteAsSvg(svgStream);
+                    slide.WriteAsSvg(fileStream);
                 }
             }
 
-            // Save the presentation (required before exiting)
+            // Save the presentation (optional, as required by the authoring rules)
             pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
