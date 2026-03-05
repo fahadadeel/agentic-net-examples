@@ -1,31 +1,30 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
-namespace CalloutExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Access the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add a callout shape to the slide
-            Aspose.Slides.IAutoShape callout = slide.Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Callout1, // Callout shape type
-                100, // X position (points)
-                100, // Y position (points)
-                300, // Width (points)
-                100  // Height (points)
-            );
+        // Add a pie chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.Pie, 50, 50, 400, 300);
 
-            // Add text to the callout
-            callout.AddTextFrame("This is a callout");
+        // Enable value display and callout for the first series
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowValue = true;
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLabelAsDataCallout = true;
 
-            // Save the presentation
-            presentation.Save("CalloutPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation to a PPTX file
+        string outPath = "AddCallouts_out.pptx";
+        presentation.Save(outPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Open the saved presentation
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(outPath) { UseShellExecute = true });
     }
 }
