@@ -3,49 +3,48 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace ManageOleObjectFrames
+namespace AccessOleObjectFrames
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Input PPT file containing OLE objects
-            string inputPath = "input.ppt";
-            // Output PPT file after processing
-            string outputPath = "output.ppt";
+            // Input PPTX file path
+            string inputPath = "input.pptx";
+            // Output PPTX file path (presentation will be saved here)
+            string outputPath = "output.pptx";
 
             // Load the presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
 
-            int oleObjectIndex = 0;
+            // Access the first slide
+            Aspose.Slides.ISlide slide = pres.Slides[0];
 
-            // Iterate through all slides
-            foreach (Aspose.Slides.ISlide slide in presentation.Slides)
+            // Access the first shape on the slide
+            Aspose.Slides.IShape shape = slide.Shapes[0];
+
+            // Cast the shape to OleObjectFrame
+            Aspose.Slides.OleObjectFrame oleFrame = shape as Aspose.Slides.OleObjectFrame;
+
+            if (oleFrame != null)
             {
-                // Iterate through all shapes on the slide
-                foreach (Aspose.Slides.IShape shape in slide.Shapes)
+                // Get embedded file data
+                byte[] data = oleFrame.EmbeddedData.EmbeddedFileData;
+                // Get embedded file extension
+                string fileExtension = oleFrame.EmbeddedData.EmbeddedFileExtension;
+
+                // Build output file name
+                string extractedFilePath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "extracted" + fileExtension);
+
+                // Write the extracted data to disk
+                using (FileStream fileStream = new FileStream(extractedFilePath, FileMode.Create, FileAccess.Write))
                 {
-                    // Cast shape to OleObjectFrame if possible
-                    Aspose.Slides.OleObjectFrame oleObjectFrame = shape as Aspose.Slides.OleObjectFrame;
-                    if (oleObjectFrame != null)
-                    {
-                        // Access embedded OLE data
-                        Aspose.Slides.IOleEmbeddedDataInfo embeddedData = oleObjectFrame.EmbeddedData;
-                        byte[] fileData = embeddedData.EmbeddedFileData;
-                        string fileExtension = embeddedData.EmbeddedFileExtension;
-
-                        // Save the extracted OLE file to disk
-                        string extractedFilePath = $"extracted_{oleObjectIndex}{fileExtension}";
-                        File.WriteAllBytes(extractedFilePath, fileData);
-
-                        oleObjectIndex++;
-                    }
+                    fileStream.Write(data, 0, data.Length);
                 }
             }
 
             // Save the presentation before exiting
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
-            presentation.Dispose();
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
