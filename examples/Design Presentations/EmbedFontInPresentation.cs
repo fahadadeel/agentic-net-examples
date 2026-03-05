@@ -1,43 +1,32 @@
 using System;
+using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace EmbedTrueTypeFont
 {
-    static void Main()
+    class Program
     {
-        // Load an existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("Fonts.pptx");
-
-        // Retrieve all fonts used in the presentation
-        Aspose.Slides.IFontData[] allFonts = presentation.FontsManager.GetFonts();
-
-        // Retrieve fonts that are already embedded
-        Aspose.Slides.IFontData[] embeddedFonts = presentation.FontsManager.GetEmbeddedFonts();
-
-        // Embed fonts that are not yet embedded
-        foreach (Aspose.Slides.IFontData font in allFonts)
+        static void Main(string[] args)
         {
-            bool isEmbedded = false;
-            foreach (Aspose.Slides.IFontData embedded in embeddedFonts)
-            {
-                if (embedded.Equals(font))
-                {
-                    isEmbedded = true;
-                    break;
-                }
-            }
+            // Load external TrueType fonts from a folder (adjust the path as needed)
+            string[] fontFolders = new string[] { "C:\\Fonts" };
+            Aspose.Slides.FontsLoader.LoadExternalFonts(fontFolders);
 
-            if (!isEmbedded)
-            {
-                presentation.FontsManager.AddEmbeddedFont(font, Aspose.Slides.Export.EmbedFontCharacters.All);
-            }
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+
+            // Read the TrueType font file into a byte array (adjust the file name as needed)
+            byte[] fontBytes = System.IO.File.ReadAllBytes("C:\\Fonts\\CustomFont.ttf");
+
+            // Embed the font into the presentation (embed all characters)
+            presentation.FontsManager.AddEmbeddedFont(fontBytes, Aspose.Slides.Export.EmbedFontCharacters.All);
+
+            // Save the presentation with the embedded font
+            presentation.Save("EmbeddedFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Clean up
+            presentation.Dispose();
         }
-
-        // Save the presentation with embedded fonts
-        presentation.Save("AddEmbeddedFont_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Clean up resources
-        presentation.Dispose();
     }
 }
