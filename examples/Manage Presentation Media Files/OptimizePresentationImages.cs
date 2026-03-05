@@ -1,30 +1,59 @@
 using System;
 using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace OptimizePresentationImages
 {
-    static void Main()
+    class Program
     {
-        // Define input and output file paths
-        string inputPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "input.pptx");
-        string outputPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "output.pptx");
-
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-
-        // Get the first shape as a picture frame
-        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes[0] as Aspose.Slides.IPictureFrame;
-
-        // If a picture frame exists, compress its image
-        if (pictureFrame != null)
+        static void Main(string[] args)
         {
-            bool compressionResult = pictureFrame.PictureFormat.CompressImage(true, Aspose.Slides.Export.PicturesCompression.Dpi150);
-        }
+            // Paths (adjust as needed)
+            string imagePath = "image.jpg";
+            string outputPptxPath = "optimized.pptx";
+            string outputPdfPath = "optimized.pdf";
 
-        // Save the optimized presentation
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+
+            // Add the image once to the presentation's image collection
+            Aspose.Slides.IPPImage sharedImage;
+            using (FileStream imageStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+            {
+                sharedImage = presentation.Images.AddImage(imageStream, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
+            }
+
+            // Place the shared image on the master slide (reused graphics)
+            Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
+            Aspose.Slides.IPictureFrame masterPicture = (Aspose.Slides.IPictureFrame)masterSlide.Shapes.AddPictureFrame(
+                Aspose.Slides.ShapeType.Rectangle,
+                0, 0, 200, 200,
+                sharedImage);
+            // Compress the image on the master (reasonable resolution)
+            masterPicture.PictureFormat.CompressImage(true, Aspose.Slides.Export.PicturesCompression.Dpi150);
+
+            // Add the same image to the first slide using the shared resource
+            Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
+            Aspose.Slides.IPictureFrame slidePicture = (Aspose.Slides.IPictureFrame)firstSlide.Shapes.AddPictureFrame(
+                Aspose.Slides.ShapeType.Rectangle,
+                300, 0, 200, 200,
+                sharedImage);
+            // Compress the image on the slide as well
+            slidePicture.PictureFormat.CompressImage(true, Aspose.Slides.Export.PicturesCompression.Dpi150);
+
+            // Save the presentation in PPTX format (required before PDF conversion)
+            presentation.Save(outputPptxPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Prepare PDF options with best image compression
+            Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+            pdfOptions.BestImagesCompressionRatio = true;
+
+            // Save the presentation as PDF using the compression options
+            presentation.Save(outputPdfPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+
+            // Clean up
+            presentation.Dispose();
+        }
     }
 }
