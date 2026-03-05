@@ -1,34 +1,30 @@
 using System;
-using System.IO;
-using System.Drawing.Imaging;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Path to the source presentation
-        string sourcePath = "input.pptx";
-        // Directory to save slide images
-        string outputDir = "output";
-        Directory.CreateDirectory(outputDir);
+        // Path to the input PPTX file
+        System.String inputPath = "input.pptx";
+        // Format string for output image files
+        System.String outputFormat = "slide_{0}.png";
 
         // Load the presentation
-        Presentation presentation = new Presentation(sourcePath);
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
 
-        // Iterate through slides and save each as PNG
-        for (int i = 0; i < presentation.Slides.Count; i++)
+        // Convert each slide to an image
+        for (int index = 0; index < pres.Slides.Count; index++)
         {
-            ISlide slide = presentation.Slides[i];
-            IImage image = slide.GetImage();
-            string imagePath = Path.Combine(outputDir, $"slide_{i + 1}.png");
-            image.Save(imagePath, ImageFormat.Png);
-            image.Dispose();
+            Aspose.Slides.ISlide slide = pres.Slides[index];
+            using (Aspose.Slides.IImage image = slide.GetImage())
+            {
+                System.String outputPath = System.String.Format(outputFormat, index);
+                image.Save(outputPath, Aspose.Slides.ImageFormat.Png);
+            }
         }
 
         // Save the presentation before exiting
-        presentation.Save(sourcePath, SaveFormat.Pptx);
-        presentation.Dispose();
+        pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        pres.Dispose();
     }
 }
