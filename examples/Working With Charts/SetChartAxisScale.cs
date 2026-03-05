@@ -1,3 +1,4 @@
+using System;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
@@ -9,22 +10,28 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add a clustered column chart to the first slide
-        Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 450, 300);
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Set vertical axis scale manually
-        chart.Axes.VerticalAxis.IsAutomaticMinValue = false;
-        chart.Axes.VerticalAxis.MinValue = 0;
-        chart.Axes.VerticalAxis.IsAutomaticMaxValue = false;
-        chart.Axes.VerticalAxis.MaxValue = 200;
-        chart.Axes.VerticalAxis.IsAutomaticMajorUnit = false;
-        chart.Axes.VerticalAxis.MajorUnit = 20;
+        // Add a clustered column chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 500, 400).Chart;
 
-        // Optional: ensure categories are placed between axis ticks
-        chart.Axes.HorizontalAxis.AxisBetweenCategories = true;
+        // Access the vertical (value) axis of the chart
+        Aspose.Slides.Charts.IAxis verticalAxis = chart.Axes.VerticalAxis;
 
-        // Save the presentation before exiting
-        presentation.Save("SetChartAxisScale_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Disable automatic min and max values
+        verticalAxis.IsAutomaticMinValue = false;
+        verticalAxis.IsAutomaticMaxValue = false;
+
+        // Set custom minimum and maximum values
+        verticalAxis.MinValue = 0;
+        verticalAxis.MaxValue = 200;
+
+        // Disable automatic major unit and set a custom major unit
+        verticalAxis.IsAutomaticMajorUnit = false;
+        verticalAxis.MajorUnit = 50;
+
+        // Save the presentation
+        presentation.Save("AxisScalePresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
