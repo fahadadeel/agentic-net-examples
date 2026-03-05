@@ -7,26 +7,25 @@ class Program
     static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Add a math shape to the first slide
-        Aspose.Slides.IAutoShape mathShape = presentation.Slides[0].Shapes.AddMathShape(0f, 0f, 720f, 150f);
+        // Add a mathematical shape to the first slide
+        Aspose.Slides.IAutoShape mathShape = pres.Slides[0].Shapes.AddMathShape(0, 0, 500, 50);
 
-        // Get the math paragraph from the math portion
+        // Retrieve the math paragraph from the shape
         Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
 
-        // Create a math block for the equation c² = a² + b²
-        Aspose.Slides.MathText.MathBlock equationBlock = new Aspose.Slides.MathText.MathBlock();
-        equationBlock.Add(new Aspose.Slides.MathText.MathematicalText("c").SetSuperscript("2"));
-        equationBlock.Add(new Aspose.Slides.MathText.MathematicalText("="));
-        equationBlock.Add(new Aspose.Slides.MathText.MathematicalText("a").SetSuperscript("2"));
-        equationBlock.Add(new Aspose.Slides.MathText.MathematicalText("+"));
-        equationBlock.Add(new Aspose.Slides.MathText.MathematicalText("b").SetSuperscript("2"));
+        // Build the equation: a + b = c
+        mathParagraph.Add(
+            new Aspose.Slides.MathText.MathematicalText("a")
+                .Join("+")
+                .Join(new Aspose.Slides.MathText.MathematicalText("b"))
+                .Join("=")
+                .Join(new Aspose.Slides.MathText.MathematicalText("c"))
+        );
 
-        // Add the equation block to the paragraph
-        mathParagraph.Add(equationBlock);
-
-        // Save the presentation as PDF
-        presentation.Save("MathEquation.pdf", Aspose.Slides.Export.SaveFormat.Pdf);
+        // Save the presentation as a PDF file
+        string outputPath = "MathEquation.pdf";
+        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf);
     }
 }
