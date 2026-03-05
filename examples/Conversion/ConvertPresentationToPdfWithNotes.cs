@@ -1,34 +1,36 @@
-using System;
-
-namespace AsposeSlidesConversion
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Input and output file paths
+        System.String inputPath = "input.pptx";
+        System.String outputPath = "output.pdf";
+
+        // Load the source presentation
+        Aspose.Slides.Presentation sourcePresentation = new Aspose.Slides.Presentation(inputPath);
+
+        // Create an auxiliary presentation to hold the slide with notes
+        Aspose.Slides.Presentation auxPresentation = new Aspose.Slides.Presentation();
+
+        // Clone the first slide from the source presentation
+        Aspose.Slides.ISlide sourceSlide = sourcePresentation.Slides[0];
+        auxPresentation.Slides.InsertClone(0, sourceSlide);
+
+        // Set slide size (optional, ensures proper layout)
+        auxPresentation.SlideSize.SetSize(612f, 792f, Aspose.Slides.SlideSizeScaleType.EnsureFit);
+
+        // Configure PDF options to include notes at the bottom of each page
+        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+        pdfOptions.SlidesLayoutOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions()
         {
-            // Expect input file path and output PDF path as arguments
-            if (args.Length < 2)
-            {
-                Console.WriteLine("Usage: AsposeSlidesConversion <input-ppt-or-pptx> <output-pdf>");
-                return;
-            }
+            NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull
+        };
 
-            string inputPath = args[0];
-            string outputPath = args[1];
+        // Save the auxiliary presentation as PDF with notes
+        auxPresentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
 
-            // Load the presentation (PPT or PPTX)
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
-            {
-                // Configure PDF options to include notes
-                Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
-                pdfOptions.SlidesLayoutOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions()
-                {
-                    NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull
-                };
-
-                // Save the presentation as PDF with notes
-                presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
-            }
-        }
+        // Release resources
+        sourcePresentation.Dispose();
+        auxPresentation.Dispose();
     }
 }
