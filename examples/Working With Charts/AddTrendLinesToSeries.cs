@@ -2,63 +2,45 @@ using System;
 using System.Drawing;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
 
-namespace AddTrendLinesExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Create a new presentation
+        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation())
         {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
-
             // Get the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+            Aspose.Slides.ISlide slide = pres.Slides[0];
 
             // Add a clustered column chart to the slide
-            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-                Aspose.Slides.Charts.ChartType.ClusteredColumn,
-                0f, 0f, 500f, 400f);
+            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 500, 400);
 
-            // ----- Add various trend lines to the first series -----
+            // Access the chart data workbook
+            Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
 
-            // Exponential trend line (hide equation and R‑squared)
-            Aspose.Slides.Charts.ITrendline exponentialTrendline = chart.ChartData.Series[0].TrendLines.Add(
-                Aspose.Slides.Charts.TrendlineType.Exponential);
-            exponentialTrendline.DisplayEquation = false;
-            exponentialTrendline.DisplayRSquaredValue = false;
+            // Remove default series and categories
+            chart.ChartData.Series.Clear();
+            chart.ChartData.Categories.Clear();
 
-            // Linear trend line with red solid line
-            Aspose.Slides.Charts.ITrendline linearTrendline = chart.ChartData.Series[0].TrendLines.Add(
-                Aspose.Slides.Charts.TrendlineType.Linear);
-            linearTrendline.Format.Line.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-            linearTrendline.Format.Line.FillFormat.SolidFillColor.Color = System.Drawing.Color.Red;
+            // Add categories
+            chart.ChartData.Categories.Add(workbook.GetCell(0, 1, 0, "Category 1"));
+            chart.ChartData.Categories.Add(workbook.GetCell(0, 2, 0, "Category 2"));
+            chart.ChartData.Categories.Add(workbook.GetCell(0, 3, 0, "Category 3"));
 
-            // Logarithmic trend line with custom text
-            Aspose.Slides.Charts.ITrendline logarithmicTrendline = chart.ChartData.Series[0].TrendLines.Add(
-                Aspose.Slides.Charts.TrendlineType.Logarithmic);
-            logarithmicTrendline.AddTextFrameForOverriding("Logarithmic Trend");
+            // Add first series and populate data points
+            Aspose.Slides.Charts.IChartSeries series1 = chart.ChartData.Series.Add(workbook.GetCell(0, 0, 1, "Series 1"), chart.Type);
+            series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 1, 1, 10));
+            series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 2, 1, 20));
+            series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 3, 1, 30));
 
-            // Moving average trend line (period = 3) with a name
-            Aspose.Slides.Charts.ITrendline movingAverageTrendline = chart.ChartData.Series[0].TrendLines.Add(
-                Aspose.Slides.Charts.TrendlineType.MovingAverage);
-            movingAverageTrendline.Period = 3;
-            movingAverageTrendline.TrendlineName = "MA(3)";
+            // Add a linear trendline to the first series
+            Aspose.Slides.Charts.ITrendline trendline = series1.TrendLines.Add(Aspose.Slides.Charts.TrendlineType.Linear);
+            trendline.DisplayEquation = true;
+            trendline.DisplayRSquaredValue = true;
 
-            // Polynomial trend line (order = 2) extending forward
-            Aspose.Slides.Charts.ITrendline polynomialTrendline = chart.ChartData.Series[0].TrendLines.Add(
-                Aspose.Slides.Charts.TrendlineType.Polynomial);
-            polynomialTrendline.Order = 2;
-            polynomialTrendline.Forward = 1;
-
-            // Power trend line extending backward
-            Aspose.Slides.Charts.ITrendline powerTrendline = chart.ChartData.Series[0].TrendLines.Add(
-                Aspose.Slides.Charts.TrendlineType.Power);
-            powerTrendline.Backward = 2;
-
-            // Save the presentation
-            presentation.Save("AddTrendLines_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation to a file
+            pres.Save("ChartWithTrendline.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
