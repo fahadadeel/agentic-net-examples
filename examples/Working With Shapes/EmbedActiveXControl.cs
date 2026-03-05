@@ -1,47 +1,54 @@
 using System;
-using Aspose.Slides;
+using System.IO;
 using Aspose.Slides.Export;
 
-namespace ConsoleApp
+namespace EmbedActiveXControlExample
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            // Define input and output paths
+            string dataDir = Path.GetFullPath("Data");
+            string inputPath = Path.Combine(dataDir, "TemplateWithActiveX.pptm");
+            string outputPath = Path.Combine(dataDir, "ActiveXModified.pptm");
 
-            // Get the first slide
+            // Load the presentation (must be PPTM to support ActiveX)
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+            // Access the first slide
             Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add an OLE object frame that represents an ActiveX control (e.g., WebBrowser)
-            Aspose.Slides.IOleObjectFrame oleObjectFrame = slide.Shapes.AddOleObjectFrame(
-                100f,    // X position
-                100f,    // Y position
-                300f,    // Width
-                200f,    // Height
-                "Shell.Explorer", // Class name of the ActiveX control
-                ""       // Path to linked file (empty for embedded)
-            );
-
-            // Access the newly added ActiveX control from the slide's Controls collection
-            // (Assuming the first control corresponds to the OLE object we just added)
-            Aspose.Slides.IControl activeXControl = slide.Controls[0];
-
-            // Set the control's name
-            activeXControl.Name = "WebBrowserControl";
-
-            // Assign the frame of the OLE object to the control
-            activeXControl.Frame = oleObjectFrame.Frame;
-
-            // If the control supports XML based properties, set a sample property
-            if (activeXControl.Persistence == Aspose.Slides.PersistenceType.PersistPropertyBag)
+            // Ensure there is at least one ActiveX control on the slide
+            if (slide.Controls.Count > 0)
             {
-                activeXControl.Properties["Value"] = "https://example.com";
+                // Get the first control
+                Aspose.Slides.IControl control = slide.Controls[0];
+
+                // Example: set a property if the control supports property bags
+                if (control.Name == "MyActiveXControl" && control.Properties != null)
+                {
+                    // Set a custom property (replace with actual property name/value as needed)
+                    control.Properties["CustomProperty"] = "CustomValue";
+                }
+
+                // Modify the control's frame using a new ShapeFrame (cannot assign X/Y directly)
+                Aspose.Slides.IShapeFrame newFrame = new Aspose.Slides.ShapeFrame(
+                    control.Frame.X,                     // X position (unchanged)
+                    control.Frame.Y + 20,                // Y position shifted down by 20 points
+                    control.Frame.Width,                 // Width (unchanged)
+                    control.Frame.Height,                // Height (unchanged)
+                    control.Frame.FlipH,                 // Horizontal flip flag (unchanged)
+                    control.Frame.FlipV,                 // Vertical flip flag (unchanged)
+                    control.Frame.Rotation               // Rotation angle (unchanged)
+                );
+
+                // Assign the new frame to the control
+                control.Frame = newFrame;
             }
 
-            // Save the presentation
-            presentation.Save("ActiveXControlPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the modified presentation
+            presentation.Save(outputPath, SaveFormat.Pptm);
         }
     }
 }
