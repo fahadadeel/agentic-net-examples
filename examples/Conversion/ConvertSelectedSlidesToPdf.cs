@@ -4,21 +4,15 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Path to the source PowerPoint file
-        string sourcePath = "input.pptx";
-        // Path to the output PDF file
-        string outputPath = "selected_slides.pdf";
+        // Load the source PowerPoint presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Slide numbers to export (1‑based indexing)
-        int[] slideIndices = new int[] { 1, 3, 5 };
+        // Specify the slide numbers to export (1‑based indexing)
+        int[] selectedSlides = new int[] { 1, 3, 5 };
 
-        // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
-        {
-            // Save only the selected slides as PDF
-            presentation.Save(outputPath, slideIndices, Aspose.Slides.Export.SaveFormat.Pdf);
-        }
+        // Save the selected slides as a PDF file
+        presentation.Save("selected_slides.pdf", selectedSlides, Aspose.Slides.Export.SaveFormat.Pdf);
     }
 }
