@@ -1,20 +1,37 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace ManagePresentationTempFolder
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Set the folder for temporary files
-        Aspose.Slides.BlobManagementOptions blobOptions = new Aspose.Slides.BlobManagementOptions();
-        blobOptions.TempFilesRootPath = "C:\\TempAsposeSlides";
+        static void Main(string[] args)
+        {
+            // Path to the source presentation (can be PPTX, PPT, etc.)
+            string sourcePath = "input.pptx";
 
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            // Desired output path in PPT format
+            string outputPath = "output.ppt";
 
-        // Access the first slide (presentation has one empty slide by default)
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Folder where temporary files will be created during BLOB handling
+            string tempFolderPath = @"C:\TempSlides";
 
-        // Save the presentation in PPT format
-        presentation.Save("output.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
+            // Configure load options with custom temporary folder
+            Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
+            // Enable creation of temporary files (required when using a custom folder)
+            loadOptions.BlobManagementOptions.IsTemporaryFilesAllowed = true;
+            // Set the root path for temporary files
+            loadOptions.BlobManagementOptions.TempFilesRootPath = tempFolderPath;
+
+            // Load the presentation using the configured options
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath, loadOptions);
+
+            // Save the presentation in PPT format
+            presentation.Save(outputPath, SaveFormat.Ppt);
+
+            // Release resources
+            presentation.Dispose();
+        }
     }
 }
