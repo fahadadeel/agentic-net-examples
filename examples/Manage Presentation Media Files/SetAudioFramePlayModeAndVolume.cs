@@ -1,33 +1,38 @@
 using System;
 using System.IO;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace SetAudioFramePlayModeAndVolume
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation.
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+            // Get the first slide.
+            Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Load audio file into a byte array
-        byte[] audioBytes = System.IO.File.ReadAllBytes("sampleaudio.mp3");
+            // Load an audio file from disk.
+            System.IO.FileStream audioStream = new System.IO.FileStream("sampleaudio.wav", System.IO.FileMode.Open, System.IO.FileAccess.Read);
 
-        // Add the audio to the presentation's audio collection
-        Aspose.Slides.IAudio audio = pres.Audios.AddAudio(audioBytes);
+            // Add an audio frame to the slide.
+            Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audioStream);
 
-        // Add an embedded audio frame to the slide
-        Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50, 50, 100, 100, audio);
+            // Close the audio stream as it is no longer needed.
+            audioStream.Close();
 
-        // Set the audio play mode to play on click
-        audioFrame.PlayMode = Aspose.Slides.AudioPlayModePreset.OnClick;
+            // Set the play mode and volume for the audio frame.
+            audioFrame.PlayMode = Aspose.Slides.AudioPlayModePreset.Auto;
+            audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Loud;
 
-        // Set the audio volume to loud
-        audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Loud;
+            // Save the presentation in PPTX format.
+            pres.Save("SetAudioPlayModeAndVolume_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Save the presentation
-        pres.Save("AudioFrameSettings_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Release resources.
+            pres.Dispose();
+        }
     }
 }
