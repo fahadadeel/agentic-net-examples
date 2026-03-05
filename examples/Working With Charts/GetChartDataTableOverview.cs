@@ -1,7 +1,4 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
 
 class Program
 {
@@ -23,10 +20,19 @@ class Program
         // Set number format for the first series values
         chart.ChartData.Series[0].NumberFormatOfValues = "#,##0.00";
 
+        // Retrieve the data table object
+        Aspose.Slides.Charts.IDataTable dataTable = chart.ChartDataTable;
+
+        // Customize the appearance of the data table
+        dataTable.HasBorderHorizontal = true;
+        dataTable.HasBorderVertical = true;
+        dataTable.HasBorderOutline = true;
+        dataTable.ShowLegendKey = false;
+
         // Save the presentation
         presentation.Save("ChartDataTableOverview.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Clean up resources
+        // Release resources
         presentation.Dispose();
     }
 }
