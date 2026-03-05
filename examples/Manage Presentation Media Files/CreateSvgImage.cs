@@ -1,32 +1,30 @@
 using System;
 using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace SvgImageInsertExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Read SVG content from a file
-            string svgContent = File.ReadAllText("content.svg");
+        // Load SVG content from a file
+        string svgPath = "content.svg";
+        Aspose.Slides.ISvgImage svgImage = new Aspose.Slides.SvgImage(svgPath);
 
-            // Create an SVG image object
-            Aspose.Slides.ISvgImage svgImage = new Aspose.Slides.SvgImage(svgContent);
+        // Add the SVG image to the presentation's image collection
+        Aspose.Slides.IPPImage addedImage = presentation.Images.AddImage(svgImage);
 
-            // Add the SVG image to the presentation's image collection
-            Aspose.Slides.IPPImage ppImage = pres.Images.AddImage(svgImage);
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Optionally, you could add a picture shape that uses the image
-            // Aspose.Slides.IShape pictureShape = pres.Slides[0].Shapes.AddPictureFrame(
-            //     Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 300, ppImage);
+        // Insert the SVG image into the slide as a picture frame
+        Aspose.Slides.IShape picture = slide.Shapes.AddPictureFrame(
+            Aspose.Slides.ShapeType.Rectangle,
+            50f, 50f, 400f, 300f,
+            addedImage);
 
-            // Save the presentation
-            pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation in PPTX format
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
