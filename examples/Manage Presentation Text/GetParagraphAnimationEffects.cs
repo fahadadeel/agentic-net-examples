@@ -1,54 +1,44 @@
 using System;
 using Aspose.Slides;
 using Aspose.Slides.Animation;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Load an existing presentation
-        Presentation presentation = new Presentation("input.pptx");
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
         // Iterate through all slides
         for (int slideIndex = 0; slideIndex < presentation.Slides.Count; slideIndex++)
         {
-            ISlide slide = presentation.Slides[slideIndex];
-
+            Aspose.Slides.ISlide slide = presentation.Slides[slideIndex];
             // Get the main animation sequence of the slide
-            ISequence mainSequence = slide.Timeline.MainSequence;
+            Aspose.Slides.Animation.ISequence mainSequence = slide.Timeline.MainSequence;
 
             // Iterate through all shapes on the slide
             for (int shapeIndex = 0; shapeIndex < slide.Shapes.Count; shapeIndex++)
             {
-                IShape shape = slide.Shapes[shapeIndex];
-
-                // Check if the shape contains a text frame
-                ITextFrame textFrame = shape as ITextFrame;
-                if (textFrame == null)
-                    continue;
-
-                // Iterate through all paragraphs in the text frame
-                for (int paraIndex = 0; paraIndex < textFrame.Paragraphs.Count; paraIndex++)
+                Aspose.Slides.IShape shape = slide.Shapes[shapeIndex];
+                // Process only AutoShapes that contain a TextFrame
+                Aspose.Slides.IAutoShape autoShape = shape as Aspose.Slides.IAutoShape;
+                if (autoShape != null && autoShape.TextFrame != null)
                 {
-                    IParagraph paragraph = textFrame.Paragraphs[paraIndex];
-
-                    // Retrieve animation effects applied to this paragraph
-                    IEffect[] effects = mainSequence.GetEffectsByParagraph(paragraph);
-
-                    Console.WriteLine($"Slide {slideIndex + 1}, Shape {shapeIndex + 1}, Paragraph {paraIndex + 1} has {effects.Length} effect(s).");
-
-                    // Output details of each effect
-                    for (int effIndex = 0; effIndex < effects.Length; effIndex++)
+                    // Iterate through all paragraphs in the TextFrame
+                    for (int paraIndex = 0; paraIndex < autoShape.TextFrame.Paragraphs.Count; paraIndex++)
                     {
-                        IEffect effect = effects[effIndex];
-                        Console.WriteLine($"  Effect {effIndex + 1}: Type = {effect.Type}, Subtype = {effect.Subtype}");
+                        Aspose.Slides.IParagraph paragraph = autoShape.TextFrame.Paragraphs[paraIndex];
+                        // Retrieve animation effects for the current paragraph
+                        Aspose.Slides.Animation.IEffect[] effects = mainSequence.GetEffectsByParagraph(paragraph);
+                        // Output the number of effects found
+                        Console.WriteLine("Slide {0}, Shape {1}, Paragraph {2} has {3} effect(s).",
+                            slideIndex, shapeIndex, paraIndex, effects.Length);
                     }
                 }
             }
         }
 
-        // Save the presentation after processing
-        presentation.Save("output.pptx", SaveFormat.Pptx);
+        // Save the presentation (required before exit)
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
