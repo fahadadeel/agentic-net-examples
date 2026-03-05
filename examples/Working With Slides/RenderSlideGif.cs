@@ -1,20 +1,33 @@
 using System;
+using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace SlideToGifExample
 {
-    static void Main()
+    class Program
     {
-        // Load the PPTX presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        static void Main(string[] args)
+        {
+            // Path to the source PPTX file
+            string sourcePath = "input.pptx";
 
-        // Create GIF export options (optional customization)
-        Aspose.Slides.Export.GifOptions gifOptions = new Aspose.Slides.Export.GifOptions();
+            // Path to the output GIF file
+            string outputPath = "slide1.gif";
 
-        // Save the presentation as an animated GIF
-        presentation.Save("output.gif", Aspose.Slides.Export.SaveFormat.Gif, gifOptions);
+            // Load the presentation
+            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(sourcePath))
+            {
+                // Specify the slide index to export (1‑based)
+                int[] slideIndices = new int[] { 1 };
 
-        // Release resources
-        presentation.Dispose();
+                // Configure GIF export options (optional)
+                Aspose.Slides.Export.GifOptions gifOptions = new Aspose.Slides.Export.GifOptions();
+                gifOptions.DefaultDelay = 2000; // 2 seconds per frame
+                gifOptions.TransitionFps = 30;
+
+                // Save the selected slide as an animated GIF
+                pres.Save(outputPath, slideIndices, Aspose.Slides.Export.SaveFormat.Gif, gifOptions);
+            }
+        }
     }
 }
