@@ -1,30 +1,23 @@
 using System;
-using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Input and output file paths
-        string inputPath = "input.pptx";
-        string outputPath = "output.pptx";
+        // Source presentation file
+        System.String srcFile = "input.pptx";
+        // Destination file after saving
+        System.String destFile = "output.pptx";
 
-        // Verify that the input file exists
-        if (!File.Exists(inputPath))
-        {
-            Console.WriteLine("Input file not found: " + inputPath);
-            return;
-        }
+        // Open the presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(srcFile);
 
-        // Open the presentation using the fully-qualified Aspose.Slides type
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-        // Save the presentation before exiting
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation in PPTX format
+        pres.Save(destFile, Aspose.Slides.Export.SaveFormat.Pptx);
 
         // Release resources
-        presentation.Dispose();
-
-        Console.WriteLine("Presentation opened and saved to " + outputPath);
+        pres.Dispose();
     }
 }
