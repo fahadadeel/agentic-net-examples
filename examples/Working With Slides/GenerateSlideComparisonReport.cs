@@ -1,34 +1,32 @@
 using System;
+using Aspose.Slides;
 
-namespace SlideComparison
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Load the source presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+
+        // Get the total number of slides
+        int slideCount = presentation.Slides.Count;
+
+        // Compare each pair of slides
+        for (int i = 0; i < slideCount; i++)
         {
-            string inputPath = "input.pptx";
-            string outputPath = "output.pptx";
-
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+            Aspose.Slides.ISlide slideI = presentation.Slides[i];
+            for (int j = i + 1; j < slideCount; j++)
             {
-                int slideCount = presentation.Slides.Count;
-                for (int i = 0; i < slideCount; i++)
+                Aspose.Slides.ISlide slideJ = presentation.Slides[j];
+                bool areEqual = slideI.Equals(slideJ);
+                if (areEqual)
                 {
-                    Aspose.Slides.ISlide slideI = presentation.Slides[i];
-                    for (int j = i + 1; j < slideCount; j++)
-                    {
-                        Aspose.Slides.ISlide slideJ = presentation.Slides[j];
-                        bool areEqual = slideI.Equals(slideJ);
-                        if (areEqual)
-                        {
-                            Console.WriteLine(string.Format("Slide #{0} is equal to Slide #{1}", i, j));
-                        }
-                    }
+                    Console.WriteLine(string.Format("Slide #{0} is equal to Slide #{1}", i, j));
                 }
-
-                // Save the presentation before exiting
-                presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
             }
         }
+
+        // Save the (potentially unchanged) presentation before exiting
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
