@@ -1,33 +1,30 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.Export;
 
-namespace ParagraphIndentExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Access the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add a rectangle auto shape with some size
-            Aspose.Slides.IAutoShape autoShape = slide.Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+        // Add a rectangle autoshape
+        Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 100, 400, 100);
 
-            // Add a text frame to the shape and set its text
-            autoShape.AddTextFrame("This is a sample paragraph.");
+        // Add a text frame to the shape
+        Aspose.Slides.ITextFrame textFrame = autoShape.AddTextFrame("This is a paragraph with custom indent.");
 
-            // Get the first paragraph of the text frame
-            Aspose.Slides.IParagraph paragraph = autoShape.TextFrame.Paragraphs[0];
+        // Get the first paragraph
+        Aspose.Slides.IParagraph paragraph = textFrame.Paragraphs[0];
 
-            // Set the paragraph indent (in points)
-            paragraph.ParagraphFormat.Indent = 20f;
+        // Set the first line indent (in points)
+        paragraph.ParagraphFormat.Indent = 30f;
 
-            // Save the presentation
-            presentation.Save("ParagraphIndent_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save("ParagraphIndent_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
