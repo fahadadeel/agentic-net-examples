@@ -1,24 +1,30 @@
 using System;
 
-class Program
+namespace PresentationToResponsiveHtml
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Path to the source PowerPoint file
-        string sourcePath = "input.pptx";
-        // Path to the output HTML file
-        string outputPath = "output.html";
+        static void Main(string[] args)
+        {
+            // Path to the source presentation
+            string inputPath = "input.pptx";
+            // Path to the generated HTML file
+            string outputPath = "output.html";
 
-        // Load the presentation from the file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
+            // Load the presentation from file
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-        // Create HTML export options (default responsive layout)
-        Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
+            // Set up HTML5 export options for a responsive layout
+            Aspose.Slides.Export.Html5Options htmlOptions = new Aspose.Slides.Export.Html5Options();
+            Aspose.Slides.Export.HandoutLayoutingOptions layoutOptions = new Aspose.Slides.Export.HandoutLayoutingOptions();
+            layoutOptions.Handout = Aspose.Slides.Export.HandoutType.Handouts4Horizontal;
+            htmlOptions.SlidesLayoutOptions = layoutOptions;
 
-        // Save the presentation as responsive HTML
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
+            // Save the presentation as responsive HTML5
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Html5, htmlOptions);
 
-        // Ensure the presentation is properly disposed before exiting
-        presentation.Dispose();
+            // Release resources
+            presentation.Dispose();
+        }
     }
 }
