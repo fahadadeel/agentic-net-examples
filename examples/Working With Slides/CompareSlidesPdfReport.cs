@@ -2,46 +2,65 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace SlideComparisonApp
+namespace CompareSlidesPdfReport
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Paths to the source presentations
-            string presentationPath1 = "Presentation1.pptx";
-            string presentationPath2 = "Presentation2.pptx";
+            // Input presentation file paths
+            string inputPath1 = "Presentation1.pptx";
+            string inputPath2 = "Presentation2.pptx";
 
-            // Load the first presentation
-            using (Aspose.Slides.Presentation presentation1 = new Aspose.Slides.Presentation(presentationPath1))
+            // Output PDF report path
+            string outputPath = "ComparisonReport.pdf";
+
+            // Load the two presentations to be compared
+            Aspose.Slides.Presentation pres1 = new Aspose.Slides.Presentation(inputPath1);
+            Aspose.Slides.Presentation pres2 = new Aspose.Slides.Presentation(inputPath2);
+
+            // Create a new presentation that will hold the comparison report
+            Aspose.Slides.Presentation reportPres = new Aspose.Slides.Presentation();
+
+            // Determine the number of slides to compare (use the smaller count)
+            int slideCount = Math.Min(pres1.Slides.Count, pres2.Slides.Count);
+
+            // Iterate through each slide pair and compare them
+            for (int i = 0; i < slideCount; i++)
             {
-                // Load the second presentation
-                using (Aspose.Slides.Presentation presentation2 = new Aspose.Slides.Presentation(presentationPath2))
+                // Use BaseSlide.Equals to check visual equality of the two slides
+                bool areEqual = pres1.Slides[i].Equals(pres2.Slides[i]);
+
+                if (!areEqual)
                 {
-                    // Get the first slide from each presentation
-                    Aspose.Slides.ISlide slide1 = presentation1.Slides[0];
-                    Aspose.Slides.ISlide slide2 = presentation2.Slides[0];
+                    // If slides differ, add the slide from the first presentation to the report
+                    reportPres.Slides.InsertClone(reportPres.Slides.Count, pres1.Slides[i]);
 
-                    // Compare the two slides using BaseSlide.Equals
-                    bool slidesAreEqual = slide1.Equals(slide2);
-
-                    // Create a new presentation to hold the comparison report
-                    using (Aspose.Slides.Presentation reportPresentation = new Aspose.Slides.Presentation())
-                    {
-                        // Add clones of the compared slides to the report presentation
-                        reportPresentation.Slides.AddClone(slide1);
-                        reportPresentation.Slides.AddClone(slide2);
-
-                        // Add a text box on the first slide indicating the comparison result
-                        Aspose.Slides.IAutoShape resultShape = reportPresentation.Slides[0].Shapes.AddAutoShape(
-                            Aspose.Slides.ShapeType.Rectangle, 10, 10, 400, 50);
-                        resultShape.TextFrame.Text = slidesAreEqual ? "Slides are equal" : "Slides differ";
-
-                        // Save the report as a PDF file
-                        reportPresentation.Save("SlideComparisonReport.pdf", Aspose.Slides.Export.SaveFormat.Pdf);
-                    }
+                    // Then add the corresponding slide from the second presentation
+                    reportPres.Slides.InsertClone(reportPres.Slides.Count, pres2.Slides[i]);
                 }
             }
+
+            // If no differences were found, add a simple text slide indicating this
+            if (reportPres.Slides.Count == 0)
+            {
+                Aspose.Slides.ISlide infoSlide = reportPres.Slides[0];
+                Aspose.Slides.IShape txtShape = infoSlide.Shapes.AddAutoShape(
+                    Aspose.Slides.ShapeType.Rectangle, 50, 50, 600, 100);
+                ((Aspose.Slides.AutoShape)txtShape).TextFrame.Text = "All compared slides are identical.";
+            }
+
+            // Configure PDF options (e.g., draw a frame around each slide)
+            Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+            pdfOptions.DrawSlidesFrame = true;
+
+            // Save the report presentation as a PDF file
+            reportPres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+
+            // Clean up resources
+            pres1.Dispose();
+            pres2.Dispose();
+            reportPres.Dispose();
         }
     }
 }
