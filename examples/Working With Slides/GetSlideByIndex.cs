@@ -1,20 +1,22 @@
 using System;
-using Aspose.Slides;
 
-class Program
+namespace AsposeSlidesExample
 {
-    static void Main()
+    class Program
     {
-        // Load an existing PPTX presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        static void Main(string[] args)
+        {
+            // Load an existing presentation
+            var presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Retrieve the slide at the specified index (e.g., index 0)
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Retrieve the slide at index 0
+            var slide = presentation.Slides[0];
 
-        // Example usage: display a message confirming retrieval
-        Console.WriteLine("Slide at index 0 has been retrieved.");
+            // Example operation: write the slide index to console
+            Console.WriteLine("Retrieved slide index: 0");
 
-        // Save the presentation before exiting
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation before exiting
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
