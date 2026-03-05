@@ -3,49 +3,44 @@ using Aspose.Slides;
 using Aspose.Slides.Export;
 using System.Drawing;
 
-class Program
+namespace PortionFormattingDemo
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main()
+        {
+            // Create a new presentation
+            Presentation presentation = new Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Access the first slide
+            ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle auto shape
-        Aspose.Slides.IAutoShape autoShape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+            // Add a rectangle auto shape to hold the text
+            IAutoShape shape = slide.Shapes.AddAutoShape(ShapeType.Rectangle, 50, 50, 400, 100);
 
-        // Add a text frame to the shape
-        autoShape.AddTextFrame("");
+            // Create a new paragraph
+            Paragraph paragraph = new Paragraph();
 
-        // Get the first paragraph in the text frame
-        Aspose.Slides.IParagraph paragraph = autoShape.TextFrame.Paragraphs[0];
+            // Create a new portion with initial text
+            Portion portion = new Portion("Formatted text");
 
-        // Create a new portion with text
-        Aspose.Slides.IPortion portion = new Aspose.Slides.Portion("Formatted text");
+            // Add the portion to the paragraph
+            paragraph.Portions.Add(portion);
 
-        // Add the portion to the paragraph
-        paragraph.Portions.Add(portion);
+            // Add the paragraph to the shape's text frame
+            shape.TextFrame.Paragraphs.Add(paragraph);
 
-        // Access the portion format to apply character formatting
-        Aspose.Slides.IPortionFormat portionFormat = portion.PortionFormat;
+            // Apply character formatting to the portion
+            IPortionFormat portionFormat = portion.PortionFormat;
+            portionFormat.FontHeight = 24f;
+            portionFormat.FontBold = NullableBool.True;
+            portionFormat.FontItalic = NullableBool.True;
+            portionFormat.FontUnderline = TextUnderlineType.Single;
+            portionFormat.FillFormat.FillType = FillType.Solid;
+            portionFormat.FillFormat.SolidFillColor.Color = Color.Blue;
 
-        // Set font size
-        portionFormat.FontHeight = 24;
-
-        // Set bold and italic
-        portionFormat.FontBold = Aspose.Slides.NullableBool.True;
-        portionFormat.FontItalic = Aspose.Slides.NullableBool.True;
-
-        // Set underline
-        portionFormat.FontUnderline = Aspose.Slides.TextUnderlineType.Single;
-
-        // Set text fill color (e.g., red)
-        Aspose.Slides.IFillFormat fillFormat = portionFormat.FillFormat;
-        fillFormat.SolidFillColor.Color = System.Drawing.Color.Red;
-
-        // Save the presentation
-        presentation.Save("PortionFormatting_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("PortionFormatting_out.pptx", SaveFormat.Pptx);
+        }
     }
 }
