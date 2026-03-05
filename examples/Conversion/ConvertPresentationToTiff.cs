@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
@@ -6,16 +7,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Path to the source PPTX file
-        string sourcePath = "input.pptx";
-        // Path to the output TIFF file
-        string outputPath = "output.tiff";
+        // Load the presentation from a PPTX file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Load the presentation from the PPTX file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
+        // Create TiffOptions (default settings)
+        Aspose.Slides.Export.TiffOptions tiffOptions = new Aspose.Slides.Export.TiffOptions();
 
-        // Save the presentation as a multi‑page TIFF image
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Tiff);
+        // Save the presentation as a multi-page TIFF image
+        presentation.Save("output.tiff", Aspose.Slides.Export.SaveFormat.Tiff, tiffOptions);
 
         // Release resources
         presentation.Dispose();
