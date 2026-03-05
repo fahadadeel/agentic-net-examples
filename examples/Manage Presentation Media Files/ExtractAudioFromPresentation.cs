@@ -7,22 +7,56 @@ class Program
 {
     static void Main()
     {
-        // Load the presentation from a file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Path to the source presentation
+        string inputPath = "input.pptx";
 
-        // Get the collection of embedded audio files
-        Aspose.Slides.IAudioCollection audioCollection = presentation.Audios;
-
-        // Extract each audio file to the file system
-        for (int index = 0; index < audioCollection.Count; index++)
+        // Directory where extracted audio files will be saved
+        string outputDir = "ExtractedAudio";
+        if (!Directory.Exists(outputDir))
         {
-            Aspose.Slides.IAudio audio = audioCollection[index];
-            byte[] audioData = audio.BinaryData;
-            string outputFile = $"audio_{index + 1}.bin";
-            File.WriteAllBytes(outputFile, audioData);
+            Directory.CreateDirectory(outputDir);
         }
 
-        // Save the presentation (required before exiting)
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Load the presentation
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+        {
+            // Get the collection of embedded audio files
+            Aspose.Slides.IAudioCollection audioCollection = presentation.Audios;
+
+            // Iterate through each audio and save it to a file
+            for (int i = 0; i < audioCollection.Count; i++)
+            {
+                Aspose.Slides.IAudio audio = audioCollection[i];
+                byte[] audioData = audio.BinaryData;
+
+                // Determine file extension based on content type
+                string extension = GetExtension(audio.ContentType);
+                string outputPath = Path.Combine(outputDir, $"audio_{i + 1}{extension}");
+
+                File.WriteAllBytes(outputPath, audioData);
+            }
+
+            // Save the presentation (even if unchanged) before exiting
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
+    }
+
+    // Helper method to map MIME types to file extensions
+    private static string GetExtension(string contentType)
+    {
+        if (contentType == null)
+            return ".bin";
+
+        string lower = contentType.ToLowerInvariant();
+        if (lower == "audio/mpeg")
+            return ".mp3";
+        if (lower == "audio/wav")
+            return ".wav";
+        if (lower == "audio/mp4")
+            return ".mp4";
+        if (lower == "audio/ogg")
+            return ".ogg";
+
+        return ".bin";
     }
 }
