@@ -1,67 +1,48 @@
 using System;
 using System.IO;
-using System.Drawing;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace PictureFrameFormattingExample
+namespace PictureFrameDemo
 {
     class Program
     {
         static void Main(string[] args)
         {
             // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+            {
+                // Get the first slide
+                Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Load an image from file
-            FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read);
-            Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
-            imageStream.Dispose();
+                // Load an image from file
+                using (FileStream imageStream = new FileStream("sample.jpg", FileMode.Open, FileAccess.Read))
+                {
+                    // Add the image to the presentation's image collection
+                    Aspose.Slides.IPPImage image = presentation.Images.AddImage(imageStream);
 
-            // Add a picture frame to the first slide
-            Aspose.Slides.IPictureFrame pictureFrame = presentation.Slides[0].Shapes.AddPictureFrame(
-                Aspose.Slides.ShapeType.Rectangle,
-                100f,   // X position
-                100f,   // Y position
-                300f,   // Width
-                200f,   // Height
-                image);
+                    // Add a picture frame to the slide using the loaded image
+                    Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes.AddPictureFrame(
+                        ShapeType.Rectangle,   // Shape type
+                        100,                   // X position (points)
+                        100,                   // Y position (points)
+                        300,                   // Width (points)
+                        200,                   // Height (points)
+                        image);                // Image to display
 
-            // Set alternative text
-            pictureFrame.AlternativeText = "Sample picture";
-            pictureFrame.AlternativeTextTitle = "Picture Title";
+                    // Set picture frame properties
+                    pictureFrame.Width = 400;               // New width
+                    pictureFrame.Height = 300;              // New height
+                    pictureFrame.Rotation = 45;             // Rotate 45 degrees
+                    pictureFrame.AlternativeText = "Demo picture frame";
 
-            // Apply rotation
-            pictureFrame.Rotation = 45f;
+                    // Example of setting the picture fill format (optional)
+                    pictureFrame.PictureFormat.Picture.Image = image;
+                }
 
-            // Adjust size and position
-            pictureFrame.X = 50f;
-            pictureFrame.Y = 50f;
-            pictureFrame.Width = 400f;
-            pictureFrame.Height = 300f;
-
-            // Scale relative to original picture size
-            pictureFrame.RelativeScaleWidth = 0.8f;
-            pictureFrame.RelativeScaleHeight = 0.8f;
-
-            // Set decorative flag and visibility
-            pictureFrame.IsDecorative = true;
-            pictureFrame.Hidden = false;
-
-            // Configure line format (border)
-            pictureFrame.LineFormat.Width = 5f;
-            pictureFrame.LineFormat.FillFormat.FillType = FillType.Solid;
-            pictureFrame.LineFormat.FillFormat.SolidFillColor.Color = Color.Red;
-
-            // Configure fill format (background of the frame)
-            pictureFrame.FillFormat.FillType = FillType.Solid;
-            pictureFrame.FillFormat.SolidFillColor.Color = Color.LightBlue;
-
-            // Save the presentation
-            presentation.Save("FormattedPictureFrame_out.pptx", SaveFormat.Pptx);
-
-            // Dispose the presentation
-            presentation.Dispose();
+                // Save the presentation to disk
+                presentation.Save("PictureFrameDemo_out.pptx", SaveFormat.Pptx);
+            }
         }
     }
 }
