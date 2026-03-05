@@ -3,25 +3,27 @@ using Aspose.Slides;
 using Aspose.Slides.Export;
 using System.Drawing;
 
-namespace SlideMasterModification
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Load an existing presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Get the first master slide
-            Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
+        // Modify the first master slide's background to Forest Green
+        presentation.Masters[0].Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
+        presentation.Masters[0].Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        presentation.Masters[0].Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.ForestGreen;
 
-            // Set the background of the master slide to a solid forest green color
-            masterSlide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
-            masterSlide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-            masterSlide.Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.ForestGreen;
+        // Enable and set footer, date/time, and slide number placeholders on the master and its child layouts
+        Aspose.Slides.IMasterSlideHeaderFooterManager headerFooterManager = presentation.Masters[0].HeaderFooterManager;
+        headerFooterManager.SetFooterAndChildFootersVisibility(true);
+        headerFooterManager.SetSlideNumberAndChildSlideNumbersVisibility(true);
+        headerFooterManager.SetDateTimeAndChildDateTimesVisibility(true);
+        headerFooterManager.SetFooterAndChildFootersText("Sample Footer");
+        headerFooterManager.SetDateTimeAndChildDateTimesText("01/01/2024");
 
-            // Save the modified presentation
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the modified presentation
+        presentation.Save("ModifiedMaster.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
