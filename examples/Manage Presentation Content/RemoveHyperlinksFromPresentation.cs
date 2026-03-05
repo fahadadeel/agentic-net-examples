@@ -4,15 +4,22 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load the existing PPTX presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Define input and output file paths
+        System.String inputPath = "input.ppt";
+        System.String outputPath = "output.ppt";
 
-        // Remove all hyperlinks from the presentation (click and mouse‑over)
+        // Load the presentation from the input file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+        // Remove all hyperlinks from the presentation
         presentation.HyperlinkQueries.RemoveAllHyperlinks();
 
-        // Save the modified presentation
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the modified presentation in PPT format
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
