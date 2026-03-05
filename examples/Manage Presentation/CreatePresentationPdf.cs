@@ -1,18 +1,12 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Create a new presentation instance
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
-
-        // Save the presentation as a PDF file
-        presentation.Save("output.pdf", Aspose.Slides.Export.SaveFormat.Pdf);
-
-        // Release resources
-        presentation.Dispose();
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+        {
+            presentation.Save("CreatedPresentation.pdf", Aspose.Slides.Export.SaveFormat.Pdf);
+        }
     }
 }
