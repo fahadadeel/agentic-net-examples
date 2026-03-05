@@ -1,47 +1,51 @@
 using System;
 using System.IO;
+using Aspose.Slides;
 using System.Drawing;
 
-class Program
+namespace AsposeSlidesExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // First slide – set background color and create first section
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-        slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
-        slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        slide.Background.FillFormat.SolidFillColor.Color = Color.Red;
-        presentation.Sections.AddSection("Section 1", slide);
+            // Configure the first slide (belongs to the first section)
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
+            slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
+            slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+            slide.Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.Red;
+            Aspose.Slides.ISection section1 = presentation.Sections.AddSection("Section 1", slide);
 
-        // Second slide – add to presentation, set background, create second section
-        slide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
-        slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
-        slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        slide.Background.FillFormat.SolidFillColor.Color = Color.Green;
-        presentation.Sections.AddSection("Section 2", slide);
+            // Add second slide and section
+            slide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
+            slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
+            slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+            slide.Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.Green;
+            Aspose.Slides.ISection section2 = presentation.Sections.AddSection("Section 2", slide);
 
-        // Third slide – add to presentation, set background, create third section
-        slide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
-        slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
-        slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        slide.Background.FillFormat.SolidFillColor.Color = Color.Blue;
-        presentation.Sections.AddSection("Section 3", slide);
+            // Add third slide and section
+            slide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
+            slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
+            slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+            slide.Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.Blue;
+            Aspose.Slides.ISection section3 = presentation.Sections.AddSection("Section 3", slide);
 
-        // Fourth slide – add to presentation, set background, create fourth section
-        slide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
-        slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
-        slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        slide.Background.FillFormat.SolidFillColor.Color = Color.Yellow;
-        presentation.Sections.AddSection("Section 4", slide);
+            // Add fourth slide and section
+            slide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
+            slide.Background.Type = Aspose.Slides.BackgroundType.OwnBackground;
+            slide.Background.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+            slide.Background.FillFormat.SolidFillColor.Color = System.Drawing.Color.Yellow;
+            Aspose.Slides.ISection section4 = presentation.Sections.AddSection("Section 4", slide);
 
-        // Add a Summary Zoom frame to the first slide
-        Aspose.Slides.ISummaryZoomFrame summaryZoom = presentation.Slides[0].Shapes.AddSummaryZoomFrame(150, 20, 500, 250);
+            // Add Summary Zoom frame to the first slide
+            Aspose.Slides.ISummaryZoomFrame summaryZoom = presentation.Slides[0].Shapes.AddSummaryZoomFrame(150f, 20f, 500f, 250f);
 
-        // Save the presentation
-        string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "SummaryZoom_out.pptx");
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "SummaryZoom_out.pptx");
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
