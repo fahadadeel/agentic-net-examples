@@ -3,35 +3,37 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace HyperlinkSoundDemo
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Presentation presentation = new Presentation();
 
-            // Get the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Get the first slide
+        ISlide slide = presentation.Slides[0];
 
-            // Add a rectangle shape that will hold the hyperlink
-            Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 50);
+        // Add a rectangle shape
+        IShape shape = slide.Shapes.AddAutoShape(ShapeType.Rectangle, 100, 100, 200, 50);
+        IAutoShape autoShape = (IAutoShape)shape;
 
-            // Create an external hyperlink and assign it to the shape
-            Aspose.Slides.Hyperlink hyperlink = new Aspose.Slides.Hyperlink("https://www.aspose.com");
-            shape.HyperlinkClick = hyperlink;
+        // Add text to the shape
+        autoShape.AddTextFrame("Click me");
 
-            // Load audio data from a file and add it to the presentation's audio collection
-            byte[] audioBytes = File.ReadAllBytes("sound.wav");
-            Aspose.Slides.IAudio audio = presentation.Audios.AddAudio(audioBytes);
+        // Create a hyperlink pointing to an external URL
+        Hyperlink hyperlink = new Hyperlink("https://www.example.com");
+        autoShape.HyperlinkClick = hyperlink;
 
-            // Assign the audio as the sound to be played when the hyperlink is clicked
-            shape.HyperlinkClick.Sound = audio;
+        // Load audio data from a file (ensure the file exists at the specified path)
+        byte[] audioData = File.ReadAllBytes("sound.mp3");
 
-            // Save the presentation in PPT format
-            presentation.Save("HyperlinkWithSound.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
-        }
+        // Add the audio to the presentation's audio collection
+        IAudio audio = presentation.Audios.AddAudio(audioData);
+
+        // Assign the audio as the sound for the hyperlink
+        hyperlink.Sound = audio;
+
+        // Save the presentation
+        presentation.Save("HyperlinkSound.pptx", SaveFormat.Pptx);
     }
 }
