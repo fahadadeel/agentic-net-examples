@@ -1,37 +1,24 @@
 using System;
+using System.IO;
 
-namespace Example
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        // Path to the source presentation
+        string inputPath = "source.pptx";
+        // Path to the output presentation
+        string outputPath = "output.pptx";
+
+        // Load the existing presentation
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Define file paths
-            string presentationPath = "output.pptx";
-            string imagePath = "slide1.png";
+            // Example operation: write the number of slides to console
+            int slideCount = presentation.Slides.Count;
+            Console.WriteLine("Number of slides: " + slideCount);
 
-            // Create a new presentation
-            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
-
-            // Create fallback rules collection
-            Aspose.Slides.IFontFallBackRulesCollection rules = new Aspose.Slides.FontFallBackRulesCollection();
-
-            // Add a fallback rule for Unicode range 0x400-0x4FF using Times New Roman
-            rules.Add(new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman"));
-
-            // Assign the rules to the presentation's FontsManager
-            pres.FontsManager.FontFallBackRulesCollection = rules;
-
-            // Save the presentation
-            pres.Save(presentationPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-            // Render the first slide to an image
-            Aspose.Slides.IImage img = pres.Slides[0].GetImage(1f, 1f);
-            img.Save(imagePath, Aspose.Slides.ImageFormat.Png);
-            img.Dispose();
-
-            // Clean up
-            pres.Dispose();
+            // Save the presentation before exiting
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
