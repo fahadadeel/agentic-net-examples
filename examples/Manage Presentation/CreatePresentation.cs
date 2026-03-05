@@ -1,25 +1,19 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace MyApp
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation (empty with one slide)
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
-
-        // Access the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-
-        // Add a line shape to the slide (optional demonstration)
-        slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Line, 50, 150, 300, 0);
-
-        // Define the output file path
-        string outputPath = "NewPresentation_out.pptx";
-
-        // Save the presentation in PPTX format using the correct SaveFormat enum
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Release resources
-        presentation.Dispose();
+        static void Main(string[] args)
+        {
+            // Create a new presentation (contains one empty slide)
+            using (Presentation presentation = new Presentation())
+            {
+                // Save the presentation in PPTX format
+                presentation.Save("NewPresentation.pptx", SaveFormat.Pptx);
+            }
+        }
     }
 }
