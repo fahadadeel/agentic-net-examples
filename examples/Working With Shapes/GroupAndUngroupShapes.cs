@@ -2,40 +2,40 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace GroupAndUngroupShapes
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
-
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-
-        // Access the shape collection of the slide
-        Aspose.Slides.IShapeCollection slideShapes = slide.Shapes;
-
-        // Add a new empty group shape
-        Aspose.Slides.IGroupShape group = slideShapes.AddGroupShape();
-
-        // Add multiple rectangle shapes to the group
-        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 300, 100, 100, 100);
-        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 500, 100, 100, 100);
-        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 300, 300, 100, 100);
-        group.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 500, 300, 100, 100);
-
-        // Optionally set the group shape's frame
-        group.Frame = new Aspose.Slides.ShapeFrame(100, 300, 500, 40, Aspose.Slides.NullableBool.False, Aspose.Slides.NullableBool.False, 0);
-
-        // Ungroup: clone each inner shape to the slide and then remove the group shape
-        for (int i = 0; i < group.Shapes.Count; i++)
+        static void Main(string[] args)
         {
-            Aspose.Slides.IShape innerShape = group.Shapes[i];
-            slideShapes.AddClone(innerShape);
-        }
-        slideShapes.Remove(group);
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Save the presentation
-        presentation.Save("GroupAndUngroup_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Get the first slide
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
+
+            // Add an empty group shape to the slide
+            Aspose.Slides.IGroupShape groupShape = slide.Shapes.AddGroupShape();
+
+            // Add multiple shapes inside the group
+            groupShape.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 150, 100);
+            groupShape.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Ellipse, 300, 100, 150, 100);
+            groupShape.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 250, 150, 100);
+            groupShape.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Ellipse, 300, 250, 150, 100);
+
+            // Ungroup: clone each inner shape back to the slide and remove the group
+            for (int i = 0; i < groupShape.Shapes.Count; i++)
+            {
+                Aspose.Slides.IShape innerShape = groupShape.Shapes[i];
+                // Clone the shape onto the slide (preserves position and size)
+                slide.Shapes.AddClone(innerShape);
+            }
+
+            // Remove the original group shape
+            slide.Shapes.Remove(groupShape);
+
+            // Save the presentation
+            presentation.Save("GroupAndUngroup_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
