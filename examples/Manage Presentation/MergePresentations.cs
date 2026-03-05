@@ -1,52 +1,76 @@
 using System;
-using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace MergePresentationsExample
+namespace MergePresentations
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Define directories and file paths
-            string dataDir = Path.Combine(Environment.CurrentDirectory, "Data");
-            if (!Directory.Exists(dataDir))
-                Directory.CreateDirectory(dataDir);
+            // Input presentation files
+            System.String sourcePath = "SourcePresentation.pptx";
+            System.String destinationPath = "DestinationPresentation.pptx";
+            System.String outputPath = "MergedPresentation.pptx";
 
-            string sourcePath1 = Path.Combine(dataDir, "source1.pptx");
-            string sourcePath2 = Path.Combine(dataDir, "source2.pptx");
-            string outputPath = Path.Combine(dataDir, "merged_output.pptx");
+            // Load source and destination presentations
+            Aspose.Slides.Presentation sourcePres = new Aspose.Slides.Presentation(sourcePath);
+            Aspose.Slides.Presentation destPres = new Aspose.Slides.Presentation(destinationPath);
 
-            // Load source presentations
-            Presentation sourcePres1 = new Presentation(sourcePath1);
-            Presentation sourcePres2 = new Presentation(sourcePath2);
-
-            // Create a new destination presentation
-            Presentation destPres = new Presentation();
-
-            // Get the slide collection of the destination presentation
-            ISlideCollection destSlides = destPres.Slides;
-
-            // Insert all slides from the first source presentation at the end of the destination
-            for (int i = 0; i < sourcePres1.Slides.Count; i++)
+            // Ensure destination has a suitable layout slide (TitleAndObject or Title)
+            // Using the add-layout-slides rule logic
+            Aspose.Slides.IMasterLayoutSlideCollection destLayoutSlides = destPres.Masters[0].LayoutSlides;
+            Aspose.Slides.ILayoutSlide destLayoutSlide = destLayoutSlides.GetByType(Aspose.Slides.SlideLayoutType.TitleAndObject) ??
+                                                          destLayoutSlides.GetByType(Aspose.Slides.SlideLayoutType.Title);
+            if (destLayoutSlide == null)
             {
-                // InsertClone inserts a copy of the source slide at the specified index
-                destSlides.InsertClone(destSlides.Count, sourcePres1.Slides[i]);
+                foreach (Aspose.Slides.ILayoutSlide ls in destLayoutSlides)
+                {
+                    if (ls.Name == "Title and Content")
+                    {
+                        destLayoutSlide = ls;
+                        break;
+                    }
+                }
+                if (destLayoutSlide == null)
+                {
+                    foreach (Aspose.Slides.ILayoutSlide ls in destLayoutSlides)
+                    {
+                        if (ls.Name == "Title")
+                        {
+                            destLayoutSlide = ls;
+                            break;
+                        }
+                    }
+                }
+                if (destLayoutSlide == null)
+                {
+                    destLayoutSlide = destLayoutSlides.GetByType(Aspose.Slides.SlideLayoutType.Blank);
+                    if (destLayoutSlide == null)
+                    {
+                        destLayoutSlide = destLayoutSlides.Add(Aspose.Slides.SlideLayoutType.TitleAndObject, "Title and Content");
+                    }
+                }
             }
 
-            // Insert all slides from the second source presentation at the end of the destination
-            for (int i = 0; i < sourcePres2.Slides.Count; i++)
+            // Insert an empty slide at the beginning using the selected layout (optional)
+            destPres.Slides.InsertEmptySlide(0, destLayoutSlide);
+
+            // Clone each slide from source into destination, preserving master layout
+            for (System.Int32 i = 0; i < sourcePres.Slides.Count; i++)
             {
-                destSlides.InsertClone(destSlides.Count, sourcePres2.Slides[i]);
+                Aspose.Slides.ISlide sourceSlide = sourcePres.Slides[i];
+                Aspose.Slides.IMasterSlide sourceMaster = sourceSlide.LayoutSlide.MasterSlide;
+                Aspose.Slides.IMasterSlide destMaster = destPres.Masters.AddClone(sourceMaster);
+                // Using the clone-to-another-presentation-with-master rule
+                destPres.Slides.AddClone(sourceSlide, destMaster, true);
             }
 
             // Save the merged presentation
-            destPres.Save(outputPath, SaveFormat.Pptx);
+            destPres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
 
-            // Clean up resources
-            sourcePres1.Dispose();
-            sourcePres2.Dispose();
+            // Dispose presentations
+            sourcePres.Dispose();
             destPres.Dispose();
         }
     }
