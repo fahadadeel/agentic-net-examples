@@ -6,25 +6,25 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Load the existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Path to the source PPTX file
+        string sourcePath = "input.pptx";
+        // Path to the output PPTX file
+        string outputPath = "output.pptx";
 
-        // Get the collection of sections
-        Aspose.Slides.ISectionCollection sections = presentation.Sections;
+        // Load the presentation from the file
+        using (Presentation presentation = new Presentation(sourcePath))
+        {
+            // Get the first layout slide to use for new slides
+            ILayoutSlide layoutSlide = presentation.LayoutSlides[0];
 
-        // Assume we want to add slides to the first section
-        Aspose.Slides.ISection targetSection = sections[0];
+            // Add a new empty slide to the presentation
+            ISlide newSlide = presentation.Slides.AddEmptySlide(layoutSlide);
 
-        // Choose a slide to clone (e.g., the first slide in the presentation)
-        Aspose.Slides.ISlide sourceSlide = presentation.Slides[0];
+            // Create a new section that starts with the newly added slide
+            ISection newSection = presentation.Sections.AddSection("New Section", newSlide);
 
-        // Add a cloned slide to the end of the target section
-        Aspose.Slides.ISlide newSlide1 = presentation.Slides.AddClone(sourceSlide, targetSection);
-
-        // Add another cloned slide to the same section
-        Aspose.Slides.ISlide newSlide2 = presentation.Slides.AddClone(sourceSlide, targetSection);
-
-        // Save the modified presentation
-        presentation.Save("output.pptx", SaveFormat.Pptx);
+            // Save the modified presentation
+            presentation.Save(outputPath, SaveFormat.Pptx);
+        }
     }
 }
