@@ -3,35 +3,30 @@ using Aspose.Slides;
 using Aspose.Slides.SlideShow;
 using Aspose.Slides.Export;
 
-class Program
+namespace TransitionDemo
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
+            // Define the desired transition type and duration (in milliseconds)
+            Aspose.Slides.SlideShow.TransitionType transitionType = Aspose.Slides.SlideShow.TransitionType.Fade;
+            int transitionDuration = 2000; // 2 seconds
 
-        // Apply a Circle transition
-        firstSlide.SlideShowTransition.Type = Aspose.Slides.SlideShow.TransitionType.Circle;
-        // Set transition duration to 2000 ms (2 seconds)
-        firstSlide.SlideShowTransition.Duration = 2000;
-        // Advance on click and after 3000 ms (3 seconds)
-        firstSlide.SlideShowTransition.AdvanceOnClick = true;
-        firstSlide.SlideShowTransition.AdvanceAfter = true;
-        firstSlide.SlideShowTransition.AdvanceAfterTime = 3000;
+            // Apply the transition settings to each slide in the presentation
+            for (int i = 0; i < presentation.Slides.Count; i++)
+            {
+                // Set transition type
+                presentation.Slides[i].SlideShowTransition.Type = transitionType;
+                // Set transition duration
+                presentation.Slides[i].SlideShowTransition.Duration = transitionDuration;
+            }
 
-        // Add a second slide using the layout of the first slide
-        Aspose.Slides.ILayoutSlide layout = presentation.Slides[0].LayoutSlide;
-        Aspose.Slides.ISlide secondSlide = presentation.Slides.AddEmptySlide(layout);
-
-        // Apply a Fade transition to the second slide
-        secondSlide.SlideShowTransition.Type = Aspose.Slides.SlideShow.TransitionType.Fade;
-        secondSlide.SlideShowTransition.Duration = 1500;
-        secondSlide.SlideShowTransition.AdvanceOnClick = true;
-
-        // Save the presentation
-        presentation.Save("SlideTransitions_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation to disk
+            presentation.Save("TransitionDemo.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
