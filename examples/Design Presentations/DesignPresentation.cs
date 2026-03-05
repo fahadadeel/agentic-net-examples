@@ -9,16 +9,16 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the fonts manager
-        Aspose.Slides.IFontsManager fontsManager = presentation.FontsManager;
+        // Get the fallback rules collection from the FontsManager
+        Aspose.Slides.IFontFallBackRulesCollection fallbackRules = presentation.FontsManager.FontFallBackRulesCollection;
 
-        // Get the fallback rules collection
-        Aspose.Slides.IFontFallBackRulesCollection fallbackRules = fontsManager.FontFallBackRulesCollection;
-
-        // Add a fallback rule for a Unicode range to use "Times New Roman"
+        // Add a fallback rule for a specific Unicode range to use "Times New Roman"
         fallbackRules.Add(new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman"));
 
-        // Save the presentation
-        presentation.Save("FallbackFontsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Assign the modified collection back to the FontsManager (optional if the same instance is used)
+        presentation.FontsManager.FontFallBackRulesCollection = fallbackRules;
+
+        // Save the presentation to a file
+        presentation.Save("FallbackFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
