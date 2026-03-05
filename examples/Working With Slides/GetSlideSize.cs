@@ -1,25 +1,29 @@
 using System;
-using System.Drawing;
 using Aspose.Slides;
+using Aspose.Slides.Export;
+using System.Drawing;
 
 class Program
 {
     static void Main()
     {
         // Load the presentation from a file
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx"))
-        {
-            // Retrieve the slide size object
-            Aspose.Slides.ISlideSize slideSize = presentation.SlideSize;
-            // Get the dimensions in points
-            SizeF size = slideSize.Size;
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-            // Output the width and height
-            Console.WriteLine("Slide width: {0} points", size.Width);
-            Console.WriteLine("Slide height: {0} points", size.Height);
+        // Get the slide size object
+        Aspose.Slides.ISlideSize slideSize = presentation.SlideSize;
 
-            // Save the presentation before exiting
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Retrieve the dimensions (width and height in points)
+        SizeF size = slideSize.Size;
+
+        // Output the slide dimensions
+        Console.WriteLine("Slide width: {0} points", size.Width);
+        Console.WriteLine("Slide height: {0} points", size.Height);
+
+        // Save the presentation (no modifications made)
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
