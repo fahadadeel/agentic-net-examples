@@ -1,33 +1,32 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.MathText;
 
-namespace WorkingWithCharts
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-            // Get the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Add a math shape to the first slide
+        Aspose.Slides.IAutoShape mathShape = pres.Slides[0].Shapes.AddMathShape(0, 0, 500, 50);
 
-            // Add a rectangle shape that will host the mathematical equation
-            Aspose.Slides.IAutoShape mathShape = slide.Shapes.AddMathShape(0f, 0f, 720f, 150f);
+        // Get the math paragraph from the shape
+        Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
 
-            // Retrieve the MathParagraph from the first portion of the shape
-            Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
+        // Build a math block: a = b + c
+        Aspose.Slides.MathText.IMathBlock mathBlock = new Aspose.Slides.MathText.MathBlock((Aspose.Slides.MathText.IMathElement)new Aspose.Slides.MathText.MathematicalText("a"))
+            .Join("+")
+            .Join(new Aspose.Slides.MathText.MathematicalText("b"))
+            .Join("=")
+            .Join(new Aspose.Slides.MathText.MathematicalText("c"));
 
-            // Create a MathBlock using the constructor that takes a single IMathElement to avoid ambiguity
-            Aspose.Slides.MathText.MathBlock mathBlock = new Aspose.Slides.MathText.MathBlock(new Aspose.Slides.MathText.MathematicalText("x"));
+        // Add block to paragraph
+        mathParagraph.Add(mathBlock);
 
-            // Add the MathBlock to the MathParagraph
-            mathParagraph.Add(mathBlock);
+        // Save presentation as PDF
+        pres.Save("MathEquations.pdf", Aspose.Slides.Export.SaveFormat.Pdf);
 
-            // Save the presentation as PDF
-            presentation.Save("MathEquations.pdf", Aspose.Slides.Export.SaveFormat.Pdf);
-        }
+        // Dispose presentation
+        pres.Dispose();
     }
 }
