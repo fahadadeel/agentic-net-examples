@@ -1,14 +1,17 @@
 using System;
 using System.IO;
+using System.Drawing;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Output directory
+        // Define output directory and ensure it exists
         string outDir = "Output";
-        if (!System.IO.Directory.Exists(outDir))
-            System.IO.Directory.CreateDirectory(outDir);
+        if (!Directory.Exists(outDir))
+            Directory.CreateDirectory(outDir);
 
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
@@ -20,38 +23,38 @@ class Program
         Aspose.Slides.IAutoShape autoShape = slide.Shapes.AddAutoShape(
             Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 300);
 
-        // Get the text frame of the shape
+        // Access the text frame of the shape
         Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
 
         // Remove the default empty paragraph
         textFrame.Paragraphs.RemoveAt(0);
 
-        // First level bullet
+        // First level bullet (depth 0)
         Aspose.Slides.Paragraph para1 = new Aspose.Slides.Paragraph();
         para1.Text = "First level bullet";
         para1.ParagraphFormat.Depth = 0;
         para1.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Symbol;
-        para1.ParagraphFormat.Bullet.Char = System.Convert.ToChar(8226); // •
+        para1.ParagraphFormat.Bullet.Char = Convert.ToChar(8226); // •
         textFrame.Paragraphs.Add(para1);
 
-        // Second level bullet
+        // Second level bullet (depth 1)
         Aspose.Slides.Paragraph para2 = new Aspose.Slides.Paragraph();
         para2.Text = "Second level bullet";
         para2.ParagraphFormat.Depth = 1;
         para2.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Symbol;
-        para2.ParagraphFormat.Bullet.Char = System.Convert.ToChar(8226); // •
+        para2.ParagraphFormat.Bullet.Char = Convert.ToChar(8226); // •
         textFrame.Paragraphs.Add(para2);
 
-        // Third level bullet
+        // Third level bullet (depth 2)
         Aspose.Slides.Paragraph para3 = new Aspose.Slides.Paragraph();
         para3.Text = "Third level bullet";
         para3.ParagraphFormat.Depth = 2;
         para3.ParagraphFormat.Bullet.Type = Aspose.Slides.BulletType.Symbol;
-        para3.ParagraphFormat.Bullet.Char = System.Convert.ToChar(8226); // •
+        para3.ParagraphFormat.Bullet.Char = Convert.ToChar(8226); // •
         textFrame.Paragraphs.Add(para3);
 
         // Save the presentation as PPTX
-        string outPath = System.IO.Path.Combine(outDir, "MultilevelBullets.pptx");
+        string outPath = Path.Combine(outDir, "MultilevelBullets.pptx");
         presentation.Save(outPath, Aspose.Slides.Export.SaveFormat.Pptx);
 
         // Dispose the presentation
