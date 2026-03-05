@@ -1,29 +1,27 @@
 using System;
-using System.IO;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Define directories and file paths
-        string dataDir = "Data";
-        if (!Directory.Exists(dataDir))
-            Directory.CreateDirectory(dataDir);
-        string inputPath = Path.Combine(dataDir, "input.pptx");
-        string outputPath = Path.Combine(dataDir, "output.pptx");
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
 
-        // Load the existing presentation
-        Presentation presentation = new Presentation(inputPath);
+        // Load the presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
-        // Add a notes slide to the first slide and set its text
-        INotesSlideManager notesManager = presentation.Slides[0].NotesSlideManager;
-        INotesSlide notesSlide = notesManager.AddNotesSlide();
+        // Access the notes slide manager for the first slide
+        Aspose.Slides.INotesSlideManager notesManager = presentation.Slides[0].NotesSlideManager;
+
+        // Add a notes slide and set its text
+        Aspose.Slides.INotesSlide notesSlide = notesManager.AddNotesSlide();
         notesSlide.NotesTextFrame.Text = "Your notes here";
 
-        // Save the modified presentation as PPTX
-        presentation.Save(outputPath, SaveFormat.Pptx);
+        // Save the modified presentation
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
         presentation.Dispose();
     }
 }
