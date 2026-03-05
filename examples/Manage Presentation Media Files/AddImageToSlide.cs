@@ -5,30 +5,26 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        string imagePath = "example.jpg";
-        string outputPath = "presentationWithImage.pptx";
+        // Path to the image file on disk
+        string imagePath = "image1.jpg";
 
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
-        try
+        // Create a new presentation
+        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation())
         {
-            FileStream fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read);
-            try
+            // Open the image file as a stream
+            using (FileStream fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
             {
+                // Add the image to the presentation using KeepLocked behavior
                 Aspose.Slides.IPPImage img = pres.Images.AddImage(fileStream, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
+
+                // Insert the image onto the first slide as a picture frame
                 pres.Slides[0].Shapes.AddPictureFrame(Aspose.Slides.ShapeType.Rectangle, 0, 0, 300, 200, img);
             }
-            finally
-            {
-                fileStream.Close();
-            }
 
-            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-        }
-        finally
-        {
-            pres.Dispose();
+            // Save the presentation to a PPTX file
+            pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
