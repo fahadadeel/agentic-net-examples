@@ -1,42 +1,37 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace SlidesToPdfNotes
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Load the source presentation
+        Aspose.Slides.Presentation sourcePresentation = new Aspose.Slides.Presentation("input.pptx");
+
+        // Create a new presentation for notes export
+        Aspose.Slides.Presentation notesPresentation = new Aspose.Slides.Presentation();
+
+        // Clone all slides into the new presentation
+        for (int i = 0; i < sourcePresentation.Slides.Count; i++)
         {
-            // Load the source PowerPoint presentation
-            Aspose.Slides.Presentation sourcePresentation = new Aspose.Slides.Presentation("input.pptx");
-
-            // Create a new presentation that will contain only the notes view
-            Aspose.Slides.Presentation auxPresentation = new Aspose.Slides.Presentation();
-
-            // Clone each slide from the source into the auxiliary presentation
-            for (int i = 0; i < sourcePresentation.Slides.Count; i++)
-            {
-                Aspose.Slides.ISlide slide = sourcePresentation.Slides[i];
-                auxPresentation.Slides.InsertClone(i, slide);
-            }
-
-            // Set the slide size (optional, matches example dimensions)
-            auxPresentation.SlideSize.SetSize(612f, 792f, Aspose.Slides.SlideSizeScaleType.EnsureFit);
-
-            // Configure PDF options to export notes below each slide
-            Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
-            pdfOptions.SlidesLayoutOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions()
-            {
-                NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull
-            };
-
-            // Save the auxiliary presentation as PDF with notes
-            auxPresentation.Save("output.pdf", Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
-
-            // Dispose presentations
-            sourcePresentation.Dispose();
-            auxPresentation.Dispose();
+            Aspose.Slides.ISlide sourceSlide = sourcePresentation.Slides[i];
+            notesPresentation.Slides.InsertClone(i, sourceSlide);
         }
+
+        // Set slide size (optional)
+        notesPresentation.SlideSize.SetSize(612F, 792F, Aspose.Slides.SlideSizeScaleType.EnsureFit);
+
+        // Configure PDF options to include notes
+        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+        pdfOptions.SlidesLayoutOptions = new Aspose.Slides.Export.NotesCommentsLayoutingOptions()
+        {
+            NotesPosition = Aspose.Slides.Export.NotesPositions.BottomFull
+        };
+
+        // Save the presentation as PDF with notes
+        notesPresentation.Save("output.pdf", Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+
+        // Dispose resources
+        sourcePresentation.Dispose();
+        notesPresentation.Dispose();
     }
 }
