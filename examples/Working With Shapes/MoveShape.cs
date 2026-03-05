@@ -12,14 +12,18 @@ class Program
         // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle shape to the slide
-        Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(ShapeType.Rectangle, 50f, 50f, 200f, 100f);
+        // Add a rectangle shape at initial position (50,50) with size 100x50
+        Aspose.Slides.IShape shape = slide.Shapes.AddAutoShape(ShapeType.Rectangle, 50f, 50f, 100f, 50f);
 
-        // Move the shape to new X and Y coordinates
-        shape.X = 150f; // New X position
-        shape.Y = 200f; // New Y position
+        // Define new X and Y coordinates
+        float newX = 200f;
+        float newY = 150f;
 
-        // Save the presentation
-        presentation.Save("MovedShape_out.pptx", SaveFormat.Pptx);
+        // Move the shape to the new coordinates
+        shape.X = newX;
+        shape.Y = newY;
+
+        // Save the presentation before exiting
+        presentation.Save("MovedShape.pptx", SaveFormat.Pptx);
     }
 }
