@@ -1,31 +1,27 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Retrieve the existing fallback rules collection from the FontsManager
-        Aspose.Slides.IFontFallBackRulesCollection rules = pres.FontsManager.FontFallBackRulesCollection;
+        // Get the fallback rules collection from the FontsManager
+        Aspose.Slides.IFontFallBackRulesCollection fallbackRules = presentation.FontsManager.FontFallBackRulesCollection;
 
-        // Create a new fallback rule for a specific Unicode range (Cyrillic block) with a primary font
-        Aspose.Slides.IFontFallBackRule rule = new Aspose.Slides.FontFallBackRule(0x0400, 0x04FF, "Arial");
+        // Create a new fallback rule for Unicode range 0x400-0x4FF with primary font "Times New Roman"
+        Aspose.Slides.FontFallBackRule rule = new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman");
 
         // Add additional fallback fonts to the rule
-        rule.AddFallBackFonts("Times New Roman");
-        rule.AddFallBackFonts(new string[] { "Calibri", "Verdana" });
+        rule.AddFallBackFonts("Arial");
+        rule.AddFallBackFonts(new string[] { "Calibri", "Helvetica" });
 
-        // Add the configured rule to the collection
-        rules.Add(rule);
-
-        // Assign the modified collection back to the FontsManager (optional if the same instance)
-        pres.FontsManager.FontFallBackRulesCollection = rules;
+        // Add the rule to the collection
+        fallbackRules.Add(rule);
 
         // Save the presentation before exiting
-        pres.Save("FallbackFontsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("FallbackFontsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
