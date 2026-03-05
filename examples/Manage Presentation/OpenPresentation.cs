@@ -4,18 +4,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Path to the existing PPTX file
-        System.String sourcePath = "input.pptx";
-        // Path where the presentation will be saved
-        System.String destinationPath = "output.pptx";
+        // Path to the source PPTX file
+        string sourcePath = "input.pptx";
 
-        // Open the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath);
-
-        // Save the presentation in PPTX format
-        presentation.Save(destinationPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Release resources
-        presentation.Dispose();
+        // Open the presentation using the fully-qualified Aspose.Slides type
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+        {
+            // Save the presentation (can be the same file or a new one)
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
