@@ -7,35 +7,34 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Paths for the source presentation and the output copy
-        string sourcePath = "input.ppt";
-        string outputPath = "output.ppt";
+        // Paths
+        string sourcePath = "input.pptx";
+        string imagePath = "large_image.jpg";
+        string outputPath = "output.pptx";
 
-        // Configure load options to keep the source locked, reducing memory usage
-        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions
+        // Configure BLOB management options
+        Aspose.Slides.BlobManagementOptions blobOptions = new Aspose.Slides.BlobManagementOptions();
+        blobOptions.IsTemporaryFilesAllowed = true;
+        blobOptions.MaxBlobsBytesInMemory = 10 * 1024 * 1024; // 10 MB
+        blobOptions.PresentationLockingBehavior = Aspose.Slides.PresentationLockingBehavior.KeepLocked;
+
+        // Load options with BLOB settings
+        Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
+        loadOptions.BlobManagementOptions = blobOptions;
+
+        // Load presentation with the specified options
+        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(sourcePath, loadOptions))
         {
-            BlobManagementOptions = new Aspose.Slides.BlobManagementOptions
+            // Add a large image as a BLOB using KeepLocked behavior
+            using (FileStream imgStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
             {
-                PresentationLockingBehavior = Aspose.Slides.PresentationLockingBehavior.KeepLocked
+                Aspose.Slides.IPPImage img = pres.Images.AddImage(imgStream, Aspose.Slides.LoadingStreamBehavior.KeepLocked);
+                // Insert picture frame on the first slide
+                pres.Slides[0].Shapes.AddPictureFrame(Aspose.Slides.ShapeType.Rectangle, 0, 0, 300, 200, img);
             }
-        };
 
-        // Load the presentation with the specified load options
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath, loadOptions);
-
-        // Example operation: rename the first slide
-        presentation.Slides[0].Name = "FirstSlide";
-
-        // Save the presentation in PPT format before exiting
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Ppt);
-
-        // Dispose the presentation to release the lock on the source file
-        presentation.Dispose();
-
-        // Optionally delete the original source file after processing
-        if (File.Exists(sourcePath))
-        {
-            File.Delete(sourcePath);
+            // Save the modified presentation
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
