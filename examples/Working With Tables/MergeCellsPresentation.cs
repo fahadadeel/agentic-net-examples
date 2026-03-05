@@ -1,40 +1,29 @@
 using System;
-using Aspose.Slides;
-using System.Drawing;
 
-namespace MergeTableCellsExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Access the first slide
-            Aspose.Slides.ISlide slide = pres.Slides[0];
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Define column widths and row heights
-            double[] columnWidths = new double[] { 100, 100, 100 };
-            double[] rowHeights = new double[] { 50, 50, 50 };
+        // Define column widths and row heights for the table
+        double[] columnWidths = new double[] { 100, 100, 100 };
+        double[] rowHeights = new double[] { 50, 50, 50 };
 
-            // Add a table to the slide
-            Aspose.Slides.ITable table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
+        // Add a table to the slide
+        Aspose.Slides.ITable table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
 
-            // Merge first two cells in the first row (horizontal merge)
-            Aspose.Slides.ICell cell1 = table.Rows[0][0];
-            Aspose.Slides.ICell cell2 = table.Rows[0][1];
-            table.MergeCells(cell1, cell2, false);
-            cell1.TextFrame.Text = "Merged Columns";
+        // Merge the first two cells in the first row
+        Aspose.Slides.ICell mergedCell = table.MergeCells(table.Rows[0][0], table.Rows[0][1], false);
 
-            // Merge first cell of first two rows (vertical merge)
-            Aspose.Slides.ICell vCell1 = table.Rows[0][2];
-            Aspose.Slides.ICell vCell2 = table.Rows[1][2];
-            table.MergeCells(vCell1, vCell2, false);
-            vCell1.TextFrame.Text = "Merged Rows";
+        // Add text to the merged cell
+        mergedCell.TextFrame.Text = "Merged Cells";
 
-            // Save the presentation
-            pres.Save("MergedCellsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save("MergedCellsPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
