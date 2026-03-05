@@ -2,35 +2,33 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace AsposeSlidesExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Add a rectangle autoshape to the first slide
-            Aspose.Slides.IAutoShape autoShape = presentation.Slides[0].Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Initialize a text frame for the shape
-            autoShape.AddTextFrame("");
+        // Add a rectangle autoshape
+        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
 
-            // Create a paragraph and a portion with sample text
-            Aspose.Slides.Paragraph paragraph = new Aspose.Slides.Paragraph();
-            Aspose.Slides.Portion portion = new Aspose.Slides.Portion("Sample text with custom font");
-            paragraph.Portions.Add(portion);
+        // Add a text frame to the shape
+        Aspose.Slides.ITextFrame textFrame = shape.AddTextFrame("");
 
-            // Add the paragraph to the shape's text frame
-            autoShape.TextFrame.Paragraphs.Add(paragraph);
+        // Create a paragraph and a portion with custom font
+        Aspose.Slides.Paragraph paragraph = new Aspose.Slides.Paragraph();
+        Aspose.Slides.Portion portion = new Aspose.Slides.Portion("Sample text with custom font");
+        // Assign a custom Latin font to the portion
+        portion.PortionFormat.LatinFont = new Aspose.Slides.FontData("Comic Sans MS");
 
-            // Assign a custom Latin font to the text portion
-            portion.PortionFormat.LatinFont = new Aspose.Slides.FontData("MyCustomFont");
+        // Add the portion to the paragraph and the paragraph to the text frame
+        paragraph.Portions.Add(portion);
+        textFrame.Paragraphs.Add(paragraph);
 
-            // Save the presentation
-            presentation.Save("CustomFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save("CustomFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
