@@ -1,21 +1,21 @@
 using System;
+using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace ExportMediaToHtml
 {
-    static void Main()
+    class Program
     {
-        // Load an existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        static void Main(string[] args)
+        {
+            // Load an existing presentation
+            Presentation presentation = new Presentation("input.pptx");
 
-        // Configure HTML5 export options to extract media files to a folder
-        Aspose.Slides.Export.Html5Options htmlOptions = new Aspose.Slides.Export.Html5Options();
-        htmlOptions.OutputPath = "output_media";
+            // Create HTML export options (default options)
+            HtmlOptions htmlOptions = new HtmlOptions();
 
-        // Export the presentation to HTML5 format (media files are saved to OutputPath)
-        presentation.Save("output.html", Aspose.Slides.Export.SaveFormat.Html5, htmlOptions);
-
-        // Release resources
-        presentation.Dispose();
+            // Export the presentation to HTML format, which also extracts media files
+            presentation.Save("output.html", SaveFormat.Html, htmlOptions);
+        }
     }
 }
