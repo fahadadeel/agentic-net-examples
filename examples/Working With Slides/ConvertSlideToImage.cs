@@ -1,40 +1,34 @@
 using System;
 using System.IO;
+using System.Drawing.Imaging;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace ConvertSlideToImage
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        // Path to the source presentation
+        string sourcePath = "input.pptx";
+        // Directory to save slide images
+        string outputDir = "output";
+        Directory.CreateDirectory(outputDir);
+
+        // Load the presentation
+        Presentation presentation = new Presentation(sourcePath);
+
+        // Iterate through slides and save each as PNG
+        for (int i = 0; i < presentation.Slides.Count; i++)
         {
-            // Input presentation path
-            System.String inputPath = "input.pptx";
-
-            // Output image file name format
-            System.String outputFormat = "Slide_{0}.jpg";
-
-            // Scale factors for the thumbnail image
-            int scaleX = 1;
-            int scaleY = scaleX;
-
-            // Load the presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-            // Convert each slide to an image
-            foreach (Aspose.Slides.ISlide slide in presentation.Slides)
-            {
-                using (Aspose.Slides.IImage thumbnail = slide.GetImage(scaleX, scaleY))
-                {
-                    System.String imageFileName = System.String.Format(outputFormat, slide.SlideNumber);
-                    thumbnail.Save(imageFileName, Aspose.Slides.ImageFormat.Jpeg);
-                }
-            }
-
-            // Save the presentation before exiting
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            presentation.Dispose();
+            ISlide slide = presentation.Slides[i];
+            IImage image = slide.GetImage();
+            string imagePath = Path.Combine(outputDir, $"slide_{i + 1}.png");
+            image.Save(imagePath, ImageFormat.Png);
+            image.Dispose();
         }
+
+        // Save the presentation before exiting
+        presentation.Save(sourcePath, SaveFormat.Pptx);
+        presentation.Dispose();
     }
 }
