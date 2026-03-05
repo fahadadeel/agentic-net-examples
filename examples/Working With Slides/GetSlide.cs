@@ -4,27 +4,22 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Path to the source presentation file
-        string inputPath = "input.pptx";
-        // Path where the modified presentation will be saved
-        string outputPath = "output.pptx";
-
-        // Load the presentation from the specified file
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
-        {
-            // Index of the slide to retrieve (zero‑based)
-            int slideIndex = 0;
-
-            // Retrieve the slide using the Slides collection indexer
-            Aspose.Slides.ISlide slide = presentation.Slides[slideIndex];
-
-            // Example usage: output the slide index to the console
-            Console.WriteLine("Retrieved slide at index: " + slideIndex);
-
-            // Save the presentation before exiting
-            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Load the presentation from a PPTX file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        
+        // Get the slide at the specified index (e.g., index 0 for the first slide)
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
+        
+        // Perform any desired operations with the slide here
+        // For example, you could read the slide's name:
+        // string slideName = slide.Name;
+        
+        // Save the presentation before exiting
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        
+        // Release resources
+        presentation.Dispose();
     }
 }
