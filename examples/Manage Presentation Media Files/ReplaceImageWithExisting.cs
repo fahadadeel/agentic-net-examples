@@ -2,29 +2,39 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace ReplaceImageExample
+namespace ReplaceImageWithExisting
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Load the existing presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+            // Input and output file paths
+            string inputPath = "input.pptx";
+            string outputPath = "output.pptx";
 
-            // Get the target image that will be replaced (e.g., first image)
-            Aspose.Slides.IPPImage targetImage = presentation.Images[0];
+            // Load the presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
 
-            // Get the source image already present in the collection (e.g., second image)
-            Aspose.Slides.IPPImage sourceImage = presentation.Images[1];
+            // Get the first slide
+            Aspose.Slides.ISlide slide = pres.Slides[0];
 
-            // Replace the target image data with the source image
-            targetImage.ReplaceImage(sourceImage);
+            // Get the first shape and cast it to IPictureFrame
+            Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes[0] as Aspose.Slides.IPictureFrame;
+
+            if (pictureFrame != null)
+            {
+                // Get an existing image from the presentation's image collection (e.g., the first image)
+                Aspose.Slides.IPPImage existingImage = pres.Images[0];
+
+                // Replace the picture frame's image with the existing image
+                pictureFrame.PictureFormat.Picture.Image = existingImage;
+            }
 
             // Save the modified presentation
-            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
 
-            // Clean up resources
-            presentation.Dispose();
+            // Dispose the presentation
+            pres.Dispose();
         }
     }
 }
