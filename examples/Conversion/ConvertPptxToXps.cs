@@ -1,15 +1,19 @@
 using System;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load the PPTX file
-        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx"))
+        // Path to the source PPTX file
+        string inputPath = "input.pptx";
+        // Path for the resulting XPS file
+        string outputPath = "output.xps";
+
+        // Load the presentation from the PPTX file
+        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath))
         {
-            // Save the presentation to XPS format
-            pres.Save("output.xps", Aspose.Slides.Export.SaveFormat.Xps);
+            // Save the presentation in XPS format using default options
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Xps);
         }
     }
 }
