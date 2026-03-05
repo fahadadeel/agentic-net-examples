@@ -1,18 +1,24 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Load the existing presentation from a file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Load the presentation from a PPTX file
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx"))
+        {
+            // Ensure there is at least one slide to remove
+            if (presentation.Slides.Count > 0)
+            {
+                // Get the slide to remove (e.g., the first slide)
+                Aspose.Slides.ISlide slideToRemove = presentation.Slides[0];
+                // Remove the slide from the presentation
+                slideToRemove.Remove();
+            }
 
-        // Remove the first slide (index 0) from the presentation
-        presentation.Slides.RemoveAt(0);
-
-        // Save the modified presentation to a new file
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the modified presentation
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
