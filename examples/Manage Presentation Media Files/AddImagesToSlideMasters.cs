@@ -2,43 +2,49 @@ using System;
 using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
+using System.Drawing;
 
-namespace AddImagesToSlideMasters
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Define paths for the image to add and the output presentation
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "image.png");
-            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.pptx");
+        // Set up data directory
+        string dataDir = "Data";
+        if (!Directory.Exists(dataDir))
+            Directory.CreateDirectory(dataDir);
 
-            // Create a new presentation
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
-            {
-                // Get the first slide (required to access its master slide)
-                Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
+        // Define image and output paths
+        string imagePath = Path.Combine(dataDir, "image.png");
+        string outPath = Path.Combine(dataDir, "output.pptx");
 
-                // Retrieve the master slide associated with the first slide's layout
-                Aspose.Slides.IMasterSlide masterSlide = firstSlide.LayoutSlide.MasterSlide;
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-                // Load the image bytes and add the image to the presentation's image collection
-                byte[] imageBytes = File.ReadAllBytes(imagePath);
-                Aspose.Slides.IPPImage pictureImage = presentation.Images.AddImage(imageBytes);
+        // Get the first slide and its master slide
+        Aspose.Slides.ISlide slide = pres.Slides[0];
+        Aspose.Slides.IMasterSlide master = slide.LayoutSlide.MasterSlide;
 
-                // Add the picture frame to the master slide's shapes collection
-                // Parameters: shape type, X, Y, width, height, image
-                masterSlide.Shapes.AddPictureFrame(
-                    Aspose.Slides.ShapeType.Rectangle,
-                    10,    // X position
-                    10,    // Y position
-                    100,   // Width
-                    100,   // Height
-                    pictureImage);
+        // Load image from file and add it to the presentation's image collection
+        Aspose.Slides.IImage img = Aspose.Slides.Images.FromFile(imagePath);
+        Aspose.Slides.IPPImage imgx = pres.Images.AddImage(img);
 
-                // Save the presentation to disk
-                presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-            }
-        }
+        // Add picture frame to the master slide using the image
+        Aspose.Slides.IPictureFrame pictureFrame = master.Shapes.AddPictureFrame(
+            Aspose.Slides.ShapeType.Rectangle,
+            0,
+            0,
+            imgx.Width,
+            imgx.Height,
+            imgx);
+
+        // Apply line formatting to the picture frame
+        pictureFrame.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        pictureFrame.LineFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.Blue;
+        pictureFrame.LineFormat.Width = 5;
+        pictureFrame.Rotation = 0;
+
+        // Save the presentation
+        pres.Save(outPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        pres.Dispose();
     }
 }
