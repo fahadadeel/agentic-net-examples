@@ -1,38 +1,39 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
-using System.Drawing;
 
-class Program
+namespace SetLineEndPoint
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Output file path
+            string outputPath = "SetLineEndPoint.pptx";
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Add a line shape to the slide
-        Aspose.Slides.IAutoShape line = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Line, 50, 150, 300, 0);
+            // Get the first slide
+            Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Apply line formatting (arrow style, width, dash style, colors)
-        line.LineFormat.Style = Aspose.Slides.LineStyle.ThickBetweenThin;
-        line.LineFormat.Width = 10;
-        line.LineFormat.DashStyle = Aspose.Slides.LineDashStyle.DashDot;
-        line.LineFormat.BeginArrowheadLength = Aspose.Slides.LineArrowheadLength.Short;
-        line.LineFormat.BeginArrowheadStyle = Aspose.Slides.LineArrowheadStyle.Oval;
-        line.LineFormat.EndArrowheadLength = Aspose.Slides.LineArrowheadLength.Long;
-        line.LineFormat.EndArrowheadStyle = Aspose.Slides.LineArrowheadStyle.Triangle;
-        line.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        line.LineFormat.FillFormat.SolidFillColor.Color = Color.Maroon;
+            // Add a line shape to the slide
+            Aspose.Slides.IAutoShape line = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
+                Aspose.Slides.ShapeType.Line, 50, 150, 300, 0);
 
-        // Set the end point of the line by adjusting its width and height
-        line.Width = 400;   // X coordinate of the end point relative to the start X
-        line.Height = 100;  // Y offset of the end point relative to the start Y
+            // Get the geometry interface of the line
+            Aspose.Slides.IGeometryShape geometryShape = line.AsIGeometryShape;
 
-        // Save the presentation
-        string outputPath = "SetLineEndPoint_out.pptx";
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Retrieve the existing geometry path
+            Aspose.Slides.IGeometryPath geometryPath = geometryShape.GetGeometryPaths()[0];
+
+            // Set a new end point for the line (index 1 corresponds to the line segment)
+            geometryPath.LineTo(400f, 150f, 1);
+
+            // Apply the modified geometry back to the shape
+            geometryShape.SetGeometryPath(geometryPath);
+
+            // Save the presentation
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
