@@ -1,27 +1,21 @@
 using System;
-using Aspose.Slides;
 using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Load an existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Load an existing presentation from file
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx"))
+        {
+            // Access the first master slide in the presentation
+            Aspose.Slides.IMasterSlide masterSlide = presentation.Masters[0];
 
-        // Get the collection of master slides
-        Aspose.Slides.IMasterSlideCollection masterSlides = presentation.Masters;
+            // Example operation: display the number of shapes on the master slide
+            Console.WriteLine("Master slide contains {0} shapes.", masterSlide.Shapes.Count);
 
-        // Access the first master slide
-        Aspose.Slides.IMasterSlide firstMaster = masterSlides[0];
-
-        // Output the name of the master slide
-        Console.WriteLine("First master slide name: " + firstMaster.Name);
-
-        // Save the presentation
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Clean up resources
-        presentation.Dispose();
+            // Save the presentation after accessing the master slide
+            presentation.Save("output.pptx", SaveFormat.Pptx);
+        }
     }
 }
