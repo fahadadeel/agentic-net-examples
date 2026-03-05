@@ -3,32 +3,31 @@ using System.Drawing;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-class Program
+namespace ModernCommentExample
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Create a new presentation (starts with one empty slide)
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add a comment author to the presentation
-        Aspose.Slides.ICommentAuthor author = presentation.CommentAuthors.AddAuthor("John Doe", "JD");
+            // Add a comment author
+            Aspose.Slides.ICommentAuthor commentAuthor = presentation.CommentAuthors.AddAuthor("John Doe", "JD");
 
-        // Define the position where the comment will appear on the slide
-        PointF position = new PointF();
-        position.X = 0.5f; // relative X position (0.0 - 1.0)
-        position.Y = 0.5f; // relative Y position (0.0 - 1.0)
+            // Define the position for the modern comment
+            PointF commentPosition = new PointF(100f, 100f);
 
-        // Add a comment to the first slide using the author and position
-        Aspose.Slides.IComment comment = author.Comments.AddComment(
-            "This is a comment on slide 1",
-            presentation.Slides[0],
-            position,
-            DateTime.Now);
+            // Add a modern comment to the first slide
+            Aspose.Slides.IModernComment modernComment = commentAuthor.Comments.AddModernComment(
+                "This is a modern comment added via Aspose.Slides",
+                presentation.Slides[0],
+                null,
+                commentPosition,
+                DateTime.Now);
 
-        // Optionally set a document-level comment property
-        presentation.DocumentProperties.Comments = "Presentation with slide comments";
-
-        // Save the presentation in PPT format
-        presentation.Save("PresentationWithComments.ppt", SaveFormat.Ppt);
+            // Save the presentation
+            presentation.Save("ModernComments_out.pptx", SaveFormat.Pptx);
+        }
     }
 }
