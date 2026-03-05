@@ -1,28 +1,42 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
-using System.Drawing;
 
 class Program
 {
     static void Main()
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Load the existing presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle shape with some text
-        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 100, 400, 100);
-        shape.AddTextFrame("Sample Text");
+        // Get the first shape (assumed to be an AutoShape with text)
+        Aspose.Slides.IShape shape = slide.Shapes[0];
+        Aspose.Slides.IAutoShape autoShape = shape as Aspose.Slides.IAutoShape;
 
-        // Set text background color (highlight) to Yellow
-        Aspose.Slides.IPortion portion = shape.TextFrame.Paragraphs[0].Portions[0];
-        portion.PortionFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        portion.PortionFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.Yellow;
+        if (autoShape != null && autoShape.TextFrame != null)
+        {
+            Aspose.Slides.ITextFrame textFrame = autoShape.TextFrame;
 
-        // Save the presentation
-        presentation.Save("TextBackgroundColor_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            if (textFrame.Paragraphs.Count > 0)
+            {
+                Aspose.Slides.IParagraph paragraph = textFrame.Paragraphs[0];
+
+                if (paragraph.Portions.Count > 0)
+                {
+                    Aspose.Slides.IPortion portion = paragraph.Portions[0];
+
+                    // Set the text background (highlight) color to Yellow
+                    portion.PortionFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+                    portion.PortionFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.Yellow;
+                }
+            }
+        }
+
+        // Save the updated presentation
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
