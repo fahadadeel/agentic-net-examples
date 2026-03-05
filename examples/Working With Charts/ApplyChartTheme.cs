@@ -1,22 +1,28 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
+using System.Drawing;
 
-class Program
+namespace ApplyChartThemeExample
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add a clustered column chart to the first slide
-        Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            50f, 50f, 500f, 400f);
+            // Add a clustered column chart to the first slide
+            Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.ClusteredColumn, 50f, 50f, 500f, 400f);
 
-        // Access the chart's theme manager and initialize an override color scheme
-        Aspose.Slides.Theme.IOverrideThemeManager themeManager = chart.ThemeManager;
-        themeManager.OverrideTheme.InitColorScheme();
+            // Modify the master theme (e.g., change the first line style color to red)
+            // MasterTheme is read‑only, but its nested properties are mutable
+            presentation.MasterTheme.FormatScheme.LineStyles[0].FillFormat.SolidFillColor.Color = Color.Red;
 
-        // Save the presentation
-        presentation.Save("ApplyChartTheme_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("ApplyChartTheme_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
