@@ -7,26 +7,27 @@ class Program
     static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Define initial column widths and row heights
-        double[] columnWidths = new double[] { 100, 100, 100 };
-        double[] rowHeights = new double[] { 50, 50 };
+        double[] columnWidths = new double[] { 100, 100 };
+        double[] rowHeights = new double[] { 50, 50, 50 };
 
         // Add a table to the slide
         Aspose.Slides.ITable table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
 
-        // Clone the first column and insert it as a new column at the end of the table
-        Aspose.Slides.IColumn templateColumn = table.Columns[0];
-        table.Columns.InsertClone(table.Columns.Count, templateColumn, false);
+        // Add a new column by cloning the first column and inserting at position 2 (zero‑based index)
+        Aspose.Slides.IColumnCollection columns = table.Columns;
+        Aspose.Slides.IColumn templateColumn = columns[0];
+        columns.InsertClone(2, templateColumn, false);
 
-        // Set the width of the newly added column
-        table.Columns[table.Columns.Count - 1].Width = 100;
+        // Set width for the newly added column
+        columns[2].Width = 120;
 
         // Save the presentation
-        pres.Save("AddColumns.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("ExpandedTable.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
