@@ -1,48 +1,29 @@
 using System;
-using Aspose.Slides;
 
-namespace CompareSlidesApp
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Paths to the presentations to compare
-            string filePath1 = "Presentation1.pptx";
-            string filePath2 = "Presentation2.pptx";
+        // Load the first presentation
+        Aspose.Slides.Presentation presentation1 = new Aspose.Slides.Presentation("Presentation1.pptx");
+        // Load the second presentation
+        Aspose.Slides.Presentation presentation2 = new Aspose.Slides.Presentation("Presentation2.pptx");
 
-            // Load the presentations
-            using (Aspose.Slides.Presentation pres1 = new Aspose.Slides.Presentation(filePath1))
-            using (Aspose.Slides.Presentation pres2 = new Aspose.Slides.Presentation(filePath2))
-            {
-                // Compare master slides using the Equals method
-                for (int i = 0; i < pres1.Masters.Count; i++)
-                {
-                    for (int j = 0; j < pres2.Masters.Count; j++)
-                    {
-                        if (pres1.Masters[i].Equals(pres2.Masters[j]))
-                        {
-                            Console.WriteLine(string.Format(
-                                "Master slide #{0} in Presentation1 is equal to Master slide #{1} in Presentation2",
-                                i, j));
-                        }
-                    }
-                }
+        // Retrieve the first slide from each presentation
+        Aspose.Slides.ISlide slide1 = presentation1.Slides[0];
+        Aspose.Slides.ISlide slide2 = presentation2.Slides[0];
 
-                // Optional: compare regular slides as well
-                int slideCount = Math.Min(pres1.Slides.Count, pres2.Slides.Count);
-                for (int k = 0; k < slideCount; k++)
-                {
-                    if (pres1.Slides[k].Equals(pres2.Slides[k]))
-                    {
-                        Console.WriteLine(string.Format(
-                            "Slide #{0} is equal in both presentations", k));
-                    }
-                }
+        // Compare the two slides for visual equality
+        bool areEqual = slide1.Equals(slide2);
 
-                // Save the first presentation (required by authoring rule)
-                pres1.Save("ComparisonResult.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            }
-        }
+        Console.WriteLine("Slides are equal: " + areEqual);
+
+        // Save the presentations before exiting
+        presentation1.Save("Presentation1_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation2.Save("Presentation2_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
+        presentation1.Dispose();
+        presentation2.Dispose();
     }
 }
