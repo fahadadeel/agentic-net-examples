@@ -1,40 +1,30 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace SlideDifferenceDetector
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Load the presentation from a file
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+
+        // Compare each pair of slides in the presentation
+        for (int i = 0; i < presentation.Slides.Count; i++)
         {
-            // Path to the source presentation
-            string sourcePath = "input.pptx";
-
-            // Load the presentation
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+            for (int j = i + 1; j < presentation.Slides.Count; j++)
             {
-                // Get the total number of slides
-                int slideCount = presentation.Slides.Count;
-
-                // Compare each pair of slides
-                for (int i = 0; i < slideCount; i++)
+                bool areEqual = presentation.Slides[i].Equals(presentation.Slides[j]);
+                if (areEqual)
                 {
-                    for (int j = i + 1; j < slideCount; j++)
-                    {
-                        // Use BaseSlide.Equals to determine if slides are identical
-                        bool areEqual = presentation.Slides[i].Equals(presentation.Slides[j]);
-
-                        if (!areEqual)
-                        {
-                            Console.WriteLine(string.Format("Slide #{0} is different from Slide #{1}", i, j));
-                        }
-                    }
+                    Console.WriteLine(string.Format("Slide #{0} is equal to Slide #{1}", i, j));
                 }
-
-                // Save the presentation (required by lifecycle rules)
-                presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                else
+                {
+                    Console.WriteLine(string.Format("Slide #{0} is different from Slide #{1}", i, j));
+                }
             }
         }
+
+        // Save the presentation (even if unchanged) before exiting
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
