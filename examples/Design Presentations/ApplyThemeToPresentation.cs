@@ -1,27 +1,22 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+namespace ApplyThemeExample
 {
-    static void Main()
+    class Program
     {
-        // Path to the existing presentation file
-        string presentationPath = "input.pptx";
-        // Path to the external theme file (.thmx)
-        string themePath = "theme.thmx";
-
-        // Load the presentation
-        using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(presentationPath))
+        static void Main(string[] args)
         {
-            // Get the first master slide
-            Aspose.Slides.IMasterSlide masterSlide = pres.Masters[0];
+            // Path to the external theme file (.thmx)
+            string themePath = "example.thmx";
 
-            // Apply the external theme to the master slide and all dependent slides
-            Aspose.Slides.IMasterSlide themedMaster = masterSlide.ApplyExternalThemeToDependingSlides(themePath);
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Save the updated presentation
-            pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Apply the external theme to the first master slide and all its dependent slides
+            Aspose.Slides.IMasterSlide themedMaster = presentation.Masters[0].ApplyExternalThemeToDependingSlides(themePath);
+
+            // Save the themed presentation
+            presentation.Save("ThemedPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
