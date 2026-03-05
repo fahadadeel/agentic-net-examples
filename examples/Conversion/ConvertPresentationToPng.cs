@@ -1,35 +1,35 @@
 using System;
 using System.IO;
-using System.Drawing.Imaging;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+namespace ConvertPresentationToPng
 {
-    static void Main()
+    class Program
     {
-        // Input presentation (PPT or PPTX)
-        string inputPath = "input.pptx";
-
-        // Folder to store PNG images
-        string outputFolder = "output";
-        Directory.CreateDirectory(outputFolder);
-
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-        // Iterate through all slides and save each as PNG
-        for (int i = 0; i < presentation.Slides.Count; i++)
+        static void Main(string[] args)
         {
-            Aspose.Slides.ISlide slide = presentation.Slides[i];
-            Aspose.Slides.IImage image = slide.GetImage();
-            string outputPath = Path.Combine(outputFolder, $"slide_{i + 1}.png");
-            image.Save(outputPath, ImageFormat.Png);
-            image.Dispose();
-        }
+            // Input PowerPoint file
+            System.String inputPath = "input.pptx";
+            // Output file name pattern
+            System.String outputFormat = "slide_{0}.png";
 
-        // Save the (unchanged) presentation before exiting as required
-        presentation.Save("saved.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        presentation.Dispose();
+            // Load presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
+
+            // Iterate through slides and save each as PNG
+            for (int index = 0; index < pres.Slides.Count; index++)
+            {
+                Aspose.Slides.ISlide slide = pres.Slides[index];
+                using (Aspose.Slides.IImage image = slide.GetImage())
+                {
+                    System.String outputPath = System.String.Format(outputFormat, index);
+                    image.Save(outputPath, Aspose.Slides.ImageFormat.Png);
+                }
+            }
+
+            // Save presentation (optional, as per authoring rule)
+            pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            pres.Dispose();
+        }
     }
 }
