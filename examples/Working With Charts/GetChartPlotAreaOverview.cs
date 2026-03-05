@@ -9,38 +9,36 @@ namespace ChartPlotAreaOverview
     {
         static void Main(string[] args)
         {
-            // Input and output file paths
+            // Define input and output file paths
+            string inputPath = "";
             string outputPath = "ChartPlotAreaOverview.pptx";
 
             // Create a new presentation
-            Presentation presentation = new Presentation();
+            Presentation pres = new Presentation();
 
             // Add a clustered column chart to the first slide
-            IChart chart = presentation.Slides[0].Shapes.AddChart(
+            Chart chart = (Chart)pres.Slides[0].Shapes.AddChart(
                 ChartType.ClusteredColumn,
-                50f,   // X position
-                50f,   // Y position
-                500f,  // Width
-                350f   // Height
+                100f,   // X position
+                100f,   // Y position
+                500f,   // Width
+                350f    // Height
             );
 
-            // Validate layout to obtain actual plot area values
+            // Calculate actual layout values for the chart
             chart.ValidateChartLayout();
 
             // Retrieve actual plot area dimensions
-            double actualX = chart.PlotArea.ActualX;
-            double actualY = chart.PlotArea.ActualY;
-            double actualWidth = chart.PlotArea.ActualWidth;
-            double actualHeight = chart.PlotArea.ActualHeight;
+            double plotX = chart.PlotArea.ActualX;
+            double plotY = chart.PlotArea.ActualY;
+            double plotWidth = chart.PlotArea.ActualWidth;
+            double plotHeight = chart.PlotArea.ActualHeight;
 
-            // Example usage of the obtained values (optional)
-            Console.WriteLine($"Plot Area - X: {actualX}, Y: {actualY}, Width: {actualWidth}, Height: {actualHeight}");
-
-            // Set layout target type correctly (use Inner instead of non‑existent Inside)
-            chart.PlotArea.LayoutTargetType = LayoutTargetType.Inner;
+            // (Optional) Use the obtained values, e.g., write to console
+            Console.WriteLine($"Plot Area - X: {plotX}, Y: {plotY}, Width: {plotWidth}, Height: {plotHeight}");
 
             // Save the presentation
-            presentation.Save(outputPath, SaveFormat.Pptx);
+            pres.Save(outputPath, SaveFormat.Pptx);
         }
     }
 }
