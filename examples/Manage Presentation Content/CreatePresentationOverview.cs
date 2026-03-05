@@ -1,49 +1,25 @@
 using System;
-using System.IO;
 using Aspose.Slides;
-using Aspose.Slides.Export;
-using Aspose.Slides.Util;
 
 class Program
 {
     static void Main()
     {
-        // Create output directory
-        string outputDir = Path.Combine(Environment.CurrentDirectory, "Output");
-        if (!Directory.Exists(outputDir))
-            Directory.CreateDirectory(outputDir);
-
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add empty slides based on existing layout slides
-        Aspose.Slides.ISlideCollection slideColl = pres.Slides;
-        int i = 0;
-        for (i = 0; i < pres.LayoutSlides.Count; i++)
-        {
-            slideColl.AddEmptySlide(pres.LayoutSlides[i]);
-        }
+        // Add a new empty slide based on the first layout slide
+        Aspose.Slides.ISlide slide = presentation.Slides.AddEmptySlide(presentation.LayoutSlides[0]);
 
-        // Save temporary presentation to extract text overview
-        string tempPath = Path.Combine(outputDir, "temp.pptx");
-        pres.Save(tempPath, SaveFormat.Pptx);
+        // Add a title shape
+        Aspose.Slides.IAutoShape titleShape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 600, 50);
+        titleShape.TextFrame.Text = "Presentation Overview";
 
-        // Extract raw text from the temporary presentation
-        Aspose.Slides.IPresentationText presentationText = Aspose.Slides.PresentationFactory.Instance.GetPresentationText(tempPath, TextExtractionArrangingMode.Unarranged);
-        for (int slideIndex = 0; slideIndex < presentationText.SlidesText.Length; slideIndex++)
-        {
-            Aspose.Slides.ISlideText slideText = presentationText.SlidesText[slideIndex];
-            Console.WriteLine("Slide " + (slideIndex + 1) + " Text:");
-            Console.WriteLine(slideText.Text);
-        }
+        // Add a content shape with bullet points
+        Aspose.Slides.IAutoShape contentShape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 120, 600, 300);
+        contentShape.TextFrame.Text = "• Introduction\n• Objectives\n• Methodology\n• Results\n• Conclusion";
 
-        // Add a summary zoom frame to the first slide
-        Aspose.Slides.ISlide firstSlide = pres.Slides[0];
-        Aspose.Slides.ISummaryZoomFrame summaryZoom = firstSlide.Shapes.AddSummaryZoomFrame(50, 50, 400, 300);
-
-        // Save the final presentation in PPT format
-        string outPath = Path.Combine(outputDir, "PresentationOverview.ppt");
-        pres.Save(outPath, SaveFormat.Ppt);
-        pres.Dispose();
+        // Save the presentation in PPT format
+        presentation.Save("Overview.ppt", Aspose.Slides.Export.SaveFormat.Ppt);
     }
 }
