@@ -1,34 +1,46 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace SetCharacterSpacing
+namespace SetTextCharacterSpacing
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            // Input and output file paths
+            string inputPath = "input.pptx";
+            string outputPath = "output.pptx";
+
+            // Load the presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
 
             // Get the first slide
             Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add a rectangle shape to the slide
-            Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
-                Aspose.Slides.ShapeType.Rectangle, 50, 150, 300, 50);
+            // Add a rectangle AutoShape to the slide
+            Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
+                Aspose.Slides.ShapeType.Rectangle,
+                100f,   // X position
+                100f,   // Y position
+                400f,   // Width
+                100f    // Height
+            );
 
-            // Add a text frame with sample text
-            autoShape.AddTextFrame("Sample Text");
+            // Add a TextFrame with initial text
+            shape.AddTextFrame("Sample text for character spacing");
 
-            // Access the first portion of the text
-            Aspose.Slides.IPortion portion = autoShape.TextFrame.Paragraphs[0].Portions[0];
+            // Access the first paragraph and its first portion
+            Aspose.Slides.IParagraph paragraph = shape.TextFrame.Paragraphs[0];
+            Aspose.Slides.IPortion portion = paragraph.Portions[0];
 
-            // Set character spacing (in points)
-            portion.PortionFormat.Spacing = 2f;
+            // Set character spacing (intercharacter spacing) in points
+            portion.PortionFormat.Spacing = 5f;
 
-            // Save the presentation
-            presentation.Save("CharacterSpacing_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the modified presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Release resources
+            presentation.Dispose();
         }
     }
 }
