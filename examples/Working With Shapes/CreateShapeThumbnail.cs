@@ -1,22 +1,21 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
         // Output file paths
-        string outputPptx = "output.pptx";
-        string outputPng = "shape_thumbnail.png";
+        string outputPptx = "ShapeThumbnail.pptx";
+        string outputPng = "ShapeThumbnail.png";
 
         // Create a new presentation
         Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Add a rectangle auto shape
+        // Add a rectangle shape
         Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
             Aspose.Slides.ShapeType.Rectangle,
             50,   // X position
@@ -29,11 +28,11 @@ class Program
         shape.FillFormat.FillType = Aspose.Slides.FillType.NoFill;
         shape.LineFormat.SketchFormat.SketchType = Aspose.Slides.LineSketchType.Scribble;
 
-        // Generate thumbnail image for the shape
+        // Generate thumbnail image of the shape
         Aspose.Slides.IImage shapeImage = shape.GetImage(
             Aspose.Slides.ShapeThumbnailBounds.Shape,
-            1f,   // Scale X
-            1f    // Scale Y
+            1.0f, // Scale X
+            1.0f  // Scale Y
         );
 
         // Save the thumbnail as PNG
@@ -41,5 +40,8 @@ class Program
 
         // Save the presentation
         pres.Save(outputPptx, Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        pres.Dispose();
     }
 }
