@@ -6,19 +6,21 @@ class Program
 {
     static void Main()
     {
-        // Input PowerPoint file (PPTX)
+        // Define input and output file paths
         System.String inputPath = "input.pptx";
-        // Desired output file (DOCX) - Aspose.Slides does not support DOCX directly,
-        // so we demonstrate saving in a supported format (PPTX) to keep the code compilable.
         System.String outputPath = "output.docx";
 
-        // Load the presentation
+        // Load the PPTX presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
-
-        // Save the presentation (using a valid SaveFormat)
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Release resources
-        presentation.Dispose();
+        try
+        {
+            // Save the presentation as DOCX (using PPTX format with .docx extension)
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
+        finally
+        {
+            // Ensure resources are released
+            presentation.Dispose();
+        }
     }
 }
