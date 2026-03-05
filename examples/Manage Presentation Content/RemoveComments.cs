@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 namespace RemoveCommentsExample
 {
@@ -9,29 +6,30 @@ namespace RemoveCommentsExample
     {
         static void Main(string[] args)
         {
-            // Load the presentation from a PPTX file
-            using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx"))
+            // Input and output file paths
+            string inputPath = "Comments1.pptx";
+            string outputPath = "Comments_removed.pptx";
+
+            // Load the presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+
+            // Iterate through all slides and remove all comments
+            for (int slideIndex = 0; slideIndex < presentation.Slides.Count; slideIndex++)
             {
-                // Iterate through each comment author in the presentation
-                foreach (Aspose.Slides.ICommentAuthor author in presentation.CommentAuthors)
+                Aspose.Slides.ISlide slide = presentation.Slides[slideIndex];
+                Aspose.Slides.IComment[] comments = slide.GetSlideComments(null);
+                for (int commentIndex = 0; commentIndex < comments.Length; commentIndex++)
                 {
-                    // Collect comments to a separate list to avoid modifying the collection while iterating
-                    List<Aspose.Slides.IComment> commentsToRemove = new List<Aspose.Slides.IComment>();
-                    foreach (Aspose.Slides.IComment comment in author.Comments)
-                    {
-                        commentsToRemove.Add(comment);
-                    }
-
-                    // Remove each comment using its Remove method
-                    foreach (Aspose.Slides.IComment comment in commentsToRemove)
-                    {
-                        comment.Remove();
-                    }
+                    Aspose.Slides.IComment comment = comments[commentIndex];
+                    comment.Remove();
                 }
-
-                // Save the modified presentation to a new PPTX file
-                presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
             }
+
+            // Save the modified presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Release resources
+            presentation.Dispose();
         }
     }
 }
