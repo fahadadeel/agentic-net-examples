@@ -1,32 +1,44 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace AsposeSlidesFallbackExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Paths (adjust as needed)
+            string dataDir = "C:\\SlidesData\\";
+            string inputFile = dataDir + "input.pptx";
+            string outputFile = dataDir + "output.pptx";
+            string outputImage = dataDir + "slide1.png";
 
-        // Create a collection for font fallback rules
-        Aspose.Slides.IFontFallBackRulesCollection rules = new Aspose.Slides.FontFallBackRulesCollection();
+            // Load the presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputFile);
 
-        // Add a fallback rule for Cyrillic characters (U+0400 to U+04FF) using Times New Roman
-        rules.Add(new Aspose.Slides.FontFallBackRule(0x400u, 0x4FFu, "Times New Roman"));
+            // Create a new fallback rules collection
+            Aspose.Slides.IFontFallBackRulesCollection rules = new Aspose.Slides.FontFallBackRulesCollection();
 
-        // Add a fallback rule for Hiragana characters (U+3040 to U+309F) using MS Mincho
-        rules.Add(new Aspose.Slides.FontFallBackRule(0x3040u, 0x309Fu, "MS Mincho"));
+            // Add fallback rules for specific Unicode ranges
+            rules.Add(new Aspose.Slides.FontFallBackRule(0x400, 0x4FF, "Times New Roman"));
+            rules.Add(new Aspose.Slides.FontFallBackRule(0x3040, 0x309F, "MS Mincho"));
 
-        // Add a fallback rule for emoji characters (U+1F600 to U+1F64F) with multiple fonts
-        string[] emojiFonts = new string[] { "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji" };
-        rules.Add(new Aspose.Slides.FontFallBackRule(0x1F600u, 0x1F64Fu, emojiFonts));
+            // Add fallback rule for emoji characters
+            string[] emojiFonts = new string[] { "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji" };
+            rules.Add(new Aspose.Slides.FontFallBackRule(0x1F600, 0x1F64F, emojiFonts));
 
-        // Assign the fallback rules collection to the presentation's FontsManager
-        presentation.FontsManager.FontFallBackRulesCollection = rules;
+            // Assign the fallback rules to the presentation's FontsManager
+            pres.FontsManager.FontFallBackRulesCollection = rules;
 
-        // Save the presentation to a file
-        presentation.Save("FallbackFontPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Render the first slide to an image and save it
+            Aspose.Slides.IImage img = pres.Slides[0].GetImage(1f, 1f);
+            img.Save(outputImage, Aspose.Slides.ImageFormat.Png);
+            img.Dispose();
 
-        // Dispose the presentation object
-        presentation.Dispose();
+            // Save the modified presentation
+            pres.Save(outputFile, Aspose.Slides.Export.SaveFormat.Pptx);
+            pres.Dispose();
+        }
     }
 }
