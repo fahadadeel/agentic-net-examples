@@ -1,26 +1,21 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Input and output file paths
-        string inputPath = "input.pptx";
-        string outputPath = "output.pptx";
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+        // Set slide size to a predefined 16:9 on‑screen size without scaling existing content
+        presentation.SlideSize.SetSize(Aspose.Slides.SlideSizeType.OnScreen16x9, Aspose.Slides.SlideSizeScaleType.DoNotScale);
 
-        // Set custom slide size with content scaling to ensure fit
-        presentation.SlideSize.SetSize(720f, 540f, Aspose.Slides.SlideSizeScaleType.EnsureFit);
+        // Set a custom slide size (width: 1024 points, height: 768 points) and ensure content fits
+        presentation.SlideSize.SetSize(1024f, 768f, Aspose.Slides.SlideSizeScaleType.EnsureFit);
 
-        // Change slide size to A4 paper and maximize content scaling
-        presentation.SlideSize.SetSize(Aspose.Slides.SlideSizeType.A4Paper, Aspose.Slides.SlideSizeScaleType.Maximize);
-
-        // Save the modified presentation
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Release resources
-        presentation.Dispose();
+        // Save the presentation to a file
+        presentation.Save("SlideSizeExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
