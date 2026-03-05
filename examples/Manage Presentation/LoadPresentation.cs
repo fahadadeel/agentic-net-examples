@@ -1,27 +1,17 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-namespace ManagePresentation
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Path to the source PPTX file
+        string inputPath = "input.pptx";
+
+        // Load the presentation using the fully-qualified Aspose.Slides type
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Input and output file paths
-            string inputPath = "input.pptx";
-            string outputPath = "output_without_binary.pptx";
-
-            // Load options to delete embedded binary objects
-            Aspose.Slides.LoadOptions loadOptions = new Aspose.Slides.LoadOptions();
-            loadOptions.DeleteEmbeddedBinaryObjects = true;
-
-            // Load the presentation with the specified options
-            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath, loadOptions))
-            {
-                // Save the presentation before exiting
-                pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-            }
+            // Save the loaded presentation to a new file (must save before exiting)
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
