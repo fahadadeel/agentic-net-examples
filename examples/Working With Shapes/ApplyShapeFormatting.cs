@@ -10,31 +10,32 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle shape
-        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 300, 200);
+        // Add a rectangle shape to the slide
+        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 100, 100, 300, 200);
 
-        // Set solid fill color
+        // Apply solid fill to the shape
         shape.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        shape.FillFormat.SolidFillColor.Color = System.Drawing.Color.FromArgb(255, 100, 150, 200);
+        shape.FillFormat.SolidFillColor.Color = Color.FromArgb(255, 100, 150, 200);
 
-        // Set line format
+        // Apply line formatting to the shape
+        shape.LineFormat.Width = 5;
         shape.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        shape.LineFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-        shape.LineFormat.Width = 2;
+        shape.LineFormat.FillFormat.SolidFillColor.Color = Color.FromArgb(255, 0, 0, 0);
 
-        // Enable outer shadow effect
-        shape.EffectFormat.EnableOuterShadowEffect();
-
-        // Configure outer shadow properties
-        shape.EffectFormat.OuterShadowEffect.BlurRadius = 5.0;
-        shape.EffectFormat.OuterShadowEffect.Direction = 45.0f;
-        shape.EffectFormat.OuterShadowEffect.Distance = 3.0;
-        shape.EffectFormat.OuterShadowEffect.ShadowColor.Color = System.Drawing.Color.FromArgb(128, 0, 0, 0);
+        // Apply a preset shadow effect to the shape
+        shape.EffectFormat.EnablePresetShadowEffect();
+        shape.EffectFormat.PresetShadowEffect.Preset = Aspose.Slides.PresetShadowType.TopLeftDropShadow;
+        shape.EffectFormat.PresetShadowEffect.Distance = 5.0;
+        shape.EffectFormat.PresetShadowEffect.Direction = 45.0f;
 
         // Save the presentation
-        presentation.Save("ShapeFormatting.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("FormattedShape.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
