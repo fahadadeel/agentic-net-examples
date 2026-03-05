@@ -3,38 +3,29 @@ using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace OdpToSvgConverter
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Load the ODP presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.odp");
+
+        // Convert each slide to an SVG file
+        for (int i = 0; i < presentation.Slides.Count; i++)
         {
-            // Input ODP file path
-            string inputFilePath = "sample.odp";
+            Aspose.Slides.ISlide slide = presentation.Slides[i];
+            string svgFileName = $"slide_{i + 1}.svg";
 
-            // Output directory for SVG files
-            string outputDirectory = "SvgOutput";
-
-            // Ensure the output directory exists
-            Directory.CreateDirectory(outputDirectory);
-
-            // Load the ODP presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputFilePath);
-
-            // Iterate through each slide and save as SVG
-            for (int index = 0; index < presentation.Slides.Count; index++)
+            using (FileStream fileStream = File.Create(svgFileName))
             {
-                Aspose.Slides.ISlide slide = presentation.Slides[index];
-                string svgFilePath = Path.Combine(outputDirectory, $"slide_{index + 1}.svg");
-
-                using (FileStream fileStream = File.Create(svgFilePath))
-                {
-                    slide.WriteAsSvg(fileStream);
-                }
+                slide.WriteAsSvg(fileStream);
             }
-
-            // Save the presentation (required before exit)
-            presentation.Save("saved_presentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
+
+        // Save the presentation before exiting (optional conversion)
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Release resources
+        presentation.Dispose();
     }
 }
