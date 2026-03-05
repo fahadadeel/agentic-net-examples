@@ -6,16 +6,13 @@ class Program
 {
     static void Main()
     {
-        // Load the source PowerPoint presentation
+        // Load the source presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Create HTML export options (default options will include speaker notes)
-        Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
+        // Configure the presentation to be shown in speaker mode (includes speaker notes)
+        presentation.SlideShowSettings.SlideShowType = new Aspose.Slides.PresentedBySpeaker();
 
-        // Save the presentation as HTML with the specified options
-        presentation.Save("output.html", Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
-
-        // Release resources
-        presentation.Dispose();
+        // Save the presentation as HTML
+        presentation.Save("output.html", Aspose.Slides.Export.SaveFormat.Html);
     }
 }
