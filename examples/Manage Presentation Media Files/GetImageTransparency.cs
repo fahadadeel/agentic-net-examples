@@ -1,45 +1,42 @@
 using System;
-using System.IO;
+using Aspose.Slides;
+using Aspose.Slides.Export;
 
-class Program
+namespace GetImageTransparency
 {
-    static void Main()
+    class Program
     {
-        // Paths for input and output presentations
-        string inputPath = Path.Combine(Directory.GetCurrentDirectory(), "input.pptx");
-        string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.pptx");
-
-        // Load the presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
-
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
-
-        // Assume the first shape is a picture frame
-        Aspose.Slides.IPictureFrame pictureFrame = slide.Shapes[0] as Aspose.Slides.IPictureFrame;
-
-        if (pictureFrame != null)
+        static void Main(string[] args)
         {
-            // Access the image transform collection
-            Aspose.Slides.Effects.IImageTransformOperationCollection imageTransform = pictureFrame.PictureFormat.Picture.ImageTransform;
+            // Input and output file paths
+            string inputPath = "input.pptx";
+            string outputPath = "output.pptx";
 
-            // Iterate through the effects to find AlphaModulateFixed
-            foreach (Aspose.Slides.Effects.IImageTransformOperation effect in imageTransform)
+            // Load the presentation
+            Presentation pres = new Presentation(inputPath);
+
+            // Assume the first shape on the first slide is a table whose fill transparency we want to read
+            ISlide slide = pres.Slides[0];
+            IShape shape = slide.Shapes[0];
+
+            // Check if the shape is a table
+            if (shape is ITable)
             {
-                if (effect is Aspose.Slides.Effects.IAlphaModulateFixed)
-                {
-                    Aspose.Slides.Effects.IAlphaModulateFixed alphaMod = (Aspose.Slides.Effects.IAlphaModulateFixed)effect;
+                ITable table = (ITable)shape;
 
-                    // Get effective data to read the current amount (transparency percentage)
-                    Aspose.Slides.Effects.IAlphaModulateFixedEffectiveData effectiveData = alphaMod.GetEffective();
-                    float amount = effectiveData.Amount;
+                // Get the transparency of the table fill
+                float transparency = table.TableFormat.Transparency;
 
-                    Console.WriteLine("Alpha Modulate Fixed amount (transparency %): " + amount);
-                }
+                // Output the transparency value
+                Console.WriteLine("Table fill transparency: " + transparency);
             }
-        }
+            else
+            {
+                Console.WriteLine("The first shape is not a table. Transparency retrieval not applicable.");
+            }
 
-        // Save the presentation before exiting
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation before exiting
+            pres.Save(outputPath, SaveFormat.Pptx);
+        }
     }
 }
