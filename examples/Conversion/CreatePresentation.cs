@@ -1,18 +1,16 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Instantiate a new Presentation object
+        // Create a new presentation instance
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
         // Save the presentation to a file
-        presentation.Save("output.pptx", SaveFormat.Pptx);
+        presentation.Save("OutputPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Dispose the presentation to release resources
+        // Clean up resources
         presentation.Dispose();
     }
 }
