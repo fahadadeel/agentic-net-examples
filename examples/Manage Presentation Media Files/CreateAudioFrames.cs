@@ -5,35 +5,31 @@ using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        // Paths for audio file and output presentation
-        string dataDir = Directory.GetCurrentDirectory();
-        string audioPath = Path.Combine(dataDir, "sampleaudio.wav");
-        string outputPath = Path.Combine(dataDir, "AudioFrame_out.pptx");
-
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
         // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add audio to the presentation's audio collection
-        Aspose.Slides.IAudio audio = pres.Audios.AddAudio(File.ReadAllBytes(audioPath));
+        // Open the WAV audio file as a stream
+        System.IO.FileStream audioStream = new System.IO.FileStream("sampleaudio.wav", System.IO.FileMode.Open, System.IO.FileAccess.Read);
 
         // Add an embedded audio frame to the slide
-        Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audio);
+        Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audioStream);
 
-        // Configure audio playback settings
-        audioFrame.PlayAcrossSlides = true;
-        audioFrame.RewindAudio = true;
-        audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Loud;
+        // Set audio playback properties
         audioFrame.PlayMode = Aspose.Slides.AudioPlayModePreset.Auto;
+        audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Loud;
 
-        // Save the presentation
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Close the audio stream
+        audioStream.Close();
 
-        // Clean up resources
-        pres.Dispose();
+        // Save the presentation to a PPTX file
+        presentation.Save("AudioFrameEmbed_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Dispose the presentation object
+        presentation.Dispose();
     }
 }
