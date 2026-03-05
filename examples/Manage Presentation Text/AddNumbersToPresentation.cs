@@ -2,26 +2,27 @@ using System;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace AddNumbersToPresentation
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Set the first slide number (using the set-slide-number rule)
-            presentation.FirstSlideNumber = 1;
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Make slide numbers visible for all slides
-            presentation.HeaderFooterManager.SetAllSlideNumbersVisibility(true);
+        // Add a rectangle shape to the slide
+        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
 
-            // Save the updated presentation as PPTX
-            presentation.Save("UpdatedPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Set the text of the shape to a number string
+        shape.TextFrame.Text = "12345";
 
-            // Release resources
-            presentation.Dispose();
-        }
+        // Save the presentation to a PPTX file
+        presentation.Save("NumbersPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Dispose the presentation object
+        presentation.Dispose();
     }
 }
