@@ -1,7 +1,4 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
-using System.Drawing;
 
 class Program
 {
@@ -13,16 +10,14 @@ class Program
         // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle shape to the slide
+        // Add a rectangle shape
         Aspose.Slides.IAutoShape rectangle = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 100, 100, 200, 100);
 
-        // Apply line style to the rectangle
-        rectangle.LineFormat.Width = 5; // Set line width
-        rectangle.LineFormat.DashStyle = Aspose.Slides.LineDashStyle.Dash; // Set dash style
-        rectangle.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid; // Set fill type for the line
-        rectangle.LineFormat.FillFormat.SolidFillColor.Color = Color.Blue; // Set line color
+        // Set line style of the rectangle
+        rectangle.LineFormat.Style = Aspose.Slides.LineStyle.ThickThin;
+        rectangle.LineFormat.Width = 5.0;
 
         // Save the presentation
-        presentation.Save("RectangleLineStyle_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("RectangleLineStyle.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
