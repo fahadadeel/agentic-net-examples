@@ -7,13 +7,18 @@ class Program
 {
     static void Main()
     {
-        // Load the existing PPTX presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Paths for input and output presentations
+        var inputPath = "input.pptx";
+        var outputPath = "output.pptx";
 
-        // Find and replace text throughout the presentation (including master slides)
-        Aspose.Slides.Util.SlideUtil.FindAndReplaceText(presentation, true, "OldText", "NewText", null);
+        // Load the existing presentation
+        using (var presentation = new Aspose.Slides.Presentation(inputPath))
+        {
+            // Find and replace text throughout the presentation (including master slides)
+            Aspose.Slides.Util.SlideUtil.FindAndReplaceText(presentation, true, "[placeholder]", "New Text", null);
 
-        // Save the modified presentation as PPTX
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the modified presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
