@@ -1,38 +1,46 @@
 using System;
-using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 using Aspose.Slides.MathText;
 
-class Program
+namespace ExportMathEquationsToPng
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Output file paths
+            System.String outputPptx = "MathEquation.pptx";
+            System.String outputPng = "MathEquation.png";
 
-        // Add a rectangle auto shape to host the mathematical equation
-        Aspose.Slides.IAutoShape mathShape = presentation.Slides[0].Shapes.AddMathShape(0f, 0f, 720f, 150f);
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Retrieve the math paragraph from the first portion of the shape
-        Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
+            // Add a math shape to the first slide
+            Aspose.Slides.IAutoShape mathShape = pres.Slides[0].Shapes.AddMathShape(0, 0, 500, 50);
 
-        // Build the equation a² + b² = c² and add it to the paragraph
-        mathParagraph.Add(
-            new Aspose.Slides.MathText.MathematicalText("a").SetSuperscript("2")
-                .Join(" + ")
-                .Join(new Aspose.Slides.MathText.MathematicalText("b").SetSuperscript("2"))
-                .Join(" = ")
-                .Join(new Aspose.Slides.MathText.MathematicalText("c").SetSuperscript("2"))
-        );
+            // Get the math paragraph from the shape
+            Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
 
-        // Export the shape (containing the equation) as a high‑resolution PNG image
-        Aspose.Slides.IImage shapeImage = mathShape.GetImage();
-        string imagePath = "math_equation.png";
-        shapeImage.Save(imagePath, Aspose.Slides.ImageFormat.Png);
+            // Build the equation a + b = c and add it to the paragraph
+            mathParagraph.Add(
+                new Aspose.Slides.MathText.MathBlock(new Aspose.Slides.MathText.MathematicalText("a"))
+                    .Join("+")
+                    .Join(new Aspose.Slides.MathText.MathematicalText("b"))
+                    .Join("=")
+                    .Join(new Aspose.Slides.MathText.MathematicalText("c"))
+            );
 
-        // Save the presentation
-        string presentationPath = "math_equation.pptx";
-        presentation.Save(presentationPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Define scaling for the shape thumbnail
+            int scaleX = 2;
+            int scaleY = 2;
+
+            // Export the math shape as a PNG image
+            Aspose.Slides.IImage shapeImage = mathShape.GetImage(Aspose.Slides.ShapeThumbnailBounds.Shape, scaleX, scaleY);
+            shapeImage.Save(outputPng, Aspose.Slides.ImageFormat.Png);
+
+            // Save the presentation
+            pres.Save(outputPptx, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
