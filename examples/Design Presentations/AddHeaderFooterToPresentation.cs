@@ -1,27 +1,53 @@
 using System;
-using Aspose.Slides;
 
-class Program
+namespace AddHeaderFooter
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Output file path
+            string outputPath = "HeaderFooterPresentation.pptx";
 
-        // Access the presentation-wide header/footer manager
-        Aspose.Slides.IPresentationHeaderFooterManager headerFooterManager = presentation.HeaderFooterManager;
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Set header text (appears on notes and handout slides)
-        headerFooterManager.SetAllHeadersText("Header text");
+            // Set footer text and make it visible for all slides
+            presentation.HeaderFooterManager.SetAllFootersText("Sample Footer");
+            presentation.HeaderFooterManager.SetAllFootersVisibility(true);
 
-        // Set footer text (appears on all slides)
-        headerFooterManager.SetAllFootersText("Footer text");
+            // Set header text via master notes slide if available
+            Aspose.Slides.IMasterNotesSlide masterNotes = presentation.MasterNotesSlideManager.MasterNotesSlide;
+            if (masterNotes != null)
+            {
+                foreach (Aspose.Slides.IShape shape in masterNotes.Shapes)
+                {
+                    if (shape.Placeholder != null && shape.Placeholder.Type == Aspose.Slides.PlaceholderType.Header)
+                    {
+                        ((Aspose.Slides.IAutoShape)shape).TextFrame.Text = "Sample Header";
+                    }
+                }
+            }
 
-        // Ensure header and footer placeholders are visible
-        headerFooterManager.SetAllHeadersVisibility(true);
-        headerFooterManager.SetAllFootersVisibility(true);
+            // Ensure slide-level footer, date-time, and slide number are visible and set text
+            Aspose.Slides.IBaseSlideHeaderFooterManager slideHeaderFooter = presentation.Slides[0].HeaderFooterManager;
+            if (!slideHeaderFooter.IsFooterVisible)
+            {
+                slideHeaderFooter.SetFooterVisibility(true);
+            }
+            if (!slideHeaderFooter.IsSlideNumberVisible)
+            {
+                slideHeaderFooter.SetSlideNumberVisibility(true);
+            }
+            if (!slideHeaderFooter.IsDateTimeVisible)
+            {
+                slideHeaderFooter.SetDateTimeVisibility(true);
+            }
+            slideHeaderFooter.SetFooterText("Sample Footer");
+            slideHeaderFooter.SetDateTimeText("01/01/2023");
 
-        // Save the presentation to a file
-        presentation.Save("HeaderFooterPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
