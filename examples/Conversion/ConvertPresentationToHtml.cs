@@ -1,19 +1,23 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Load the source presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Configure HTML export options for high‑quality images
-        Aspose.Slides.Export.HtmlOptions htmlOptions = new Aspose.Slides.Export.HtmlOptions();
-        htmlOptions.JpegQuality = 100; // Maximum JPEG quality
+        // Create an HTML formatter with a custom CSS file and enable slide titles
+        Aspose.Slides.Export.HtmlFormatter formatter = Aspose.Slides.Export.HtmlFormatter.CreateDocumentFormatter("style.css", true);
 
-        // Export the presentation to a single HTML file
-        presentation.Save("output.html", Aspose.Slides.Export.SaveFormat.Html, htmlOptions);
+        // Configure HTML export options and assign the formatter
+        Aspose.Slides.Export.HtmlOptions options = new Aspose.Slides.Export.HtmlOptions();
+        options.HtmlFormatter = formatter;
+
+        // Export the presentation to a single HTML file using the specified options
+        presentation.Save("output.html", Aspose.Slides.Export.SaveFormat.Html, options);
+
+        // Save the presentation before exiting (as required)
+        presentation.Save("input_saved.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
