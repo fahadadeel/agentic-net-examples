@@ -4,23 +4,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Verify that input and output file paths are provided
-        if (args.Length < 2)
-        {
-            Console.WriteLine("Usage: ConvertPptxToOdp <input.pptx> <output.odp>");
-            return;
-        }
+        // Path to the source PPTX file
+        string inputPath = "input.pptx";
 
-        // Input PPTX file path
-        string inputPath = args[0];
-        // Desired ODP output file path
-        string outputPath = args[1];
+        // Path where the ODP file will be saved
+        string outputPath = "output.odp";
 
-        // Load the PPTX presentation using the fully-qualified Aspose.Slides type
+        // Load the PPTX presentation
         using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
         {
-            // Save the presentation in ODP format before exiting
+            // Save the presentation in ODP format
             presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Odp);
         }
+
+        // Indicate completion
+        Console.WriteLine("Conversion completed.");
     }
 }
