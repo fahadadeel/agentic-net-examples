@@ -7,20 +7,16 @@ class Program
 {
     static void Main()
     {
-        // Define output directory and file name
-        string outputDir = "Output";
-        if (!Directory.Exists(outputDir))
-        {
-            Directory.CreateDirectory(outputDir);
-        }
-        string outPath = Path.Combine(outputDir, "DesignPresentation_out.pptx");
+        // Output directory for the PPTX file
+        System.String outputDir = "Output";
+        if (!System.IO.Directory.Exists(outputDir))
+            System.IO.Directory.CreateDirectory(outputDir);
 
-        // Create a new presentation
+        // Full path of the output PPTX file
+        System.String outPath = System.IO.Path.Combine(outputDir, "DesignPresentation.pptx");
+
+        // Create a new presentation (contains one empty slide by default)
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
-
-        // Add a simple rectangle shape to the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-        slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 200);
 
         // Save the presentation as PPTX
         presentation.Save(outPath, Aspose.Slides.Export.SaveFormat.Pptx);
