@@ -4,11 +4,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Initialize a new presentation document
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation())
+        // Path to the template PPTX file
+        string templatePath = "Template.pptx";
+
+        // Load the presentation from the template file
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(templatePath))
         {
-            // Save the presentation in PPTX format before exiting
-            presentation.Save("NewPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation to a new file
+            presentation.Save("Output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
