@@ -1,25 +1,29 @@
 using System;
-using Aspose.Slides;
 
 class Program
 {
     static void Main()
     {
-        // Load the source presentation from file
-        Aspose.Slides.Presentation sourcePres = new Aspose.Slides.Presentation("source.pptx");
-        // Create a new destination presentation (contains one empty slide by default)
+        // Path to the source PPTX file
+        string sourcePath = "SourcePresentation.pptx";
+        // Path for the output PPTX file
+        string outputPath = "ResultPresentation.pptx";
+
+        // Load the source presentation
+        Aspose.Slides.Presentation srcPres = new Aspose.Slides.Presentation(sourcePath);
+        // Create a new empty destination presentation
         Aspose.Slides.Presentation destPres = new Aspose.Slides.Presentation();
 
-        // Get the first slide from the source presentation
-        Aspose.Slides.ISlide sourceSlide = sourcePres.Slides[0];
-        // Clone the source slide into the destination presentation
-        Aspose.Slides.ISlide clonedSlide = destPres.Slides.AddClone(sourceSlide);
+        // Get the slide collection of the destination presentation
+        Aspose.Slides.ISlideCollection destSlides = destPres.Slides;
+        // Clone the first slide from the source presentation into the destination
+        destSlides.AddClone(srcPres.Slides[0]);
 
-        // Save the destination presentation to a PPTX file
-        destPres.Save("merged.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the destination presentation
+        destPres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
 
         // Clean up resources
-        sourcePres.Dispose();
+        srcPres.Dispose();
         destPres.Dispose();
     }
 }
