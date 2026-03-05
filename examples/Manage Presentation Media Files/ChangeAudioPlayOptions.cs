@@ -1,42 +1,39 @@
 using System;
+using System.IO;
 using Aspose.Slides;
 using Aspose.Slides.Export;
 
-namespace AudioPlayOptionsDemo
+namespace AsposeSlidesDemo
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Load an existing presentation that contains an audio frame
-            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("AudioFrameEmbed_out.pptx"))
+            // Create a new presentation
+            using (Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation())
             {
                 // Get the first slide
                 Aspose.Slides.ISlide slide = pres.Slides[0];
 
-                // Retrieve the first shape on the slide and cast it to AudioFrame
-                Aspose.Slides.AudioFrame audioFrame = (Aspose.Slides.AudioFrame)slide.Shapes[0];
+                // Load audio data from a file (replace with a valid path)
+                byte[] audioData = File.ReadAllBytes("sampleaudio.wav");
 
-                // Change audio play mode to play on click
+                // Add the audio to the presentation's audio collection
+                Aspose.Slides.IAudio audio = pres.Audios.AddAudio(audioData);
+
+                // Add an audio frame to the slide using the embedded audio
+                Aspose.Slides.IAudioFrame audioFrame = slide.Shapes.AddAudioFrameEmbedded(50f, 150f, 100f, 100f, audio);
+
+                // Change audio play options
                 audioFrame.PlayMode = Aspose.Slides.AudioPlayModePreset.OnClick;
-
-                // Set audio volume to low
                 audioFrame.Volume = Aspose.Slides.AudioVolumeMode.Low;
-
-                // Enable playing the audio across all slides
                 audioFrame.PlayAcrossSlides = true;
-
-                // Disable looping of the audio
                 audioFrame.PlayLoopMode = false;
-
-                // Hide the audio frame during the slide show
                 audioFrame.HideAtShowing = true;
-
-                // Rewind the audio to the start after it finishes playing
                 audioFrame.RewindAudio = true;
 
-                // Save the modified presentation
-                pres.Save("AudioFrameEmbed_changed.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                // Save the presentation in PPTX format
+                pres.Save("AudioFrameChanged.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
             }
         }
     }
