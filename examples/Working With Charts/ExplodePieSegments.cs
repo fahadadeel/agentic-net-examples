@@ -1,4 +1,7 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -11,19 +14,15 @@ class Program
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Add a pie chart with sample data
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.Pie,
-            50f,   // X position
-            50f,   // Y position
-            400f,  // Width
-            400f   // Height
-        );
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.Pie, 50, 50, 400, 400);
 
-        // Access the first series (sample data already added)
+        // Access the first series (default series)
         Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series[0];
 
-        // Explode the second slice (index 1) by 30%
-        series.DataPoints[1].Explosion = 30;
+        // Explode individual slices
+        series.DataPoints[0].Explosion = 20; // explode first slice by 20%
+        series.DataPoints[1].Explosion = 30; // explode second slice by 30%
+        series.DataPoints[2].Explosion = 10; // explode third slice by 10%
 
         // Save the presentation
         presentation.Save("ExplodedPieChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
