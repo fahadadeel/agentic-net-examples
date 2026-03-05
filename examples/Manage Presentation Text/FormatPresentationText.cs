@@ -1,45 +1,36 @@
+using System;
+using System.Drawing;
 using Aspose.Slides;
 using Aspose.Slides.Export;
-using System.Drawing;
+using Aspose.Slides.Util;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Output file path
-        System.String outPath = "FormattedPresentation.pptx";
+        // Get the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a rectangle auto shape to the first slide
-        Aspose.Slides.IAutoShape shape = pres.Slides[0].Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle,
-            100f,   // X coordinate
-            100f,   // Y coordinate
-            400f,   // Width
-            200f    // Height
-        );
+        // Add a rectangle auto shape with a text frame
+        Aspose.Slides.IAutoShape autoShape = (Aspose.Slides.IAutoShape)slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 50, 50, 400, 100);
+        autoShape.AddTextFrame("Hello [placeholder] World!");
 
-        // Add a text frame with sample text
-        shape.AddTextFrame("Column 1 text. Column 2 text. Column 3 text.");
+        // Define the formatting for the replacement text
+        Aspose.Slides.PortionFormat format = new Aspose.Slides.PortionFormat();
+        format.FontHeight = 24f;
+        format.FontItalic = Aspose.Slides.NullableBool.True;
+        format.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        format.FillFormat.SolidFillColor.Color = Color.Red;
 
-        // Get the text frame format for column settings
-        Aspose.Slides.TextFrameFormat format = (Aspose.Slides.TextFrameFormat)shape.TextFrame.TextFrameFormat;
+        // Replace the placeholder with formatted text
+        Aspose.Slides.Util.SlideUtil.FindAndReplaceText(presentation, true,
+            "[placeholder]", "Formatted", format);
 
-        // Set the number of columns
-        format.ColumnCount = 3;
-
-        // Set spacing between columns (double value)
-        format.ColumnSpacing = 15.0;
-
-        // Set autofit mode to resize shape to fit text
-        format.AutofitType = Aspose.Slides.TextAutofitType.Shape;
-
-        // Set rotation angle (float literal with 'F' suffix)
-        format.RotationAngle = 0F;
-
-        // Save the presentation
-        pres.Save(outPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation as PPTX
+        presentation.Save("FormattedPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
