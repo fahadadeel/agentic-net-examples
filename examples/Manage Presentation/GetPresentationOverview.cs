@@ -1,38 +1,40 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
+using System.IO;
 
-class Program
+namespace PresentationOverviewApp
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Path to the source presentation file
-        string sourcePath = "input.pptx";
-
-        // Load the presentation
-        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(sourcePath))
+        static void Main(string[] args)
         {
-            // Get the number of slides
+            // Define output directory
+            string outDir = Path.Combine(Directory.GetCurrentDirectory(), "Output");
+            if (!Directory.Exists(outDir))
+                Directory.CreateDirectory(outDir);
+
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+
+            // Get the first slide (automatically created)
+            Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
+
+            // Display basic information about the presentation
             int slideCount = presentation.Slides.Count;
             Console.WriteLine("Number of slides: " + slideCount);
 
-            // Access document properties
-            Aspose.Slides.IDocumentProperties docProps = presentation.DocumentProperties;
-            Console.WriteLine("Title: " + docProps.Title);
-            Console.WriteLine("Author: " + docProps.Author);
-            Console.WriteLine("Created: " + docProps.CreatedTime);
-
-            // Iterate through slides and display their names
+            // Iterate through all slides and print their slide numbers
             for (int i = 0; i < slideCount; i++)
             {
                 Aspose.Slides.ISlide slide = presentation.Slides[i];
-                string slideName = slide.Name;
-                Console.WriteLine("Slide " + (i + 1) + " name: " + slideName);
+                Console.WriteLine("Slide Number: " + slide.SlideNumber);
             }
 
-            // Save a copy of the presentation
-            string outputPath = "output.pptx";
+            // Save the presentation before exiting
+            string outputPath = Path.Combine(outDir, "Overview.pptx");
             presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+
+            // Release resources
+            presentation.Dispose();
         }
     }
 }
