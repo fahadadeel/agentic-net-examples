@@ -1,30 +1,30 @@
 using System;
-using Aspose.Slides;
 using System.Drawing;
+using Aspose.Slides;
 
 class Program
 {
     static void Main()
     {
         // Create a new presentation
-        using (var pres = new Aspose.Slides.Presentation())
-        {
-            // Get the first slide
-            var slide = pres.Slides[0];
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Define column widths and row heights
-            var colWidths = new double[] { 100, 100, 100 };
-            var rowHeights = new double[] { 50, 50 };
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add a table to the slide
-            var table = slide.Shapes.AddTable(50, 50, colWidths, rowHeights);
+        // Define column widths and row heights for the table
+        double[] columnWidths = new double[] { 100, 100, 100 };
+        double[] rowHeights = new double[] { 50, 50, 50 };
 
-            // Change the background color of the first cell (row 0, column 0)
-            table.Rows[0][0].CellFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-            table.Rows[0][0].CellFormat.FillFormat.SolidFillColor.Color = Color.Yellow;
+        // Add a table shape to the slide
+        Aspose.Slides.ITable table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
 
-            // Save the presentation
-            pres.Save("TableCellBackground.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Get a specific cell (row 0, column 0) and set its background color
+        Aspose.Slides.ICell cell = table[0, 0];
+        cell.CellFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        cell.CellFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.Yellow;
+
+        // Save the presentation to disk
+        presentation.Save("ChangeCellBackgroundColor.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
