@@ -6,19 +6,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Load an existing presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Specify the slide index you want to retrieve
-        int slideIndex = 0; // first slide (zero‑based)
+        // Add a new empty slide using the layout of the first slide
+        Aspose.Slides.ISlide newSlide = presentation.Slides.AddEmptySlide(presentation.Slides[0].LayoutSlide);
 
-        // Get the slide reference using the indexer
-        Aspose.Slides.ISlide slide = presentation.Slides[slideIndex];
+        // Retrieve a slide reference by its index (e.g., the first slide)
+        Aspose.Slides.ISlide firstSlide = presentation.Slides[0];
 
-        // Example usage: output the slide ID
-        Console.WriteLine("Slide ID: " + slide.SlideId);
+        // Display a message confirming retrieval
+        Console.WriteLine("Slide at index 0 retrieved successfully.");
 
-        // Save the presentation before exiting
-        presentation.Save("output.pptx", SaveFormat.Pptx);
+        // Save the presentation in PPTX format
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
