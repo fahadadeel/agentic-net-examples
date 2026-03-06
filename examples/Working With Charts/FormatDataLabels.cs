@@ -3,26 +3,30 @@ using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
-class Program
+namespace FormatDataLabelsExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+            // Access the first slide
+            Aspose.Slides.ISlide slide = pres.Slides[0];
 
-        // Add a pie chart to the slide
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.Pie, 50f, 50f, 500f, 400f);
+            // Add a pie chart with sample data
+            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.Pie, 50f, 50f, 500f, 400f);
 
-        // Customize data label settings
-        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLeaderLines = true;
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowValue = true;
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowCategoryName = false;
-        chart.ChartData.Series[0].Labels[0].DataLabelFormat.Separator = ", ";
+            // Customize data label settings
+            chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLeaderLines = true;
+            chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowValue = true;
+            chart.ChartData.Series[0].Labels[0].DataLabelFormat.ShowCategoryName = true;
+            chart.ChartData.Series[0].Labels[0].DataLabelFormat.Separator = "/";
 
-        // Save the presentation
-        pres.Save("FormatDataLabels_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            pres.Save("FormattedDataLabels.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
