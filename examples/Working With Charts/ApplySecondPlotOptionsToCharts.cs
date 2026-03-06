@@ -1,33 +1,37 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
         // Create a new presentation
-        var pres = new Aspose.Slides.Presentation();
+        var presentation = new Aspose.Slides.Presentation();
 
         // Access the first slide
-        var slide = pres.Slides[0];
+        var slide = presentation.Slides[0];
 
         // Add a Pie of Pie chart
-        var pieChart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.PieOfPie, 50, 50, 400, 400);
-        // Configure second plot options via the series group
-        var pieSeriesGroup = pieChart.ChartData.Series[0].ParentSeriesGroup;
-        pieSeriesGroup.SecondPieSize = 150; // Size of second pie as 150% of first pie
-        pieSeriesGroup.PieSplitBy = Aspose.Slides.Charts.PieSplitType.ByValue; // Split by value
+        var pieOfPieChart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.PieOfPie, 50, 50, 400, 300);
+        // Get the first series of the chart
+        var pieSeries = pieOfPieChart.ChartData.Series[0];
+        // Set the size of the second pie (percentage of the first pie)
+        pieSeries.ParentSeriesGroup.SecondPieSize = 150; // 150%
+        // Set the split type to Custom
+        pieSeries.ParentSeriesGroup.PieSplitBy = Aspose.Slides.Charts.PieSplitType.Custom;
+        // Example split position (used with certain split types)
+        pieSeries.ParentSeriesGroup.PieSplitPosition = 30;
 
         // Add a Bar of Pie chart
-        var barChart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.BarOfPie, 50, 500, 400, 400);
-        // Configure second plot options via the series group
-        var barSeriesGroup = barChart.ChartData.Series[0].ParentSeriesGroup;
-        barSeriesGroup.SecondPieSize = 120; // Size of second bar as 120% of first pie
-        barSeriesGroup.PieSplitBy = Aspose.Slides.Charts.PieSplitType.ByPercentage; // Split by percentage
+        var barOfPieChart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.BarOfPie, 50, 400, 400, 300);
+        var barSeries = barOfPieChart.ChartData.Series[0];
+        // Set the size of the second bar (percentage of the first pie)
+        barSeries.ParentSeriesGroup.SecondPieSize = 120; // 120%
+        // Set the split type to ByValue
+        barSeries.ParentSeriesGroup.PieSplitBy = Aspose.Slides.Charts.PieSplitType.ByValue;
+        // Example split position for ByValue split type
+        barSeries.ParentSeriesGroup.PieSplitPosition = 20;
 
         // Save the presentation
-        pres.Save("SecondPlotOptions.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("SecondPlotOptions.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
