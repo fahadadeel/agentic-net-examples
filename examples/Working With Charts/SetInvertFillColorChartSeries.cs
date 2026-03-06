@@ -1,30 +1,35 @@
 using System;
 using System.Drawing;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add a clustered column chart with sample data
-        Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn, 0, 0, 500, 400);
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Get the first series (sample series is already added)
+        // Add a clustered column chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.ClusteredColumn,
+            50f,   // X position
+            50f,   // Y position
+            500f,  // Width
+            400f   // Height
+        );
+
+        // Get the first series of the chart
         Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series[0];
 
-        // Set the series fill type to solid (required before setting color)
+        // Set the series fill type to solid (required for inverted solid fill color)
         series.Format.Fill.FillType = Aspose.Slides.FillType.Solid;
 
         // Set the inverted solid fill color for the series
         series.InvertedSolidFillColor.Color = Color.Blue;
 
-        // Save the presentation
-        presentation.Save("InvertFillColorChartSeries.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation to a PPTX file
+        presentation.Save("SetInvertFillColorChartSeries.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
