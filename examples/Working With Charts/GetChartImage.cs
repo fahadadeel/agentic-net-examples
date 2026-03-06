@@ -1,33 +1,32 @@
 using System;
-using System.IO;
-using System.Drawing.Imaging;
 using Aspose.Slides;
+using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
-class Program
+namespace GetChartImageExample
 {
-    static void Main()
+    class Program
     {
-        // Load an existing presentation that contains a chart
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx");
-
-        // Assume the first shape on the first slide is a chart
-        Aspose.Slides.IShape shape = pres.Slides[0].Shapes[0];
-        Aspose.Slides.Charts.Chart chart = shape as Aspose.Slides.Charts.Chart;
-
-        if (chart != null)
+        static void Main(string[] args)
         {
-            // Get the chart image (thumbnail) at default scale
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+
+            // Add a clustered column chart to the first slide
+            Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.ClusteredColumn,
+                0f, 0f, 500f, 400f);
+
+            // Get the chart image
             Aspose.Slides.IImage chartImage = chart.GetImage();
 
-            // Save the chart image to a PNG file
-            chartImage.Save("chart.png", ImageFormat.Png);
+            // Save the chart image as PNG
+            string chartImagePath = "chart.png";
+            chartImage.Save(chartImagePath, Aspose.Slides.ImageFormat.Png);
+
+            // Save the presentation
+            string presentationOutputPath = "output.pptx";
+            presentation.Save(presentationOutputPath, Aspose.Slides.Export.SaveFormat.Pptx);
         }
-
-        // Save the presentation (required before exit)
-        pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Clean up resources
-        pres.Dispose();
     }
 }
