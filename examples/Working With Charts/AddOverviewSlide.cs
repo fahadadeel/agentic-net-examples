@@ -1,29 +1,35 @@
 using System;
 using Aspose.Slides;
-using Aspose.Slides.Export;
-using System.Drawing;
 
-class Program
+namespace OverviewPresentation
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Add a rectangle auto shape to the first slide
+            Aspose.Slides.IAutoShape overviewShape = presentation.Slides[0].Shapes.AddAutoShape(
+                Aspose.Slides.ShapeType.Rectangle,
+                50f,   // X position
+                50f,   // Y position
+                400f,  // Width
+                100f,  // Height
+                false  // isGrouped
+            );
 
-        // Add a title shape
-        Aspose.Slides.IShape titleShape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 50, 600, 50);
-        Aspose.Slides.IAutoShape titleAutoShape = (Aspose.Slides.IAutoShape)titleShape;
-        titleAutoShape.TextFrame.Text = "Presentation Overview";
+            // Add a text frame with the overview title
+            overviewShape.AddTextFrame("Overview");
 
-        // Add a subtitle shape
-        Aspose.Slides.IShape subtitleShape = slide.Shapes.AddAutoShape(Aspose.Slides.ShapeType.Rectangle, 50, 120, 600, 50);
-        Aspose.Slides.IAutoShape subtitleAutoShape = (Aspose.Slides.IAutoShape)subtitleShape;
-        subtitleAutoShape.TextFrame.Text = "Generated using Aspose.Slides";
+            // Add a hyperlink to the text
+            overviewShape.TextFrame.Paragraphs[0].Portions[0].PortionFormat.HyperlinkClick = new Aspose.Slides.Hyperlink("https://example.com");
+            overviewShape.TextFrame.Paragraphs[0].Portions[0].PortionFormat.HyperlinkClick.Tooltip = "Open example website";
 
-        // Save the presentation
-        presentation.Save("Overview.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            string outputPath = System.IO.Path.Combine(Environment.CurrentDirectory, "OverviewPresentation.pptx");
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
