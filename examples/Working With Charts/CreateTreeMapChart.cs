@@ -1,58 +1,60 @@
-using System;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
-using System.Drawing;
 
-namespace TreeMapChartExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Presentation presentation = new Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-            // Access the first slide
-            ISlide slide = presentation.Slides[0];
+        // Access the first slide
+        Aspose.Slides.ISlide slide = pres.Slides[0];
 
-            // Add a TreeMap chart
-            IChart chart = slide.Shapes.AddChart(ChartType.Treemap, 50f, 50f, 500f, 400f);
+        // Add a TreeMap chart
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(ChartType.Treemap, 0f, 0f, 500f, 500f);
 
-            // Set chart title
-            chart.HasTitle = true;
-            chart.ChartTitle.AddTextFrameForOverriding("Sample TreeMap Chart");
-            chart.ChartTitle.TextFrameForOverriding.TextFrameFormat.CenterText = NullableBool.True;
-            chart.ChartTitle.Height = 20f;
+        // Clear default categories and series
+        chart.ChartData.Categories.Clear();
+        chart.ChartData.Series.Clear();
 
-            // Clear default series and categories
-            chart.ChartData.Series.Clear();
-            chart.ChartData.Categories.Clear();
+        // Get the chart data workbook
+        Aspose.Slides.Charts.IChartDataWorkbook wb = chart.ChartData.ChartDataWorkbook;
+        wb.Clear(0);
 
-            // Get the chart data workbook
-            IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
-            int defaultWorksheetIndex = 0;
+        // Branch 1
+        Aspose.Slides.Charts.IChartCategory leaf = chart.ChartData.Categories.Add(wb.GetCell(0, "C1", "Leaf1"));
+        leaf.GroupingLevels.SetGroupingItem(0, "Stem1");
+        leaf.GroupingLevels.SetGroupingItem(1, "Branch1");
+        chart.ChartData.Categories.Add(wb.GetCell(0, "C2", "Leaf2"));
+        leaf = chart.ChartData.Categories.Add(wb.GetCell(0, "C3", "Leaf3"));
+        leaf.GroupingLevels.SetGroupingItem(0, "Stem2");
+        chart.ChartData.Categories.Add(wb.GetCell(0, "C4", "Leaf4"));
 
-            // Add a series
-            chart.ChartData.Series.Add(workbook.GetCell(defaultWorksheetIndex, 0, 1, "Series 1"), chart.Type);
+        // Branch 2
+        leaf = chart.ChartData.Categories.Add(wb.GetCell(0, "C5", "Leaf5"));
+        leaf.GroupingLevels.SetGroupingItem(0, "Stem3");
+        leaf.GroupingLevels.SetGroupingItem(1, "Branch2");
+        chart.ChartData.Categories.Add(wb.GetCell(0, "C6", "Leaf6"));
+        leaf = chart.ChartData.Categories.Add(wb.GetCell(0, "C7", "Leaf7"));
+        leaf.GroupingLevels.SetGroupingItem(0, "Stem4");
+        chart.ChartData.Categories.Add(wb.GetCell(0, "C8", "Leaf8"));
 
-            // Add categories (hierarchical levels)
-            chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 1, 0, "Category A"));
-            chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 2, 0, "Category B"));
-            chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 3, 0, "Category C"));
+        // Add a series for the TreeMap
+        Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series.Add(ChartType.Treemap);
+        series.Labels.DefaultDataLabelFormat.ShowCategoryName = true;
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D1", 10));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D2", 20));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D3", 30));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D4", 40));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D5", 50));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D6", 60));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D7", 70));
+        series.DataPoints.AddDataPointForTreemapSeries(wb.GetCell(0, "D8", 80));
+        series.ParentLabelLayout = ParentLabelLayoutType.Overlapping;
 
-            // Populate data points for the series
-            IChartSeries series = chart.ChartData.Series[0];
-            series.DataPoints.AddDataPointForTreemapSeries(workbook.GetCell(defaultWorksheetIndex, 1, 1, 30));
-            series.DataPoints.AddDataPointForTreemapSeries(workbook.GetCell(defaultWorksheetIndex, 2, 1, 50));
-            series.DataPoints.AddDataPointForTreemapSeries(workbook.GetCell(defaultWorksheetIndex, 3, 1, 20));
-
-            // Set fill colors for the series
-            series.Format.Fill.FillType = FillType.Solid;
-            series.Format.Fill.SolidFillColor.Color = Color.Orange;
-
-            // Save the presentation
-            presentation.Save("TreeMapChart_out.pptx", SaveFormat.Pptx);
-        }
+        // Save the presentation
+        pres.Save("TreeMapChart_out.pptx", SaveFormat.Pptx);
     }
 }
