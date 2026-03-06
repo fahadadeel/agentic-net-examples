@@ -7,24 +7,21 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Add a math shape to the first slide
+        // Add a math shape (optional, just to ensure math support)
         Aspose.Slides.IAutoShape mathShape = presentation.Slides[0].Shapes.AddMathShape(0, 0, 720, 150);
 
-        // Retrieve the math paragraph from the shape
-        Aspose.Slides.MathText.IMathParagraph mathParagraph = (mathShape.TextFrame.Paragraphs[0].Portions[0] as Aspose.Slides.MathText.MathPortion).MathParagraph;
-
-        // Identify and display supported integral types
-        Console.WriteLine("Supported Integral Types:");
-        foreach (Aspose.Slides.MathText.MathIntegralTypes integralType in Enum.GetValues(typeof(Aspose.Slides.MathText.MathIntegralTypes)))
+        // List supported integral types
+        Console.WriteLine("Supported Math Integral Types:");
+        foreach (Aspose.Slides.MathText.MathIntegralTypes integral in Enum.GetValues(typeof(Aspose.Slides.MathText.MathIntegralTypes)))
         {
-            Console.WriteLine("- " + integralType);
+            Console.WriteLine("- " + integral.ToString());
         }
 
-        // Identify and display supported fraction types
-        Console.WriteLine("Supported Fraction Types:");
-        foreach (Aspose.Slides.MathText.MathFractionTypes fractionType in Enum.GetValues(typeof(Aspose.Slides.MathText.MathFractionTypes)))
+        // List supported fraction types
+        Console.WriteLine("Supported Math Fraction Types:");
+        foreach (Aspose.Slides.MathText.MathFractionTypes fraction in Enum.GetValues(typeof(Aspose.Slides.MathText.MathFractionTypes)))
         {
-            Console.WriteLine("- " + fractionType);
+            Console.WriteLine("- " + fraction.ToString());
         }
 
         // Save the presentation before exiting
