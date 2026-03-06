@@ -1,54 +1,45 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Presentation presentation = new Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        // Get the first slide
+        ISlide slide = presentation.Slides[0];
 
-        // Add a doughnut chart
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.Doughnut,
-            0f, 0f, 500f, 400f);
+        // Add a doughnut chart to the slide
+        IChart chart = slide.Shapes.AddChart(ChartType.Doughnut, 50, 50, 500, 400);
 
-        // Get the chart data workbook
-        Aspose.Slides.Charts.IChartDataWorkbook workBook = chart.ChartData.ChartDataWorkbook;
-
-        // Clear default series and categories
+        // Remove default series and categories
         chart.ChartData.Series.Clear();
         chart.ChartData.Categories.Clear();
 
+        // Get the chart data workbook
+        IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
+        int defaultWorksheetIndex = 0;
+
         // Add a series
-        Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series.Add(
-            workBook.GetCell(0, 0, 1, "Series 1"),
-            chart.Type);
+        IChartSeries series = chart.ChartData.Series.Add(workbook.GetCell(defaultWorksheetIndex, 0, 1, "Series 1"), chart.Type);
 
-        // Add a category
-        chart.ChartData.Categories.Add(
-            workBook.GetCell(0, 1, 0, "Category 1"));
+        // Add categories
+        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 1, 0, "Category 1"));
+        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 2, 0, "Category 2"));
 
-        // Add a data point for the doughnut series
-        Aspose.Slides.Charts.IChartDataPoint dataPoint = series.DataPoints.AddDataPointForDoughnutSeries(
-            workBook.GetCell(0, 1, 1, 30));
+        // Add data points for the doughnut series
+        series.DataPoints.AddDataPointForDoughnutSeries(30);
+        series.DataPoints.AddDataPointForDoughnutSeries(70);
 
-        // Set fill and line formatting for the data point
-        dataPoint.Format.Fill.FillType = Aspose.Slides.FillType.Solid;
-        dataPoint.Format.Line.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        dataPoint.Format.Line.Style = Aspose.Slides.LineStyle.Single;
-        dataPoint.Format.Line.DashStyle = Aspose.Slides.LineDashStyle.Solid;
-
-        // Configure the data label as a callout
-        Aspose.Slides.Charts.IDataLabel lbl = dataPoint.Label;
-        lbl.TextFormat.TextBlockFormat.AutofitType = Aspose.Slides.TextAutofitType.Shape;
-        lbl.DataLabelFormat.TextFormat.PortionFormat.FontBold = Aspose.Slides.NullableBool.True;
-        lbl.DataLabelFormat.TextFormat.PortionFormat.LatinFont = new Aspose.Slides.FontData("Arial");
-        lbl.DataLabelFormat.TextFormat.PortionFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        // Enable callout (leader line) for the first data point
+        IDataLabel dataLabel = series.DataPoints[0].Label;
+        dataLabel.DataLabelFormat.ShowLeaderLines = true;
 
         // Save the presentation
-        pres.Save("DoughnutCallout.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("DoughnutCallout_out.pptx", SaveFormat.Pptx);
     }
 }
