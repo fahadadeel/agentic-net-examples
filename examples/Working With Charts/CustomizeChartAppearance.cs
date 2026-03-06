@@ -6,35 +6,42 @@ using System.Drawing;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
+        // Output file path
+        string outputPath = "ChartWithDataLabels.pptx";
+
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Add a bubble chart with sample data
+        Aspose.Slides.Charts.IChart chart = (Aspose.Slides.Charts.IChart)presentation.Slides[0].Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.Bubble, 50f, 50f, 600f, 400f, true);
 
-        // Add a clustered column chart to the slide
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            50,   // X position
-            50,   // Y position
-            500,  // Width
-            400   // Height
-        );
+        // Get the first series of the chart
+        Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series[0];
 
-        // Customize the chart border
-        chart.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        chart.LineFormat.Style = Aspose.Slides.LineStyle.Single;
+        // Enable data labels to show values from workbook cells
+        series.Labels.DefaultDataLabelFormat.ShowLabelValueFromCell = true;
 
-        // Enable rounded corners for the chart area
-        chart.HasRoundedCorners = true;
+        // Access the chart's data workbook
+        Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
 
-        // Set a solid fill color for the chart area
-        chart.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        chart.FillFormat.SolidFillColor.Color = Color.LightBlue;
+        // Populate cells with label text
+        workbook.GetCell(0, "A10", "First");
+        workbook.GetCell(0, "A11", "Second");
+        workbook.GetCell(0, "A12", "Third");
 
-        // Save the presentation to a PPTX file
-        presentation.Save("CustomizedChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Assign workbook cells to the data labels
+        series.Labels[0].ValueFromCell = workbook.GetCell(0, "A10", "First");
+        series.Labels[1].ValueFromCell = workbook.GetCell(0, "A11", "Second");
+        series.Labels[2].ValueFromCell = workbook.GetCell(0, "A12", "Third");
+
+        // Customize the series fill color
+        series.Format.Fill.FillType = Aspose.Slides.FillType.Solid;
+        series.Format.Fill.SolidFillColor.Color = Color.Blue;
+
+        // Save the presentation
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
