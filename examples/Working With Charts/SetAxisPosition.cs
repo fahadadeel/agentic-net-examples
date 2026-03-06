@@ -1,29 +1,32 @@
 using System;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
-class Program
+namespace SetAxisPositionExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Presentation presentation = new Presentation();
 
-        // Get the first slide (default slide)
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Add a chart to the first slide
+            IChart chart = presentation.Slides[0].Shapes.AddChart(ChartType.ClusteredColumn, 50, 50, 500, 400);
 
-        // Add a clustered column chart to the slide
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 500, 400).Chart;
+            // Get the horizontal (category) axis
+            IAxis horizontalAxis = chart.Axes.HorizontalAxis;
+            // Set the position of the horizontal axis to the bottom
+            horizontalAxis.Position = AxisPositionType.Bottom;
 
-        // Set the position of the category (horizontal) axis to Bottom
-        Aspose.Slides.Charts.IAxis categoryAxis = chart.Axes.HorizontalAxis;
-        categoryAxis.Position = Aspose.Slides.Charts.AxisPositionType.Bottom;
+            // Get the vertical (value) axis
+            IAxis verticalAxis = chart.Axes.VerticalAxis;
+            // Set the position of the vertical axis to the left
+            verticalAxis.Position = AxisPositionType.Left;
 
-        // Set the position of the value (vertical) axis to Left
-        Aspose.Slides.Charts.IAxis valueAxis = chart.Axes.VerticalAxis;
-        valueAxis.Position = Aspose.Slides.Charts.AxisPositionType.Left;
-
-        // Save the presentation
-        presentation.Save("AxisPositionExample.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("SetAxisPosition.pptx", SaveFormat.Pptx);
+        }
     }
 }
