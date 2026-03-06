@@ -1,32 +1,35 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Create a new presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
         // Access the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a clustered column chart with sample data
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn, 50f, 50f, 500f, 400f);
+        // Add a clustered column chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(ChartType.ClusteredColumn, 50, 50, 500, 400);
 
-        // Customize legend position and size (fractions of the chart dimensions)
-        chart.Legend.X = 0.8f;
-        chart.Legend.Y = 0.1f;
-        chart.Legend.Width = 0.2f;
-        chart.Legend.Height = 0.2f;
-
-        // Set legend font size
-        chart.Legend.TextFormat.PortionFormat.FontHeight = 14f;
-
-        // Ensure the legend is visible
+        // Ensure the chart has a legend
         chart.HasLegend = true;
 
+        // Set legend position to top right
+        chart.Legend.Position = LegendPositionType.TopRight;
+
+        // Do not allow other chart elements to overlap the legend
+        chart.Legend.Overlay = false;
+
+        // Hide the first legend entry (optional customization)
+        Aspose.Slides.Charts.ILegendEntryProperties firstEntry = chart.Legend.Entries[0];
+        firstEntry.Hide = true;
+
         // Save the presentation
-        pres.Save("CustomizedLegend.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("CustomizeChartLegend_out.pptx", SaveFormat.Pptx);
     }
 }
