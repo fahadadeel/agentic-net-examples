@@ -1,32 +1,29 @@
 using System;
 
-class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         // Create a new presentation
         Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
-
-        // Add a mathematical shape to host the equation
-        Aspose.Slides.IAutoShape mathShape = slide.Shapes.AddMathShape(0, 0, 500, 50);
+        // Add a mathematical shape to the first slide
+        Aspose.Slides.IAutoShape mathShape = pres.Slides[0].Shapes.AddMathShape(0, 0, 500, 50);
 
         // Retrieve the math paragraph from the shape
         Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
 
-        // Create a fraction x / y
-        Aspose.Slides.MathText.IMathFraction fraction = new Aspose.Slides.MathText.MathFraction(
-            new Aspose.Slides.MathText.MathematicalText("x"),
-            new Aspose.Slides.MathText.MathematicalText("y")
-        );
+        // Build a math block representing the equation x + y = z
+        Aspose.Slides.MathText.IMathBlock mathBlock = new Aspose.Slides.MathText.MathematicalText("x")
+            .Join("+")
+            .Join(new Aspose.Slides.MathText.MathematicalText("y"))
+            .Join("=")
+            .Join(new Aspose.Slides.MathText.MathematicalText("z"));
 
-        // Add the fraction as a math block to the paragraph
-        mathParagraph.Add(new Aspose.Slides.MathText.MathBlock(fraction));
+        // Add the math block to the paragraph
+        mathParagraph.Add(mathBlock);
 
         // Save the presentation as XPS
-        Aspose.Slides.Export.XpsOptions xpsOptions = new Aspose.Slides.Export.XpsOptions();
-        pres.Save("ExportMathToXps.xps", Aspose.Slides.Export.SaveFormat.Xps, xpsOptions);
+        pres.Save("MathEquation.xps", Aspose.Slides.Export.SaveFormat.Xps);
     }
 }
