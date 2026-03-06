@@ -1,13 +1,12 @@
 using System;
 using Aspose.Slides;
 using Aspose.Slides.MathText;
-using Aspose.Slides.Export;
 
 namespace CreateMathEquations
 {
-    public class Program
+    class Program
     {
-        public static void Main()
+        static void Main(string[] args)
         {
             // Create a new presentation
             Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
@@ -18,16 +17,17 @@ namespace CreateMathEquations
             // Retrieve the math paragraph from the shape
             Aspose.Slides.MathText.IMathParagraph mathParagraph = ((Aspose.Slides.MathText.MathPortion)mathShape.TextFrame.Paragraphs[0].Portions[0]).MathParagraph;
 
-            // Build the equation a + b = c
-            mathParagraph.Add(
-                new Aspose.Slides.MathText.MathematicalText("a")
-                    .Join("+")
-                    .Join(new Aspose.Slides.MathText.MathematicalText("b"))
-                    .Join("=")
-                    .Join(new Aspose.Slides.MathText.MathematicalText("c"))
-            );
+            // Build a math block representing the equation a + b = c
+            Aspose.Slides.MathText.IMathBlock equationBlock = new Aspose.Slides.MathText.MathBlock(new Aspose.Slides.MathText.MathematicalText("a"))
+                .Join("+")
+                .Join(new Aspose.Slides.MathText.MathematicalText("b"))
+                .Join("=")
+                .Join(new Aspose.Slides.MathText.MathematicalText("c"));
 
-            // Export the equation to LaTeX format
+            // Add the equation block to the math paragraph
+            mathParagraph.Add(equationBlock);
+
+            // Export the equation to LaTeX format (optional usage)
             string latexString = mathParagraph.ToLatex();
             Console.WriteLine("LaTeX representation: " + latexString);
 
