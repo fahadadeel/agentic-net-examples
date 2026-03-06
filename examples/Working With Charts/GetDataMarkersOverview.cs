@@ -1,61 +1,57 @@
 using System;
 
-public class Program
+class Program
 {
-    public static void Main()
+    static void Main()
     {
-        // Define file paths
-        string outputPath = "DataMarkersOverview.pptx";
-        string imagePath1 = "image1.png";
-        string imagePath2 = "image2.png";
-
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Add a line chart with markers
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.LineWithMarkers, 0, 0, 400, 400);
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.LineWithMarkers, 0f, 0f, 400f, 400f);
 
-        // Index of the default worksheet
         int defaultWorksheetIndex = 0;
-
-        // Get the chart data workbook
         Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
 
-        // Clear any default series
+        // Remove the default generated series
         chart.ChartData.Series.Clear();
 
-        // Add a series
-        chart.ChartData.Series.Add(workbook.GetCell(defaultWorksheetIndex, 1, 1, "Series 1"), chart.Type);
+        // Add a new series
+        chart.ChartData.Series.Add(
+            workbook.GetCell(defaultWorksheetIndex, 1, 1, "Series 1"),
+            chart.Type);
 
-        // Load images and add them to the presentation
-        Aspose.Slides.IImage img1 = Aspose.Slides.Images.FromFile(imagePath1);
+        // Load images to be used as markers
+        Aspose.Slides.IImage img1 = Aspose.Slides.Images.FromFile("image1.png");
         Aspose.Slides.IPPImage imgx1 = presentation.Images.AddImage(img1);
-        Aspose.Slides.IImage img2 = Aspose.Slides.Images.FromFile(imagePath2);
+        Aspose.Slides.IImage img2 = Aspose.Slides.Images.FromFile("image2.png");
         Aspose.Slides.IPPImage imgx2 = presentation.Images.AddImage(img2);
 
-        // Get the series
+        // Get the series we just added
         Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series[0];
 
-        // First data point with picture marker imgx1
-        Aspose.Slides.Charts.IChartDataPoint point1 = series.DataPoints.AddDataPointForLineSeries(workbook.GetCell(defaultWorksheetIndex, 1, 1, 10));
+        // Add data points with picture markers
+        Aspose.Slides.Charts.IChartDataPoint point1 = series.DataPoints.AddDataPointForLineSeries(
+            workbook.GetCell(defaultWorksheetIndex, 1, 1, 10));
         point1.Marker.Format.Fill.FillType = Aspose.Slides.FillType.Picture;
         point1.Marker.Format.Fill.PictureFillFormat.Picture.Image = imgx1;
 
-        // Second data point with picture marker imgx2
-        Aspose.Slides.Charts.IChartDataPoint point2 = series.DataPoints.AddDataPointForLineSeries(workbook.GetCell(defaultWorksheetIndex, 2, 1, 20));
+        Aspose.Slides.Charts.IChartDataPoint point2 = series.DataPoints.AddDataPointForLineSeries(
+            workbook.GetCell(defaultWorksheetIndex, 2, 1, 20));
         point2.Marker.Format.Fill.FillType = Aspose.Slides.FillType.Picture;
         point2.Marker.Format.Fill.PictureFillFormat.Picture.Image = imgx2;
 
-        // Third data point with picture marker imgx1
-        Aspose.Slides.Charts.IChartDataPoint point3 = series.DataPoints.AddDataPointForLineSeries(workbook.GetCell(defaultWorksheetIndex, 3, 1, 30));
+        Aspose.Slides.Charts.IChartDataPoint point3 = series.DataPoints.AddDataPointForLineSeries(
+            workbook.GetCell(defaultWorksheetIndex, 3, 1, 30));
         point3.Marker.Format.Fill.FillType = Aspose.Slides.FillType.Picture;
         point3.Marker.Format.Fill.PictureFillFormat.Picture.Image = imgx1;
 
-        // Fourth data point with picture marker imgx2
-        Aspose.Slides.Charts.IChartDataPoint point4 = series.DataPoints.AddDataPointForLineSeries(workbook.GetCell(defaultWorksheetIndex, 4, 1, 40));
+        Aspose.Slides.Charts.IChartDataPoint point4 = series.DataPoints.AddDataPointForLineSeries(
+            workbook.GetCell(defaultWorksheetIndex, 4, 1, 40));
         point4.Marker.Format.Fill.FillType = Aspose.Slides.FillType.Picture;
         point4.Marker.Format.Fill.PictureFillFormat.Picture.Image = imgx2;
 
@@ -63,6 +59,6 @@ public class Program
         series.Marker.Size = 10;
 
         // Save the presentation
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("DataMarkersOverview.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
