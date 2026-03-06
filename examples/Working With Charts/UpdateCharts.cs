@@ -1,3 +1,4 @@
+using System;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
@@ -6,20 +7,20 @@ class Program
 {
     static void Main()
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Load an existing presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Add a pie chart with sample data
-        Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.Pie, 50f, 50f, 400f, 600f, true);
+        // Retrieve the first chart on the first slide
+        Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes[0] as Aspose.Slides.Charts.IChart;
 
-        // Get the chart data object
-        Aspose.Slides.Charts.IChartData chartData = chart.ChartData;
+        // Set an external workbook as the data source and update chart data
+        ((Aspose.Slides.Charts.ChartData)chart.ChartData).SetExternalWorkbook("data.xlsx", true);
 
-        // Set an external workbook as the data source (do not update chart data immediately)
-        ((Aspose.Slides.Charts.ChartData)chartData).SetExternalWorkbook("data.xlsx", false);
+        // Recalculate any formulas in the embedded workbook
+        Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
+        workbook.CalculateFormulas();
 
-        // Save the presentation
-        presentation.Save("UpdatedChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the updated presentation
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
