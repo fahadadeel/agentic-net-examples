@@ -7,19 +7,19 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
+        // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a clustered column chart to the slide
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            50f, 50f, 500f, 400f);
+        // Add a chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 400, 300);
 
-        // Set the legend position to TopRight
-        Aspose.Slides.Charts.ILegend legend = chart.Legend;
-        legend.Position = Aspose.Slides.Charts.LegendPositionType.TopRight;
+        // Ensure the chart has a legend
+        chart.HasLegend = true;
+
+        // Set legend position to TopRight
+        chart.Legend.Position = Aspose.Slides.Charts.LegendPositionType.TopRight;
 
         // Save the presentation
-        presentation.Save("SetLegendPosition_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("LegendPosition_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
