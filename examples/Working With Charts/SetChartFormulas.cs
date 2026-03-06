@@ -1,4 +1,5 @@
 using System;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -14,20 +15,20 @@ class Program
         Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
             Aspose.Slides.Charts.ChartType.ClusteredColumn, 0f, 0f, 500f, 400f);
 
-        // Get the workbook associated with the chart
+        // Get the workbook that holds chart data
         Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
 
-        // Set numeric values in cells B2 and B3
+        // Set values in cells B2 and B3
         workbook.GetCell(0, "B2", 2);
         workbook.GetCell(0, "B3", 3);
 
-        // Set a formula in cell B4 that sums B2 and B3
+        // Set a formula in cell B4 that adds B2 and B3
         workbook.GetCell(0, "B4").Formula = "B2+B3";
 
         // Calculate all formulas in the workbook
         workbook.CalculateFormulas();
 
-        // Save the presentation to a PPTX file
+        // Save the presentation
         presentation.Save("ChartFormulas.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
