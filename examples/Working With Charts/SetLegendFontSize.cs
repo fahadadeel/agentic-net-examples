@@ -1,33 +1,32 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
-namespace SetLegendFontSize
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Access the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add a clustered column chart to the slide
-            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-                Aspose.Slides.Charts.ChartType.ClusteredColumn,
-                0f, 0f, 500f, 400f);
+        // Add a clustered column chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.ClusteredColumn,
+            50f,   // X position
+            50f,   // Y position
+            500f,  // Width
+            400f   // Height
+        );
 
-            // Set the font size of the legend text
-            chart.Legend.TextFormat.PortionFormat.FontHeight = 14f;
+        // Set the font height of the legend text (e.g., 14 points)
+        chart.Legend.TextFormat.PortionFormat.FontHeight = 14f;
 
-            // Save the presentation
-            presentation.Save("SetLegendFontSize_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation to a PPTX file
+        presentation.Save("SetLegendFontSize_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-            // Clean up resources
-            presentation.Dispose();
-        }
+        // Release resources
+        presentation.Dispose();
     }
 }
