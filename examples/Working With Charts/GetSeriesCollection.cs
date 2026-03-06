@@ -1,5 +1,8 @@
 using System;
 using System.Drawing;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
 class Program
 {
@@ -8,40 +11,30 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a chart without sample data
+        // Add a clustered column chart to the slide
         Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            0, 0, 500, 400, false);
+            Aspose.Slides.Charts.ChartType.ClusteredColumn, 0, 0, 500, 400);
 
-        // Access the chart data workbook
-        Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
+        // Get the series collection from the chart
+        Aspose.Slides.Charts.IChartSeriesCollection seriesCollection = chart.ChartData.Series;
 
-        // Clear default series and categories
-        chart.ChartData.Series.Clear();
-        chart.ChartData.Categories.Clear();
+        // Iterate through each series in the collection
+        for (int i = 0; i < seriesCollection.Count; i++)
+        {
+            Aspose.Slides.Charts.IChartSeries series = seriesCollection[i];
 
-        // Add categories
-        int defaultWorksheetIndex = 0;
-        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 1, 0, "Category 1"));
-        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 2, 0, "Category 2"));
-        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 3, 0, "Category 3"));
+            // Set a solid fill color for the series
+            series.Format.Fill.FillType = Aspose.Slides.FillType.Solid;
+            series.Format.Fill.SolidFillColor.Color = Color.Blue;
+        }
 
-        // Add first series using name overload
-        Aspose.Slides.Charts.IChartSeries series1 = chart.ChartData.Series.Add("Series 1", chart.Type);
-        series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(defaultWorksheetIndex, 1, 1, 20));
-        series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(defaultWorksheetIndex, 2, 1, 50));
-        series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(defaultWorksheetIndex, 3, 1, 30));
+        // Save the presentation to a file
+        presentation.Save("SeriesCollection.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Add second series using type overload
-        Aspose.Slides.Charts.IChartSeries series2 = chart.ChartData.Series.Add(chart.Type);
-        series2.DataPoints.AddDataPointForBarSeries(workbook.GetCell(defaultWorksheetIndex, 1, 2, 40));
-        series2.DataPoints.AddDataPointForBarSeries(workbook.GetCell(defaultWorksheetIndex, 2, 2, 60));
-        series2.DataPoints.AddDataPointForBarSeries(workbook.GetCell(defaultWorksheetIndex, 3, 2, 10));
-
-        // Save the presentation
-        presentation.Save("SeriesCollectionDemo.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Dispose the presentation object
+        presentation.Dispose();
     }
 }
