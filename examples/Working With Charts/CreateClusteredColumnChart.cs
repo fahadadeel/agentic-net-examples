@@ -7,11 +7,13 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Add a clustered column chart
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 500, 400);
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.ClusteredColumn,
+            0f, 0f, 500f, 400f);
 
         // Clear default series and categories
         chart.ChartData.Series.Clear();
@@ -21,21 +23,28 @@ class Program
         Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
 
         // Add categories
-        chart.ChartData.Categories.Add(workbook.GetCell(0, 0, 0, "Category 1"));
-        chart.ChartData.Categories.Add(workbook.GetCell(0, 1, 0, "Category 2"));
-        chart.ChartData.Categories.Add(workbook.GetCell(0, 2, 0, "Category 3"));
+        Aspose.Slides.Charts.IChartCategory category1 = chart.ChartData.Categories.Add(
+            workbook.GetCell(0, 0, 0, "Category 1"));
+        Aspose.Slides.Charts.IChartCategory category2 = chart.ChartData.Categories.Add(
+            workbook.GetCell(0, 1, 0, "Category 2"));
 
-        // Add first series
-        Aspose.Slides.Charts.IChartSeries series1 = chart.ChartData.Series.Add(workbook.GetCell(0, 0, 1, "Series 1"), chart.Type);
-        series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 0, 1, 10));
-        series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 1, 1, 20));
-        series1.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 2, 1, 30));
+        // Add series
+        Aspose.Slides.Charts.IChartSeries series1 = chart.ChartData.Series.Add(
+            workbook.GetCell(0, 0, 1, "Series 1"), chart.Type);
+        Aspose.Slides.Charts.IChartSeries series2 = chart.ChartData.Series.Add(
+            workbook.GetCell(0, 0, 2, "Series 2"), chart.Type);
 
-        // Add second series
-        Aspose.Slides.Charts.IChartSeries series2 = chart.ChartData.Series.Add(workbook.GetCell(0, 0, 2, "Series 2"), chart.Type);
-        series2.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 0, 2, 15));
-        series2.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 1, 2, 25));
-        series2.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 2, 2, 35));
+        // Populate data points for series 1
+        series1.DataPoints.AddDataPointForBarSeries(
+            workbook.GetCell(0, 1, 1, 10));
+        series1.DataPoints.AddDataPointForBarSeries(
+            workbook.GetCell(0, 2, 1, 20));
+
+        // Populate data points for series 2
+        series2.DataPoints.AddDataPointForBarSeries(
+            workbook.GetCell(0, 1, 2, 30));
+        series2.DataPoints.AddDataPointForBarSeries(
+            workbook.GetCell(0, 2, 2, 40));
 
         // Save the presentation
         presentation.Save("ClusteredColumnChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
