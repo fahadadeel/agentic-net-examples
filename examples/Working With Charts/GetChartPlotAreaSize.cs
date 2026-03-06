@@ -1,38 +1,33 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
-        // Load the presentation
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation("input.pptx");
+        // Load an existing presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = pres.Slides[0];
+        // Get the first chart on the first slide (adjust indices as needed)
+        Aspose.Slides.Charts.Chart chart = (Aspose.Slides.Charts.Chart)presentation.Slides[0].Shapes[0];
 
-        // Assume the first shape is a chart
-        Aspose.Slides.IShape shape = slide.Shapes[0];
-        Aspose.Slides.Charts.Chart chart = shape as Aspose.Slides.Charts.Chart;
+        // Validate layout to ensure actual dimensions are calculated
+        chart.ValidateChartLayout();
 
-        if (chart != null)
-        {
-            // Validate layout to obtain actual dimensions
-            chart.ValidateChartLayout();
+        // Access the plot area of the chart
+        Aspose.Slides.Charts.IChartPlotArea plotArea = chart.PlotArea;
 
-            // Get the plot area
-            Aspose.Slides.Charts.IChartPlotArea plotArea = chart.PlotArea;
+        // Retrieve actual width and height of the plot area
+        float actualWidth = plotArea.ActualWidth;
+        float actualHeight = plotArea.ActualHeight;
 
-            // Retrieve actual width and height
-            float actualWidth = plotArea.ActualWidth;
-            float actualHeight = plotArea.ActualHeight;
+        // Output the dimensions
+        Console.WriteLine("Plot Area Actual Width: " + actualWidth);
+        Console.WriteLine("Plot Area Actual Height: " + actualHeight);
 
-            // Output the dimensions
-            Console.WriteLine("Plot Area Actual Width: " + actualWidth);
-            Console.WriteLine("Plot Area Actual Height: " + actualHeight);
-        }
-
-        // Save the presentation before exiting
-        pres.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        pres.Dispose();
+        // Save the presentation (required before exit)
+        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
