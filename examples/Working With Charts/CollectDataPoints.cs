@@ -1,44 +1,59 @@
+using System;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
-using System;
 
-class Program
+namespace AsposeSlidesDemo
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
-
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-
-        // Add a Sunburst chart
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.Sunburst, 0, 0, 500, 400);
-
-        // Access the data points collection of the first series
-        Aspose.Slides.Charts.IChartDataPointCollection dataPoints = chart.ChartData.Series[0].DataPoints;
-
-        // Set some label properties (example from add-color-to-data-points rule)
-        dataPoints[3].DataPointLevels[0].Label.DataLabelFormat.ShowValue = true;
-
-        Aspose.Slides.Charts.IDataLabel branch1Label = dataPoints[0].DataPointLevels[2].Label;
-        branch1Label.DataLabelFormat.ShowCategoryName = true;
-        branch1Label.DataLabelFormat.ShowSeriesName = true;
-        branch1Label.DataLabelFormat.TextFormat.PortionFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        branch1Label.DataLabelFormat.TextFormat.PortionFormat.FillFormat.SolidFillColor.Color = System.Drawing.Color.Yellow;
-
-        Aspose.Slides.Charts.IFormat steam4Format = dataPoints[9].Format;
-        steam4Format.Fill.FillType = Aspose.Slides.FillType.Solid;
-        steam4Format.Fill.SolidFillColor.Color = System.Drawing.Color.FromArgb(255, 0, 0, 255); // Example ARGB color
-
-        // Iterate over data points and output their indexes
-        foreach (Aspose.Slides.Charts.IChartDataPoint dataPoint in chart.ChartData.Series[0].DataPoints)
+        static void Main(string[] args)
         {
-            System.Console.WriteLine("Data point index: " + dataPoint.Index);
-        }
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Save the presentation
-        presentation.Save("DataPointsDemo.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Get the first slide
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
+
+            // Add a clustered column chart
+            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.ClusteredColumn,
+                0, 0, 500, 400);
+
+            // Clear default series and categories
+            chart.ChartData.Series.Clear();
+            chart.ChartData.Categories.Clear();
+
+            // Get the chart data workbook
+            Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
+
+            // Add categories
+            workbook.Clear(0);
+            chart.ChartData.Categories.Add(workbook.GetCell(0, "A1", "Category 1"));
+            chart.ChartData.Categories.Add(workbook.GetCell(0, "A2", "Category 2"));
+            chart.ChartData.Categories.Add(workbook.GetCell(0, "A3", "Category 3"));
+
+            // Add a series
+            Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series.Add(
+                workbook.GetCell(0, 0, 1, "Series 1"),
+                chart.Type);
+
+            // Add data points to the series
+            series.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 1, 1, 10));
+            series.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 2, 1, 20));
+            series.DataPoints.AddDataPointForBarSeries(workbook.GetCell(0, 3, 1, 30));
+
+            // Collect data points from the series
+            Aspose.Slides.Charts.IChartDataPointCollection dataPoints = series.DataPoints;
+            for (int i = 0; i < dataPoints.Count; i++)
+            {
+                Aspose.Slides.Charts.IChartDataPoint point = dataPoints[i];
+                // Example: output the index of each data point
+                Console.WriteLine("Data point index: " + i);
+            }
+
+            // Save the presentation
+            presentation.Save("DataPointsCollection_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
