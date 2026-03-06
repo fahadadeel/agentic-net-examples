@@ -1,31 +1,45 @@
 using System;
 using System.IO;
 
-class Program
+namespace Example
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Path to the input PPTX file
-        string inputFileName = "sample.pptx";
-        string inputPath = Path.Combine(Directory.GetCurrentDirectory(), inputFileName);
-
-        // Extract raw text from the presentation using the Unarranged mode
-        Aspose.Slides.IPresentationText presentationText = Aspose.Slides.PresentationFactory.Instance.GetPresentationText(
-            inputPath,
-            Aspose.Slides.TextExtractionArrangingMode.Unarranged);
-
-        // Iterate through each slide and output its text
-        for (int i = 0; i < presentationText.SlidesText.Length; i++)
+        static void Main(string[] args)
         {
-            Aspose.Slides.ISlideText slideText = presentationText.SlidesText[i];
-            Console.WriteLine("Slide {0} text:", i + 1);
-            Console.WriteLine(slideText.Text);
-        }
+            // Input and output file names
+            string inputFileName = "sample.pptx";
+            string outputFileName = "sample_out.pptx";
 
-        // Load the presentation to satisfy the rule of saving before exit
-        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
-        string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.pptx");
-        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
-        pres.Dispose();
+            // Build full paths
+            string inputPath = Path.Combine(Directory.GetCurrentDirectory(), inputFileName);
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), outputFileName);
+
+            // Fast text extraction using PresentationFactory (unarranged mode)
+            Aspose.Slides.IPresentationText presentationText = Aspose.Slides.PresentationFactory.Instance.GetPresentationText(
+                inputPath,
+                Aspose.Slides.TextExtractionArrangingMode.Unarranged);
+
+            // Iterate through each slide and display categorized text
+            for (int i = 0; i < presentationText.SlidesText.Length; i++)
+            {
+                Aspose.Slides.ISlideText slideText = presentationText.SlidesText[i];
+                Console.WriteLine("Slide " + (i + 1) + " - Text:");
+                Console.WriteLine(slideText.Text);
+                Console.WriteLine("Master Text:");
+                Console.WriteLine(slideText.MasterText);
+                Console.WriteLine("Notes Text:");
+                Console.WriteLine(slideText.NotesText);
+                Console.WriteLine("Comments Text:");
+                Console.WriteLine(slideText.CommentsText);
+                Console.WriteLine("Layout Text:");
+                Console.WriteLine(slideText.LayoutText);
+                Console.WriteLine("---------------------------");
+            }
+
+            // Load the presentation (no modifications) and save it before exiting
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
+            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
