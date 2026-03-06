@@ -3,44 +3,41 @@ using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
-namespace SpecifyDataSourceTypeExample
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
+
+        // Load the presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
+
+        // Access the first slide
+        Aspose.Slides.ISlide slide = pres.Slides[0];
+
+        // Retrieve the first chart on the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes[0] as Aspose.Slides.Charts.IChart;
+
+        if (chart != null)
         {
-            // Input and output file paths
-            string inputPath = "input.pptx";
-            string outputPath = "output.pptx";
+            // Set an external workbook as the chart's data source
+            ((Aspose.Slides.Charts.ChartData)chart.ChartData).SetExternalWorkbook("data.xlsx");
 
-            // Create a new presentation (or load an existing one)
-            Presentation pres = new Presentation();
+            // Get the data source type of the chart
+            Aspose.Slides.Charts.ChartDataSourceType sourceType = chart.ChartData.DataSourceType;
 
-            // Access the first slide
-            ISlide slide = pres.Slides[0];
-
-            // Add a pie chart to the slide
-            IChart chart = slide.Shapes.AddChart(ChartType.Pie, 0, 0, 500, 400) as IChart;
-
-            // OPTIONAL: Set an external workbook as the data source
-            // ((ChartData)chart.ChartData).SetExternalWorkbook("data.xlsx");
-
-            // Retrieve the data source type of the chart
-            ChartDataSourceType sourceType = chart.ChartData.DataSourceType;
-
-            // If the chart uses an external workbook, get its path
-            if (sourceType == ChartDataSourceType.ExternalWorkbook)
+            // If the data source is an external workbook, output its path
+            if (sourceType == Aspose.Slides.Charts.ChartDataSourceType.ExternalWorkbook)
             {
                 string externalPath = chart.ChartData.ExternalWorkbookPath;
-                // Use externalPath as needed (e.g., logging)
                 Console.WriteLine("External workbook path: " + externalPath);
             }
-
-            // Save the presentation before exiting
-            pres.Save(outputPath, SaveFormat.Pptx);
-
-            // Clean up resources
-            pres.Dispose();
         }
+
+        // Save the modified presentation
+        pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        pres.Dispose();
     }
 }
