@@ -1,24 +1,27 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
-class Program
+namespace AsposeSlidesExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        var presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Presentation pres = new Presentation();
 
-        // Get the first slide
-        var slide = presentation.Slides[0];
+            // Add a 3D clustered column chart to the first slide
+            IChart chart = pres.Slides[0].Shapes.AddChart(ChartType.ClusteredColumn3D, 50, 50, 500, 400);
 
-        // Add a 3D clustered column chart
-        var chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn3D, 50, 50, 400, 300);
+            // Set 3D rotation properties
+            chart.Rotation3D.RotationX = 30;          // Rotate around X-axis
+            chart.Rotation3D.RotationY = 40;          // Rotate around Y-axis
+            chart.Rotation3D.DepthPercents = 150;    // Set depth as percentage of chart width
 
-        // Set 3D rotation properties
-        chart.Rotation3D.RotationX = (sbyte)30;      // X-axis rotation
-        chart.Rotation3D.RotationY = (ushort)45;    // Y-axis rotation
-        chart.Rotation3D.DepthPercents = (ushort)200; // Depth percentage
-
-        // Save the presentation
-        presentation.Save("3DChartRotation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            pres.Save("3DChartRotation.pptx", SaveFormat.Pptx);
+        }
     }
 }
