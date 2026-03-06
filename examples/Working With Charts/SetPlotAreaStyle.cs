@@ -1,6 +1,7 @@
 using System;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 using System.Drawing;
 
 class Program
@@ -8,27 +9,31 @@ class Program
     static void Main()
     {
         // Create a new presentation
-        var presentation = new Aspose.Slides.Presentation();
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        var slide = presentation.Slides[0];
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a chart to the slide
-        var chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 500, 400);
+        // Add a clustered column chart
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50f, 50f, 600f, 400f);
 
-        // Access the plot area of the chart
-        var plotArea = chart.PlotArea;
+        // Set chart area line format
+        chart.LineFormat.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        chart.LineFormat.Style = Aspose.Slides.LineStyle.Single;
+        chart.HasRoundedCorners = true;
 
-        // Set solid fill for the plot area
-        plotArea.Format.Fill.FillType = Aspose.Slides.FillType.Solid;
-        plotArea.Format.Fill.SolidFillColor.Color = Color.LightGray;
+        // Set plot area fill to solid yellow
+        chart.PlotArea.Format.Fill.FillType = Aspose.Slides.FillType.Solid;
+        chart.PlotArea.Format.Fill.SolidFillColor.Color = System.Drawing.Color.Yellow;
 
-        // Set border (line) for the plot area
-        plotArea.Format.Line.FillFormat.FillType = Aspose.Slides.FillType.Solid;
-        plotArea.Format.Line.FillFormat.SolidFillColor.Color = Color.Black;
-        plotArea.Format.Line.Width = 2;
+        // Set plot area border line
+        chart.PlotArea.Format.Line.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+        chart.PlotArea.Format.Line.Width = 2f;
 
         // Save the presentation
-        presentation.Save("PlotAreaFormatting_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("SetPlotAreaStyle_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+
+        // Clean up
+        presentation.Dispose();
     }
 }
