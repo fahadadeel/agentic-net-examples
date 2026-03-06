@@ -4,39 +4,20 @@ class Program
 {
     static void Main()
     {
-        // Load the presentation from a file
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
-
-        // Iterate through all slides
-        for (int slideIndex = 0; slideIndex < presentation.Slides.Count; slideIndex++)
-        {
-            // Get the current slide
-            Aspose.Slides.ISlide slide = presentation.Slides[slideIndex];
-
-            // Iterate through all shapes on the slide
-            for (int shapeIndex = 0; shapeIndex < slide.Shapes.Count; shapeIndex++)
-            {
-                // Get the current shape
-                Aspose.Slides.IShape shape = slide.Shapes[shapeIndex];
-
-                // Check if the shape is a chart
-                if (shape is Aspose.Slides.Charts.Chart)
-                {
-                    // Cast the shape to a Chart object
-                    Aspose.Slides.Charts.Chart chart = (Aspose.Slides.Charts.Chart)shape;
-
-                    // Hide chart elements
-                    chart.HasLegend = false;      // Hide legend
-                    chart.HasTitle = false;       // Hide title
-                    chart.HasDataTable = false;   // Hide data table
-                }
-            }
-        }
-
-        // Save the modified presentation
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-
-        // Dispose the presentation object
-        presentation.Dispose();
+        // Create a new presentation
+        Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
+        // Get the first slide
+        Aspose.Slides.ISlide slide = pres.Slides[0];
+        // Add a pie chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.Pie, 0, 0, 500, 500);
+        // Hide various data label elements for the first series
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLegendKey = false;
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowValue = false;
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowCategoryName = false;
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowSeriesName = false;
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowPercentage = false;
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowBubbleSize = false;
+        // Save the presentation
+        pres.Save("HideChartElements_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
