@@ -3,43 +3,32 @@ using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
-namespace ChangeSeriesName
+namespace ChangeSeriesNameExample
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Input and output file paths
-            string inputPath = "input.pptx";
-            string outputPath = "output.pptx";
-
-            // Load the presentation (lifecycle rule)
-            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation(inputPath);
+            // Create a new presentation
+            Aspose.Slides.Presentation pres = new Aspose.Slides.Presentation();
 
             // Access the first slide
             Aspose.Slides.ISlide slide = pres.Slides[0];
 
-            // Assume the first shape on the slide is a chart
-            Aspose.Slides.Charts.IChart chart = slide.Shapes[0] as Aspose.Slides.Charts.IChart;
+            // Add a clustered column chart with sample data
+            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.ClusteredColumn,
+                50f,   // X position
+                50f,   // Y position
+                500f,  // Width
+                400f   // Height
+            );
 
-            if (chart != null)
-            {
-                // Access the chart data workbook
-                Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
+            // Change the name of the first series
+            chart.ChartData.Series[0].Name.AsLiteralString = "New Series Name";
 
-                // Index of the default worksheet (usually 0)
-                int defaultWorksheetIndex = 0;
-
-                // Change the name of the first series.
-                // Series names are stored in the first row of the worksheet.
-                // Column 1 (zero‑based) holds the name of the first series.
-                Aspose.Slides.Charts.IChartDataCell nameCell = workbook.GetCell(defaultWorksheetIndex, 0, 1, "New Series Name");
-                // The GetCell method sets the cell value to the provided string,
-                // effectively updating the series name in the chart.
-            }
-
-            // Save the presentation before exit (authoring rule)
-            pres.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            pres.Save("ChangeSeriesName_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
         }
     }
 }
