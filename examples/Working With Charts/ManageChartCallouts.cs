@@ -2,7 +2,7 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
@@ -10,20 +10,17 @@ class Program
         // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a pie chart to the slide
+        // Add a pie chart to the slide (position and size are in points)
         Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.Pie,
-            50f,   // X position
-            50f,   // Y position
-            500f,  // Width
-            400f   // Height
-        );
+            Aspose.Slides.Charts.ChartType.Pie, 50f, 50f, 500f, 400f);
 
-        // Enable value display and show data labels as callouts for the first series
+        // Show the value for each data label
         chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowValue = true;
+
+        // Display the data labels as callouts
         chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLabelAsDataCallout = true;
 
-        // Save the presentation
+        // Save the presentation to a PPTX file
         presentation.Save("ManageChartCallouts_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
