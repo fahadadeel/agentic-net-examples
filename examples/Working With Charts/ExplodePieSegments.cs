@@ -1,8 +1,4 @@
-using System;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
-
+// Console application demonstrating exploding a pie chart slice using Aspose.Slides
 class Program
 {
     static void Main()
@@ -10,21 +6,21 @@ class Program
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide (index 0)
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a pie chart with sample data
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.Pie, 50, 50, 400, 400);
+        // Add a pie chart to the slide at position (50,50) with size 400x400 points
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.Pie,
+            50f, 50f, 400f, 400f);
 
-        // Access the first series (default series)
+        // Retrieve the first series of the chart (index 0)
         Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series[0];
 
-        // Explode individual slices
-        series.DataPoints[0].Explosion = 20; // explode first slice by 20%
-        series.DataPoints[1].Explosion = 30; // explode second slice by 30%
-        series.DataPoints[2].Explosion = 10; // explode third slice by 10%
+        // Explode the first data point (slice) by 20% of the pie diameter
+        series.DataPoints[0].Explosion = 20;
 
-        // Save the presentation
-        presentation.Save("ExplodedPieChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation to a PPTX file
+        presentation.Save("ExplodePieSegments_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
