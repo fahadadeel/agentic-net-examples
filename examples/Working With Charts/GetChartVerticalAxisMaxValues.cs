@@ -21,29 +21,24 @@ class Program
                 Aspose.Slides.IShape shape = slide.Shapes[shapeIndex];
 
                 // Check if the shape is a chart
-                if (shape is Aspose.Slides.Charts.IChart)
+                Aspose.Slides.Charts.IChart chart = shape as Aspose.Slides.Charts.IChart;
+                if (chart != null)
                 {
-                    Aspose.Slides.Charts.IChart chart = (Aspose.Slides.Charts.IChart)shape;
-
-                    // Validate chart layout to get actual axis values
-                    chart.ValidateChartLayout();
-
-                    // Get the vertical axis
+                    // Access the vertical axis of the chart
                     Aspose.Slides.Charts.IAxis verticalAxis = chart.Axes.VerticalAxis;
 
-                    // Retrieve the actual maximum value on the vertical axis
-                    double actualMax = verticalAxis.ActualMaxValue;
+                    // Retrieve the maximum value set on the vertical axis
+                    double maxValue = verticalAxis.MaxValue;
 
-                    // Output the value
-                    Console.WriteLine($"Slide {slideIndex + 1}, Chart {shapeIndex + 1}: Vertical Axis Actual Max Value = {actualMax}");
+                    Console.WriteLine($"Slide {slideIndex + 1}, Chart {shapeIndex + 1}: Vertical Axis MaxValue = {maxValue}");
                 }
             }
         }
 
-        // Save the presentation
+        // Save the presentation (unchanged)
         presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
 
-        // Dispose the presentation object
+        // Release resources
         presentation.Dispose();
     }
 }
