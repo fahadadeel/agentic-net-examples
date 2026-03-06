@@ -1,8 +1,11 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
@@ -13,19 +16,20 @@ class Program
         // Add a clustered column chart to the slide
         Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
             Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            0f, 0f, 500f, 400f);
+            50f,   // X position
+            50f,   // Y position
+            500f,  // Width
+            400f   // Height
+        );
 
-        // Customize legend position and size
-        chart.Legend.X = 0.5f; // X coordinate as fraction of chart width
-        chart.Legend.Y = 0.5f; // Y coordinate as fraction of chart height
-        chart.Legend.Width = 0.3f; // Width as fraction of chart width
-        chart.Legend.Height = 0.2f; // Height as fraction of chart height
+        // Customize legend appearance
+        chart.Legend.X = 0.8f;               // Position X (fraction of chart width)
+        chart.Legend.Y = 0.1f;               // Position Y (fraction of chart height)
+        chart.Legend.Width = 0.15f;          // Legend width (fraction of chart width)
+        chart.Legend.Height = 0.3f;          // Legend height (fraction of chart height)
+        chart.Legend.Position = Aspose.Slides.Charts.LegendPositionType.Right; // Set legend position
 
-        // Additional legend appearance settings
-        chart.Legend.Position = Aspose.Slides.Charts.LegendPositionType.Right;
-        chart.Legend.Overlay = false;
-
-        // Save the presentation
-        presentation.Save("CustomLegend.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        // Save the presentation before exiting
+        presentation.Save("CustomizedLegend.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
