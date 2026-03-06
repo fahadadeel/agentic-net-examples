@@ -8,26 +8,15 @@ class Program
     static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        Presentation presentation = new Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Add a chart to the first slide
+        IChart chart = presentation.Slides[0].Shapes.AddChart(ChartType.ClusteredColumn, 20, 100, 600, 400);
 
-        // Add a clustered column chart to the slide
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            20f, 100f, 600f, 400f);
-
-        // Define manual layout for the plot area
-        chart.PlotArea.AsILayoutable.X = 0.2f;
-        chart.PlotArea.AsILayoutable.Y = 0.2f;
-        chart.PlotArea.AsILayoutable.Width = 0.7f;
-        chart.PlotArea.AsILayoutable.Height = 0.7f;
-
-        // Set the layout target type (inner layout)
-        chart.PlotArea.LayoutTargetType = Aspose.Slides.Charts.LayoutTargetType.Inner;
+        // Set the layout mode of the chart's plot area to Inner
+        chart.PlotArea.LayoutTargetType = LayoutTargetType.Inner;
 
         // Save the presentation
-        presentation.Save("SetChartPlotAreaLayoutMode.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("ChartLayoutMode.pptx", SaveFormat.Pptx);
     }
 }
