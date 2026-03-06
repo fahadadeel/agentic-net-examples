@@ -1,51 +1,45 @@
 using System;
-using System.Drawing;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
-class Program
+namespace AddErrorBarsExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        var presentation = new Aspose.Slides.Presentation();
-
-        // Access the first slide
-        var slide = presentation.Slides[0];
-
-        // Add a clustered column chart
-        var chart = slide.Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50, 50, 500, 400);
-
-        // Get the chart data workbook
-        var defaultWorksheetIndex = 0;
-        var chartDataWorkbook = chart.ChartData.ChartDataWorkbook;
-
-        // Clear default series and categories
-        chart.ChartData.Series.Clear();
-        chart.ChartData.Categories.Clear();
-
-        // Add categories
-        chart.ChartData.Categories.Add(chartDataWorkbook.GetCell(defaultWorksheetIndex, 1, 0, "Category 1"));
-        chart.ChartData.Categories.Add(chartDataWorkbook.GetCell(defaultWorksheetIndex, 2, 0, "Category 2"));
-        chart.ChartData.Categories.Add(chartDataWorkbook.GetCell(defaultWorksheetIndex, 3, 0, "Category 3"));
-
-        // Add a series
-        var series = chart.ChartData.Series.Add(chartDataWorkbook.GetCell(defaultWorksheetIndex, 0, 1, "Series 1"), chart.Type);
-
-        // Add data points
-        series.DataPoints.AddDataPointForBarSeries(chartDataWorkbook.GetCell(defaultWorksheetIndex, 1, 1, 10));
-        series.DataPoints.AddDataPointForBarSeries(chartDataWorkbook.GetCell(defaultWorksheetIndex, 2, 1, 20));
-        series.DataPoints.AddDataPointForBarSeries(chartDataWorkbook.GetCell(defaultWorksheetIndex, 3, 1, 15));
-
-        // Configure Y error bars if allowed
-        if (Aspose.Slides.Charts.ChartTypeCharacterizer.IsErrorBarsYAllowed(chart.Type))
+        static void Main(string[] args)
         {
-            var errorBars = series.ErrorBarsYFormat;
-            errorBars.IsVisible = true;
-            errorBars.Type = Aspose.Slides.Charts.ErrorBarType.Both;
-            errorBars.ValueType = Aspose.Slides.Charts.ErrorBarValueType.Fixed;
-            errorBars.Value = 5f; // Fixed error bar length
-        }
+            // Create a new presentation
+            Presentation pres = new Presentation();
 
-        // Save the presentation
-        presentation.Save("ErrorBarsChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Access the first slide
+            ISlide slide = pres.Slides[0];
+
+            // Add a clustered column chart to the slide
+            IChart chart = slide.Shapes.AddChart(ChartType.ClusteredColumn, 50, 50, 500, 400);
+
+            // Ensure the chart type supports Y error bars
+            if (ChartTypeCharacterizer.IsErrorBarsYAllowed(chart.Type))
+            {
+                // Get the first series of the chart
+                IChartSeries series = chart.ChartData.Series[0];
+
+                // Access the Y-direction error bars format
+                IErrorBarsFormat errorBars = series.ErrorBarsYFormat;
+
+                // Make error bars visible
+                errorBars.IsVisible = true;
+
+                // Set the error bar type (both positive and negative)
+                errorBars.Type = ErrorBarType.Both;
+
+                // Use a fixed value for the length of the error bars
+                errorBars.ValueType = ErrorBarValueType.Fixed;
+                errorBars.Value = 5f; // Length of error bars
+            }
+
+            // Save the presentation
+            pres.Save("ErrorBarsChart.pptx", SaveFormat.Pptx);
+        }
     }
 }
