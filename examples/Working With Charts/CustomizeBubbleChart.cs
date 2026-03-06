@@ -1,29 +1,34 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
-class Program
+namespace CustomizeBubbleChart
 {
-    static void Main(string[] args)
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Add a bubble chart to the first slide
+            Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.Bubble,
+                50f,   // X position
+                50f,   // Y position
+                600f,  // Width
+                400f   // Height
+            );
 
-        // Add a bubble chart to the slide
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.Bubble, 50f, 50f, 600f, 400f);
+            // Set bubble size representation to Width (radius proportional)
+            chart.ChartData.SeriesGroups[0].BubbleSizeRepresentation = Aspose.Slides.Charts.BubbleSizeRepresentationType.Width;
 
-        // Set bubble size representation to Width
-        chart.ChartData.SeriesGroups[0].BubbleSizeRepresentation = Aspose.Slides.Charts.BubbleSizeRepresentationType.Width;
+            // Set bubble size scale (e.g., 150% of default size)
+            chart.ChartData.SeriesGroups[0].BubbleSizeScale = 150;
 
-        // Optionally set bubble size scale (e.g., 150%)
-        chart.ChartData.SeriesGroups[0].BubbleSizeScale = 150;
-
-        // Show bubble size values in data labels
-        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowBubbleSize = true;
-
-        // Save the presentation
-        presentation.Save("CustomizedBubbleChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("CustomizedBubbleChart.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
