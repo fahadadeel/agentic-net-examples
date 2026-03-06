@@ -1,26 +1,34 @@
 using System;
+using Aspose.Slides;
+using Aspose.Slides.Charts;
+using Aspose.Slides.Export;
 
-class Program
+namespace AddChartExample
 {
-    static void Main()
+    class Program
     {
-        // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        static void Main(string[] args)
+        {
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Access the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+            // Access the first slide
+            Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a clustered column chart at position (50,50) with size 500x400
-        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-            Aspose.Slides.Charts.ChartType.ClusteredColumn,
-            50f, 50f, 500f, 400f);
+            // Add a clustered column chart to the slide
+            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+                Aspose.Slides.Charts.ChartType.ClusteredColumn,
+                0f, 0f, 500f, 400f);
 
-        // Set chart title
-        chart.HasTitle = true;
-        chart.ChartTitle.AddTextFrameForOverriding("Sample Chart");
-        chart.ChartTitle.TextFrameForOverriding.TextFrameFormat.CenterText = Aspose.Slides.NullableBool.True;
+            // Set the plot area layout (optional)
+            chart.PlotArea.AsILayoutable.X = 0f;
+            chart.PlotArea.AsILayoutable.Y = 0f;
+            chart.PlotArea.AsILayoutable.Width = 500f;
+            chart.PlotArea.AsILayoutable.Height = 400f;
+            chart.PlotArea.LayoutTargetType = Aspose.Slides.Charts.LayoutTargetType.Inner;
 
-        // Save the presentation
-        presentation.Save("ChartPresentation.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+            // Save the presentation
+            presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
