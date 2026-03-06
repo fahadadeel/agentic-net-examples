@@ -1,56 +1,53 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 using System.Drawing;
+using Aspose.Slides.Export;
 
 class Program
 {
     static void Main()
     {
         // Create a new presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        var presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Access the first slide
+        var slide = presentation.Slides[0];
 
-        // Define column widths and row heights
+        // Define column widths and row heights (in points)
         double[] columnWidths = new double[] { 100, 100, 100 };
-        double[] rowHeights = new double[] { 50, 30, 30, 30, 30 };
+        double[] rowHeights = new double[] { 40, 30, 30, 30 };
 
-        // Add a table to the slide
-        Aspose.Slides.ITable table = slide.Shapes.AddTable(100f, 50f, columnWidths, rowHeights);
+        // Add a table shape to the slide
+        var table = slide.Shapes.AddTable(50, 50, columnWidths, rowHeights);
 
-        // Set border format for each cell
+        // Apply red borders of width 5 to each cell
         for (int row = 0; row < table.Rows.Count; row++)
         {
             for (int col = 0; col < table.Rows[row].Count; col++)
             {
-                // Top border
-                table.Rows[row][col].CellFormat.BorderTop.FillFormat.FillType = FillType.Solid;
-                table.Rows[row][col].CellFormat.BorderTop.FillFormat.SolidFillColor.Color = Color.Red;
-                table.Rows[row][col].CellFormat.BorderTop.Width = 5;
+                var cell = table.Rows[row][col];
 
-                // Bottom border
-                table.Rows[row][col].CellFormat.BorderBottom.FillFormat.FillType = FillType.Solid;
-                table.Rows[row][col].CellFormat.BorderBottom.FillFormat.SolidFillColor.Color = Color.Red;
-                table.Rows[row][col].CellFormat.BorderBottom.Width = 5;
+                cell.CellFormat.BorderTop.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+                cell.CellFormat.BorderTop.FillFormat.SolidFillColor.Color = Color.Red;
+                cell.CellFormat.BorderTop.Width = 5;
 
-                // Left border
-                table.Rows[row][col].CellFormat.BorderLeft.FillFormat.FillType = FillType.Solid;
-                table.Rows[row][col].CellFormat.BorderLeft.FillFormat.SolidFillColor.Color = Color.Red;
-                table.Rows[row][col].CellFormat.BorderLeft.Width = 5;
+                cell.CellFormat.BorderBottom.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+                cell.CellFormat.BorderBottom.FillFormat.SolidFillColor.Color = Color.Red;
+                cell.CellFormat.BorderBottom.Width = 5;
 
-                // Right border
-                table.Rows[row][col].CellFormat.BorderRight.FillFormat.FillType = FillType.Solid;
-                table.Rows[row][col].CellFormat.BorderRight.FillFormat.SolidFillColor.Color = Color.Red;
-                table.Rows[row][col].CellFormat.BorderRight.Width = 5;
+                cell.CellFormat.BorderLeft.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+                cell.CellFormat.BorderLeft.FillFormat.SolidFillColor.Color = Color.Red;
+                cell.CellFormat.BorderLeft.Width = 5;
+
+                cell.CellFormat.BorderRight.FillFormat.FillType = Aspose.Slides.FillType.Solid;
+                cell.CellFormat.BorderRight.FillFormat.SolidFillColor.Color = Color.Red;
+                cell.CellFormat.BorderRight.Width = 5;
             }
         }
 
-        // Merge first two cells of the first row
+        // Merge the first two cells of the first row
         table.MergeCells(table.Rows[0][0], table.Rows[0][1], false);
         // Add text to the merged cell
-        table.Rows[0][0].TextFrame.Text = "Merged Cells";
+        table.Rows[0][0].TextFrame.Text = "Header";
 
         // Save the presentation
         presentation.Save("FormattedTable.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
