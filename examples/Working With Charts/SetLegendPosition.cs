@@ -1,34 +1,25 @@
 using System;
 
-namespace SetLegendPosition
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Access the first slide
-            Aspose.Slides.ISlide slide = presentation.Slides[0];
+        // Access the first slide
+        Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-            // Add a clustered column chart to the slide
-            Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
-                Aspose.Slides.Charts.ChartType.ClusteredColumn,
-                50f,   // X position
-                50f,   // Y position
-                500f,  // Width
-                400f   // Height
-            );
+        // Add a clustered column chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.ClusteredColumn,
+            50f, 50f, 500f, 400f);
 
-            // Position and size the legend using fractional coordinates
-            chart.Legend.X = 0.5f;      // 50% of chart width from left
-            chart.Legend.Y = 0.5f;      // 50% of chart height from top
-            chart.Legend.Width = 0.2f;  // 20% of chart width
-            chart.Legend.Height = 0.2f; // 20% of chart height
+        // Set the legend position to TopRight
+        Aspose.Slides.Charts.ILegend legend = chart.Legend;
+        legend.Position = Aspose.Slides.Charts.LegendPositionType.TopRight;
 
-            // Save the presentation
-            presentation.Save("SetLegendPosition_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save("SetLegendPosition_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
