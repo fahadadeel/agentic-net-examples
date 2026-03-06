@@ -1,5 +1,6 @@
 using System;
 using Aspose.Slides;
+using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
 class Program
@@ -12,16 +13,22 @@ class Program
         // Get the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
-        // Add a callout shape (Callout1) at position (100,100) with width 300 and height 150
-        Aspose.Slides.IAutoShape callout = slide.Shapes.AddAutoShape(ShapeType.Callout1, 100, 100, 300, 150);
+        // Add a pie chart to the slide
+        Aspose.Slides.Charts.IChart chart = slide.Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.Pie,
+            50f,   // X position
+            50f,   // Y position
+            500f,  // Width
+            400f   // Height
+        );
 
-        // Set the text of the callout
-        callout.TextFrame.Text = "This is a callout";
+        // Show the data values on the chart
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowValue = true;
 
-        // Optionally format the text
-        callout.TextFrame.Paragraphs[0].Portions[0].PortionFormat.FontHeight = 20;
+        // Display the data labels as callouts
+        chart.ChartData.Series[0].Labels.DefaultDataLabelFormat.ShowLabelAsDataCallout = true;
 
         // Save the presentation
-        presentation.Save("CalloutPresentation.pptx", SaveFormat.Pptx);
+        presentation.Save("AddCallouts_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
