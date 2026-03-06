@@ -1,29 +1,29 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Export;
 
-class Program
+namespace ModifyWorkbookData
 {
-    static void Main()
+    class Program
     {
-        // Load the existing PPTX presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation("input.pptx");
-
-        // Access the first slide (example)
-        Aspose.Slides.ISlide slide = presentation.Slides[0];
-
-        // Example: Access the first shape on the slide
-        Aspose.Slides.IShape shape = slide.Shapes[0];
-
-        // If the shape is a chart, you can modify its workbook data here
-        // (Implementation depends on the specific chart type and data structure)
-        // Aspose.Slides.IChart chart = shape as Aspose.Slides.IChart;
-        // if (chart != null)
-        // {
-        //     // Modify chart data workbook, e.g., change cell values
-        // }
-
-        // Save the modified presentation before exiting
-        presentation.Save("output.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        static void Main(string[] args)
+        {
+            // Define output path
+            System.String outputPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "ModifiedWorkbookData.pptx");
+            // Create a new presentation
+            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+            // Add a clustered column chart
+            Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(Aspose.Slides.Charts.ChartType.ClusteredColumn, 50f, 50f, 600f, 400f);
+            // Access the chart's workbook
+            Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
+            // Set values in cells B2 and B3
+            workbook.GetCell(0, "B2", 2);
+            workbook.GetCell(0, "B3", 3);
+            // Set formula in B4 to sum B2 and B3
+            Aspose.Slides.Charts.IChartDataCell cellB4 = workbook.GetCell(0, "B4");
+            cellB4.Formula = "B2+B3";
+            // Calculate formulas
+            workbook.CalculateFormulas();
+            // Save the presentation
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
+        }
     }
 }
