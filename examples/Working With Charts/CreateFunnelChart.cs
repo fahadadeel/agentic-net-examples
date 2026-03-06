@@ -1,50 +1,41 @@
 using System;
+using System.Drawing;
 using Aspose.Slides;
 using Aspose.Slides.Charts;
 using Aspose.Slides.Export;
 
-namespace FunnelChartExample
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            // Create a new presentation
-            Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
+        Presentation presentation = new Presentation();
+        IChart chart = presentation.Slides[0].Shapes.AddChart(ChartType.Funnel, 50, 50, 500, 400);
 
-            // Add a funnel chart to the first slide
-            Aspose.Slides.Charts.IChart chart = presentation.Slides[0].Shapes.AddChart(
-                Aspose.Slides.Charts.ChartType.Funnel, 0f, 0f, 500f, 400f);
+        // Remove default series and categories
+        chart.ChartData.Series.Clear();
+        chart.ChartData.Categories.Clear();
 
-            // Clear any default categories and series
-            chart.ChartData.Categories.Clear();
-            chart.ChartData.Series.Clear();
+        int defaultWorksheetIndex = 0;
+        IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
 
-            // Get the workbook to create cells
-            Aspose.Slides.Charts.IChartDataWorkbook workbook = chart.ChartData.ChartDataWorkbook;
-            workbook.Clear(0); // Clear the first worksheet
+        // Add a series
+        IChartSeries series = chart.ChartData.Series.Add(workbook.GetCell(defaultWorksheetIndex, 0, 1, "Series 1"), ChartType.Funnel);
 
-            // Add categories (stages of the funnel)
-            chart.ChartData.Categories.Add(workbook.GetCell(0, "A1", "Stage 1"));
-            chart.ChartData.Categories.Add(workbook.GetCell(0, "A2", "Stage 2"));
-            chart.ChartData.Categories.Add(workbook.GetCell(0, "A3", "Stage 3"));
-            chart.ChartData.Categories.Add(workbook.GetCell(0, "A4", "Stage 4"));
-            chart.ChartData.Categories.Add(workbook.GetCell(0, "A5", "Stage 5"));
-            chart.ChartData.Categories.Add(workbook.GetCell(0, "A6", "Stage 6"));
+        // Add categories
+        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 1, 0, "Category 1"));
+        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 2, 0, "Category 2"));
+        chart.ChartData.Categories.Add(workbook.GetCell(defaultWorksheetIndex, 3, 0, "Category 3"));
 
-            // Add a series for the funnel chart
-            Aspose.Slides.Charts.IChartSeries series = chart.ChartData.Series.Add(Aspose.Slides.Charts.ChartType.Funnel);
+        // Add data points for the funnel series
+        series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(defaultWorksheetIndex, 1, 1, 30));
+        series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(defaultWorksheetIndex, 2, 1, 50));
+        series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(defaultWorksheetIndex, 3, 1, 20));
 
-            // Add data points (values for each stage)
-            series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(0, "B1", 120));
-            series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(0, "B2", 100));
-            series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(0, "B3", 80));
-            series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(0, "B4", 60));
-            series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(0, "B5", 40));
-            series.DataPoints.AddDataPointForFunnelSeries(workbook.GetCell(0, "B6", 20));
+        // Set fill color for the series
+        series.Format.Fill.FillType = FillType.Solid;
+        series.Format.Fill.SolidFillColor.Color = Color.Blue;
 
-            // Save the presentation
-            presentation.Save("FunnelChart_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save("FunnelChart_out.pptx", SaveFormat.Pptx);
     }
 }
