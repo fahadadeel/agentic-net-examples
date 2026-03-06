@@ -2,8 +2,11 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
+        // Output file path
+        string outputFile = "SetChartSeriesOverlap.pptx";
+
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
@@ -15,14 +18,14 @@ class Program
         // Get the series collection
         Aspose.Slides.Charts.IChartSeriesCollection series = chart.ChartData.Series;
 
-        // If the first series has default overlap, set a new overlap value
+        // If the first series has default overlap (0), set a new overlap value
         if (series[0].Overlap == 0)
         {
             series[0].ParentSeriesGroup.Overlap = (sbyte)55; // Set overlap to 55%
         }
 
         // Save the presentation
-        presentation.Save("SetChartSeriesOverlap_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save(outputFile, Aspose.Slides.Export.SaveFormat.Pptx);
 
         // Dispose the presentation
         presentation.Dispose();
