@@ -1,44 +1,36 @@
 using System;
-using Aspose.Slides;
-using Aspose.Slides.Charts;
-using Aspose.Slides.Export;
 
-namespace ChartPlotAreaOverview
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            // Define input and output file paths
-            string inputPath = "";
-            string outputPath = "ChartPlotAreaOverview.pptx";
+        // Input and output file paths
+        string inputPath = "input.pptx";
+        string outputPath = "output.pptx";
 
-            // Create a new presentation
-            Presentation pres = new Presentation();
+        // Create a new presentation
+        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-            // Add a clustered column chart to the first slide
-            Chart chart = (Chart)pres.Slides[0].Shapes.AddChart(
-                ChartType.ClusteredColumn,
-                100f,   // X position
-                100f,   // Y position
-                500f,   // Width
-                350f    // Height
-            );
+        // Add a clustered column chart to the first slide
+        Aspose.Slides.Charts.Chart chart = (Aspose.Slides.Charts.Chart)presentation.Slides[0].Shapes.AddChart(
+            Aspose.Slides.Charts.ChartType.ClusteredColumn, 100f, 100f, 500f, 350f);
 
-            // Calculate actual layout values for the chart
-            chart.ValidateChartLayout();
+        // Calculate actual layout values
+        chart.ValidateChartLayout();
 
-            // Retrieve actual plot area dimensions
-            double plotX = chart.PlotArea.ActualX;
-            double plotY = chart.PlotArea.ActualY;
-            double plotWidth = chart.PlotArea.ActualWidth;
-            double plotHeight = chart.PlotArea.ActualHeight;
+        // Retrieve plot area dimensions
+        double plotX = chart.PlotArea.ActualX;
+        double plotY = chart.PlotArea.ActualY;
+        double plotWidth = chart.PlotArea.ActualWidth;
+        double plotHeight = chart.PlotArea.ActualHeight;
 
-            // (Optional) Use the obtained values, e.g., write to console
-            Console.WriteLine($"Plot Area - X: {plotX}, Y: {plotY}, Width: {plotWidth}, Height: {plotHeight}");
+        // Example usage: display the values
+        Console.WriteLine("Plot Area X: " + plotX);
+        Console.WriteLine("Plot Area Y: " + plotY);
+        Console.WriteLine("Plot Area Width: " + plotWidth);
+        Console.WriteLine("Plot Area Height: " + plotHeight);
 
-            // Save the presentation
-            pres.Save(outputPath, SaveFormat.Pptx);
-        }
+        // Save the presentation
+        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
