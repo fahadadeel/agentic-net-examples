@@ -1,34 +1,33 @@
 using System;
+using System.Drawing;
+using Aspose.Slides.Export;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         // Create a new presentation
         Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation();
 
-        // Get the first slide
+        // Access the first slide
         Aspose.Slides.ISlide slide = presentation.Slides[0];
 
         // Add a rectangle shape to the slide
-        Aspose.Slides.IShape rectShape = slide.Shapes.AddAutoShape(
-            Aspose.Slides.ShapeType.Rectangle,
-            100,   // X position
-            100,   // Y position
-            300,   // Width
-            200);  // Height
+        Aspose.Slides.IAutoShape shape = slide.Shapes.AddAutoShape(
+            Aspose.Slides.ShapeType.Rectangle, 200, 150, 200, 200);
 
-        // Set 3D depth of the shape
-        rectShape.ThreeDFormat.Depth = 5;
+        // Set the shape's text
+        shape.TextFrame.Text = "3D Lighting";
 
-        // Configure the camera for the shape
-        rectShape.ThreeDFormat.Camera.CameraType = Aspose.Slides.CameraPresetType.OrthographicFront;
+        // Apply 3D lighting settings
+        shape.ThreeDFormat.LightRig.LightType = Aspose.Slides.LightRigPresetType.Balanced;
+        shape.ThreeDFormat.LightRig.Direction = Aspose.Slides.LightingDirection.TopRight;
 
-        // Apply a light rig and set its direction
-        rectShape.ThreeDFormat.LightRig.LightType = Aspose.Slides.LightRigPresetType.ThreePt;
-        rectShape.ThreeDFormat.LightRig.Direction = Aspose.Slides.LightingDirection.Top;
+        // Optional: set material and extrusion height
+        shape.ThreeDFormat.Material = Aspose.Slides.MaterialPresetType.Plastic;
+        shape.ThreeDFormat.ExtrusionHeight = 100;
 
         // Save the presentation
-        presentation.Save("Apply3DLighting.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+        presentation.Save("3DLighting.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
     }
 }
