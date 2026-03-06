@@ -13,15 +13,15 @@ class Program
         string outputPath = "output.pdf";
 
         // Load the presentation
-        Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath);
+        using (Aspose.Slides.Presentation presentation = new Aspose.Slides.Presentation(inputPath))
+        {
+            // Create PDF options (optional)
+            Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
+            // Include hidden slides in the PDF
+            pdfOptions.ShowHiddenSlides = true;
 
-        // Create PDF options (optional, can be customized)
-        Aspose.Slides.Export.PdfOptions pdfOptions = new Aspose.Slides.Export.PdfOptions();
-
-        // Save the presentation as PDF
-        presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
-
-        // Release resources
-        presentation.Dispose();
+            // Save the presentation as PDF
+            presentation.Save(outputPath, Aspose.Slides.Export.SaveFormat.Pdf, pdfOptions);
+        }
     }
 }
