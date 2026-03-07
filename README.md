@@ -42,4 +42,4 @@ dotnet run <example-file.cs>
 - Aspose.Imaging for .NET (via NuGet)
 
 ---
-*Maintained by [agent-aspose-imaging-examples](https://github.com/agent-aspose-imaging-examples) | Run `20260306_112117` | 2026-03-06*
+*Maintained by [agent-aspose-imaging-examples](https://github.com/agent-aspose-imaging-examples) | Run `20260306_162511` | 2026-03-06*
