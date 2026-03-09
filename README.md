@@ -9,12 +9,7 @@ This repository provides working code examples demonstrating Aspose.PDF for .NET
 ## Repository Structure
 
 Examples are organized by feature category:
-- `Accessibility-and-Tagged-PDFs/` - Tagged PDF creation, structure elements, accessibility
-- `Compare-PDF/` - Document comparison features
-- `Conversion/` - Format conversion (PDF ↔ DOCX, HTML, SVG, XPS, etc.)
-- `Document/` - Document manipulation and properties
-- `Facades-AcroForms/` - Simplified AcroForms operations
-- `Working-with-Annotation/` - Annotations and markup
+- `Compare PDF/` - 30 example(s)
 
 Each category contains standalone `.cs` files that can be compiled and run independently.
 
