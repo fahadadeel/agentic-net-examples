@@ -4,134 +4,111 @@
 - This folder contains examples for **working-with-tables**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
-## Files in this folder
-- [Add-rows-and-cells-to-a-PDF-document-programmatically-ensuring-proper-table-structure-and-formattin](./Add-rows-and-cells-to-a-PDF-document-programmatically-ensuring-proper-table-structure-and-formattin.cs)
-- [Apply-cell-based-formatting-properties-to-customize-the-appearance-and-layout-of-PDF-documents-progr](./Apply-cell-based-formatting-properties-to-customize-the-appearance-and-layout-of-PDF-documents-progr.cs)
-- [Apply-cell-formatting-by-setting-its-property-values-programmatically-through-the-API-within-a-PDF-d](./Apply-cell-formatting-by-setting-its-property-values-programmatically-through-the-API-within-a-PDF-d.cs)
-- [Apply-custom-styling-to-the-table-and-output-the-resulting-document-in-PDF-format](./Apply-custom-styling-to-the-table-and-output-the-resulting-document-in-PDF-format.cs)
-- [Apply-formatting-to-a-PDF-to-exactly-replicate-the-source-document-s-layout-and-style](./Apply-formatting-to-a-PDF-to-exactly-replicate-the-source-document-s-layout-and-style.cs)
-- [Apply-formatting-to-ensure-the-PDF-output-mirrors-the-source-document-s-original-layout-and-styling](./Apply-formatting-to-ensure-the-PDF-output-mirrors-the-source-document-s-original-layout-and-styling.cs)
-- [Assign-custom-text-to-a-PDF-table-cell-by-utilizing-the-TextFragment-class-for-precise-content-place](./Assign-custom-text-to-a-PDF-table-cell-by-utilizing-the-TextFragment-class-for-precise-content-place.cs)
-- [Assign-new-text-to-a-PDF-table-cell-using-a-TextFragment-object-for-precise-formatting](./Assign-new-text-to-a-PDF-table-cell-using-a-TextFragment-object-for-precise-formatting.cs)
-- [Assign-values-to-PDF-table-cells-via-the-Cell-class-updating-each-cell-s-content-programmatically](./Assign-values-to-PDF-table-cells-via-the-Cell-class-updating-each-cell-s-content-programmatically.cs)
-- [Combine-adjacent-cells-within-a-PDF-table-to-create-unified-spanning-cells-while-maintaining-layout](./Combine-adjacent-cells-within-a-PDF-table-to-create-unified-spanning-cells-while-maintaining-layout.cs)
-- [Combine-adjacent-table-cells-within-a-PDF-document-to-create-merged-cells-while-maintaining-layout-i](./Combine-adjacent-table-cells-within-a-PDF-document-to-create-merged-cells-while-maintaining-layout-i.cs)
-- [Combine-multiple-table-cells-within-a-PDF-using-the-Cell.Merge-function-to-create-a-unified-cell](./Combine-multiple-table-cells-within-a-PDF-using-the-Cell.Merge-function-to-create-a-unified-cell.cs)
-- [Configure-and-modify-table-properties-within-a-PDF-document-including-borders-padding-alignment](./Configure-and-modify-table-properties-within-a-PDF-document-including-borders-padding-alignment.cs)
-- [Configure-table-cells-in-a-PDF-with-borders-background-colors-and-text-styling-using-the-API](./Configure-table-cells-in-a-PDF-with-borders-background-colors-and-text-styling-using-the-API.cs)
-- [Configure-table-styling-in-a-PDF-by-applying-custom-border-styles-background-colors-and-text-forma](./Configure-table-styling-in-a-PDF-by-applying-custom-border-styles-background-colors-and-text-forma.cs)
-- [Create-a-PDF-table-by-specifying-column-widths-and-row-heights-for-the-desired-topic](./Create-a-PDF-table-by-specifying-column-widths-and-row-heights-for-the-desired-topic.cs)
-- [Create-a-Table-instance-programmatically-within-a-PDF-document-to-define-structured-tabular-content](./Create-a-Table-instance-programmatically-within-a-PDF-document-to-define-structured-tabular-content.cs)
-- [Create-modify-and-retrieve-tables-within-PDF-documents-using-the-.NET-PDF-processing-APIs](./Create-modify-and-retrieve-tables-within-PDF-documents-using-the-.NET-PDF-processing-APIs.cs)
-- [Create-rows-and-cells-in-a-PDF-based-on-imported-data-dynamically-populating-table-structures](./Create-rows-and-cells-in-a-PDF-based-on-imported-data-dynamically-populating-table-structures.cs)
-- [Delete-table-elements-from-a-PDF-document-while-preserving-surrounding-headings-and-overall-layout](./Delete-table-elements-from-a-PDF-document-while-preserving-surrounding-headings-and-overall-layout.cs)
-- [Delete-the-detected-tables-from-a-PDF-document-ensuring-the-remaining-content-stays-properly-intact](./Delete-the-detected-tables-from-a-PDF-document-ensuring-the-remaining-content-stays-properly-intact.cs)
-- [Demonstrate-how-to-programmatically-edit-existing-tables-within-a-PDF-document-using-.NET-APIs](./Demonstrate-how-to-programmatically-edit-existing-tables-within-a-PDF-document-using-.NET-APIs.cs)
-- [Describe-the-process-for-extracting-tables-from-a-PDF-document-programmatically-using-the-available](./Describe-the-process-for-extracting-tables-from-a-PDF-document-programmatically-using-the-available.cs)
-- [Detect-and-locate-tables-in-a-PDF-document-by-identifying-their-heading-markers-and-extracting-their](./Detect-and-locate-tables-in-a-PDF-document-by-identifying-their-heading-markers-and-extracting-their.cs)
-- [Eliminate-all-tables-from-a-PDF-document-by-invoking-the-TableAbsorber-class-s-Remove-method-program](./Eliminate-all-tables-from-a-PDF-document-by-invoking-the-TableAbsorber-class-s-Remove-method-program.cs)
-- [Enumerate-each-entry-in-the-TableAbsorber.TableList-collection-of-a-PDF-document-to-process-tables](./Enumerate-each-entry-in-the-TableAbsorber.TableList-collection-of-a-PDF-document-to-process-tables.cs)
-- [Export-extracted-table-headings-to-a-PDF-file-ensuring-proper-formatting-and-data-integrity](./Export-extracted-table-headings-to-a-PDF-file-ensuring-proper-formatting-and-data-integrity.cs)
-- [Extract-a-specific-table-from-an-existing-PDF-document-while-maintaining-its-layout-and-data-integri](./Extract-a-specific-table-from-an-existing-PDF-document-while-maintaining-its-layout-and-data-integri.cs)
-- [Extract-a-specific-table-identified-by-its-heading-from-an-existing-PDF-document-using-the-API](./Extract-a-specific-table-identified-by-its-heading-from-an-existing-PDF-document-using-the-API.cs)
-- [Extract-a-table-from-an-existing-PDF-document-while-retaining-its-layout-and-data-integrity](./Extract-a-table-from-an-existing-PDF-document-while-retaining-its-layout-and-data-integrity.cs)
-- [Extract-tables-with-heading-information-from-a-PDF-document-using-the-TableAbsorber-utility-for-stru](./Extract-tables-with-heading-information-from-a-PDF-document-using-the-TableAbsorber-utility-for-stru.cs)
-- [Extract-tabular-data-from-a-PDF-file-and-convert-it-into-a-structured-format-for-further-processing](./Extract-tabular-data-from-a-PDF-file-and-convert-it-into-a-structured-format-for-further-processing.cs)
-- [Extract-the-heading-table-from-an-existing-PDF-document-into-a-structured-format-while-preserving-la](./Extract-the-heading-table-from-an-existing-PDF-document-into-a-structured-format-while-preserving-la.cs)
-- [First-load-the-existing-PDF-document-into-memory-using-the-PDF-API-for-further-processing](./First-load-the-existing-PDF-document-into-memory-using-the-PDF-API-for-further-processing.cs)
-- [Generate-a-PDF-document-containing-a-table-with-a-heading-ensuring-proper-layout-and-formatting](./Generate-a-PDF-document-containing-a-table-with-a-heading-ensuring-proper-layout-and-formatting.cs)
-- [Generate-a-formatted-table-within-a-PDF-document-using-the-library-s-table-creation-API](./Generate-a-formatted-table-within-a-PDF-document-using-the-library-s-table-creation-API.cs)
-- [Identify-all-tables-within-a-PDF-document-by-employing-the-TableAbsorber-class-to-extract-structural](./Identify-all-tables-within-a-PDF-document-by-employing-the-TableAbsorber-class-to-extract-structural.cs)
-- [Identify-tables-within-a-PDF-page-using-the-TableAbsorber-utility-and-retrieve-their-structural-info](./Identify-tables-within-a-PDF-page-using-the-TableAbsorber-utility-and-retrieve-their-structural-info.cs)
-- [Import-Excel-table-data-into-a-PDF-document-preserving-original-formatting-cell-structure-and-dat](./Import-Excel-table-data-into-a-PDF-document-preserving-original-formatting-cell-structure-and-dat.cs)
-- [Import-table-data-from-a-CSV-file-into-a-PDF-document-preserving-formatting-and-layout](./Import-table-data-from-a-CSV-file-into-a-PDF-document-preserving-formatting-and-layout.cs)
-- [Import-table-data-from-a-CSV-heading-file-into-a-PDF-document-as-a-formatted-table](./Import-table-data-from-a-CSV-heading-file-into-a-PDF-document-as-a-formatted-table.cs)
-- [Import-table-data-from-an-Excel-worksheet-into-a-PDF-document-while-preserving-formatting-and-layout](./Import-table-data-from-an-Excel-worksheet-into-a-PDF-document-while-preserving-formatting-and-layout.cs)
-- [Import-table-data-with-column-headings-from-an-Excel-worksheet-into-a-PDF-document-while-preserving](./Import-table-data-with-column-headings-from-an-Excel-worksheet-into-a-PDF-document-while-preserving.cs)
-- [Import-tabular-data-from-CSV-or-Excel-files-into-a-PDF-document-using-.NET-PDF-generation-APIs](./Import-tabular-data-from-CSV-or-Excel-files-into-a-PDF-document-using-.NET-PDF-generation-APIs.cs)
-- [Incorporate-tables-from-CSV-or-Excel-sources-into-a-PDF-document-preserving-formatting-and-data-int](./Incorporate-tables-from-CSV-or-Excel-sources-into-a-PDF-document-preserving-formatting-and-data-int.cs)
-- [Insert-Cell-objects-into-each-topic-row-of-a-PDF-document-to-structure-and-organize-the-content](./Insert-Cell-objects-into-each-topic-row-of-a-PDF-document-to-structure-and-organize-the-content.cs)
-- [Insert-Cell-objects-into-every-row-of-a-PDF-table-to-populate-its-structure](./Insert-Cell-objects-into-every-row-of-a-PDF-table-to-populate-its-structure.cs)
-- [Insert-a-formatted-table-into-a-PDF-document-ensuring-proper-alignment-pagination-and-styling](./Insert-a-formatted-table-into-a-PDF-document-ensuring-proper-alignment-pagination-and-styling.cs)
-- [Insert-a-formatted-table-into-an-existing-PDF-file-programmatically-using-the-.NET-PDF-manipulation](./Insert-a-formatted-table-into-an-existing-PDF-file-programmatically-using-the-.NET-PDF-manipulation.cs)
-- [Insert-a-formatted-table-into-an-existing-PDF-file-while-maintaining-its-layout-and-content-integrit](./Insert-a-formatted-table-into-an-existing-PDF-file-while-maintaining-its-layout-and-content-integrit.cs)
-- [Insert-a-table-into-an-existing-PDF-document-while-preserving-its-layout-formatting-and-structure](./Insert-a-table-into-an-existing-PDF-document-while-preserving-its-layout-formatting-and-structure.cs)
-- [Insert-a-table-with-a-heading-into-a-PDF-file-while-maintaining-formatting-consistency](./Insert-a-table-with-a-heading-into-a-PDF-file-while-maintaining-formatting-consistency.cs)
-- [Insert-new-rows-and-cells-into-a-PDF-table-and-fill-them-with-the-desired-content](./Insert-new-rows-and-cells-into-a-PDF-table-and-fill-them-with-the-desired-content.cs)
-- [Insert-tables-into-an-existing-PDF-file-utilizing-the-Table-class-preserving-layout-and-formatting](./Insert-tables-into-an-existing-PDF-file-utilizing-the-Table-class-preserving-layout-and-formatting.cs)
-- [Instantiate-a-PDF-table-and-fill-it-with-the-previously-imported-data-set-for-rendering](./Instantiate-a-PDF-table-and-fill-it-with-the-previously-imported-data-set-for-rendering.cs)
-- [Instantiate-a-Table-element-and-define-its-page-coordinates-to-position-it-precisely-within-a-PDF-do](./Instantiate-a-Table-element-and-define-its-page-coordinates-to-position-it-precisely-within-a-PDF-do.cs)
-- [Instantiate-a-Table-object-in-a-PDF-and-configure-its-rows-and-columns-accordingly](./Instantiate-a-Table-object-in-a-PDF-and-configure-its-rows-and-columns-accordingly.cs)
-- [Instantiate-a-TableAbsorber-object-for-a-PDF-document-to-enable-table-extraction-and-manipulation](./Instantiate-a-TableAbsorber-object-for-a-PDF-document-to-enable-table-extraction-and-manipulation.cs)
-- [Instantiate-a-TableAbsorber-object-for-programmatically-extracting-all-table-structures-within-a-PDF](./Instantiate-a-TableAbsorber-object-for-programmatically-extracting-all-table-structures-within-a-PDF.cs)
-- [Instantiate-a-TableAbsorber-object-to-programmatically-extract-table-structures-from-a-PDF-document](./Instantiate-a-TableAbsorber-object-to-programmatically-extract-table-structures-from-a-PDF-document.cs)
-- [Instantiate-a-TableAbsorber-object-to-programmatically-extract-tabular-structures-from-PDF-documents](./Instantiate-a-TableAbsorber-object-to-programmatically-extract-tabular-structures-from-PDF-documents.cs)
-- [Instantiate-and-add-a-Table-object-to-a-PDF-document-to-organize-content-in-rows-and-columns](./Instantiate-and-add-a-Table-object-to-a-PDF-document-to-organize-content-in-rows-and-columns.cs)
-- [Instantiate-and-add-a-Table-structure-to-a-PDF-document-programmatically-using-the-API](./Instantiate-and-add-a-Table-structure-to-a-PDF-document-programmatically-using-the-API.cs)
-- [Instantiate-the-Document-class-to-load-a-PDF-file-into-memory-for-further-processing](./Instantiate-the-Document-class-to-load-a-PDF-file-into-memory-for-further-processing.cs)
-- [Instantiate-the-Document-class-to-load-a-PDF-file-into-memory-for-subsequent-manipulation-and-analys](./Instantiate-the-Document-class-to-load-a-PDF-file-into-memory-for-subsequent-manipulation-and-analys.cs)
-- [Invoke-the-Absorb-method-on-a-designated-PDF-page-to-incorporate-its-contents-into-the-current-docum](./Invoke-the-Absorb-method-on-a-designated-PDF-page-to-incorporate-its-contents-into-the-current-docum.cs)
-- [Invoke-the-Absorb-method-on-a-designated-PDF-page-topic-to-merge-its-resources](./Invoke-the-Absorb-method-on-a-designated-PDF-page-topic-to-merge-its-resources.cs)
-- [Invoke-the-Absorb-operation-on-a-designated-PDF-page-to-integrate-its-content-into-the-current-docum](./Invoke-the-Absorb-operation-on-a-designated-PDF-page-to-integrate-its-content-into-the-current-docum.cs)
-- [Invoke-the-Absorb-operation-on-a-selected-PDF-page-to-merge-its-contents-into-the-surrounding-docume](./Invoke-the-Absorb-operation-on-a-selected-PDF-page-to-merge-its-contents-into-the-surrounding-docume.cs)
-- [Invoke-the-Remove-function-to-programmatically-eliminate-tables-entirely-from-a-PDF-document-during](./Invoke-the-Remove-function-to-programmatically-eliminate-tables-entirely-from-a-PDF-document-during.cs)
-- [Invoke-the-Remove-method-to-eliminate-all-table-elements-from-a-PDF-document-programmatically](./Invoke-the-Remove-method-to-eliminate-all-table-elements-from-a-PDF-document-programmatically.cs)
-- [Iterate-over-every-TableAbsorber.Table-object-extracted-from-a-PDF-document-to-process-each-table](./Iterate-over-every-TableAbsorber.Table-object-extracted-from-a-PDF-document-to-process-each-table.cs)
-- [Iterate-over-the-TableAbsorber.TableList-collection-to-retrieve-each-individual-table-from-a-PDF-doc](./Iterate-over-the-TableAbsorber.TableList-collection-to-retrieve-each-individual-table-from-a-PDF-doc.cs)
-- [Iterate-through-tables-extracted-from-a-PDF-document-handling-each-table-heading-and-its-rows-progr](./Iterate-through-tables-extracted-from-a-PDF-document-handling-each-table-heading-and-its-rows-progr.cs)
-- [Loop-through-every-TableAbsorber.Table-object-extracted-from-a-PDF-to-sequentially-process-each-topi](./Loop-through-every-TableAbsorber.Table-object-extracted-from-a-PDF-to-sequentially-process-each-topi.cs)
-- [Merge-table-cells-within-a-PDF-document-programmatically-by-invoking-the-Cell.Merge-method-on-the-ta](./Merge-table-cells-within-a-PDF-document-programmatically-by-invoking-the-Cell.Merge-method-on-the-ta.cs)
-- [Merge-table-heading-cells-in-a-PDF-document-while-maintaining-cell-formatting-and-layout](./Merge-table-heading-cells-in-a-PDF-document-while-maintaining-cell-formatting-and-layout.cs)
-- [Modify-a-table-s-heading-properties-in-a-PDF-document-programmatically-via-.NET-APIs-ensuring-corre](./Modify-a-table-s-heading-properties-in-a-PDF-document-programmatically-via-.NET-APIs-ensuring-corre.cs)
-- [Modify-table-appearance-in-a-PDF-by-configuring-Table-properties-such-as-borders-padding-and-align](./Modify-table-appearance-in-a-PDF-by-configuring-Table-properties-such-as-borders-padding-and-align.cs)
-- [Modify-table-layout-in-a-PDF-by-configuring-its-Table-properties-using-the-API](./Modify-table-layout-in-a-PDF-by-configuring-its-Table-properties-using-the-API.cs)
-- [Modify-tables-within-an-existing-PDF-file-including-adding-updating-or-removing-rows-and-columns](./Modify-tables-within-an-existing-PDF-file-including-adding-updating-or-removing-rows-and-columns.cs)
-- [Modify-the-content-of-a-table-cell-in-a-PDF-by-utilizing-the-TextFragment-class](./Modify-the-content-of-a-table-cell-in-a-PDF-by-utilizing-the-TextFragment-class.cs)
-- [Modify-the-content-of-a-table-cell-in-a-PDF-document-by-employing-the-TextFragment-class](./Modify-the-content-of-a-table-cell-in-a-PDF-document-by-employing-the-TextFragment-class.cs)
-- [Modify-the-heading-cell-values-within-a-PDF-document-programmatically-using-.NET-APIs-to-reflect-upd](./Modify-the-heading-cell-values-within-a-PDF-document-programmatically-using-.NET-APIs-to-reflect-upd.cs)
-- [Persist-the-edited-PDF-document-by-saving-it-in-PDF-format-ensuring-all-changes-are-retained](./Persist-the-edited-PDF-document-by-saving-it-in-PDF-format-ensuring-all-changes-are-retained.cs)
-- [Populate-a-PDF-with-additional-table-rows-and-cells-programmatically-derived-from-imported-data](./Populate-a-PDF-with-additional-table-rows-and-cells-programmatically-derived-from-imported-data.cs)
-- [Programmatically-create-and-insert-a-Table-object-into-a-PDF-document-configuring-its-structure-and](./Programmatically-create-and-insert-a-Table-object-into-a-PDF-document-configuring-its-structure-and.cs)
-- [Programmatically-delete-all-table-structures-from-a-PDF-document-while-maintaining-the-remaining-con](./Programmatically-delete-all-table-structures-from-a-PDF-document-while-maintaining-the-remaining-con.cs)
-- [Programmatically-delete-tables-identified-by-specific-headings-from-a-PDF-document-while-maintaining](./Programmatically-delete-tables-identified-by-specific-headings-from-a-PDF-document-while-maintaining.cs)
-- [Programmatically-eliminate-tables-from-a-PDF-document-using-.NET-while-maintaining-other-content-int](./Programmatically-eliminate-tables-from-a-PDF-document-using-.NET-while-maintaining-other-content-int.cs)
-- [Read-CSV-data-using-a-.NET-spreadsheet-library-or-built-in-.NET-APIs-and-generate-a-PDF-document](./Read-CSV-data-using-a-.NET-spreadsheet-library-or-built-in-.NET-APIs-and-generate-a-PDF-document.cs)
-- [Read-CSV-data-with-.NET-libraries-or-a-spreadsheet-component-and-use-it-to-generate-PDF-output](./Read-CSV-data-with-.NET-libraries-or-a-spreadsheet-component-and-use-it-to-generate-PDF-output.cs)
-- [Read-data-from-Excel-worksheets-and-incorporate-it-into-PDF-generation-using-the-.NET-Excel-processi](./Read-data-from-Excel-worksheets-and-incorporate-it-into-PDF-generation-using-the-.NET-Excel-processi.cs)
-- [Read-data-from-an-XLSX-workbook-and-utilize-it-to-generate-PDF-output-while-preserving-formatting](./Read-data-from-an-XLSX-workbook-and-utilize-it-to-generate-PDF-output-while-preserving-formatting.cs)
-- [Read-tabular-data-from-a-CSV-file-and-insert-it-into-a-PDF-document-as-a-formatted-table](./Read-tabular-data-from-a-CSV-file-and-insert-it-into-a-PDF-document-as-a-formatted-table.cs)
-- [Read-the-source-data-from-a-PDF-efficiently-using-the-appropriate-.NET-PDF-library](./Read-the-source-data-from-a-PDF-efficiently-using-the-appropriate-.NET-PDF-library.cs)
-- [Remove-all-table-structures-from-a-PDF-document-while-maintaining-surrounding-content-layout-integri](./Remove-all-table-structures-from-a-PDF-document-while-maintaining-surrounding-content-layout-integri.cs)
-- [Remove-all-table-structures-from-an-existing-PDF-document-programmatically-while-preserving-the-rema](./Remove-all-table-structures-from-an-existing-PDF-document-programmatically-while-preserving-the-rema.cs)
-- [Remove-tables-from-a-PDF-file-while-maintaining-the-layout-and-integrity-of-remaining-content](./Remove-tables-from-a-PDF-file-while-maintaining-the-layout-and-integrity-of-remaining-content.cs)
-- [Remove-tables-from-an-existing-PDF-document-preserving-surrounding-content-layout-and-ensuring-file](./Remove-tables-from-an-existing-PDF-document-preserving-surrounding-content-layout-and-ensuring-file.cs)
-- [Remove-tables-from-an-existing-PDF-document-preserving-surrounding-content-layout-integrity-and-m](./Remove-tables-from-an-existing-PDF-document-preserving-surrounding-content-layout-integrity-and-m.cs)
-- [Retrieve-cell-data-from-PDF-tables-using-TableAbsorber-s-Table.Rows-and-Cells-collections-for-furthe](./Retrieve-cell-data-from-PDF-tables-using-TableAbsorber-s-Table.Rows-and-Cells-collections-for-furthe.cs)
-- [Retrieve-individual-cell-values-from-a-PDF-table-by-iterating-TableAbsorber.Table.Rows-and-accessing](./Retrieve-individual-cell-values-from-a-PDF-table-by-iterating-TableAbsorber.Table.Rows-and-accessing.cs)
-- [Retrieve-targeted-table-cells-from-a-PDF-by-navigating-TableAbsorber.Table.Rows-and-accessing-the-Ce](./Retrieve-targeted-table-cells-from-a-PDF-by-navigating-TableAbsorber.Table.Rows-and-accessing-the-Ce.cs)
-- [Retrieve-targeted-table-cells-from-a-PDF-by-navigating-TableAbsorber.Table.Rows-and-its-Cells-collec](./Retrieve-targeted-table-cells-from-a-PDF-by-navigating-TableAbsorber.Table.Rows-and-its-Cells-collec.cs)
-- [Retrieve-the-TableAbsorber.TableList-collection-from-a-PDF-document-to-enumerate-detected-tables-wit](./Retrieve-the-TableAbsorber.TableList-collection-from-a-PDF-document-to-enumerate-detected-tables-wit.cs)
-- [Retrieve-the-TableList-collection-from-a-TableAbsorber-instance-for-a-PDF-document-using-the-PDF-pro](./Retrieve-the-TableList-collection-from-a-TableAbsorber-instance-for-a-PDF-document-using-the-PDF-pro.cs)
-- [Save-the-generated-PDF-document-to-a-file-stream-using-the-appropriate-PDF-format](./Save-the-generated-PDF-document-to-a-file-stream-using-the-appropriate-PDF-format.cs)
-- [Save-the-modified-PDF-document-back-to-a-PDF-file-preserving-all-changes-and-formatting](./Save-the-modified-PDF-document-back-to-a-PDF-file-preserving-all-changes-and-formatting.cs)
-- [Specify-the-desired-number-of-columns-and-rows-when-constructing-a-table-within-a-PDF-document](./Specify-the-desired-number-of-columns-and-rows-when-constructing-a-table-within-a-PDF-document.cs)
-- [Strip-all-table-elements-from-a-PDF-file-while-maintaining-the-remaining-content-s-layout-and-format](./Strip-all-table-elements-from-a-PDF-file-while-maintaining-the-remaining-content-s-layout-and-format.cs)
-- [Traverse-the-TableAbsorber.TableList-collection-programmatically-to-sequentially-access-each-topic-w](./Traverse-the-TableAbsorber.TableList-collection-programmatically-to-sequentially-access-each-topic-w.cs)
-- [Update-cell-values-merge-cells-and-adjust-table-attributes-such-as-borders-and-background-colors-p](./Update-cell-values-merge-cells-and-adjust-table-attributes-such-as-borders-and-background-colors-p.cs)
-- [Update-cell-values-merge-cells-and-modify-table-properties-within-an-existing-PDF-table](./Update-cell-values-merge-cells-and-modify-table-properties-within-an-existing-PDF-table.cs)
-- [Utilize-TableAbsorber-to-detect-and-retrieve-all-table-structures-present-on-a-given-PDF-page](./Utilize-TableAbsorber-to-detect-and-retrieve-all-table-structures-present-on-a-given-PDF-page.cs)
-- [Utilize-TableAbsorber-to-programmatically-detect-and-extract-table-structures-from-a-given-PDF-page](./Utilize-TableAbsorber-to-programmatically-detect-and-extract-table-structures-from-a-given-PDF-page.cs)
-- [Utilize-the-TableAbsorber-class-to-extract-tables-from-a-PDF-document-and-preserve-their-layout](./Utilize-the-TableAbsorber-class-to-extract-tables-from-a-PDF-document-and-preserve-their-layout.cs)
-- [Utilize-the-TableAbsorber-to-identify-existing-tables-in-a-document-enabling-subsequent-modificatio](./Utilize-the-TableAbsorber-to-identify-existing-tables-in-a-document-enabling-subsequent-modificatio.cs)
+## Required Namespaces
 
+- `using Aspose.Pdf;` (118/118 files) ← category-specific
+- `using Aspose.Pdf.Text;` (97/118 files) ← category-specific
+- `using Aspose.Pdf.Facades;` (7/118 files)
+- `using Aspose.Pdf.Drawing;` (6/118 files)
+- `using Aspose.Pdf.LogicalStructure;` (3/118 files)
+- `using Aspose.Pdf.Tagged;` (3/118 files)
+- `using Aspose.Pdf.Annotations;` (1/118 files)
+- `using Aspose.Pdf.Vector;` (1/118 files)
+- `using System;` (118/118 files)
+- `using System.IO;` (107/118 files)
+- `using System.Data;` (18/118 files)
+- `using System.Linq;` (15/118 files)
+- `using System.Collections.Generic;` (8/118 files)
+- `using System.Text.Json;` (1/118 files)
+
+## Common Code Pattern
+
+Most files follow this pattern:
+
+```csharp
+using (Document doc = new Document("input.pdf"))
+{
+    // ... operations ...
+    doc.Save("output.pdf");
+}
+```
+
+## Files in this folder
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [Add-rows-and-cells-to-a-PDF-document-programmatically-ensuri...](./Add-rows-and-cells-to-a-PDF-document-programmatically-ensuring-proper-table-structure-and-formattin.cs) | `BorderInfo`, `MarginInfo` | Add rows and cells to a PDF document programmatically ensuring proper table s... |
+| [Apply-cell-based-formatting-properties-to-customize-the-appe...](./Apply-cell-based-formatting-properties-to-customize-the-appearance-and-layout-of-PDF-documents-progr.cs) | `BorderInfo` | Apply cell based formatting properties to customize the appearance and layout... |
+| [Apply-cell-formatting-by-setting-its-property-values-program...](./Apply-cell-formatting-by-setting-its-property-values-programmatically-through-the-API-within-a-PDF-d.cs) | `BorderInfo`, `TableFragment` | Apply cell formatting by setting its property values programmatically through... |
+| [Apply-custom-styling-to-the-table-and-output-the-resulting-d...](./Apply-custom-styling-to-the-table-and-output-the-resulting-document-in-PDF-format.cs) | `BorderInfo`, `MarginInfo` | Apply custom styling to the table and output the resulting document in PDF fo... |
+| [Apply-formatting-to-a-PDF-to-exactly-replicate-the-source-do...](./Apply-formatting-to-a-PDF-to-exactly-replicate-the-source-document-s-layout-and-style.cs) |  | Apply formatting to a PDF to exactly replicate the source document s layout a... |
+| [Apply-formatting-to-ensure-the-PDF-output-mirrors-the-source...](./Apply-formatting-to-ensure-the-PDF-output-mirrors-the-source-document-s-original-layout-and-styling.cs) |  | Apply formatting to ensure the PDF output mirrors the source document s origi... |
+| [Assign-custom-text-to-a-PDF-table-cell-by-utilizing-the-Text...](./Assign-custom-text-to-a-PDF-table-cell-by-utilizing-the-TextFragment-class-for-precise-content-place.cs) | `TableAbsorber`, `TextFragment` | Assign custom text to a PDF table cell by utilizing the TextFragment class fo... |
+| [Assign-new-text-to-a-PDF-table-cell-using-a-TextFragment-obj...](./Assign-new-text-to-a-PDF-table-cell-using-a-TextFragment-object-for-precise-formatting.cs) | `TableAbsorber` | Assign new text to a PDF table cell using a TextFragment object for precise f... |
+| [Assign-values-to-PDF-table-cells-via-the-Cell-class-updating...](./Assign-values-to-PDF-table-cells-via-the-Cell-class-updating-each-cell-s-content-programmatically.cs) | `TextFragment` | Assign values to PDF table cells via the Cell class updating each cell s cont... |
+| [Combine-adjacent-cells-within-a-PDF-table-to-create-unified-...](./Combine-adjacent-cells-within-a-PDF-table-to-create-unified-spanning-cells-while-maintaining-layout.cs) | `TableAbsorber`, `TextFragment` | Combine adjacent cells within a PDF table to create unified spanning cells wh... |
+| [Combine-adjacent-table-cells-within-a-PDF-document-to-create...](./Combine-adjacent-table-cells-within-a-PDF-document-to-create-merged-cells-while-maintaining-layout-i.cs) | `TableAbsorber`, `TextFragment` | Combine adjacent table cells within a PDF document to create merged cells whi... |
+| [Combine-multiple-table-cells-within-a-PDF-using-the-Cell.Mer...](./Combine-multiple-table-cells-within-a-PDF-using-the-Cell.Merge-function-to-create-a-unified-cell.cs) |  | Combine multiple table cells within a PDF using the Cell.Merge function to cr... |
+| [Configure-and-modify-table-properties-within-a-PDF-document-...](./Configure-and-modify-table-properties-within-a-PDF-document-including-borders-padding-alignment.cs) | `BorderInfo`, `MarginInfo`, `TextFragment` | Configure and modify table properties within a PDF document including borders... |
+| [Configure-table-cells-in-a-PDF-with-borders-background-color...](./Configure-table-cells-in-a-PDF-with-borders-background-colors-and-text-styling-using-the-API.cs) | `BorderInfo`, `MarginInfo`, `TextFragment` | Configure table cells in a PDF with borders background colors and text stylin... |
+| [Configure-table-styling-in-a-PDF-by-applying-custom-border-s...](./Configure-table-styling-in-a-PDF-by-applying-custom-border-styles-background-colors-and-text-forma.cs) | `MarginInfo`, `BorderInfo`, `TextFragment` | Configure table styling in a PDF by applying custom border styles background ... |
+| [Create-a-PDF-table-by-specifying-column-widths-and-row-heigh...](./Create-a-PDF-table-by-specifying-column-widths-and-row-heights-for-the-desired-topic.cs) | `BorderInfo` | Create a PDF table by specifying column widths and row heights for the desire... |
+| [Create-a-Table-instance-programmatically-within-a-PDF-docume...](./Create-a-Table-instance-programmatically-within-a-PDF-document-to-define-structured-tabular-content.cs) | `BorderInfo`, `TextFragment` | Create a Table instance programmatically within a PDF document to define stru... |
+| [Create-modify-and-retrieve-tables-within-PDF-documents-using...](./Create-modify-and-retrieve-tables-within-PDF-documents-using-the-.NET-PDF-processing-APIs.cs) | `BorderInfo` | Create modify and retrieve tables within PDF documents using the .NET PDF pro... |
+| [Create-rows-and-cells-in-a-PDF-based-on-imported-data-dynami...](./Create-rows-and-cells-in-a-PDF-based-on-imported-data-dynamically-populating-table-structures.cs) | `BorderInfo`, `MarginInfo` | Create rows and cells in a PDF based on imported data dynamically populating ... |
+| [Delete-table-elements-from-a-PDF-document-while-preserving-s...](./Delete-table-elements-from-a-PDF-document-while-preserving-surrounding-headings-and-overall-layout.cs) | `TableAbsorber` | Delete table elements from a PDF document while preserving surrounding headin... |
+| [Delete-the-detected-tables-from-a-PDF-document-ensuring-the-...](./Delete-the-detected-tables-from-a-PDF-document-ensuring-the-remaining-content-stays-properly-intact.cs) | `TableAbsorber` | Delete the detected tables from a PDF document ensuring the remaining content... |
+| [Demonstrate-how-to-programmatically-edit-existing-tables-wit...](./Demonstrate-how-to-programmatically-edit-existing-tables-within-a-PDF-document-using-.NET-APIs.cs) | `TableAbsorber`, `BorderInfo` | Demonstrate how to programmatically edit existing tables within a PDF documen... |
+| [Describe-the-process-for-extracting-tables-from-a-PDF-docume...](./Describe-the-process-for-extracting-tables-from-a-PDF-document-programmatically-using-the-available.cs) | `TableAbsorber` | Describe the process for extracting tables from a PDF document programmatical... |
+| [Detect-and-locate-tables-in-a-PDF-document-by-identifying-th...](./Detect-and-locate-tables-in-a-PDF-document-by-identifying-their-heading-markers-and-extracting-their.cs) | `TableAbsorber`, `TextFragmentAbsorber` | Detect and locate tables in a PDF document by identifying their heading marke... |
+| [Eliminate-all-tables-from-a-PDF-document-by-invoking-the-Tab...](./Eliminate-all-tables-from-a-PDF-document-by-invoking-the-TableAbsorber-class-s-Remove-method-program.cs) | `TableAbsorber` | Eliminate all tables from a PDF document by invoking the TableAbsorber class ... |
+| [Enumerate-each-entry-in-the-TableAbsorber.TableList-collecti...](./Enumerate-each-entry-in-the-TableAbsorber.TableList-collection-of-a-PDF-document-to-process-tables.cs) | `TableAbsorber` | Enumerate each entry in the TableAbsorber.TableList collection of a PDF docum... |
+| [Export-extracted-table-headings-to-a-PDF-file-ensuring-prope...](./Export-extracted-table-headings-to-a-PDF-file-ensuring-proper-formatting-and-data-integrity.cs) | `TableAbsorber`, `BorderInfo`, `MarginInfo` | Export extracted table headings to a PDF file ensuring proper formatting and ... |
+| [Extract-a-specific-table-from-an-existing-PDF-document-while...](./Extract-a-specific-table-from-an-existing-PDF-document-while-maintaining-its-layout-and-data-integri.cs) | `TableAbsorber`, `BorderInfo`, `MarginInfo` | Extract a specific table from an existing PDF document while maintaining its ... |
+| [Extract-a-specific-table-identified-by-its-heading-from-an-e...](./Extract-a-specific-table-identified-by-its-heading-from-an-existing-PDF-document-using-the-API.cs) | `TableAbsorber` | Extract a specific table identified by its heading from an existing PDF docum... |
+| [Extract-a-table-from-an-existing-PDF-document-while-retainin...](./Extract-a-table-from-an-existing-PDF-document-while-retaining-its-layout-and-data-integrity.cs) | `TableAbsorber` | Extract a table from an existing PDF document while retaining its layout and ... |
+| ... | | *and 88 more files* |
 
 ## Category Statistics
 - Total examples: 118
+
+## Category-Specific Tips
+
+### Key API Surface
+- `Aspose.Pdf.BorderCornerStyle`
+- `Aspose.Pdf.BorderInfo`
+- `Aspose.Pdf.BorderSide`
+- `Aspose.Pdf.Cell`
+- `Aspose.Pdf.Color`
+- `Aspose.Pdf.ColumnAdjustment`
+- `Aspose.Pdf.Document`
+- `Aspose.Pdf.GraphInfo`
+- `Aspose.Pdf.HorizontalAlignment`
+- `Aspose.Pdf.Image`
+- `Aspose.Pdf.MarginInfo`
+- `Aspose.Pdf.Page`
+- `Aspose.Pdf.Row`
+- `Aspose.Pdf.Table`
+- `Aspose.Pdf.Table.GetWidth`
+
+### Rules
+- Create an {image} object, assign its File property to a {string_literal} path, and embed it in a table cell by invoking cell.Paragraphs.Add({image}).
+- Add a {table} to a {page} via page.Paragraphs.Add({table}), configure its DefaultCellBorder with new BorderInfo(BorderSide.All, {float}) and set ColumnWidths using a space‑separated {string_literal}; then populate rows with table.Rows.Add() and cells with row.Cells.Add(...), optionally adjusting cell properties such as VerticalAlignment.
+- Instantiate a PDF document and add a page: {doc} = new Document(); {page} = {doc}.Pages.Add();
+- Create a Table, set column widths via a space‑separated string and enable auto‑fit to window: {table} = new Table(); {table}.ColumnWidths = "{string_literal}"; {table}.ColumnAdjustment = ColumnAdjustment.AutoFitToWindow;
+- Define default cell border and overall table border using BorderInfo with BorderSide.All and a thickness: {table}.DefaultCellBorder = new BorderInfo(BorderSide.All, {float}); {table}.Border = new BorderInfo(BorderSide.All, {float});
+
+### Warnings
+- ColumnWidths expects a space‑separated string of numeric values; ensure the format matches the table layout requirements.
+- ColumnAdjustment.AutoFitToWindow only takes effect when ColumnWidths are explicitly set; otherwise the table may not resize as expected.
+- GetWidth may return a meaningful value only after the table has been laid out (e.g., added to a page or after layout processing). In this isolated example the table is not added to the page, which could lead to default or zero width in some scenarios.
+- TableAbsorber and AbsorbedTable reside in the Aspose.Pdf.Text namespace; ensure the appropriate using directive is present.
+- TableAbsorber.TableList may be empty; accessing index 0 without checking can cause an exception.
 
 ## General Tips
 - See parent [agents.md](../agents.md) for repository-level patterns, conventions, and anti-patterns
 - Review code examples in this folder for working-with-tables patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_105743_f05edb`
+Updated: 2026-03-10 | Run: `20260310_144233_a67dac`
 <!-- AUTOGENERATED:END -->
