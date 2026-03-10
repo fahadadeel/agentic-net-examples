@@ -1,0 +1,45 @@
+# AGENTS - Facades - Texts and Images
+
+## Scope
+- This folder contains examples for **Facades - Texts and Images**.
+- Files are standalone `.cs` examples stored directly in this folder.
+
+## Files in this folder
+- [apply-the-facade-pattern-to-add-images-and-text-into-a-pdf-document-already-loaded-in-memory](./apply-the-facade-pattern-to-add-images-and-text-into-a-pdf-document-already-loaded-in-memory.cs)
+- [configure-image-handling-options-for-a-loaded-pdf-document-using-the-facade-pattern-api](./configure-image-handling-options-for-a-loaded-pdf-document-using-the-facade-pattern-api.cs)
+- [convert-a-loaded-pdf-document-to-bmp-image-format-using-a-facade-abstraction-layer](./convert-a-loaded-pdf-document-to-bmp-image-format-using-a-facade-abstraction-layer.cs)
+- [convert-a-loaded-pdf-document-to-xps-format-using-a-facade-abstraction-to-simplify-api-interactions](./convert-a-loaded-pdf-document-to-xps-format-using-a-facade-abstraction-to-simplify-api-interactions.cs)
+- [convert-each-page-of-a-loaded-pdf-document-into-individual-emf-images-using-a-facade-abstraction](./convert-each-page-of-a-loaded-pdf-document-into-individual-emf-images-using-a-facade-abstraction.cs)
+- [convert-each-page-of-a-loaded-pdf-document-into-separate-jpeg-images-using-facades](./convert-each-page-of-a-loaded-pdf-document-into-separate-jpeg-images-using-facades.cs)
+- [employ-facade-components-to-apply-image-manipulation-operations-on-a-pdf-document-after-loading-it](./employ-facade-components-to-apply-image-manipulation-operations-on-a-pdf-document-after-loading-it.cs)
+- [employ-facades-to-extract-all-embedded-images-from-an-epub-document-loaded-as-epub](./employ-facades-to-extract-all-embedded-images-from-an-epub-document-loaded-as-epub.cs)
+- [implement-a-facade-to-render-and-output-a-loaded-markdown-.md-document-to-the-console](./implement-a-facade-to-render-and-output-a-loaded-markdown-.md-document-to-the-console.cs)
+- [implement-a-facade-to-transform-an-svg-input-stream-into-a-jpeg-image-preserving-visual-fidelity](./implement-a-facade-to-transform-an-svg-input-stream-into-a-jpeg-image-preserving-visual-fidelity.cs)
+- [use-a-fa-ade-pattern-to-transform-a-loaded-pdf-document-into-docx-format-while-maintaining-content-f](./use-a-fa-ade-pattern-to-transform-a-loaded-pdf-document-into-docx-format-while-maintaining-content-f.cs)
+- [use-the-facade-pattern-to-insert-an-image-into-an-already-loaded-pdf-document](./use-the-facade-pattern-to-insert-an-image-into-an-already-loaded-pdf-document.cs)
+- [utilize-a-facade-to-efficiently-transform-a-loaded-pdf-document-into-plain-text-format](./utilize-a-facade-to-efficiently-transform-a-loaded-pdf-document-into-plain-text-format.cs)
+- [utilize-a-facade-to-retrieve-all-embedded-images-from-a-loaded-pdf-document-while-preserving-origina](./utilize-a-facade-to-retrieve-all-embedded-images-from-a-loaded-pdf-document-while-preserving-origina.cs)
+- [utilize-a-facade-to-retrieve-both-images-and-textual-content-from-a-loaded-pdf-document](./utilize-a-facade-to-retrieve-both-images-and-textual-content-from-a-loaded-pdf-document.cs)
+- [utilize-a-facade-to-send-a-loaded-pdf-document-to-the-printer-preserving-its-original-layout](./utilize-a-facade-to-send-a-loaded-pdf-document-to-the-printer-preserving-its-original-layout.cs)
+- [utilize-facade-abstractions-to-render-and-print-an-html-document-that-has-been-loaded-as-html](./utilize-facade-abstractions-to-render-and-print-an-html-document-that-has-been-loaded-as-html.cs)
+- [utilize-facade-components-to-extract-images-and-text-from-an-html-document-loaded-into-memory](./utilize-facade-components-to-extract-images-and-text-from-an-html-document-loaded-into-memory.cs)
+- [utilize-facades-to-transform-a-loaded-pdf-document-into-png-images-while-maintaining-visual-fidelity](./utilize-facades-to-transform-a-loaded-pdf-document-into-png-images-while-maintaining-visual-fidelity.cs)
+- [utilize-the-facade-api-to-insert-custom-text-into-a-loaded-pdf-document-and-save-the-modifications](./utilize-the-facade-api-to-insert-custom-text-into-a-loaded-pdf-document-and-save-the-modifications.cs)
+- [utilize-the-facade-layer-to-transform-a-loaded-pdf-document-into-high-quality-jpeg-images](./utilize-the-facade-layer-to-transform-a-loaded-pdf-document-into-high-quality-jpeg-images.cs)
+- [utilize-the-facade-pattern-to-transform-a-loaded-pdf-document-into-a-bmp-image-file](./utilize-the-facade-pattern-to-transform-a-loaded-pdf-document-into-a-bmp-image-file.cs)
+- [utilize-the-facade-pattern-to-transform-a-loaded-pdf-document-into-a-tiff-image-while-preserving-fid](./utilize-the-facade-pattern-to-transform-a-loaded-pdf-document-into-a-tiff-image-while-preserving-fid.cs)
+
+
+## Category Statistics
+- Total examples: 23
+- Passed: 22
+- Failed: 1
+- Pass rate: 95.7%
+
+## Category Tips
+- See parent [agents.md](../agents.md) for repository-level patterns
+- Review code examples in this folder for Facades - Texts and Images patterns
+
+<!-- AUTOGENERATED:START -->
+Updated: 2026-03-10 | Run: `20260310_104518_ab3006`
+<!-- AUTOGENERATED:END -->
