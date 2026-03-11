@@ -1,271 +1,131 @@
+---
+name: working-with-annotations
+description: C# examples for working-with-annotations using Aspose.PDF for .NET
+language: csharp
+framework: net10.0
+parent: ../agents.md
+---
+
 # AGENTS - working-with-annotations
+
+## Persona
+
+You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
+working within the **working-with-annotations** category.
+This folder contains standalone C# examples for working-with-annotations operations.
+See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
 - This folder contains examples for **working-with-annotations**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
-## Files in this folder
-- [Add-Delete-and-Get-Annotation-using-CGM-format](./Add-Delete-and-Get-Annotation-using-CGM-format.cs)
-- [Add-Delete-and-Get-Annotation-using-EPUB-format](./Add-Delete-and-Get-Annotation-using-EPUB-format.cs)
-- [Add-Delete-and-Get-Annotation-using-MD-format](./Add-Delete-and-Get-Annotation-using-MD-format.cs)
-- [Add-Delete-and-Get-Annotation-using-MHT-format](./Add-Delete-and-Get-Annotation-using-MHT-format.cs)
-- [Add-Delete-and-Get-Annotation-using-OFD-format](./Add-Delete-and-Get-Annotation-using-OFD-format.cs)
-- [Add-Delete-and-Get-Annotation-using-PCL-format](./Add-Delete-and-Get-Annotation-using-PCL-format.cs)
-- [Add-Delete-and-Get-Annotation-using-PDF-format](./Add-Delete-and-Get-Annotation-using-PDF-format.cs)
-- [Add-Delete-and-Get-Annotation-using-PS-format](./Add-Delete-and-Get-Annotation-using-PS-format.cs)
-- [Add-Delete-and-Get-Annotation-using-SVG-format](./Add-Delete-and-Get-Annotation-using-SVG-format.cs)
-- [Add-Delete-and-Get-Annotation-using-TeX-format](./Add-Delete-and-Get-Annotation-using-TeX-format.cs)
-- [Add-Delete-and-Get-Annotation-using-XML-format](./Add-Delete-and-Get-Annotation-using-XML-format.cs)
-- [Add-Delete-and-Get-Annotation-using-XPS-format](./Add-Delete-and-Get-Annotation-using-XPS-format.cs)
-- [Add-Figures-Annotations-using-C-using-CGM-format](./Add-Figures-Annotations-using-C-using-CGM-format.cs)
-- [Add-Figures-Annotations-using-C-using-EPUB-format](./Add-Figures-Annotations-using-C-using-EPUB-format.cs)
-- [Add-Figures-Annotations-using-C-using-HTML-format](./Add-Figures-Annotations-using-C-using-HTML-format.cs)
-- [Add-Figures-Annotations-using-C-using-MD-format](./Add-Figures-Annotations-using-C-using-MD-format.cs)
-- [Add-Figures-Annotations-using-C-using-MHT-format](./Add-Figures-Annotations-using-C-using-MHT-format.cs)
-- [Add-Figures-Annotations-using-C-using-OFD-format](./Add-Figures-Annotations-using-C-using-OFD-format.cs)
-- [Add-Figures-Annotations-using-C-using-PDF-format](./Add-Figures-Annotations-using-C-using-PDF-format.cs)
-- [Add-Figures-Annotations-using-C-using-PS-format](./Add-Figures-Annotations-using-C-using-PS-format.cs)
-- [Add-Figures-Annotations-using-C-using-SVG-format](./Add-Figures-Annotations-using-C-using-SVG-format.cs)
-- [Add-Figures-Annotations-using-C-using-TeX-format](./Add-Figures-Annotations-using-C-using-TeX-format.cs)
-- [Add-Figures-Annotations-using-C-using-XML-format](./Add-Figures-Annotations-using-C-using-XML-format.cs)
-- [Add-Figures-Annotations-using-C-using-XPS-format](./Add-Figures-Annotations-using-C-using-XPS-format.cs)
-- [Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Document-using-CGM-format](./Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Document-using-CGM-format.cs)
-- [Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Document-using-PDF-format](./Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Document-using-PDF-format.cs)
-- [Add-Screen-Annotation-using-CGM-format](./Add-Screen-Annotation-using-CGM-format.cs)
-- [Add-Screen-Annotation-using-EPUB-format](./Add-Screen-Annotation-using-EPUB-format.cs)
-- [Add-Screen-Annotation-using-HTML-format](./Add-Screen-Annotation-using-HTML-format.cs)
-- [Add-Screen-Annotation-using-MD-format](./Add-Screen-Annotation-using-MD-format.cs)
-- [Add-Screen-Annotation-using-MHT-format](./Add-Screen-Annotation-using-MHT-format.cs)
-- [Add-Screen-Annotation-using-OFD-format](./Add-Screen-Annotation-using-OFD-format.cs)
-- [Add-Screen-Annotation-using-PCL-format](./Add-Screen-Annotation-using-PCL-format.cs)
-- [Add-Screen-Annotation-using-PDF-format](./Add-Screen-Annotation-using-PDF-format.cs)
-- [Add-Screen-Annotation-using-PS-format](./Add-Screen-Annotation-using-PS-format.cs)
-- [Add-Screen-Annotation-using-SVG-format](./Add-Screen-Annotation-using-SVG-format.cs)
-- [Add-Screen-Annotation-using-TeX-format](./Add-Screen-Annotation-using-TeX-format.cs)
-- [Add-Screen-Annotation-using-XML-format](./Add-Screen-Annotation-using-XML-format.cs)
-- [Add-Screen-Annotation-using-XPS-format](./Add-Screen-Annotation-using-XPS-format.cs)
-- [Add-Screen-Annotation-using-XSLFO-format](./Add-Screen-Annotation-using-XSLFO-format.cs)
-- [Add-Sound-Annotation-using-CGM-format](./Add-Sound-Annotation-using-CGM-format.cs)
-- [Add-Sound-Annotation-using-PDF-format](./Add-Sound-Annotation-using-PDF-format.cs)
-- [Add-Text-Markup-Annotation-using-CGM-format](./Add-Text-Markup-Annotation-using-CGM-format.cs)
-- [Add-Text-Markup-Annotation-using-HTML-format](./Add-Text-Markup-Annotation-using-HTML-format.cs)
-- [Add-Text-Markup-Annotation-using-MD-format](./Add-Text-Markup-Annotation-using-MD-format.cs)
-- [Add-Text-Markup-Annotation-using-OFD-format](./Add-Text-Markup-Annotation-using-OFD-format.cs)
-- [Add-Text-Markup-Annotation-using-PCL-format](./Add-Text-Markup-Annotation-using-PCL-format.cs)
-- [Add-Text-Markup-Annotation-using-PDF-format](./Add-Text-Markup-Annotation-using-PDF-format.cs)
-- [Add-Text-Markup-Annotation-using-PS-format](./Add-Text-Markup-Annotation-using-PS-format.cs)
-- [Add-Text-Markup-Annotation-using-SVG-format](./Add-Text-Markup-Annotation-using-SVG-format.cs)
-- [Add-Text-Markup-Annotation-using-TeX-format](./Add-Text-Markup-Annotation-using-TeX-format.cs)
-- [Add-Text-Markup-Annotation-using-XML-format](./Add-Text-Markup-Annotation-using-XML-format.cs)
-- [Add-Text-Markup-Annotation-using-XPS-format](./Add-Text-Markup-Annotation-using-XPS-format.cs)
-- [Add-Text-Markup-Annotation-using-XSLFO-format](./Add-Text-Markup-Annotation-using-XSLFO-format.cs)
-- [Add-Watermark-Annotation-using-CGM-format](./Add-Watermark-Annotation-using-CGM-format.cs)
-- [Add-Watermark-Annotation-using-EPUB-format](./Add-Watermark-Annotation-using-EPUB-format.cs)
-- [Add-Watermark-Annotation-using-HTML-format](./Add-Watermark-Annotation-using-HTML-format.cs)
-- [Add-Watermark-Annotation-using-MD-format](./Add-Watermark-Annotation-using-MD-format.cs)
-- [Add-Watermark-Annotation-using-MHT-format](./Add-Watermark-Annotation-using-MHT-format.cs)
-- [Add-Watermark-Annotation-using-OFD-format](./Add-Watermark-Annotation-using-OFD-format.cs)
-- [Add-Watermark-Annotation-using-PCL-format](./Add-Watermark-Annotation-using-PCL-format.cs)
-- [Add-Watermark-Annotation-using-PDF-format](./Add-Watermark-Annotation-using-PDF-format.cs)
-- [Add-Watermark-Annotation-using-PS-format](./Add-Watermark-Annotation-using-PS-format.cs)
-- [Add-Watermark-Annotation-using-SVG-format](./Add-Watermark-Annotation-using-SVG-format.cs)
-- [Add-Watermark-Annotation-using-TeX-format](./Add-Watermark-Annotation-using-TeX-format.cs)
-- [Add-Watermark-Annotation-using-XML-format](./Add-Watermark-Annotation-using-XML-format.cs)
-- [Adding-Lines-or-Arrows-using-PDF-format](./Adding-Lines-or-Arrows-using-PDF-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-CGM-format](./Adding-Link-Annotation-into-existing-PDF-file-using-CGM-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-EPUB-format](./Adding-Link-Annotation-into-existing-PDF-file-using-EPUB-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-HTML-format](./Adding-Link-Annotation-into-existing-PDF-file-using-HTML-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-MD-format](./Adding-Link-Annotation-into-existing-PDF-file-using-MD-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-MHT-format](./Adding-Link-Annotation-into-existing-PDF-file-using-MHT-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-OFD-format](./Adding-Link-Annotation-into-existing-PDF-file-using-OFD-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-PCL-format](./Adding-Link-Annotation-into-existing-PDF-file-using-PCL-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-PDF-format](./Adding-Link-Annotation-into-existing-PDF-file-using-PDF-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-PS-format](./Adding-Link-Annotation-into-existing-PDF-file-using-PS-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-SVG-format](./Adding-Link-Annotation-into-existing-PDF-file-using-SVG-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-TeX-format](./Adding-Link-Annotation-into-existing-PDF-file-using-TeX-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-XML-format](./Adding-Link-Annotation-into-existing-PDF-file-using-XML-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-XPS-format](./Adding-Link-Annotation-into-existing-PDF-file-using-XPS-format.cs)
-- [Adding-Link-Annotation-into-existing-PDF-file-using-XSLFO-format](./Adding-Link-Annotation-into-existing-PDF-file-using-XSLFO-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-CGM-format](./Adding-Shapes-and-Figures-on-Page-using-CGM-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-EPUB-format](./Adding-Shapes-and-Figures-on-Page-using-EPUB-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-HTML-format](./Adding-Shapes-and-Figures-on-Page-using-HTML-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-MHT-format](./Adding-Shapes-and-Figures-on-Page-using-MHT-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-OFD-format](./Adding-Shapes-and-Figures-on-Page-using-OFD-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-PCL-format](./Adding-Shapes-and-Figures-on-Page-using-PCL-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-SVG-format](./Adding-Shapes-and-Figures-on-Page-using-SVG-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-TeX-format](./Adding-Shapes-and-Figures-on-Page-using-TeX-format.cs)
-- [Adding-Shapes-and-Figures-on-Page-using-XSLFO-format](./Adding-Shapes-and-Figures-on-Page-using-XSLFO-format.cs)
-- [Adding-decorated-Link-Annotation-using-CGM-format](./Adding-decorated-Link-Annotation-using-CGM-format.cs)
-- [Adding-decorated-Link-Annotation-using-PDF-format](./Adding-decorated-Link-Annotation-using-PDF-format.cs)
-- [Delete-All-Annotations-from-Page-of-PDF-File-using-PDF-format](./Delete-All-Annotations-from-Page-of-PDF-File-using-PDF-format.cs)
-- [Delete-Particular-Annotation-from-PDF-File-using-PDF-format](./Delete-Particular-Annotation-from-PDF-File-using-PDF-format.cs)
-- [Extra-Annotations-using-C-using-CGM-format](./Extra-Annotations-using-C-using-CGM-format.cs)
-- [Extra-Annotations-using-C-using-EPUB-format](./Extra-Annotations-using-C-using-EPUB-format.cs)
-- [Extra-Annotations-using-C-using-HTML-format](./Extra-Annotations-using-C-using-HTML-format.cs)
-- [Extra-Annotations-using-C-using-MD-format](./Extra-Annotations-using-C-using-MD-format.cs)
-- [Extra-Annotations-using-C-using-MHT-format](./Extra-Annotations-using-C-using-MHT-format.cs)
-- [Extra-Annotations-using-C-using-OFD-format](./Extra-Annotations-using-C-using-OFD-format.cs)
-- [Extra-Annotations-using-C-using-PCL-format](./Extra-Annotations-using-C-using-PCL-format.cs)
-- [Extra-Annotations-using-C-using-PDF-format](./Extra-Annotations-using-C-using-PDF-format.cs)
-- [Extra-Annotations-using-C-using-PS-format](./Extra-Annotations-using-C-using-PS-format.cs)
-- [Extra-Annotations-using-C-using-SVG-format](./Extra-Annotations-using-C-using-SVG-format.cs)
-- [Extra-Annotations-using-C-using-XML-format](./Extra-Annotations-using-C-using-XML-format.cs)
-- [Extra-Annotations-using-C-using-XSLFO-format](./Extra-Annotations-using-C-using-XSLFO-format.cs)
-- [Get-All-Annotations-from-Page-of-PDF-Document-using-PDF-format](./Get-All-Annotations-from-Page-of-PDF-Document-using-PDF-format.cs)
-- [Get-Particular-Annotation-from-PDF-File-using-PDF-format](./Get-Particular-Annotation-from-PDF-File-using-PDF-format.cs)
-- [Get-Resource-of-Annotation-using-PDF-format](./Get-Resource-of-Annotation-using-PDF-format.cs)
-- [Get-Text-Markup-Annotation-using-CGM-format](./Get-Text-Markup-Annotation-using-CGM-format.cs)
-- [Get-Text-Markup-Annotation-using-PDF-format](./Get-Text-Markup-Annotation-using-PDF-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-CGM-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-CGM-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-HTML-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-HTML-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-MD-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-MD-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-MHT-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-MHT-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-OFD-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-OFD-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-PCL-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-PCL-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-PDF-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-PDF-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-PS-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-PS-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-SVG-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-SVG-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-TeX-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-TeX-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-XML-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-XML-format.cs)
-- [How-to-add-Caret-Annotation-into-existing-PDF-file-using-XSLFO-format](./How-to-add-Caret-Annotation-into-existing-PDF-file-using-XSLFO-format.cs)
-- [How-to-add-Popup-Annotation-using-PDF-format](./How-to-add-Popup-Annotation-using-PDF-format.cs)
-- [How-to-add-Text-Annotation-into-existing-PDF-file-using-EPUB-format](./How-to-add-Text-Annotation-into-existing-PDF-file-using-EPUB-format.cs)
-- [How-to-add-Text-Annotation-into-existing-PDF-file-using-PDF-format](./How-to-add-Text-Annotation-into-existing-PDF-file-using-PDF-format.cs)
-- [How-to-add-or-Create-new-Free-Text-Annotation-using-PDF-format](./How-to-add-or-Create-new-Free-Text-Annotation-using-PDF-format.cs)
-- [Import-FDF-format-annotations-to-PDF-using-CGM-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-CGM-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-EPUB-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-EPUB-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-HTML-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-HTML-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-MD-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-MD-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-MHT-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-MHT-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-OFD-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-OFD-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-PCL-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-PCL-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-PDF-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-PDF-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-PS-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-PS-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-SVG-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-SVG-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-TeX-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-TeX-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-XML-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-XML-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-XPS-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-XPS-format-and-save-as-PDF.cs)
-- [Import-FDF-format-annotations-to-PDF-using-XSLFO-format-and-save-as-PDF](./Import-FDF-format-annotations-to-PDF-using-XSLFO-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-CGM-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-CGM-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-EPUB-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-EPUB-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-HTML-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-HTML-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-MD-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-MD-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-MHT-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-MHT-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-OFD-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-OFD-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-PCL-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-PCL-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-PDF-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-PDF-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-PDF-format](./Import-and-Export-Annotations-to-XFDF-using-PDF-format.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-PS-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-PS-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-SVG-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-SVG-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-TeX-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-TeX-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-XML-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-XML-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-XPS-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-XPS-format-and-save-as-PDF.cs)
-- [Import-and-Export-Annotations-to-XFDF-using-XSLFO-format-and-save-as-PDF](./Import-and-Export-Annotations-to-XFDF-using-XSLFO-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-CGM-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-CGM-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-EPUB-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-EPUB-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-HTML-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-HTML-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-MD-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-MD-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-MHT-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-MHT-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-OFD-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-OFD-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-PCL-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-PCL-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-PDF-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-PDF-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-PS-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-PS-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-SVG-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-SVG-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-TeX-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-TeX-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-XML-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-XML-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-XPS-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-XPS-format-and-save-as-PDF.cs)
-- [Import-and-export-annotation-with-XFDF-format-using-XSLFO-format-and-save-as-PDF](./Import-and-export-annotation-with-XFDF-format-using-XSLFO-format-and-save-as-PDF.cs)
-- [Make-Free-Text-Annotation-Invisible-using-PDF-format](./Make-Free-Text-Annotation-Invisible-using-PDF-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-CGM-format](./PDF-Highlight-Annotation-using-C-using-CGM-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-HTML-format](./PDF-Highlight-Annotation-using-C-using-HTML-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-MD-format](./PDF-Highlight-Annotation-using-C-using-MD-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-MHT-format](./PDF-Highlight-Annotation-using-C-using-MHT-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-OFD-format](./PDF-Highlight-Annotation-using-C-using-OFD-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-PCL-format](./PDF-Highlight-Annotation-using-C-using-PCL-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-PDF-format](./PDF-Highlight-Annotation-using-C-using-PDF-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-PS-format](./PDF-Highlight-Annotation-using-C-using-PS-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-XML-format](./PDF-Highlight-Annotation-using-C-using-XML-format.cs)
-- [PDF-Highlight-Annotation-using-C-using-XSLFO-format](./PDF-Highlight-Annotation-using-C-using-XSLFO-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-CGM-format](./PDF-Multimedia-Annotation-using-C-using-CGM-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-EPUB-format](./PDF-Multimedia-Annotation-using-C-using-EPUB-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-HTML-format](./PDF-Multimedia-Annotation-using-C-using-HTML-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-MD-format](./PDF-Multimedia-Annotation-using-C-using-MD-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-MHT-format](./PDF-Multimedia-Annotation-using-C-using-MHT-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-OFD-format](./PDF-Multimedia-Annotation-using-C-using-OFD-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-PCL-format](./PDF-Multimedia-Annotation-using-C-using-PCL-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-PDF-format](./PDF-Multimedia-Annotation-using-C-using-PDF-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-PS-format](./PDF-Multimedia-Annotation-using-C-using-PS-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-TeX-format](./PDF-Multimedia-Annotation-using-C-using-TeX-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-XML-format](./PDF-Multimedia-Annotation-using-C-using-XML-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-XPS-format](./PDF-Multimedia-Annotation-using-C-using-XPS-format.cs)
-- [PDF-Multimedia-Annotation-using-C-using-XSLFO-format](./PDF-Multimedia-Annotation-using-C-using-XSLFO-format.cs)
-- [PDF-sticky-Annotations-using-C-using-CGM-format](./PDF-sticky-Annotations-using-C-using-CGM-format.cs)
-- [PDF-sticky-Annotations-using-C-using-EPUB-format](./PDF-sticky-Annotations-using-C-using-EPUB-format.cs)
-- [PDF-sticky-Annotations-using-C-using-MD-format](./PDF-sticky-Annotations-using-C-using-MD-format.cs)
-- [PDF-sticky-Annotations-using-C-using-MHT-format](./PDF-sticky-Annotations-using-C-using-MHT-format.cs)
-- [PDF-sticky-Annotations-using-C-using-OFD-format](./PDF-sticky-Annotations-using-C-using-OFD-format.cs)
-- [PDF-sticky-Annotations-using-C-using-PCL-format](./PDF-sticky-Annotations-using-C-using-PCL-format.cs)
-- [PDF-sticky-Annotations-using-C-using-PDF-format](./PDF-sticky-Annotations-using-C-using-PDF-format.cs)
-- [PDF-sticky-Annotations-using-C-using-PS-format](./PDF-sticky-Annotations-using-C-using-PS-format.cs)
-- [PDF-sticky-Annotations-using-C-using-SVG-format](./PDF-sticky-Annotations-using-C-using-SVG-format.cs)
-- [PDF-sticky-Annotations-using-C-using-TeX-format](./PDF-sticky-Annotations-using-C-using-TeX-format.cs)
-- [PDF-sticky-Annotations-using-C-using-XML-format](./PDF-sticky-Annotations-using-C-using-XML-format.cs)
-- [PDF-sticky-Annotations-using-C-using-XPS-format](./PDF-sticky-Annotations-using-C-using-XPS-format.cs)
-- [PDF-sticky-Annotations-using-C-using-XSLFO-format](./PDF-sticky-Annotations-using-C-using-XSLFO-format.cs)
-- [Redact-certain-page-region-with-Redaction-Annotation-using-CGM-format](./Redact-certain-page-region-with-Redaction-Annotation-using-CGM-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-CGM-format](./Search-for-a-TextFragment-in-the-PDF-file-using-CGM-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-EPUB-format](./Search-for-a-TextFragment-in-the-PDF-file-using-EPUB-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-HTML-format](./Search-for-a-TextFragment-in-the-PDF-file-using-HTML-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-MD-format](./Search-for-a-TextFragment-in-the-PDF-file-using-MD-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-MHT-format](./Search-for-a-TextFragment-in-the-PDF-file-using-MHT-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-OFD-format](./Search-for-a-TextFragment-in-the-PDF-file-using-OFD-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-PCL-format](./Search-for-a-TextFragment-in-the-PDF-file-using-PCL-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-PDF-format](./Search-for-a-TextFragment-in-the-PDF-file-using-PDF-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-PS-format](./Search-for-a-TextFragment-in-the-PDF-file-using-PS-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-SVG-format](./Search-for-a-TextFragment-in-the-PDF-file-using-SVG-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-TeX-format](./Search-for-a-TextFragment-in-the-PDF-file-using-TeX-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-XML-format](./Search-for-a-TextFragment-in-the-PDF-file-using-XML-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-XPS-format](./Search-for-a-TextFragment-in-the-PDF-file-using-XPS-format.cs)
-- [Search-for-a-TextFragment-in-the-PDF-file-using-XSLFO-format](./Search-for-a-TextFragment-in-the-PDF-file-using-XSLFO-format.cs)
-- [Set-Callout-Property-for-FreeTextAnnotation-using-PDF-format](./Set-Callout-Property-for-FreeTextAnnotation-using-PDF-format.cs)
-- [Set-Callout-Property-for-XFDF-File-using-PDF-format](./Set-Callout-Property-for-XFDF-File-using-PDF-format.cs)
-- [Set-Formatting-of-FreeTextAnnotation-using-PDF-format](./Set-Formatting-of-FreeTextAnnotation-using-PDF-format.cs)
-- [Strike-Out-Words-using-StrikeOutAnnotation-using-PDF-format](./Strike-Out-Words-using-StrikeOutAnnotation-using-PDF-format.cs)
-- [Using-Link-Annotations-in-PDF-using-CGM-format](./Using-Link-Annotations-in-PDF-using-CGM-format.cs)
-- [Using-Link-Annotations-in-PDF-using-HTML-format](./Using-Link-Annotations-in-PDF-using-HTML-format.cs)
-- [Using-Link-Annotations-in-PDF-using-MD-format](./Using-Link-Annotations-in-PDF-using-MD-format.cs)
-- [Using-Link-Annotations-in-PDF-using-MHT-format](./Using-Link-Annotations-in-PDF-using-MHT-format.cs)
-- [Using-Link-Annotations-in-PDF-using-OFD-format](./Using-Link-Annotations-in-PDF-using-OFD-format.cs)
-- [Using-Link-Annotations-in-PDF-using-PCL-format](./Using-Link-Annotations-in-PDF-using-PCL-format.cs)
-- [Using-Link-Annotations-in-PDF-using-PDF-format](./Using-Link-Annotations-in-PDF-using-PDF-format.cs)
-- [Using-Link-Annotations-in-PDF-using-PS-format](./Using-Link-Annotations-in-PDF-using-PS-format.cs)
-- [Using-Link-Annotations-in-PDF-using-SVG-format](./Using-Link-Annotations-in-PDF-using-SVG-format.cs)
-- [Using-Link-Annotations-in-PDF-using-TeX-format](./Using-Link-Annotations-in-PDF-using-TeX-format.cs)
-- [Using-Link-Annotations-in-PDF-using-XML-format](./Using-Link-Annotations-in-PDF-using-XML-format.cs)
-- [Using-Text-Annotation-for-PDF-using-CGM-format](./Using-Text-Annotation-for-PDF-using-CGM-format.cs)
-- [Using-Text-Annotation-for-PDF-using-PDF-format](./Using-Text-Annotation-for-PDF-using-PDF-format.cs)
-- [Working-with-Annotations-using-HTML-format](./Working-with-Annotations-using-HTML-format.cs)
-- [Working-with-Annotations-using-PDF-format](./Working-with-Annotations-using-PDF-format.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-CGM-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-CGM-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-HTML-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-HTML-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-HTML-format](./Yet-another-way-to-export-import-annotations-at-once-using-HTML-format.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-MD-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-MD-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-MHT-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-MHT-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-OFD-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-OFD-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-PCL-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-PCL-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-PDF-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-PDF-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-PS-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-PS-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-SVG-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-SVG-format-and-save-as-PDF.cs)
-- [Yet-another-way-to-export-import-annotations-at-once-using-XML-format-and-save-as-PDF](./Yet-another-way-to-export-import-annotations-at-once-using-XML-format-and-save-as-PDF.cs)
+## Required Namespaces
 
+- `using Aspose.Pdf;` (246/252 files) ← category-specific
+- `using Aspose.Pdf.Annotations;` (194/252 files) ← category-specific
+- `using Aspose.Pdf.Text;` (36/252 files)
+- `using Aspose.Pdf.Facades;` (30/252 files)
+- `using Aspose.Pdf.Drawing;` (19/252 files)
+- `using Aspose.Pdf.Tagged;` (5/252 files)
+- `using Aspose.Pdf.LogicalStructure;` (3/252 files)
+- `using Aspose.Pdf.Vector;` (2/252 files)
+- `using System;` (252/252 files)
+- `using System.IO;` (247/252 files)
+- `using System.Drawing;` (12/252 files)
+- `using System.Runtime.InteropServices;` (8/252 files)
+
+## Common Code Pattern
+
+Most files follow this pattern:
+
+```csharp
+using (Document doc = new Document("input.pdf"))
+{
+    // ... operations ...
+    doc.Save("output.pdf");
+}
+```
+
+## Files in this folder
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [Add-Delete-and-Get-Annotation-using-CGM-format](./Add-Delete-and-Get-Annotation-using-CGM-format.cs) | `CgmLoadOptions`, `TextAnnotation` | Add Delete and Get Annotation using CGM format |
+| [Add-Delete-and-Get-Annotation-using-EPUB-format](./Add-Delete-and-Get-Annotation-using-EPUB-format.cs) | `Rectangle`, `TextAnnotation`, `PdfAnnotationEditor` | Add Delete and Get Annotation using EPUB format |
+| [Add-Delete-and-Get-Annotation-using-MD-format](./Add-Delete-and-Get-Annotation-using-MD-format.cs) | `TextAnnotation` | Add Delete and Get Annotation using MD format |
+| [Add-Delete-and-Get-Annotation-using-MHT-format](./Add-Delete-and-Get-Annotation-using-MHT-format.cs) | `TextAnnotation` | Add Delete and Get Annotation using MHT format |
+| [Add-Delete-and-Get-Annotation-using-OFD-format](./Add-Delete-and-Get-Annotation-using-OFD-format.cs) | `OfdLoadOptions`, `TextAnnotation` | Add Delete and Get Annotation using OFD format |
+| [Add-Delete-and-Get-Annotation-using-PCL-format](./Add-Delete-and-Get-Annotation-using-PCL-format.cs) | `PclLoadOptions`, `TextAnnotation` | Add Delete and Get Annotation using PCL format |
+| [Add-Delete-and-Get-Annotation-using-PDF-format](./Add-Delete-and-Get-Annotation-using-PDF-format.cs) | `TextAnnotation` | Add Delete and Get Annotation using PDF format |
+| [Add-Delete-and-Get-Annotation-using-PS-format](./Add-Delete-and-Get-Annotation-using-PS-format.cs) | `PsLoadOptions`, `TextAnnotation` | Add Delete and Get Annotation using PS format |
+| [Add-Delete-and-Get-Annotation-using-SVG-format](./Add-Delete-and-Get-Annotation-using-SVG-format.cs) | `SquareAnnotation`, `SvgExtractor` | Add Delete and Get Annotation using SVG format |
+| [Add-Delete-and-Get-Annotation-using-TeX-format](./Add-Delete-and-Get-Annotation-using-TeX-format.cs) | `TeXFragment`, `TextAnnotation` | Add Delete and Get Annotation using TeX format |
+| [Add-Delete-and-Get-Annotation-using-XML-format](./Add-Delete-and-Get-Annotation-using-XML-format.cs) | `TextAnnotation` | Add Delete and Get Annotation using XML format |
+| [Add-Delete-and-Get-Annotation-using-XPS-format](./Add-Delete-and-Get-Annotation-using-XPS-format.cs) | `XpsLoadOptions`, `TextAnnotation`, `PdfAnnotationEditor` | Add Delete and Get Annotation using XPS format |
+| [Add-Figures-Annotations-using-C-using-CGM-format](./Add-Figures-Annotations-using-C-using-CGM-format.cs) | `CgmLoadOptions`, `CircleAnnotation`, `SquareAnnotation` | Add Figures Annotations using C using CGM format |
+| [Add-Figures-Annotations-using-C-using-EPUB-format](./Add-Figures-Annotations-using-C-using-EPUB-format.cs) | `SquareAnnotation`, `CircleAnnotation` | Add Figures Annotations using C using EPUB format |
+| [Add-Figures-Annotations-using-C-using-HTML-format](./Add-Figures-Annotations-using-C-using-HTML-format.cs) | `SquareAnnotation` | Add Figures Annotations using C using HTML format |
+| [Add-Figures-Annotations-using-C-using-MD-format](./Add-Figures-Annotations-using-C-using-MD-format.cs) | `SquareAnnotation`, `CircleAnnotation` | Add Figures Annotations using C using MD format |
+| [Add-Figures-Annotations-using-C-using-MHT-format](./Add-Figures-Annotations-using-C-using-MHT-format.cs) | `MhtLoadOptions`, `SquareAnnotation`, `CircleAnnotation` | Add Figures Annotations using C using MHT format |
+| [Add-Figures-Annotations-using-C-using-OFD-format](./Add-Figures-Annotations-using-C-using-OFD-format.cs) | `OfdLoadOptions`, `SquareAnnotation`, `CircleAnnotation` | Add Figures Annotations using C using OFD format |
+| [Add-Figures-Annotations-using-C-using-PDF-format](./Add-Figures-Annotations-using-C-using-PDF-format.cs) | `SquareAnnotation`, `CircleAnnotation`, `PolygonAnnotation` | Add Figures Annotations using C using PDF format |
+| [Add-Figures-Annotations-using-C-using-PS-format](./Add-Figures-Annotations-using-C-using-PS-format.cs) | `SquareAnnotation`, `CircleAnnotation` | Add Figures Annotations using C using PS format |
+| [Add-Figures-Annotations-using-C-using-SVG-format](./Add-Figures-Annotations-using-C-using-SVG-format.cs) | `SquareAnnotation`, `SvgSaveOptions` | Add Figures Annotations using C using SVG format |
+| [Add-Figures-Annotations-using-C-using-TeX-format](./Add-Figures-Annotations-using-C-using-TeX-format.cs) | `SquareAnnotation`, `TeXFragment`, `TextAnnotation` | Add Figures Annotations using C using TeX format |
+| [Add-Figures-Annotations-using-C-using-XML-format](./Add-Figures-Annotations-using-C-using-XML-format.cs) | `SquareAnnotation` | Add Figures Annotations using C using XML format |
+| [Add-Figures-Annotations-using-C-using-XPS-format](./Add-Figures-Annotations-using-C-using-XPS-format.cs) | `SquareAnnotation`, `XpsSaveOptions` | Add Figures Annotations using C using XPS format |
+| [Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Docu...](./Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Document-using-CGM-format.cs) | `CgmLoadOptions` | Add Reference of a single Image multiple times in a PDF Document using CGM fo... |
+| [Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Docu...](./Add-Reference-of-a-single-Image-multiple-times-in-a-PDF-Document-using-PDF-format.cs) | `Rectangle` | Add Reference of a single Image multiple times in a PDF Document using PDF fo... |
+| [Add-Screen-Annotation-using-CGM-format](./Add-Screen-Annotation-using-CGM-format.cs) | `ScreenAnnotation` | Add Screen Annotation using CGM format |
+| [Add-Screen-Annotation-using-EPUB-format](./Add-Screen-Annotation-using-EPUB-format.cs) | `ScreenAnnotation` | Add Screen Annotation using EPUB format |
+| [Add-Screen-Annotation-using-HTML-format](./Add-Screen-Annotation-using-HTML-format.cs) | `ScreenAnnotation` | Add Screen Annotation using HTML format |
+| [Add-Screen-Annotation-using-MD-format](./Add-Screen-Annotation-using-MD-format.cs) | `ScreenAnnotation` | Add Screen Annotation using MD format |
+| ... | | *and 222 more files* |
 
 ## Category Statistics
 - Total examples: 252
 
+## Category-Specific Tips
+
+### Key API Surface
+- `Aspose.Pdf.AnnotationCollection`
+- `Aspose.Pdf.AnnotationCollection.Delete`
+- `Aspose.Pdf.Annotations.Annotation`
+- `Aspose.Pdf.Annotations.AnnotationFlags`
+- `Aspose.Pdf.Annotations.DefaultAppearance`
+- `Aspose.Pdf.Annotations.FreeTextAnnotation`
+- `Aspose.Pdf.Annotations.MarkupAnnotation`
+- `Aspose.Pdf.Annotations.ScreenAnnotation`
+- `Aspose.Pdf.Annotations.TextAnnotation`
+- `Aspose.Pdf.Annotations.TextMarkupAnnotation`
+- `Aspose.Pdf.Annotations.TextStyle`
+- `Aspose.Pdf.Document`
+- `Aspose.Pdf.Document.Save`
+- `Aspose.Pdf.Facades.PdfAnnotationEditor`
+- `Aspose.Pdf.Facades.PdfAnnotationEditor.BindPdf`
+
+### Rules
+- BindPdf({input_pdf}) must be called on a PdfContentEditor instance before any annotation operations.
+- CreateFreeText({rect}, {string_literal}, {int}) adds a free‑text annotation containing the given text to the specified page number within the bound document.
+- Save({output_pdf}) persists all changes made to the PDF after annotation creation.
+- Load a PDF document with {doc} = new Document({input_pdf});
+- Create a screen annotation using {annotation} = new ScreenAnnotation({page}, {rect}, {string_literal}) where {string_literal} points to a .swf file.
+
+### Warnings
+- The rectangle coordinates are expressed in points relative to the page's origin (bottom‑left).
+- Page numbers are 1‑based; passing an invalid page index will throw an exception.
+- SWF (Flash) content may not be supported by all PDF viewers; ensure target environment can render it.
+- The rectangle coordinates must be within the bounds of {page} to be visible.
+- The exact class name for the annotations collection is assumed to be Aspose.Pdf.AnnotationCollection; verify against the library version.
+
 ## General Tips
-- See parent [agents.md](../agents.md) for repository-level patterns, conventions, and anti-patterns
+- See parent [agents.md](../agents.md) for:
+  - **Boundaries** — Always / Ask First / Never rules for all examples
+  - **Common Mistakes** — verified anti-patterns that cause build failures
+  - **Domain Knowledge** — cross-cutting API-specific gotchas
+  - **Testing Guide** — build and run verification steps
 - Review code examples in this folder for working-with-annotations patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_105743_f05edb`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

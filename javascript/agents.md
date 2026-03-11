@@ -1,28 +1,70 @@
-# AGENTS - JavaScript
+---
+name: javascript
+description: C# examples for javascript using Aspose.PDF for .NET
+language: csharp
+framework: net10.0
+parent: ../agents.md
+---
+
+# AGENTS - javascript
+
+## Persona
+
+You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
+working within the **javascript** category.
+This folder contains standalone C# examples for javascript operations.
+See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **JavaScript**.
+- This folder contains examples for **javascript**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
-## Files in this folder
-- [Add-JavaScript-actions-to-a-PDF-document-and-load-it-to-enable-interactive-scripting](./Add-JavaScript-actions-to-a-PDF-document-and-load-it-to-enable-interactive-scripting.cs)
-- [Add-document-level-JavaScript-to-a-PDF-and-load-it-for-execution-within-the-application](./Add-document-level-JavaScript-to-a-PDF-and-load-it-for-execution-within-the-application.cs)
-- [Attach-JavaScript-to-a-form-field-s-OnFocus-or-OnBlur-event-in-a-PDF-and-load-the-document](./Attach-JavaScript-to-a-form-field-s-OnFocus-or-OnBlur-event-in-a-PDF-and-load-the-document.cs)
-- [Attach-a-document-level-JavaScript-action-to-a-PDF-using-the-Document.JavaScriptActions-collection-a](./Attach-a-document-level-JavaScript-action-to-a-PDF-using-the-Document.JavaScriptActions-collection-a.cs)
-- [Embed-JavaScript-into-a-PDF-document-by-analyzing-existing-scripts-and-loading-the-PDF-for-modificat](./Embed-JavaScript-into-a-PDF-document-by-analyzing-existing-scripts-and-loading-the-PDF-for-modificat.cs)
-- [Execute-sample-JavaScript-code-to-embed-scripts-into-a-PDF-and-subsequently-load-the-modified-docume](./Execute-sample-JavaScript-code-to-embed-scripts-into-a-PDF-and-subsequently-load-the-modified-docume.cs)
-- [Implement-field-level-JavaScript-scripts-within-a-PDF-and-load-the-document-programmatically-for-exe](./Implement-field-level-JavaScript-scripts-within-a-PDF-and-load-the-document-programmatically-for-exe.cs)
-- [Integrate-JavaScript-into-a-PDF-to-execute-calculations-validations-or-UI-interactions-when-the-do](./Integrate-JavaScript-into-a-PDF-to-execute-calculations-validations-or-UI-interactions-when-the-do.cs)
-- [Provide-a-comprehensive-guide-on-embedding-JavaScript-into-PDFs-including-script-integration-and-PD](./Provide-a-comprehensive-guide-on-embedding-JavaScript-into-PDFs-including-script-integration-and-PD.cs)
+## Required Namespaces
 
+- `using Aspose.Pdf;` (9/9 files) ← category-specific
+- `using Aspose.Pdf.Annotations;` (8/9 files) ← category-specific
+- `using Aspose.Pdf.Forms;` (2/9 files)
+- `using Aspose.Pdf.Facades;` (1/9 files)
+- `using System;` (9/9 files)
+- `using System.IO;` (8/9 files)
+
+## Common Code Pattern
+
+Most files follow this pattern:
+
+```csharp
+using (Document doc = new Document("input.pdf"))
+{
+    // ... operations ...
+    doc.Save("output.pdf");
+}
+```
+
+## Files in this folder
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [Add-JavaScript-actions-to-a-PDF-document-and-load-it-to-enab...](./Add-JavaScript-actions-to-a-PDF-document-and-load-it-to-enable-interactive-scripting.cs) | `JavascriptAction`, `LinkAnnotation` | Add JavaScript actions to a PDF document and load it to enable interactive sc... |
+| [Add-document-level-JavaScript-to-a-PDF-and-load-it-for-execu...](./Add-document-level-JavaScript-to-a-PDF-and-load-it-for-execution-within-the-application.cs) | `JavascriptAction` | Add document level JavaScript to a PDF and load it for execution within the a... |
+| [Attach-JavaScript-to-a-form-field-s-OnFocus-or-OnBlur-event-...](./Attach-JavaScript-to-a-form-field-s-OnFocus-or-OnBlur-event-in-a-PDF-and-load-the-document.cs) | `JavascriptAction` | Attach JavaScript to a form field s OnFocus or OnBlur event in a PDF and load... |
+| [Attach-a-document-level-JavaScript-action-to-a-PDF-using-the...](./Attach-a-document-level-JavaScript-action-to-a-PDF-using-the-Document.JavaScriptActions-collection-a.cs) | `JavascriptAction` | Attach a document level JavaScript action to a PDF using the Document.JavaScr... |
+| [Embed-JavaScript-into-a-PDF-document-by-analyzing-existing-s...](./Embed-JavaScript-into-a-PDF-document-by-analyzing-existing-scripts-and-loading-the-PDF-for-modificat.cs) | `JavascriptAction` | Embed JavaScript into a PDF document by analyzing existing scripts and loadin... |
+| [Execute-sample-JavaScript-code-to-embed-scripts-into-a-PDF-a...](./Execute-sample-JavaScript-code-to-embed-scripts-into-a-PDF-and-subsequently-load-the-modified-docume.cs) | `PdfContentEditor` | Execute sample JavaScript code to embed scripts into a PDF and subsequently l... |
+| [Implement-field-level-JavaScript-scripts-within-a-PDF-and-lo...](./Implement-field-level-JavaScript-scripts-within-a-PDF-and-load-the-document-programmatically-for-exe.cs) | `JavascriptAction` | Implement field level JavaScript scripts within a PDF and load the document p... |
+| [Integrate-JavaScript-into-a-PDF-to-execute-calculations-vali...](./Integrate-JavaScript-into-a-PDF-to-execute-calculations-validations-or-UI-interactions-when-the-do.cs) | `JavascriptAction` | Integrate JavaScript into a PDF to execute calculations validations or UI int... |
+| [Provide-a-comprehensive-guide-on-embedding-JavaScript-into-P...](./Provide-a-comprehensive-guide-on-embedding-JavaScript-into-PDFs-including-script-integration-and-PD.cs) | `JavascriptAction`, `LinkAnnotation` | Provide a comprehensive guide on embedding JavaScript into PDFs including scr... |
 
 ## Category Statistics
 - Total examples: 9
 
 ## General Tips
-- See parent [agents.md](../agents.md) for repository-level patterns, conventions, and anti-patterns
-- Review code examples in this folder for JavaScript patterns
+- See parent [agents.md](../agents.md) for:
+  - **Boundaries** — Always / Ask First / Never rules for all examples
+  - **Common Mistakes** — verified anti-patterns that cause build failures
+  - **Domain Knowledge** — cross-cutting API-specific gotchas
+  - **Testing Guide** — build and run verification steps
+- Review code examples in this folder for javascript patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_105743_f05edb`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

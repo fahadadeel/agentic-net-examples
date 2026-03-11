@@ -1,88 +1,90 @@
 ---
-name: Facades - Metadata
-description: C# examples for Facades - Metadata using Aspose.PDF for .NET
+name: facades-metadata
+description: C# examples for facades-metadata using Aspose.PDF for .NET
 language: csharp
 framework: net10.0
 parent: ../agents.md
 ---
 
-# AGENTS - Facades - Metadata
+# AGENTS - facades-metadata
 
 ## Persona
 
 You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
-working within the **Facades - Metadata** category.
-This folder contains standalone C# examples for Facades - Metadata operations.
+working within the **facades-metadata** category.
+This folder contains standalone C# examples for facades-metadata operations.
 See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **Facades - Metadata**.
+- This folder contains examples for **facades-metadata**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
+## Required Namespaces
+
+- `using Aspose.Pdf.Facades;` (58/59 files) ← category-specific
+- `using Aspose.Pdf;` (39/59 files) ← category-specific
+- `using System;` (59/59 files)
+- `using System.IO;` (59/59 files)
+- `using System.Text;` (4/59 files)
+- `using System.Xml.Linq;` (4/59 files)
+- `using System.Collections.Generic;` (3/59 files)
+- `using System.Linq;` (3/59 files)
+- `using System.Globalization;` (1/59 files)
+- `using System.IO.Compression;` (1/59 files)
+- `using System.Reflection;` (1/59 files)
+- `using System.Runtime.InteropServices;` (1/59 files)
+- `using System.Text.Json;` (1/59 files)
+- `using System.Text.RegularExpressions;` (1/59 files)
+
+## Common Code Pattern
+
+Most files in this category use `PdfFileInfo` from `Aspose.Pdf.Facades`:
+
+```csharp
+PdfFileInfo tool = new PdfFileInfo();
+tool.BindPdf("input.pdf");
+// ... PdfFileInfo operations ...
+tool.Save("output.pdf");
+```
+
 ## Files in this folder
-- [adjust-metadata-properties-of-a-pdf-document-embedded-within-an-ofd-file-using-the-provided-api](./adjust-metadata-properties-of-a-pdf-document-embedded-within-an-ofd-file-using-the-provided-api.cs)
-- [assign-pdf-metadata-fields-title-author-subject-and-keywords-to-an-svg-document-using-the-appropr](./assign-pdf-metadata-fields-title-author-subject-and-keywords-to-an-svg-document-using-the-appropr.cs)
-- [assign-pdf-metadata-fields-within-a-cgm-document-programmatically-using-the-available-api-methods](./assign-pdf-metadata-fields-within-a-cgm-document-programmatically-using-the-available-api-methods.cs)
-- [assign-pdf-metadata-including-title-author-subject-and-keywords-to-an-mht-document-using-the-prov](./assign-pdf-metadata-including-title-author-subject-and-keywords-to-an-mht-document-using-the-prov.cs)
-- [assign-pdf-metadata-properties-including-title-author-subject-and-keywords-directly-from-an-html](./assign-pdf-metadata-properties-including-title-author-subject-and-keywords-directly-from-an-html.cs)
-- [assign-title-author-subject-and-keyword-metadata-to-an-epub-file-using-pdf-metadata-properties](./assign-title-author-subject-and-keyword-metadata-to-an-epub-file-using-pdf-metadata-properties.cs)
-- [assign-title-author-subject-and-keyword-metadata-to-an-xps-document-using-the-appropriate-api-cal](./assign-title-author-subject-and-keyword-metadata-to-an-xps-document-using-the-appropriate-api-cal.cs)
-- [assign-title-author-subject-and-keyword-metadata-to-the-pdf-output-generated-from-a-cgm-document](./assign-title-author-subject-and-keyword-metadata-to-the-pdf-output-generated-from-a-cgm-document.cs)
-- [configure-pdf-metadata-fields-including-title-author-subject-and-keywords-directly-inside-an-xsl](./configure-pdf-metadata-fields-including-title-author-subject-and-keywords-directly-inside-an-xsl.cs)
-- [configure-pdf-metadata-including-title-author-subject-and-keywords-when-generating-a-pdf-from-a-t](./configure-pdf-metadata-including-title-author-subject-and-keywords-when-generating-a-pdf-from-a-t.cs)
-- [extract-pdf-metadata-embedded-in-a-cgm-file-and-present-it-in-a-structured-format](./extract-pdf-metadata-embedded-in-a-cgm-file-and-present-it-in-a-structured-format.cs)
-- [extract-pdf-metadata-title-author-subject-and-keywords-and-assign-these-properties-to-an-ofd-docu](./extract-pdf-metadata-title-author-subject-and-keywords-and-assign-these-properties-to-an-ofd-docu.cs)
-- [modify-pdf-document-metadata-using-html-controls-to-programmatically-set-properties-before-rendering](./modify-pdf-document-metadata-using-html-controls-to-programmatically-set-properties-before-rendering.cs)
-- [populate-pdf-metadata-fields-title-author-subject-and-keywords-using-values-specified-in-a-markdo](./populate-pdf-metadata-fields-title-author-subject-and-keywords-using-values-specified-in-a-markdo.cs)
-- [programmatically-assign-pdf-metadata-fields-title-author-subject-and-keywords-to-a-generated-post](./programmatically-assign-pdf-metadata-fields-title-author-subject-and-keywords-to-a-generated-post.cs)
-- [programmatically-retrieve-pdf-document-metadata-such-as-title-and-author-from-within-an-xps-file](./programmatically-retrieve-pdf-document-metadata-such-as-title-and-author-from-within-an-xps-file.cs)
-- [programmatically-update-pdf-document-metadata-properties-during-svg-document-processing-using-the-.n](./programmatically-update-pdf-document-metadata-properties-during-svg-document-processing-using-the-.n.cs)
-- [read-pdf-document-properties-and-display-them-programmatically-within-an-html-page-using-.net-librar](./read-pdf-document-properties-and-display-them-programmatically-within-an-html-page-using-.net-librar.cs)
-- [read-pdf-document-properties-and-output-them-to-an-md-file-for-documentation-purposes](./read-pdf-document-properties-and-output-them-to-an-md-file-for-documentation-purposes.cs)
-- [read-pdf-metadata-from-an-epub-file-and-expose-the-properties-via-.net-api](./read-pdf-metadata-from-an-epub-file-and-expose-the-properties-via-.net-api.cs)
-- [read-the-metadata-properties-of-a-pdf-document-embedded-within-a-cgm-file-programmatically](./read-the-metadata-properties-of-a-pdf-document-embedded-within-a-cgm-file-programmatically.cs)
-- [retrieve-a-pdf-s-title-author-subject-and-keywords-and-embed-them-into-an-svg-document](./retrieve-a-pdf-s-title-author-subject-and-keywords-and-embed-them-into-an-svg-document.cs)
-- [retrieve-comprehensive-metadata-page-count-and-structural-details-from-a-pdf-document-using-the-.n](./retrieve-comprehensive-metadata-page-count-and-structural-details-from-a-pdf-document-using-the-.n.cs)
-- [retrieve-metadata-properties-from-a-pdf-document-using-the-library-s-api-and-expose-them-programmati](./retrieve-metadata-properties-from-a-pdf-document-using-the-library-s-api-and-expose-them-programmati.cs)
-- [retrieve-metadata-title-author-subject-keywords-from-a-pdf-file-and-embed-it-into-a-pcl-documen](./retrieve-metadata-title-author-subject-keywords-from-a-pdf-file-and-embed-it-into-a-pcl-documen.cs)
-- [retrieve-pdf-document-metadata-within-an-xslfo-template-to-dynamically-populate-property-values-duri](./retrieve-pdf-document-metadata-within-an-xslfo-template-to-dynamically-populate-property-values-duri.cs)
-- [retrieve-pdf-document-properties-and-write-them-to-an-xml-file-for-integration-with-other-systems](./retrieve-pdf-document-properties-and-write-them-to-an-xml-file-for-integration-with-other-systems.cs)
-- [retrieve-pdf-document-properties-embedded-within-an-ofd-file-programmatically-using-the-appropriate](./retrieve-pdf-document-properties-embedded-within-an-ofd-file-programmatically-using-the-appropriate.cs)
-- [retrieve-pdf-document-properties-within-a-postscript-ps-file-using-appropriate-.net-apis-and-integ](./retrieve-pdf-document-properties-within-a-postscript-ps-file-using-appropriate-.net-apis-and-integ.cs)
-- [retrieve-pdf-metadata-fields-including-title-author-subject-and-keywords-from-an-epub-document-pr](./retrieve-pdf-metadata-fields-including-title-author-subject-and-keywords-from-an-epub-document-pr.cs)
-- [retrieve-pdf-metadata-fields-title-author-subject-and-keywords-from-a-document-programmatically-u](./retrieve-pdf-metadata-fields-title-author-subject-and-keywords-from-a-document-programmatically-u.cs)
-- [retrieve-pdf-metadata-from-a-pdf-file-embedded-within-an-mht-document-using-.net-apis](./retrieve-pdf-metadata-from-a-pdf-file-embedded-within-an-mht-document-using-.net-apis.cs)
-- [retrieve-pdf-metadata-including-title-author-subject-and-keywords-and-generate-an-md-document-con](./retrieve-pdf-metadata-including-title-author-subject-and-keywords-and-generate-an-md-document-con.cs)
-- [retrieve-pdf-metadata-including-title-author-subject-and-keywords-from-a-cgm-document-using-the-a](./retrieve-pdf-metadata-including-title-author-subject-and-keywords-from-a-cgm-document-using-the-a.cs)
-- [retrieve-pdf-metadata-including-title-author-subject-and-keywords-from-an-xps-document-using-.net](./retrieve-pdf-metadata-including-title-author-subject-and-keywords-from-an-xps-document-using-.net.cs)
-- [retrieve-pdf-metadata-including-title-author-subject-and-keywords-programmatically-within-an-xs](./retrieve-pdf-metadata-including-title-author-subject-and-keywords-programmatically-within-an-xs.cs)
-- [retrieve-pdf-metadata-properties-programmatically-while-processing-an-svg-document-using-the-.net-ap](./retrieve-pdf-metadata-properties-programmatically-while-processing-an-svg-document-using-the-.net-ap.cs)
-- [retrieve-pdf-metadata-properties-within-a-tex-document-by-invoking-the-appropriate-api-methods](./retrieve-pdf-metadata-properties-within-a-tex-document-by-invoking-the-appropriate-api-methods.cs)
-- [retrieve-pdf-metadata-such-as-title-author-subject-and-keywords-and-display-it-in-an-html-docume](./retrieve-pdf-metadata-such-as-title-author-subject-and-keywords-and-display-it-in-an-html-docume.cs)
-- [retrieve-pdf-metadata-title-author-subject-and-keywords-and-insert-it-into-a-tex-source-file](./retrieve-pdf-metadata-title-author-subject-and-keywords-and-insert-it-into-a-tex-source-file.cs)
-- [retrieve-pdf-metadata-title-author-subject-keywords-and-embed-it-into-a-ps-document](./retrieve-pdf-metadata-title-author-subject-keywords-and-embed-it-into-a-ps-document.cs)
-- [retrieve-pdf-metadata-title-author-subject-keywords-and-embed-it-into-an-mht-document](./retrieve-pdf-metadata-title-author-subject-keywords-and-embed-it-into-an-mht-document.cs)
-- [retrieve-pdf-metadata-title-author-subject-keywords-and-output-it-as-a-structured-xml-document](./retrieve-pdf-metadata-title-author-subject-keywords-and-output-it-as-a-structured-xml-document.cs)
-- [retrieve-pdf-metadata-while-processing-a-pcl-document-to-directly-access-its-properties-programmatic](./retrieve-pdf-metadata-while-processing-a-pcl-document-to-directly-access-its-properties-programmatic.cs)
-- [set-metadata-fields-title-author-subject-keywords-for-a-pdf-file-embedded-within-a-pcl-document](./set-metadata-fields-title-author-subject-keywords-for-a-pdf-file-embedded-within-a-pcl-document.cs)
-- [set-pdf-metadata-fields-such-as-title-author-subject-and-keywords-for-a-pdf-document](./set-pdf-metadata-fields-such-as-title-author-subject-and-keywords-for-a-pdf-document.cs)
-- [set-pdf-metadata-fields-title-author-subject-keywords-within-an-ofd-document-via-.net-apis](./set-pdf-metadata-fields-title-author-subject-keywords-within-an-ofd-document-via-.net-apis.cs)
-- [update-metadata-of-embedded-pdf-files-inside-an-epub-archive-programmatically-ensuring-compliance-w](./update-metadata-of-embedded-pdf-files-inside-an-epub-archive-programmatically-ensuring-compliance-w.cs)
-- [update-or-set-metadata-properties-of-a-pdf-document-programmatically-using-the-.net-api](./update-or-set-metadata-properties-of-a-pdf-document-programmatically-using-the-.net-api.cs)
-- [update-pdf-document-metadata-and-properties-by-applying-settings-defined-in-an-external-xml-configur](./update-pdf-document-metadata-and-properties-by-applying-settings-defined-in-an-external-xml-configur.cs)
-- [update-pdf-document-properties-embedded-within-a-cgm-file-using-the-appropriate-api-methods](./update-pdf-document-properties-embedded-within-a-cgm-file-using-the-appropriate-api-methods.cs)
-- [update-pdf-document-properties-within-a-ps-file-to-reflect-desired-metadata-and-display-settings](./update-pdf-document-properties-within-a-ps-file-to-reflect-desired-metadata-and-display-settings.cs)
-- [update-pdf-metadata-fields-when-embedding-the-pdf-into-an-xps-document-using-.net-apis](./update-pdf-metadata-fields-when-embedding-the-pdf-into-an-xps-document-using-.net-apis.cs)
-- [update-pdf-metadata-properties-when-generating-a-pdf-from-a-tex-source-using-the-library-s-api](./update-pdf-metadata-properties-when-generating-a-pdf-from-a-tex-source-using-the-library-s-api.cs)
-- [update-pdf-metadata-properties-within-an-xsl-fo-document-using-appropriate-api-calls-and-property-de](./update-pdf-metadata-properties-within-an-xsl-fo-document-using-appropriate-api-calls-and-property-de.cs)
-- [update-the-metadata-fields-of-a-pdf-document-embedded-within-a-pcl-file-using-the-appropriate-api](./update-the-metadata-fields-of-a-pdf-document-embedded-within-a-pcl-file-using-the-appropriate-api.cs)
-- [update-the-metadata-properties-of-a-pdf-document-embedded-inside-an-mht-file-programmatically](./update-the-metadata-properties-of-a-pdf-document-embedded-inside-an-mht-file-programmatically.cs)
-- [update-the-metadata-properties-of-a-pdf-document-such-as-title-author-and-keywords-programmaticall](./update-the-metadata-properties-of-a-pdf-document-such-as-title-author-and-keywords-programmaticall.cs)
-- [update-the-pdf-file-s-metadata-properties-based-on-values-defined-in-a-markdown-.md-document](./update-the-pdf-file-s-metadata-properties-based-on-values-defined-in-a-markdown-.md-document.cs)
-- [write-pdf-metadata-title-author-subject-keywords-into-an-xml-document-for-later-processing](./write-pdf-metadata-title-author-subject-keywords-into-an-xml-document-for-later-processing.cs)
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [adjust-metadata-properties-of-a-pdf-document-embedded-within...](./adjust-metadata-properties-of-a-pdf-document-embedded-within-an-ofd-file-using-the-provided-api.cs) | `OfdLoadOptions`, `PdfFileInfo` | Adjust metadata properties of a pdf document embedded within an ofd file usin... |
+| [assign-pdf-metadata-fields-title-author-subject-and-keywords...](./assign-pdf-metadata-fields-title-author-subject-and-keywords-to-an-svg-document-using-the-appropr.cs) | `SvgLoadOptions`, `PdfFileInfo` | Assign pdf metadata fields title author subject and keywords to an svg docume... |
+| [assign-pdf-metadata-fields-within-a-cgm-document-programmati...](./assign-pdf-metadata-fields-within-a-cgm-document-programmatically-using-the-available-api-methods.cs) | `CgmLoadOptions`, `PdfFileInfo` | Assign pdf metadata fields within a cgm document programmatically using the a... |
+| [assign-pdf-metadata-including-title-author-subject-and-keywo...](./assign-pdf-metadata-including-title-author-subject-and-keywords-to-an-mht-document-using-the-prov.cs) | `MhtLoadOptions`, `PdfFileInfo` | Assign pdf metadata including title author subject and keywords to an mht doc... |
+| [assign-pdf-metadata-properties-including-title-author-subjec...](./assign-pdf-metadata-properties-including-title-author-subject-and-keywords-directly-from-an-html.cs) | `HtmlLoadOptions`, `PdfFileInfo` | Assign pdf metadata properties including title author subject and keywords di... |
+| [assign-title-author-subject-and-keyword-metadata-to-an-epub-...](./assign-title-author-subject-and-keyword-metadata-to-an-epub-file-using-pdf-metadata-properties.cs) | `PdfFileInfo` | Assign title author subject and keyword metadata to an epub file using pdf me... |
+| [assign-title-author-subject-and-keyword-metadata-to-an-xps-d...](./assign-title-author-subject-and-keyword-metadata-to-an-xps-document-using-the-appropriate-api-cal.cs) | `PdfFileInfo`, `XpsSaveOptions` | Assign title author subject and keyword metadata to an xps document using the... |
+| [assign-title-author-subject-and-keyword-metadata-to-the-pdf-...](./assign-title-author-subject-and-keyword-metadata-to-the-pdf-output-generated-from-a-cgm-document.cs) | `PdfFileInfo` | Assign title author subject and keyword metadata to the pdf output generated ... |
+| [configure-pdf-metadata-fields-including-title-author-subject...](./configure-pdf-metadata-fields-including-title-author-subject-and-keywords-directly-inside-an-xsl.cs) | `XslFoLoadOptions`, `PdfFileInfo` | Configure pdf metadata fields including title author subject and keywords dir... |
+| [configure-pdf-metadata-including-title-author-subject-and-ke...](./configure-pdf-metadata-including-title-author-subject-and-keywords-when-generating-a-pdf-from-a-t.cs) | `TeXLoadOptions` | Configure pdf metadata including title author subject and keywords when gener... |
+| [extract-pdf-metadata-embedded-in-a-cgm-file-and-present-it-i...](./extract-pdf-metadata-embedded-in-a-cgm-file-and-present-it-in-a-structured-format.cs) | `PdfFileInfo` | Extract pdf metadata embedded in a cgm file and present it in a structured fo... |
+| [extract-pdf-metadata-title-author-subject-and-keywords-and-a...](./extract-pdf-metadata-title-author-subject-and-keywords-and-assign-these-properties-to-an-ofd-docu.cs) | `PdfFileInfo`, `OfdLoadOptions` | Extract pdf metadata title author subject and keywords and assign these prope... |
+| [modify-pdf-document-metadata-using-html-controls-to-programm...](./modify-pdf-document-metadata-using-html-controls-to-programmatically-set-properties-before-rendering.cs) | `PdfFileInfo` | Modify pdf document metadata using html controls to programmatically set prop... |
+| [populate-pdf-metadata-fields-title-author-subject-and-keywor...](./populate-pdf-metadata-fields-title-author-subject-and-keywords-using-values-specified-in-a-markdo.cs) | `PdfFileInfo` | Populate pdf metadata fields title author subject and keywords using values s... |
+| [programmatically-assign-pdf-metadata-fields-title-author-sub...](./programmatically-assign-pdf-metadata-fields-title-author-subject-and-keywords-to-a-generated-post.cs) | `PdfFileInfo` | Programmatically assign pdf metadata fields title author subject and keywords... |
+| [programmatically-retrieve-pdf-document-metadata-such-as-titl...](./programmatically-retrieve-pdf-document-metadata-such-as-title-and-author-from-within-an-xps-file.cs) | `XpsLoadOptions`, `PdfFileInfo` | Programmatically retrieve pdf document metadata such as title and author from... |
+| [programmatically-update-pdf-document-metadata-properties-dur...](./programmatically-update-pdf-document-metadata-properties-during-svg-document-processing-using-the-.n.cs) | `PdfFileInfo`, `SvgSaveOptions` | Programmatically update pdf document metadata properties during svg document ... |
+| [read-pdf-document-properties-and-display-them-programmatical...](./read-pdf-document-properties-and-display-them-programmatically-within-an-html-page-using-.net-librar.cs) | `PdfFileInfo`, `StringBuilder` | Read pdf document properties and display them programmatically within an html... |
+| [read-pdf-document-properties-and-output-them-to-an-md-file-f...](./read-pdf-document-properties-and-output-them-to-an-md-file-for-documentation-purposes.cs) | `PdfFileInfo`, `StringBuilder` | Read pdf document properties and output them to an md file for documentation ... |
+| [read-pdf-metadata-from-an-epub-file-and-expose-the-propertie...](./read-pdf-metadata-from-an-epub-file-and-expose-the-properties-via-.net-api.cs) | `EpubLoadOptions`, `PdfFileInfo` | Read pdf metadata from an epub file and expose the properties via .net api |
+| [read-the-metadata-properties-of-a-pdf-document-embedded-with...](./read-the-metadata-properties-of-a-pdf-document-embedded-within-a-cgm-file-programmatically.cs) | `PdfFileInfo` | Read the metadata properties of a pdf document embedded within a cgm file pro... |
+| [retrieve-a-pdf-s-title-author-subject-and-keywords-and-embed...](./retrieve-a-pdf-s-title-author-subject-and-keywords-and-embed-them-into-an-svg-document.cs) | `PdfFileInfo` | Retrieve a pdf s title author subject and keywords and embed them into an svg... |
+| [retrieve-comprehensive-metadata-page-count-and-structural-de...](./retrieve-comprehensive-metadata-page-count-and-structural-details-from-a-pdf-document-using-the-.n.cs) | `PdfFileInfo` | Retrieve comprehensive metadata page count and structural details from a pdf ... |
+| [retrieve-metadata-properties-from-a-pdf-document-using-the-l...](./retrieve-metadata-properties-from-a-pdf-document-using-the-library-s-api-and-expose-them-programmati.cs) | `PdfFileInfo` | Retrieve metadata properties from a pdf document using the library s api and ... |
+| [retrieve-metadata-title-author-subject-keywords-from-a-pdf-f...](./retrieve-metadata-title-author-subject-keywords-from-a-pdf-file-and-embed-it-into-a-pcl-documen.cs) | `PdfFileInfo` | Retrieve metadata title author subject keywords from a pdf file and embed it ... |
+| [retrieve-pdf-document-metadata-within-an-xslfo-template-to-d...](./retrieve-pdf-document-metadata-within-an-xslfo-template-to-dynamically-populate-property-values-duri.cs) | `PdfFileInfo`, `XslFoLoadOptions` | Retrieve pdf document metadata within an xslfo template to dynamically popula... |
+| [retrieve-pdf-document-properties-and-write-them-to-an-xml-fi...](./retrieve-pdf-document-properties-and-write-them-to-an-xml-file-for-integration-with-other-systems.cs) | `PdfFileInfo` | Retrieve pdf document properties and write them to an xml file for integratio... |
+| [retrieve-pdf-document-properties-embedded-within-an-ofd-file...](./retrieve-pdf-document-properties-embedded-within-an-ofd-file-programmatically-using-the-appropriate.cs) | `OfdLoadOptions`, `PdfFileInfo` | Retrieve pdf document properties embedded within an ofd file programmatically... |
+| [retrieve-pdf-document-properties-within-a-postscript-ps-file...](./retrieve-pdf-document-properties-within-a-postscript-ps-file-using-appropriate-.net-apis-and-integ.cs) | `PsLoadOptions`, `PdfFileInfo` | Retrieve pdf document properties within a postscript ps file using appropriat... |
+| [retrieve-pdf-metadata-fields-including-title-author-subject-...](./retrieve-pdf-metadata-fields-including-title-author-subject-and-keywords-from-an-epub-document-pr.cs) | `EpubLoadOptions`, `PdfFileInfo` | Retrieve pdf metadata fields including title author subject and keywords from... |
+| ... | | *and 29 more files* |
 
 ## Category Statistics
-- Total examples: 60
+- Total examples: 59
 
 ## Category-Specific Tips
 
@@ -123,8 +125,8 @@ See the root [agents.md](../agents.md) for repository-wide conventions and bound
   - **Common Mistakes** — verified anti-patterns that cause build failures
   - **Domain Knowledge** — cross-cutting API-specific gotchas
   - **Testing Guide** — build and run verification steps
-- Review code examples in this folder for Facades - Metadata patterns
+- Review code examples in this folder for facades-metadata patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_160245_96a7ea`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

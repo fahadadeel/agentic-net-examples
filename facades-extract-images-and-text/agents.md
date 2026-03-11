@@ -1,37 +1,62 @@
 ---
-name: Facades - Extract Images and Text
-description: C# examples for Facades - Extract Images and Text using Aspose.PDF for .NET
+name: facades-extract-images-and-text
+description: C# examples for facades-extract-images-and-text using Aspose.PDF for .NET
 language: csharp
 framework: net10.0
 parent: ../agents.md
 ---
 
-# AGENTS - Facades - Extract Images and Text
+# AGENTS - facades-extract-images-and-text
 
 ## Persona
 
 You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
-working within the **Facades - Extract Images and Text** category.
-This folder contains standalone C# examples for Facades - Extract Images and Text operations.
+working within the **facades-extract-images-and-text** category.
+This folder contains standalone C# examples for facades-extract-images-and-text operations.
 See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **Facades - Extract Images and Text**.
+- This folder contains examples for **facades-extract-images-and-text**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
+## Required Namespaces
+
+- `using Aspose.Pdf.Facades;` (12/12 files) ← category-specific
+- `using Aspose.Pdf;` (1/12 files)
+- `using System;` (12/12 files)
+- `using System.IO;` (12/12 files)
+- `using System.Drawing.Imaging;` (2/12 files)
+- `using System.Collections.Generic;` (1/12 files)
+- `using System.Text;` (1/12 files)
+- `using System.Threading.Tasks;` (1/12 files)
+
+## Common Code Pattern
+
+Most files in this category use `PdfExtractor` from `Aspose.Pdf.Facades`:
+
+```csharp
+PdfExtractor tool = new PdfExtractor();
+tool.BindPdf("input.pdf");
+// ... PdfExtractor operations ...
+tool.Save("output.pdf");
+```
+
 ## Files in this folder
-- [determine-if-a-pdf-document-includes-any-images-or-textual-content-using-the-facade-api](./determine-if-a-pdf-document-includes-any-images-or-textual-content-using-the-facade-api.cs)
-- [extract-attachments-from-a-pdf-document-using-the-facade-api-for-image-and-text-extraction](./extract-attachments-from-a-pdf-document-using-the-facade-api-for-image-and-text-extraction.cs)
-- [extract-images-and-text-from-a-pdf-utilizing-the-facade-api-with-the-extractimagemode-setting](./extract-images-and-text-from-a-pdf-utilizing-the-facade-api-with-the-extractimagemode-setting.cs)
-- [extract-images-and-text-from-an-entire-pdf-into-streams-utilizing-the-facade-abstraction](./extract-images-and-text-from-an-entire-pdf-into-streams-utilizing-the-facade-abstraction.cs)
-- [extract-images-and-text-from-pdf-files-using-the-facade-api-employing-the-text-extraction-mode-as-d](./extract-images-and-text-from-pdf-files-using-the-facade-api-employing-the-text-extraction-mode-as-d.cs)
-- [extract-images-from-a-defined-page-range-of-a-pdf-using-the-facades-library](./extract-images-from-a-defined-page-range-of-a-pdf-using-the-facades-library.cs)
-- [extract-text-content-from-a-pdf-document-using-the-facade-api-while-preserving-layout-and-formatting](./extract-text-content-from-a-pdf-document-using-the-facade-api-while-preserving-layout-and-formatting.cs)
-- [use-the-facade-api-to-extract-both-images-and-text-from-a-pdf-document-while-handling-background-pro](./use-the-facade-api-to-extract-both-images-and-text-from-a-pdf-document-while-handling-background-pro.cs)
-- [utilize-the-facades-api-in-image-extraction-mode-to-retrieve-images-and-associated-text-from-pdf-fil](./utilize-the-facades-api-in-image-extraction-mode-to-retrieve-images-and-associated-text-from-pdf-fil.cs)
-- [utilize-the-facades-api-to-extract-all-images-from-a-pdf-document-and-save-each-to-separate-files](./utilize-the-facades-api-to-extract-all-images-from-a-pdf-document-and-save-each-to-separate-files.cs)
-- [utilize-the-facades-api-to-extract-all-images-from-a-specified-page-of-a-pdf-document](./utilize-the-facades-api-to-extract-all-images-from-a-specified-page-of-a-pdf-document.cs)
-- [utilize-the-pdfextractor-fa-ade-to-retrieve-images-from-a-pdf-document-while-maintaining-original-qu](./utilize-the-pdfextractor-fa-ade-to-retrieve-images-from-a-pdf-document-while-maintaining-original-qu.cs)
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [determine-if-a-pdf-document-includes-any-images-or-textual-c...](./determine-if-a-pdf-document-includes-any-images-or-textual-content-using-the-facade-api.cs) | `PdfExtractor` | Determine if a pdf document includes any images or textual content using the ... |
+| [extract-attachments-from-a-pdf-document-using-the-facade-api...](./extract-attachments-from-a-pdf-document-using-the-facade-api-for-image-and-text-extraction.cs) | `PdfExtractor` | Extract attachments from a pdf document using the facade api for image and te... |
+| [extract-images-and-text-from-a-pdf-utilizing-the-facade-api-...](./extract-images-and-text-from-a-pdf-utilizing-the-facade-api-with-the-extractimagemode-setting.cs) | `PdfExtractor` | Extract images and text from a pdf utilizing the facade api with the extracti... |
+| [extract-images-and-text-from-an-entire-pdf-into-streams-util...](./extract-images-and-text-from-an-entire-pdf-into-streams-utilizing-the-facade-abstraction.cs) | `PdfExtractor` | Extract images and text from an entire pdf into streams utilizing the facade ... |
+| [extract-images-and-text-from-pdf-files-using-the-facade-api-...](./extract-images-and-text-from-pdf-files-using-the-facade-api-employing-the-text-extraction-mode-as-d.cs) | `PdfExtractor` | Extract images and text from pdf files using the facade api employing the tex... |
+| [extract-images-from-a-defined-page-range-of-a-pdf-using-the-...](./extract-images-from-a-defined-page-range-of-a-pdf-using-the-facades-library.cs) | `PdfExtractor` | Extract images from a defined page range of a pdf using the facades library |
+| [extract-text-content-from-a-pdf-document-using-the-facade-ap...](./extract-text-content-from-a-pdf-document-using-the-facade-api-while-preserving-layout-and-formatting.cs) | `PdfExtractor` | Extract text content from a pdf document using the facade api while preservin... |
+| [use-the-facade-api-to-extract-both-images-and-text-from-a-pd...](./use-the-facade-api-to-extract-both-images-and-text-from-a-pdf-document-while-handling-background-pro.cs) | `PdfExtractor` | Use the facade api to extract both images and text from a pdf document while ... |
+| [utilize-the-facades-api-in-image-extraction-mode-to-retrieve...](./utilize-the-facades-api-in-image-extraction-mode-to-retrieve-images-and-associated-text-from-pdf-fil.cs) | `PdfExtractor` | Utilize the facades api in image extraction mode to retrieve images and assoc... |
+| [utilize-the-facades-api-to-extract-all-images-from-a-pdf-doc...](./utilize-the-facades-api-to-extract-all-images-from-a-pdf-document-and-save-each-to-separate-files.cs) | `PdfExtractor` | Utilize the facades api to extract all images from a pdf document and save ea... |
+| [utilize-the-facades-api-to-extract-all-images-from-a-specifi...](./utilize-the-facades-api-to-extract-all-images-from-a-specified-page-of-a-pdf-document.cs) | `PdfExtractor` | Utilize the facades api to extract all images from a specified page of a pdf ... |
+| [utilize-the-pdfextractor-fa-ade-to-retrieve-images-from-a-pd...](./utilize-the-pdfextractor-fa-ade-to-retrieve-images-from-a-pdf-document-while-maintaining-original-qu.cs) | `PdfExtractor` | Utilize the pdfextractor fa ade to retrieve images from a pdf document while ... |
 
 ## Category Statistics
 - Total examples: 12
@@ -70,8 +95,8 @@ See the root [agents.md](../agents.md) for repository-wide conventions and bound
   - **Common Mistakes** — verified anti-patterns that cause build failures
   - **Domain Knowledge** — cross-cutting API-specific gotchas
   - **Testing Guide** — build and run verification steps
-- Review code examples in this folder for Facades - Extract Images and Text patterns
+- Review code examples in this folder for facades-extract-images-and-text patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_163421_7d7524`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->
