@@ -1,18 +1,58 @@
-# AGENTS - Operators
+---
+name: operators
+description: C# examples for operators using Aspose.PDF for .NET
+language: csharp
+framework: net10.0
+parent: ../agents.md
+---
+
+# AGENTS - operators
+
+## Persona
+
+You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
+working within the **operators** category.
+This folder contains standalone C# examples for operators operations.
+See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **Operators**.
+- This folder contains examples for **operators**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
-## Files in this folder
-- [Implement-PDF-manipulation-by-loading-a-PDF-and-evaluating-values-using-comparison-operators](./Implement-PDF-manipulation-by-loading-a-PDF-and-evaluating-values-using-comparison-operators.cs)
-- [Load-a-PDF-and-apply-boolean-logic-using-and-operators-to-manipulate-its-content](./Load-a-PDF-and-apply-boolean-logic-using-and-operators-to-manipulate-its-content.cs)
-- [Load-a-PDF-and-perform-arithmetic-operations-addition-subtraction-multiplication-division-on-nume](./Load-a-PDF-and-perform-arithmetic-operations-addition-subtraction-multiplication-division-on-nume.cs)
-- [Load-a-PDF-document-and-concatenate-string-values-using-the-operator-for-dynamic-content-generatio](./Load-a-PDF-document-and-concatenate-string-values-using-the-operator-for-dynamic-content-generatio.cs)
-- [Utilize-PDF-operators-to-evaluate-logical-conditions-programmatically-and-load-the-resulting-PDF-doc](./Utilize-PDF-operators-to-evaluate-logical-conditions-programmatically-and-load-the-resulting-PDF-doc.cs)
-- [Utilize-PDF-operators-to-examine-the-operator-overview-and-load-a-PDF-document-programmatically](./Utilize-PDF-operators-to-examine-the-operator-overview-and-load-a-PDF-document-programmatically.cs)
-- [Utilize-PDF-operators-with-comparison-logic-to-validate-data-integrity-before-loading-the-document-i](./Utilize-PDF-operators-with-comparison-logic-to-validate-data-integrity-before-loading-the-document-i.cs)
+## Required Namespaces
 
+- `using Aspose.Pdf;` (7/7 files) ← category-specific
+- `using Aspose.Pdf.Text;` (5/7 files) ← category-specific
+- `using Aspose.Pdf.Operators;` (2/7 files)
+- `using Aspose.Pdf.Annotations;` (1/7 files)
+- `using System;` (7/7 files)
+- `using System.IO;` (7/7 files)
+- `using System.Text.RegularExpressions;` (2/7 files)
+- `using System.Collections.Generic;` (1/7 files)
+
+## Common Code Pattern
+
+Most files follow this pattern:
+
+```csharp
+using (Document doc = new Document("input.pdf"))
+{
+    // ... operations ...
+    doc.Save("output.pdf");
+}
+```
+
+## Files in this folder
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [Implement-PDF-manipulation-by-loading-a-PDF-and-evaluating-v...](./Implement-PDF-manipulation-by-loading-a-PDF-and-evaluating-values-using-comparison-operators.cs) | `TextAbsorber` | Implement PDF manipulation by loading a PDF and evaluating values using compa... |
+| [Load-a-PDF-and-apply-boolean-logic-using-and-operators-to-ma...](./Load-a-PDF-and-apply-boolean-logic-using-and-operators-to-manipulate-its-content.cs) | `TextAnnotation`, `TextFragment` | Load a PDF and apply boolean logic using and operators to manipulate its content |
+| [Load-a-PDF-and-perform-arithmetic-operations-addition-subtra...](./Load-a-PDF-and-perform-arithmetic-operations-addition-subtraction-multiplication-division-on-nume.cs) | `TextAbsorber`, `TextFragment` | Load a PDF and perform arithmetic operations addition subtraction multiplicat... |
+| [Load-a-PDF-document-and-concatenate-string-values-using-the-...](./Load-a-PDF-document-and-concatenate-string-values-using-the-operator-for-dynamic-content-generatio.cs) | `TextFragment`, `TextBuilder` | Load a PDF document and concatenate string values using the operator for dyna... |
+| [Utilize-PDF-operators-to-evaluate-logical-conditions-program...](./Utilize-PDF-operators-to-evaluate-logical-conditions-programmatically-and-load-the-resulting-PDF-doc.cs) |  | Utilize PDF operators to evaluate logical conditions programmatically and loa... |
+| [Utilize-PDF-operators-to-examine-the-operator-overview-and-l...](./Utilize-PDF-operators-to-examine-the-operator-overview-and-load-a-PDF-document-programmatically.cs) |  | Utilize PDF operators to examine the operator overview and load a PDF documen... |
+| [Utilize-PDF-operators-with-comparison-logic-to-validate-data...](./Utilize-PDF-operators-with-comparison-logic-to-validate-data-integrity-before-loading-the-document-i.cs) |  | Utilize PDF operators with comparison logic to validate data integrity before... |
 
 ## Category Statistics
 - Total examples: 7
@@ -23,18 +63,18 @@
 - `Aspose.Pdf.Document`
 - `Aspose.Pdf.Matrix`
 - `Aspose.Pdf.OperatorCollection`
+- `Aspose.Pdf.Operators.BDC`
+- `Aspose.Pdf.Operators.BDC.Accept`
+- `Aspose.Pdf.Operators.BDC.Properties`
+- `Aspose.Pdf.Operators.BDC.Tag`
+- `Aspose.Pdf.Operators.BDC.ToString`
 - `Aspose.Pdf.Operators.ClosePathStroke`
 - `Aspose.Pdf.Operators.ConcatenateMatrix`
 - `Aspose.Pdf.Operators.Do`
 - `Aspose.Pdf.Operators.Fill`
 - `Aspose.Pdf.Operators.GRestore`
 - `Aspose.Pdf.Operators.GSave`
-- `Aspose.Pdf.Operators.Operator`
-- `Aspose.Pdf.Operators.Stroke`
-- `Aspose.Pdf.Page`
-- `Aspose.Pdf.Rectangle`
-- `Aspose.Pdf.Resources`
-- `Aspose.Pdf.XForm`
+- `Aspose.Pdf.Operators.MoveTextPosition`
 
 ### Rules
 - To place an image on {page}, first add the image stream ({image_stream}) to {page}.Resources.Images, then append the operators in order: GSave, ConcatenateMatrix (with a matrix derived from the desired {rect}), Do (using the image name retrieved from the resources), and finally GRestore.
@@ -51,9 +91,13 @@
 - The actual Delete call is commented out in the sample, so the example does not produce an output PDF with removed graphics.
 
 ## General Tips
-- See parent [agents.md](../agents.md) for repository-level patterns, conventions, and anti-patterns
-- Review code examples in this folder for Operators patterns
+- See parent [agents.md](../agents.md) for:
+  - **Boundaries** — Always / Ask First / Never rules for all examples
+  - **Common Mistakes** — verified anti-patterns that cause build failures
+  - **Domain Knowledge** — cross-cutting API-specific gotchas
+  - **Testing Guide** — build and run verification steps
+- Review code examples in this folder for operators patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_105743_f05edb`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

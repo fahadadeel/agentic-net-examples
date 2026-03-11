@@ -1,81 +1,80 @@
 ---
-name: Facades - Documents
-description: C# examples for Facades - Documents using Aspose.PDF for .NET
+name: facades-documents
+description: C# examples for facades-documents using Aspose.PDF for .NET
 language: csharp
 framework: net10.0
 parent: ../agents.md
 ---
 
-# AGENTS - Facades - Documents
+# AGENTS - facades-documents
 
 ## Persona
 
 You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
-working within the **Facades - Documents** category.
-This folder contains standalone C# examples for Facades - Documents operations.
+working within the **facades-documents** category.
+This folder contains standalone C# examples for facades-documents operations.
 See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **Facades - Documents**.
+- This folder contains examples for **facades-documents**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
+## Required Namespaces
+
+- `using Aspose.Pdf.Facades;` (49/56 files) ← category-specific
+- `using Aspose.Pdf;` (21/56 files)
+- `using Aspose.Pdf.Text;` (3/56 files)
+- `using System;` (56/56 files)
+- `using System.IO;` (56/56 files)
+- `using System.Runtime.InteropServices;` (3/56 files)
+- `using System.Collections.Generic;` (2/56 files)
+
+## Common Code Pattern
+
+Most files in this category use `PdfFileEditor` from `Aspose.Pdf.Facades`:
+
+```csharp
+PdfFileEditor tool = new PdfFileEditor();
+tool.BindPdf("input.pdf");
+// ... PdfFileEditor operations ...
+tool.Save("output.pdf");
+```
+
 ## Files in this folder
-- [append-a-loaded-pdf-to-another-document-concatenating-multiple-pdfs-while-preserving-original-conte](./append-a-loaded-pdf-to-another-document-concatenating-multiple-pdfs-while-preserving-original-conte.cs)
-- [combine-multiple-pdf-files-using-various-loading-techniques-to-create-a-single-concatenated-document](./combine-multiple-pdf-files-using-various-loading-techniques-to-create-a-single-concatenated-document.cs)
-- [concatenation-loads-multiple-pdf-files-sequentially-merging-them-into-a-single-continuous-in-memory](./concatenation-loads-multiple-pdf-files-sequentially-merging-them-into-a-single-continuous-in-memory.cs)
-- [configure-each-loaded-pdf-page-s-desiredsize-property-programmatically-to-uniformly-specify-its-targ](./configure-each-loaded-pdf-page-s-desiredsize-property-programmatically-to-uniformly-specify-its-targ.cs)
-- [configure-the-bookletlayout-property-while-loading-a-pdf-document-to-define-booklet-pagination-behav](./configure-the-bookletlayout-property-while-loading-a-pdf-document-to-define-booklet-pagination-behav.cs)
-- [create-a-booklet-version-of-a-loaded-pdf-document-reordering-pages-for-printed-folding](./create-a-booklet-version-of-a-loaded-pdf-document-reordering-pages-for-printed-folding.cs)
-- [delete-selected-pages-from-a-loaded-pdf-document-while-maintaining-the-integrity-of-the-remaining-co](./delete-selected-pages-from-a-loaded-pdf-document-while-maintaining-the-integrity-of-the-remaining-co.cs)
-- [demonstrate-loading-a-pdf-document-into-memory-via-the-provided-api-initializing-required-objects-a](./demonstrate-loading-a-pdf-document-into-memory-via-the-provided-api-initializing-required-objects-a.cs)
-- [describe-pdf-splitting-functionality-for-loading-a-pdf-document-and-dividing-it-into-separate-pages](./describe-pdf-splitting-functionality-for-loading-a-pdf-document-and-dividing-it-into-separate-pages.cs)
-- [detect-page-break-positions-in-a-loaded-pdf-and-return-their-corresponding-page-numbers-for-further](./detect-page-break-positions-in-a-loaded-pdf-and-return-their-corresponding-page-numbers-for-further.cs)
-- [explain-the-n-up-layout-option-for-loading-a-pdf-describing-how-pages-are-tiled-per-sheet](./explain-the-n-up-layout-option-for-loading-a-pdf-describing-how-pages-are-tiled-per-sheet.cs)
-- [generate-an-n-up-pdf-by-loading-an-existing-pdf-and-arranging-its-pages-in-a-grid-layout](./generate-an-n-up-pdf-by-loading-an-existing-pdf-and-arranging-its-pages-in-a-grid-layout.cs)
-- [implement-functionality-to-load-a-pdf-file-and-extract-specified-pages-into-a-new-document](./implement-functionality-to-load-a-pdf-file-and-extract-specified-pages-into-a-new-document.cs)
-- [insert-a-new-page-into-a-loaded-pdf-at-a-specified-index-while-maintaining-document-integrity](./insert-a-new-page-into-a-loaded-pdf-at-a-specified-index-while-maintaining-document-integrity.cs)
-- [insert-a-new-page-into-an-existing-pdf-document-by-loading-the-source-pdf-and-specifying-the-inserti](./insert-a-new-page-into-an-existing-pdf-document-by-loading-the-source-pdf-and-specifying-the-inserti.cs)
-- [insert-a-page-break-into-a-loaded-pdf-document-while-preserving-existing-content-integrity](./insert-a-page-break-into-a-loaded-pdf-document-while-preserving-existing-content-integrity.cs)
-- [insert-a-page-break-into-an-opened-pdf-document-programmatically-while-maintaining-existing-content](./insert-a-page-break-into-an-opened-pdf-document-programmatically-while-maintaining-existing-content.cs)
-- [insert-additional-pages-into-an-existing-pdf-by-loading-the-document-and-appending-specified-page-co](./insert-additional-pages-into-an-existing-pdf-by-loading-the-document-and-appending-specified-page-co.cs)
-- [insert-pages-from-one-pdf-into-another-to-concatenate-documents-after-loading-the-source-pdf](./insert-pages-from-one-pdf-into-another-to-concatenate-documents-after-loading-the-source-pdf.cs)
-- [instantiate-a-new-pdf-document-object-and-append-the-specified-pages-loaded-from-an-existing-pdf-fil](./instantiate-a-new-pdf-document-object-and-append-the-specified-pages-loaded-from-an-existing-pdf-fil.cs)
-- [instantiate-a-pdf-document-load-its-content-and-add-a-new-page-via-the-page-class](./instantiate-a-pdf-document-load-its-content-and-add-a-new-page-via-the-page-class.cs)
-- [instantiate-a-pdfdocument-object-for-each-pdf-file-to-load-its-contents-into-memory](./instantiate-a-pdfdocument-object-for-each-pdf-file-to-load-its-contents-into-memory.cs)
-- [instantiate-separate-pdf-document-objects-for-each-specified-range-loading-the-source-pdfs-accordin](./instantiate-separate-pdf-document-objects-for-each-specified-range-loading-the-source-pdfs-accordin.cs)
-- [load-a-pdf-and-concatenate-its-pages-into-a-single-document-using-the-merge-operation](./load-a-pdf-and-concatenate-its-pages-into-a-single-document-using-the-merge-operation.cs)
-- [load-a-pdf-and-resize-its-pages-to-specified-dimensions-while-maintaining-content-fidelity](./load-a-pdf-and-resize-its-pages-to-specified-dimensions-while-maintaining-content-fidelity.cs)
-- [load-a-pdf-document-and-apply-an-n-up-layout-to-arrange-multiple-pages-per-sheet](./load-a-pdf-document-and-apply-an-n-up-layout-to-arrange-multiple-pages-per-sheet.cs)
-- [load-a-pdf-document-and-convert-it-into-a-booklet-format-preserving-page-ordering-and-orientation](./load-a-pdf-document-and-convert-it-into-a-booklet-format-preserving-page-ordering-and-orientation.cs)
-- [load-a-pdf-document-and-define-specific-page-numbers-to-extract-from-for-processing](./load-a-pdf-document-and-define-specific-page-numbers-to-extract-from-for-processing.cs)
-- [load-a-pdf-document-and-extract-selected-pages-into-a-new-pdf-while-maintaining-content-integrity](./load-a-pdf-document-and-extract-selected-pages-into-a-new-pdf-while-maintaining-content-integrity.cs)
-- [load-a-pdf-document-and-extract-selected-pages-into-individual-pdf-files-while-preserving-content-in](./load-a-pdf-document-and-extract-selected-pages-into-individual-pdf-files-while-preserving-content-in.cs)
-- [load-a-pdf-document-and-generate-an-n-up-layout-arranging-multiple-pages-onto-each-output-page](./load-a-pdf-document-and-generate-an-n-up-layout-arranging-multiple-pages-onto-each-output-page.cs)
-- [load-a-pdf-document-and-identify-whether-it-is-formatted-as-a-booklet-based-on-page-ordering](./load-a-pdf-document-and-identify-whether-it-is-formatted-as-a-booklet-based-on-page-ordering.cs)
-- [load-a-pdf-document-and-insert-pages-from-another-pdf-preserving-order-and-formatting](./load-a-pdf-document-and-insert-pages-from-another-pdf-preserving-order-and-formatting.cs)
-- [load-a-pdf-document-and-split-each-page-into-separate-individual-single-page-pdf-files](./load-a-pdf-document-and-split-each-page-into-separate-individual-single-page-pdf-files.cs)
-- [load-a-pdf-document-into-the-application-s-runtime-environment-to-enable-subsequent-programmatic-man](./load-a-pdf-document-into-the-application-s-runtime-environment-to-enable-subsequent-programmatic-man.cs)
-- [load-a-pdf-file-and-programmatically-resize-its-pages-to-specified-dimensions-while-maintaining-cont](./load-a-pdf-file-and-programmatically-resize-its-pages-to-specified-dimensions-while-maintaining-cont.cs)
-- [load-a-pdf-file-and-resize-its-pages-to-target-dimensions-preserving-layout-and-content-fidelity](./load-a-pdf-file-and-resize-its-pages-to-target-dimensions-preserving-layout-and-content-fidelity.cs)
-- [load-a-pdf-file-and-split-it-into-separate-documents-based-on-specified-page-ranges](./load-a-pdf-file-and-split-it-into-separate-documents-based-on-specified-page-ranges.cs)
-- [load-an-existing-pdf-file-into-memory-to-enable-further-processing-of-its-contents](./load-an-existing-pdf-file-into-memory-to-enable-further-processing-of-its-contents.cs)
-- [load-pdf-files-and-concatenate-them-into-a-single-document-while-maintaining-original-content-order](./load-pdf-files-and-concatenate-them-into-a-single-document-while-maintaining-original-content-order.cs)
-- [load-pdf-files-and-concatenate-them-into-a-single-document-while-maintaining-page-order](./load-pdf-files-and-concatenate-them-into-a-single-document-while-maintaining-page-order.cs)
-- [load-the-source-pdf-file-that-contains-the-pages-to-be-inserted-into-another-document](./load-the-source-pdf-file-that-contains-the-pages-to-be-inserted-into-another-document.cs)
-- [load-the-target-pdf-document-into-the-processing-environment-initializing-necessary-objects-for-sub](./load-the-target-pdf-document-into-the-processing-environment-initializing-necessary-objects-for-sub.cs)
-- [open-and-load-the-source-pdf-file-into-memory-for-subsequent-processing-using-the-library-s-pdf-load](./open-and-load-the-source-pdf-file-into-memory-for-subsequent-processing-using-the-library-s-pdf-load.cs)
-- [persist-the-generated-booklet-pdf-to-the-desired-output-file-location-using-appropriate-pdf-saving-m](./persist-the-generated-booklet-pdf-to-the-desired-output-file-location-using-appropriate-pdf-saving-m.cs)
-- [persist-the-generated-pdf-document-to-a-file-on-disk-using-the-appropriate-.net-api](./persist-the-generated-pdf-document-to-a-file-on-disk-using-the-appropriate-.net-api.cs)
-- [persist-the-generated-pdf-document-to-the-desired-file-system-location-using-the-appropriate-save-me](./persist-the-generated-pdf-document-to-the-desired-file-system-location-using-the-appropriate-save-me.cs)
-- [provide-a-list-of-page-numbers-to-remove-from-a-pdf-document-during-load](./provide-a-list-of-page-numbers-to-remove-from-a-pdf-document-during-load.cs)
-- [remove-specified-pages-from-a-loaded-pdf-document-updating-the-file-without-altering-the-remaining](./remove-specified-pages-from-a-loaded-pdf-document-updating-the-file-without-altering-the-remaining.cs)
-- [remove-specified-pages-from-a-loaded-pdf-document-while-maintaining-the-integrity-of-remaining-conte](./remove-specified-pages-from-a-loaded-pdf-document-while-maintaining-the-integrity-of-remaining-conte.cs)
-- [save-each-resulting-segment-as-an-individual-pdf-file-after-performing-the-document-split-operation](./save-each-resulting-segment-as-an-individual-pdf-file-after-performing-the-document-split-operation.cs)
-- [set-the-nupoptions-row-and-column-properties-to-define-the-page-layout-before-loading-the-pdf](./set-the-nupoptions-row-and-column-properties-to-define-the-page-layout-before-loading-the-pdf.cs)
-- [specify-page-ranges-for-each-resulting-split-document-when-loading-a-pdf-file-programmatically](./specify-page-ranges-for-each-resulting-split-document-when-loading-a-pdf-file-programmatically.cs)
-- [write-the-modified-content-to-an-output-pdf-file-persisting-all-changes-and-the-document-structure](./write-the-modified-content-to-an-output-pdf-file-persisting-all-changes-and-the-document-structure.cs)
-- [write-the-modified-pdf-content-to-the-designated-output-pdf-file-ensuring-all-changes-are-fully-per](./write-the-modified-pdf-content-to-the-designated-output-pdf-file-ensuring-all-changes-are-fully-per.cs)
-- [write-the-resized-pdf-to-a-new-file-as-the-output-pdf-document-and-ensure-correct-saving](./write-the-resized-pdf-to-a-new-file-as-the-output-pdf-document-and-ensure-correct-saving.cs)
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [append-a-loaded-pdf-to-another-document-concatenating-multip...](./append-a-loaded-pdf-to-another-document-concatenating-multiple-pdfs-while-preserving-original-conte.cs) | `PdfFileEditor` | Append a loaded pdf to another document concatenating multiple pdfs while pre... |
+| [combine-multiple-pdf-files-using-various-loading-techniques-...](./combine-multiple-pdf-files-using-various-loading-techniques-to-create-a-single-concatenated-document.cs) | `PdfFileEditor`, `TextFragment` | Combine multiple pdf files using various loading techniques to create a singl... |
+| [concatenation-loads-multiple-pdf-files-sequentially-merging-...](./concatenation-loads-multiple-pdf-files-sequentially-merging-them-into-a-single-continuous-in-memory.cs) | `PdfFileEditor` | Concatenation loads multiple pdf files sequentially merging them into a singl... |
+| [configure-each-loaded-pdf-page-s-desiredsize-property-progra...](./configure-each-loaded-pdf-page-s-desiredsize-property-programmatically-to-uniformly-specify-its-targ.cs) | `PdfPageEditor` | Configure each loaded pdf page s desiredsize property programmatically to uni... |
+| [configure-the-bookletlayout-property-while-loading-a-pdf-doc...](./configure-the-bookletlayout-property-while-loading-a-pdf-document-to-define-booklet-pagination-behav.cs) | `PdfFileEditor` | Configure the bookletlayout property while loading a pdf document to define b... |
+| [create-a-booklet-version-of-a-loaded-pdf-document-reordering...](./create-a-booklet-version-of-a-loaded-pdf-document-reordering-pages-for-printed-folding.cs) | `PdfFileEditor` | Create a booklet version of a loaded pdf document reordering pages for printe... |
+| [delete-selected-pages-from-a-loaded-pdf-document-while-maint...](./delete-selected-pages-from-a-loaded-pdf-document-while-maintaining-the-integrity-of-the-remaining-co.cs) | `PdfFileEditor` | Delete selected pages from a loaded pdf document while maintaining the integr... |
+| [demonstrate-loading-a-pdf-document-into-memory-via-the-provi...](./demonstrate-loading-a-pdf-document-into-memory-via-the-provided-api-initializing-required-objects-a.cs) |  | Demonstrate loading a pdf document into memory via the provided api initializ... |
+| [describe-pdf-splitting-functionality-for-loading-a-pdf-docum...](./describe-pdf-splitting-functionality-for-loading-a-pdf-document-and-dividing-it-into-separate-pages.cs) | `PdfFileEditor` | Describe pdf splitting functionality for loading a pdf document and dividing ... |
+| [detect-page-break-positions-in-a-loaded-pdf-and-return-their...](./detect-page-break-positions-in-a-loaded-pdf-and-return-their-corresponding-page-numbers-for-further.cs) |  | Detect page break positions in a loaded pdf and return their corresponding pa... |
+| [explain-the-n-up-layout-option-for-loading-a-pdf-describing-...](./explain-the-n-up-layout-option-for-loading-a-pdf-describing-how-pages-are-tiled-per-sheet.cs) | `PdfFileEditor` | Explain the n up layout option for loading a pdf describing how pages are til... |
+| [generate-an-n-up-pdf-by-loading-an-existing-pdf-and-arrangin...](./generate-an-n-up-pdf-by-loading-an-existing-pdf-and-arranging-its-pages-in-a-grid-layout.cs) | `PdfFileEditor` | Generate an n up pdf by loading an existing pdf and arranging its pages in a ... |
+| [implement-functionality-to-load-a-pdf-file-and-extract-speci...](./implement-functionality-to-load-a-pdf-file-and-extract-specified-pages-into-a-new-document.cs) | `PdfFileEditor` | Implement functionality to load a pdf file and extract specified pages into a... |
+| [insert-a-new-page-into-a-loaded-pdf-at-a-specified-index-whi...](./insert-a-new-page-into-a-loaded-pdf-at-a-specified-index-while-maintaining-document-integrity.cs) | `PdfFileEditor` | Insert a new page into a loaded pdf at a specified index while maintaining do... |
+| [insert-a-new-page-into-an-existing-pdf-document-by-loading-t...](./insert-a-new-page-into-an-existing-pdf-document-by-loading-the-source-pdf-and-specifying-the-inserti.cs) | `PdfFileEditor` | Insert a new page into an existing pdf document by loading the source pdf and... |
+| [insert-a-page-break-into-a-loaded-pdf-document-while-preserv...](./insert-a-page-break-into-a-loaded-pdf-document-while-preserving-existing-content-integrity.cs) | `PdfFileEditor` | Insert a page break into a loaded pdf document while preserving existing cont... |
+| [insert-a-page-break-into-an-opened-pdf-document-programmatic...](./insert-a-page-break-into-an-opened-pdf-document-programmatically-while-maintaining-existing-content.cs) | `PdfFileEditor` | Insert a page break into an opened pdf document programmatically while mainta... |
+| [insert-additional-pages-into-an-existing-pdf-by-loading-the-...](./insert-additional-pages-into-an-existing-pdf-by-loading-the-document-and-appending-specified-page-co.cs) | `PdfFileEditor` | Insert additional pages into an existing pdf by loading the document and appe... |
+| [insert-pages-from-one-pdf-into-another-to-concatenate-docume...](./insert-pages-from-one-pdf-into-another-to-concatenate-documents-after-loading-the-source-pdf.cs) | `PdfFileEditor` | Insert pages from one pdf into another to concatenate documents after loading... |
+| [instantiate-a-new-pdf-document-object-and-append-the-specifi...](./instantiate-a-new-pdf-document-object-and-append-the-specified-pages-loaded-from-an-existing-pdf-fil.cs) | `PdfFileEditor` | Instantiate a new pdf document object and append the specified pages loaded f... |
+| [instantiate-a-pdf-document-load-its-content-and-add-a-new-pa...](./instantiate-a-pdf-document-load-its-content-and-add-a-new-page-via-the-page-class.cs) | `PdfPageEditor` | Instantiate a pdf document load its content and add a new page via the page c... |
+| [instantiate-a-pdfdocument-object-for-each-pdf-file-to-load-i...](./instantiate-a-pdfdocument-object-for-each-pdf-file-to-load-its-contents-into-memory.cs) |  | Instantiate a pdfdocument object for each pdf file to load its contents into ... |
+| [instantiate-separate-pdf-document-objects-for-each-specified...](./instantiate-separate-pdf-document-objects-for-each-specified-range-loading-the-source-pdfs-accordin.cs) | `PdfFileEditor` | Instantiate separate pdf document objects for each specified range loading th... |
+| [load-a-pdf-and-concatenate-its-pages-into-a-single-document-...](./load-a-pdf-and-concatenate-its-pages-into-a-single-document-using-the-merge-operation.cs) | `PdfFileEditor` | Load a pdf and concatenate its pages into a single document using the merge o... |
+| [load-a-pdf-and-resize-its-pages-to-specified-dimensions-whil...](./load-a-pdf-and-resize-its-pages-to-specified-dimensions-while-maintaining-content-fidelity.cs) | `PdfPageEditor` | Load a pdf and resize its pages to specified dimensions while maintaining con... |
+| [load-a-pdf-document-and-apply-an-n-up-layout-to-arrange-mult...](./load-a-pdf-document-and-apply-an-n-up-layout-to-arrange-multiple-pages-per-sheet.cs) | `PdfFileEditor` | Load a pdf document and apply an n up layout to arrange multiple pages per sheet |
+| [load-a-pdf-document-and-convert-it-into-a-booklet-format-pre...](./load-a-pdf-document-and-convert-it-into-a-booklet-format-preserving-page-ordering-and-orientation.cs) | `PdfFileEditor` | Load a pdf document and convert it into a booklet format preserving page orde... |
+| [load-a-pdf-document-and-define-specific-page-numbers-to-extr...](./load-a-pdf-document-and-define-specific-page-numbers-to-extract-from-for-processing.cs) | `PdfFileEditor` | Load a pdf document and define specific page numbers to extract from for proc... |
+| [load-a-pdf-document-and-extract-selected-pages-into-a-new-pd...](./load-a-pdf-document-and-extract-selected-pages-into-a-new-pdf-while-maintaining-content-integrity.cs) | `PdfFileEditor` | Load a pdf document and extract selected pages into a new pdf while maintaini... |
+| [load-a-pdf-document-and-extract-selected-pages-into-individu...](./load-a-pdf-document-and-extract-selected-pages-into-individual-pdf-files-while-preserving-content-in.cs) | `PdfFileEditor` | Load a pdf document and extract selected pages into individual pdf files whil... |
+| ... | | *and 26 more files* |
 
 ## Category Statistics
 - Total examples: 56
@@ -119,8 +118,8 @@ See the root [agents.md](../agents.md) for repository-wide conventions and bound
   - **Common Mistakes** — verified anti-patterns that cause build failures
   - **Domain Knowledge** — cross-cutting API-specific gotchas
   - **Testing Guide** — build and run verification steps
-- Review code examples in this folder for Facades - Documents patterns
+- Review code examples in this folder for facades-documents patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_182821_8b655f`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

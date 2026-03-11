@@ -1,34 +1,57 @@
 ---
-name: Facades - Annotations
-description: C# examples for Facades - Annotations using Aspose.PDF for .NET
+name: facades-annotations
+description: C# examples for facades-annotations using Aspose.PDF for .NET
 language: csharp
 framework: net10.0
 parent: ../agents.md
 ---
 
-# AGENTS - Facades - Annotations
+# AGENTS - facades-annotations
 
 ## Persona
 
 You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
-working within the **Facades - Annotations** category.
-This folder contains standalone C# examples for Facades - Annotations operations.
+working within the **facades-annotations** category.
+This folder contains standalone C# examples for facades-annotations operations.
 See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **Facades - Annotations**.
+- This folder contains examples for **facades-annotations**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
+## Required Namespaces
+
+- `using Aspose.Pdf.Facades;` (7/9 files) ← category-specific
+- `using Aspose.Pdf;` (3/9 files)
+- `using Aspose.Pdf.Annotations;` (3/9 files)
+- `using Aspose.Pdf.Drawing;` (1/9 files)
+- `using System;` (9/9 files)
+- `using System.IO;` (9/9 files)
+
+## Common Code Pattern
+
+Most files in this category use `PdfAnnotationEditor` from `Aspose.Pdf.Facades`:
+
+```csharp
+PdfAnnotationEditor tool = new PdfAnnotationEditor();
+tool.BindPdf("input.pdf");
+// ... PdfAnnotationEditor operations ...
+tool.Save("output.pdf");
+```
+
 ## Files in this folder
-- [delete-an-annotation-with-a-specified-name-from-a-pdf-document-via-the-facade-interface](./delete-an-annotation-with-a-specified-name-from-a-pdf-document-via-the-facade-interface.cs)
-- [import-and-export-annotations-using-xfdf-format-load-a-pdf-and-save-it-back-as-pdf](./import-and-export-annotations-using-xfdf-format-load-a-pdf-and-save-it-back-as-pdf.cs)
-- [import-xfdf-annotations-into-a-loaded-pdf-then-export-the-updated-annotations-back-to-xfdf-and-save](./import-xfdf-annotations-into-a-loaded-pdf-then-export-the-updated-annotations-back-to-xfdf-and-save.cs)
-- [remove-all-annotations-from-a-pdf-document-using-the-facades-api-preserving-the-original-content-la](./remove-all-annotations-from-a-pdf-document-using-the-facades-api-preserving-the-original-content-la.cs)
-- [remove-every-annotation-from-an-existing-pdf-document-ensuring-the-resulting-file-retains-its-origi](./remove-every-annotation-from-an-existing-pdf-document-ensuring-the-resulting-file-retains-its-origi.cs)
-- [remove-every-annotation-of-a-given-type-from-a-pdf-document-while-preserving-the-remaining-content-s](./remove-every-annotation-of-a-given-type-from-a-pdf-document-while-preserving-the-remaining-content-s.cs)
-- [retrieve-all-annotations-from-a-pdf-document-preserving-their-types-positions-and-associated-meta](./retrieve-all-annotations-from-a-pdf-document-preserving-their-types-positions-and-associated-meta.cs)
-- [update-existing-annotations-in-a-pdf-file-altering-their-properties-while-preserving-the-document-s](./update-existing-annotations-in-a-pdf-file-altering-their-properties-while-preserving-the-document-s.cs)
-- [update-properties-of-an-existing-annotation-within-a-pdf-file-preserving-its-positioning-and-appear](./update-properties-of-an-existing-annotation-within-a-pdf-file-preserving-its-positioning-and-appear.cs)
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [delete-an-annotation-with-a-specified-name-from-a-pdf-docume...](./delete-an-annotation-with-a-specified-name-from-a-pdf-document-via-the-facade-interface.cs) | `PdfAnnotationEditor` | Delete an annotation with a specified name from a pdf document via the facade... |
+| [import-and-export-annotations-using-xfdf-format-load-a-pdf-a...](./import-and-export-annotations-using-xfdf-format-load-a-pdf-and-save-it-back-as-pdf.cs) | `PdfAnnotationEditor` | Import and export annotations using xfdf format load a pdf and save it back a... |
+| [import-xfdf-annotations-into-a-loaded-pdf-then-export-the-up...](./import-xfdf-annotations-into-a-loaded-pdf-then-export-the-updated-annotations-back-to-xfdf-and-save.cs) | `PdfAnnotationEditor` | Import xfdf annotations into a loaded pdf then export the updated annotations... |
+| [remove-all-annotations-from-a-pdf-document-using-the-facades...](./remove-all-annotations-from-a-pdf-document-using-the-facades-api-preserving-the-original-content-la.cs) | `PdfAnnotationEditor` | Remove all annotations from a pdf document using the facades api preserving t... |
+| [remove-every-annotation-from-an-existing-pdf-document-ensuri...](./remove-every-annotation-from-an-existing-pdf-document-ensuring-the-resulting-file-retains-its-origi.cs) | `PdfAnnotationEditor` | Remove every annotation from an existing pdf document ensuring the resulting ... |
+| [remove-every-annotation-of-a-given-type-from-a-pdf-document-...](./remove-every-annotation-of-a-given-type-from-a-pdf-document-while-preserving-the-remaining-content-s.cs) | `PdfAnnotationEditor` | Remove every annotation of a given type from a pdf document while preserving ... |
+| [retrieve-all-annotations-from-a-pdf-document-preserving-thei...](./retrieve-all-annotations-from-a-pdf-document-preserving-their-types-positions-and-associated-meta.cs) |  | Retrieve all annotations from a pdf document preserving their types positions... |
+| [update-existing-annotations-in-a-pdf-file-altering-their-pro...](./update-existing-annotations-in-a-pdf-file-altering-their-properties-while-preserving-the-document-s.cs) |  | Update existing annotations in a pdf file altering their properties while pre... |
+| [update-properties-of-an-existing-annotation-within-a-pdf-fil...](./update-properties-of-an-existing-annotation-within-a-pdf-file-preserving-its-positioning-and-appear.cs) | `PdfAnnotationEditor`, `TextAnnotation` | Update properties of an existing annotation within a pdf file preserving its ... |
 
 ## Category Statistics
 - Total examples: 9
@@ -72,8 +95,8 @@ See the root [agents.md](../agents.md) for repository-wide conventions and bound
   - **Common Mistakes** — verified anti-patterns that cause build failures
   - **Domain Knowledge** — cross-cutting API-specific gotchas
   - **Testing Guide** — build and run verification steps
-- Review code examples in this folder for Facades - Annotations patterns
+- Review code examples in this folder for facades-annotations patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_191202_db0088`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

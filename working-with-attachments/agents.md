@@ -1,114 +1,126 @@
+---
+name: working-with-attachments
+description: C# examples for working-with-attachments using Aspose.PDF for .NET
+language: csharp
+framework: net10.0
+parent: ../agents.md
+---
+
 # AGENTS - working-with-attachments
+
+## Persona
+
+You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
+working within the **working-with-attachments** category.
+This folder contains standalone C# examples for working-with-attachments operations.
+See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
 - This folder contains examples for **working-with-attachments**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
-## Files in this folder
-- [Add-an-attachment-to-a-PDF-document-and-extract-and-save-an-attachment-using-PDF-input-and-save-as-P](./Add-an-attachment-to-a-PDF-document-and-extract-and-save-an-attachment-using-PDF-input-and-save-as-P.cs)
-- [Add-an-attachment-to-a-PDF-document-using-PDF-input-and-save-as-PDF](./Add-an-attachment-to-a-PDF-document-using-PDF-input-and-save-as-PDF.cs)
-- [Add-an-attachment-to-a-tagged-PDF-then-extract-and-save-that-attachment-as-a-separate-PDF-file](./Add-an-attachment-to-a-tagged-PDF-then-extract-and-save-that-attachment-as-a-separate-PDF-file.cs)
-- [Aspose.PDF-allows-you-to-access-a-PDF-file-s-XMP-metadata-to-get-a-PDF-file-s-metadata-use-PDF-inpu](./Aspose.PDF-allows-you-to-access-a-PDF-file-s-XMP-metadata-to-get-a-PDF-file-s-metadata-use-PDF-inpu.cs)
-- [Aspose.PDF-allows-you-to-set-metadata-in-a-PDF-file-to-set-this-use-PDF-input-and-save-as-PDF](./Aspose.PDF-allows-you-to-set-metadata-in-a-PDF-file-to-set-this-use-PDF-input-and-save-as-PDF.cs)
-- [Aspose.PDF-can-remove-attachments-from-PDF-files-a-PDF-document-s-attachments-are-held-in-the-Docum](./Aspose.PDF-can-remove-attachments-from-PDF-files-a-PDF-document-s-attachments-are-held-in-the-Docum.cs)
-- [Aspose.PDF-for-.NET-allows-you-to-set-file-specific-information-such-as-author-creation-date-subje](./Aspose.PDF-for-.NET-allows-you-to-set-file-specific-information-such-as-author-creation-date-subje.cs)
-- [Assign-a-custom-XMP-metadata-heading-to-a-PDF-document-using-the-source-PDF-as-input](./Assign-a-custom-XMP-metadata-heading-to-a-PDF-document-using-the-source-PDF-as-input.cs)
-- [Assign-custom-metadata-to-a-PDF-document-using-its-Metadata-property-and-output-the-modified-file-as](./Assign-custom-metadata-to-a-PDF-document-using-its-Metadata-property-and-output-the-modified-file-as.cs)
-- [Assign-property-values-from-an-input-PDF-and-write-the-updated-document-back-to-PDF-format](./Assign-property-values-from-an-input-PDF-and-write-the-updated-document-back-to-PDF-format.cs)
-- [Attach-a-file-to-a-PDF-then-retrieve-and-save-the-embedded-attachment-as-a-separate-PDF-document](./Attach-a-file-to-a-PDF-then-retrieve-and-save-the-embedded-attachment-as-a-separate-PDF-document.cs)
-- [Attach-an-external-PDF-file-to-an-existing-PDF-document-and-save-the-result-as-a-new-PDF](./Attach-an-external-PDF-file-to-an-existing-PDF-document-and-save-the-result-as-a-new-PDF.cs)
-- [Call-the-EmbeddedFiles-collection-s-Delete-method-using-PDF-input-and-save-as-PDF](./Call-the-EmbeddedFiles-collection-s-Delete-method-using-PDF-input-and-save-as-PDF.cs)
-- [Create-a-Document-object-and-open-the-input-PDF-file-using-PDF-input-and-save-as-PDF](./Create-a-Document-object-and-open-the-input-PDF-file-using-PDF-input-and-save-as-PDF.cs)
-- [Create-a-Document-object-using-PDF-input-and-save-as-PDF](./Create-a-Document-object-using-PDF-input-and-save-as-PDF.cs)
-- [Create-a-DocumentInfo-object-using-PDF-input-and-save-as-PDF](./Create-a-DocumentInfo-object-using-PDF-input-and-save-as-PDF.cs)
-- [Create-a-custom-metadata-namespace-with-a-prefix-add-prefixed-metadata-to-a-PDF-then-save-the-outp](./Create-a-custom-metadata-namespace-with-a-prefix-add-prefixed-metadata-to-a-PDF-then-save-the-outp.cs)
-- [Delete-a-specific-attachment-from-a-PDF-file-and-save-the-modified-document-as-a-new-PDF](./Delete-a-specific-attachment-from-a-PDF-file-and-save-the-modified-document-as-a-new-PDF.cs)
-- [Delete-all-attachments-associated-with-a-PDF-file-using-PDF-input-and-save-as-PDF](./Delete-all-attachments-associated-with-a-PDF-file-using-PDF-input-and-save-as-PDF.cs)
-- [Execute-advanced-PDF-attachment-manipulations-delete-a-specified-attachment-and-save-the-updated-d](./Execute-advanced-PDF-attachment-manipulations-delete-a-specified-attachment-and-save-the-updated-d.cs)
-- [Execute-advanced-attachment-manipulations-delete-a-specified-attachment-from-a-PDF-and-save-the-mo](./Execute-advanced-attachment-manipulations-delete-a-specified-attachment-from-a-PDF-and-save-the-mo.cs)
-- [Execute-advanced-attachment-manipulations-extracting-a-PDF-attachment-from-a-source-PDF-and-saving](./Execute-advanced-attachment-manipulations-extracting-a-PDF-attachment-from-a-source-PDF-and-saving.cs)
-- [Extract-all-embedded-PDF-attachments-from-an-input-PDF-and-write-each-attachment-to-separate-PDF-fil](./Extract-all-embedded-PDF-attachments-from-an-input-PDF-and-write-each-attachment-to-separate-PDF-fil.cs)
-- [Extract-an-attachment-from-a-PDF-portfolio-save-it-as-PDF-and-remove-it-from-the-original-PDF](./Extract-an-attachment-from-a-PDF-portfolio-save-it-as-PDF-and-remove-it-from-the-original-PDF.cs)
-- [Extract-an-embedded-PDF-attachment-from-a-source-PDF-document-and-save-it-as-a-separate-PDF-file](./Extract-an-embedded-PDF-attachment-from-a-source-PDF-document-and-save-it-as-a-separate-PDF-file.cs)
-- [Extract-and-save-an-attachment-and-remove-an-attachment-from-an-existing-PDF-portfolio-file-using-PD](./Extract-and-save-an-attachment-and-remove-an-attachment-from-an-existing-PDF-portfolio-file-using-PD.cs)
-- [Extract-and-save-an-attachment-heading-using-PDF-input](./Extract-and-save-an-attachment-heading-using-PDF-input.cs)
-- [Extract-and-save-an-attachment-using-PDF-input-and-save-as-PDF](./Extract-and-save-an-attachment-using-PDF-input-and-save-as-PDF.cs)
-- [Extract-every-attachment-from-the-supplied-PDF-document-including-those-associated-with-heading-ele](./Extract-every-attachment-from-the-supplied-PDF-document-including-those-associated-with-heading-ele.cs)
-- [Extract-the-embedded-attachment-from-a-PDF-file-and-save-it-to-a-specified-location](./Extract-the-embedded-attachment-from-a-PDF-file-and-save-it-to-a-specified-location.cs)
-- [Get-PDF-file-information-heading-using-PDF-input](./Get-PDF-file-information-heading-using-PDF-input.cs)
-- [Get-XMP-metadata-from-a-PDF-file-heading-using-PDF-input](./Get-XMP-metadata-from-a-PDF-file-heading-using-PDF-input.cs)
-- [Get-all-attachments-heading-using-PDF-input](./Get-all-attachments-heading-using-PDF-input.cs)
-- [Get-attachments-contained-in-FileAttachmentAnnotation-objects-heading-using-PDF-input](./Get-attachments-contained-in-FileAttachmentAnnotation-objects-heading-using-PDF-input.cs)
-- [Get-individual-attachment-heading-using-PDF-input](./Get-individual-attachment-heading-using-PDF-input.cs)
-- [Get-the-file-s-metadata-using-the-Metadata-property-using-PDF-input-and-save-as-PDF](./Get-the-file-s-metadata-using-the-Metadata-property-using-PDF-input-and-save-as-PDF.cs)
-- [Insert-metadata-with-a-prefix-heading-using-PDF-input](./Insert-metadata-with-a-prefix-heading-using-PDF-input.cs)
-- [Instantiate-a-Document-load-the-specified-PDF-file-and-save-the-content-back-as-a-PDF-document](./Instantiate-a-Document-load-the-specified-PDF-file-and-save-the-content-back-as-a-PDF-document.cs)
-- [Instantiate-a-DocumentInfo-instance-from-a-PDF-source-and-persist-it-back-as-a-PDF-file](./Instantiate-a-DocumentInfo-instance-from-a-PDF-source-and-persist-it-back-as-a-PDF-file.cs)
-- [Instantiate-a-PDF-document-object-from-an-input-file-and-persist-it-as-a-new-PDF-document](./Instantiate-a-PDF-document-object-from-an-input-file-and-persist-it-as-a-new-PDF-document.cs)
-- [Invoke-the-Delete-method-on-the-EmbeddedFiles-collection-for-a-PDF-input-and-output-the-modified-PDF](./Invoke-the-Delete-method-on-the-EmbeddedFiles-collection-for-a-PDF-input-and-output-the-modified-PDF.cs)
-- [Invoke-the-Document-class-Save-method-to-write-the-modified-PDF-input-back-to-a-PDF-file](./Invoke-the-Document-class-Save-method-to-write-the-modified-PDF-input-back-to-a-PDF-file.cs)
-- [Iterate-the-Document-s-EmbeddedFiles-collection-of-FileSpecification-objects-from-a-PDF-and-save-the](./Iterate-the-Document-s-EmbeddedFiles-collection-of-FileSpecification-objects-from-a-PDF-and-save-the.cs)
-- [Loop-through-the-Document-object-s-EmbeddedFiles-collection-which-contains-all-attachments-where-e](./Loop-through-the-Document-object-s-EmbeddedFiles-collection-which-contains-all-attachments-where-e.cs)
-- [Manipulate-PDF-attachments-add-extract-or-remove-embedded-files-by-processing-the-PDF-document-as](./Manipulate-PDF-attachments-add-extract-or-remove-embedded-files-by-processing-the-PDF-document-as.cs)
-- [Manipulate-vector-graphics-embed-ZUGFeRD-data-run-JavaScript-compare-PDF-navigation-using-PDF-inp](./Manipulate-vector-graphics-embed-ZUGFeRD-data-run-JavaScript-compare-PDF-navigation-using-PDF-inp.cs)
-- [Overview-get-started-basic-operations-convert-a-PDF-document-and-parse-PDF-documents-using-PDF-i](./Overview-get-started-basic-operations-convert-a-PDF-document-and-parse-PDF-documents-using-PDF-i.cs)
-- [Perform-advanced-operations-on-attachments-and-extract-and-save-an-attachment-using-PDF-input-and-sa](./Perform-advanced-operations-on-attachments-and-extract-and-save-an-attachment-using-PDF-input-and-sa.cs)
-- [Perform-advanced-operations-on-attachments-and-remove-an-attachment-using-PDF-input-and-save-as-PDF](./Perform-advanced-operations-on-attachments-and-remove-an-attachment-using-PDF-input-and-save-as-PDF.cs)
-- [Perform-advanced-operations-on-attachments-remove-an-attachment-from-an-existing-PDF-and-remove-an](./Perform-advanced-operations-on-attachments-remove-an-attachment-from-an-existing-PDF-and-remove-an.cs)
-- [Programmatically-assign-a-heading-to-a-PDF-file-s-metadata-using-an-input-PDF-document](./Programmatically-assign-a-heading-to-a-PDF-file-s-metadata-using-an-input-PDF-document.cs)
-- [Provide-an-overview-get-started-guide-core-PDF-operations-document-conversion-and-parsing-using](./Provide-an-overview-get-started-guide-core-PDF-operations-document-conversion-and-parsing-using.cs)
-- [Read-modify-and-write-PDF-metadata-in-C-by-loading-a-PDF-document-as-the-input-source](./Read-modify-and-write-PDF-metadata-in-C-by-loading-a-PDF-document-as-the-input-source.cs)
-- [Remove-a-heading-attachment-from-a-PDF-document-programmatically-using-the-provided-PDF-input](./Remove-a-heading-attachment-from-a-PDF-document-programmatically-using-the-provided-PDF-input.cs)
-- [Remove-a-specific-attachment-from-an-input-PDF-document-and-save-the-resulting-file-as-a-new-PDF](./Remove-a-specific-attachment-from-an-input-PDF-document-and-save-the-resulting-file-as-a-new-PDF.cs)
-- [Remove-a-specified-attachment-from-a-PDF-file-and-output-the-resulting-document-as-a-new-PDF](./Remove-a-specified-attachment-from-a-PDF-file-and-output-the-resulting-document-as-a-new-PDF.cs)
-- [Remove-all-attachments-from-an-input-PDF-document-and-write-the-resulting-file-back-as-a-PDF](./Remove-all-attachments-from-an-input-PDF-document-and-write-the-resulting-file-back-as-a-PDF.cs)
-- [Remove-all-attachments-from-an-input-PDF-file-and-write-the-resulting-document-to-a-new-PDF](./Remove-all-attachments-from-an-input-PDF-file-and-write-the-resulting-document-to-a-new-PDF.cs)
-- [Remove-an-attachment-from-PDF-Aspose-using-PDF-input-and-save-as-PDF](./Remove-an-attachment-from-PDF-Aspose-using-PDF-input-and-save-as-PDF.cs)
-- [Remove-an-attachment-from-PDF-heading-using-PDF-input](./Remove-an-attachment-from-PDF-heading-using-PDF-input.cs)
-- [Remove-an-attachment-from-a-PDF-using-PDF-input-and-save-as-PDF](./Remove-an-attachment-from-a-PDF-using-PDF-input-and-save-as-PDF.cs)
-- [Remove-an-attachment-from-an-existing-PDF-using-PDF-input-and-save-as-PDF](./Remove-an-attachment-from-an-existing-PDF-using-PDF-input-and-save-as-PDF.cs)
-- [Remove-attachments-from-PDF-files-using-PDF-input-and-save-as-PDF](./Remove-attachments-from-PDF-files-using-PDF-input-and-save-as-PDF.cs)
-- [Remove-embedded-file-attachments-from-a-PDF-by-clearing-the-Document-s-EmbeddedFiles-collection-and](./Remove-embedded-file-attachments-from-a-PDF-by-clearing-the-Document-s-EmbeddedFiles-collection-and.cs)
-- [Retrieve-PDF-metadata-from-an-input-document-and-embed-it-into-a-newly-generated-PDF-file](./Retrieve-PDF-metadata-from-an-input-document-and-embed-it-into-a-newly-generated-PDF-file.cs)
-- [Retrieve-a-PDF-s-XMP-metadata-by-loading-the-document-with-PDF-input-and-saving-it-back-as-PDF](./Retrieve-a-PDF-s-XMP-metadata-by-loading-the-document-with-PDF-input-and-saving-it-back-as-PDF.cs)
-- [Retrieve-a-PDF-s-metadata-via-the-Metadata-property-and-save-it-into-a-new-PDF-file](./Retrieve-a-PDF-s-metadata-via-the-Metadata-property-and-save-it-into-a-new-PDF-file.cs)
-- [Retrieve-a-specific-attachment-heading-from-an-input-PDF-document-using-the-API-programmatically](./Retrieve-a-specific-attachment-heading-from-an-input-PDF-document-using-the-API-programmatically.cs)
-- [Retrieve-all-attachments-from-a-PDF-document-for-separate-storage-or-removal-processing-PDF-input-a](./Retrieve-all-attachments-from-a-PDF-document-for-separate-storage-or-removal-processing-PDF-input-a.cs)
-- [Retrieve-all-attachments-from-a-PDF-file-using-PDF-input-and-save-as-PDF](./Retrieve-all-attachments-from-a-PDF-file-using-PDF-input-and-save-as-PDF.cs)
-- [Retrieve-all-embedded-attachments-from-a-PDF-file-and-write-them-into-a-new-PDF-document](./Retrieve-all-embedded-attachments-from-a-PDF-file-and-write-them-into-a-new-PDF-document.cs)
-- [Retrieve-attachments-stored-in-FileAttachmentAnnotation-objects-from-a-PDF-document-input-using-the](./Retrieve-attachments-stored-in-FileAttachmentAnnotation-objects-from-a-PDF-document-input-using-the.cs)
-- [Retrieve-the-XMP-metadata-from-a-PDF-document-s-heading-using-a-PDF-input-stream](./Retrieve-the-XMP-metadata-from-a-PDF-document-s-heading-using-a-PDF-input-stream.cs)
-- [Retrieve-the-heading-information-from-a-PDF-document-programmatically-using-a-PDF-input-stream](./Retrieve-the-heading-information-from-a-PDF-document-programmatically-using-a-PDF-input-stream.cs)
-- [Save-the-updated-document-using-the-Document-class-s-Save-method-using-PDF-input-and-save-as-PDF](./Save-the-updated-document-using-the-Document-class-s-Save-method-using-PDF-input-and-save-as-PDF.cs)
-- [Save-the-updated-document-using-the-Save-method-of-the-Document-object-using-PDF-input-and-save-as-P](./Save-the-updated-document-using-the-Save-method-of-the-Document-object-using-PDF-input-and-save-as-P.cs)
-- [Save-the-updated-file-using-the-Document-object-s-Save-method-using-PDF-input-and-save-as-PDF](./Save-the-updated-file-using-the-Document-object-s-Save-method-using-PDF-input-and-save-as-PDF.cs)
-- [Set-PDF-document-metadata-by-loading-a-PDF-as-input-modifying-its-properties-and-saving-the-result](./Set-PDF-document-metadata-by-loading-a-PDF-as-input-modifying-its-properties-and-saving-the-result.cs)
-- [Set-PDF-file-information-heading-using-PDF-input](./Set-PDF-file-information-heading-using-PDF-input.cs)
-- [Set-PDF-metadata-from-an-input-file-and-save-the-modified-document-as-a-PDF](./Set-PDF-metadata-from-an-input-file-and-save-the-modified-document-as-a-PDF.cs)
-- [Set-XMP-metadata-in-a-PDF-file-heading-using-PDF-input](./Set-XMP-metadata-in-a-PDF-file-heading-using-PDF-input.cs)
-- [Set-author-creation-date-subject-and-title-metadata-on-a-PDF-by-loading-and-re-saving-the-documen](./Set-author-creation-date-subject-and-title-metadata-on-a-PDF-by-loading-and-re-saving-the-documen.cs)
-- [Set-metadata-values-using-the-Metadata-property-using-PDF-input-and-save-as-PDF](./Set-metadata-values-using-the-Metadata-property-using-PDF-input-and-save-as-PDF.cs)
-- [Set-the-values-of-the-properties-using-PDF-input-and-save-as-PDF](./Set-the-values-of-the-properties-using-PDF-input-and-save-as-PDF.cs)
-- [Show-how-to-get-all-attachments-from-a-PDF-document-using-PDF-input-and-save-as-PDF](./Show-how-to-get-all-attachments-from-a-PDF-document-using-PDF-input-and-save-as-PDF.cs)
-- [Show-how-to-remove-attachments-from-a-PDF-document-using-PDF-input-and-save-as-PDF](./Show-how-to-remove-attachments-from-a-PDF-document-using-PDF-input-and-save-as-PDF.cs)
-- [Some-developers-need-to-create-a-new-metadata-namespace-with-a-prefix-the-following-code-snippet-sh](./Some-developers-need-to-create-a-new-metadata-namespace-with-a-prefix-the-following-code-snippet-sh.cs)
-- [Strip-all-attachments-from-an-input-PDF-and-write-the-resulting-document-as-a-new-PDF-file](./Strip-all-attachments-from-an-input-PDF-and-write-the-resulting-document-as-a-new-PDF-file.cs)
-- [Tagged-PDF-add-an-attachment-to-a-PDF-document-and-extract-and-save-an-attachment-using-PDF-input-a](./Tagged-PDF-add-an-attachment-to-a-PDF-document-and-extract-and-save-an-attachment-using-PDF-input-a.cs)
-- [The-following-code-snippet-shows-how-to-get-metadata-from-the-PDF-file-using-PDF-input-and-save-as-P](./The-following-code-snippet-shows-how-to-get-metadata-from-the-PDF-file-using-PDF-input-and-save-as-P.cs)
-- [The-following-code-snippet-shows-how-to-set-PDF-file-information-using-PDF-input-and-save-as-PDF](./The-following-code-snippet-shows-how-to-set-PDF-file-information-using-PDF-input-and-save-as-PDF.cs)
-- [Use-Aspose.PDF-to-get-all-attachments-from-a-PDF-document-which-is-useful-for-saving-documents-sepa](./Use-Aspose.PDF-to-get-all-attachments-from-a-PDF-document-which-is-useful-for-saving-documents-sepa.cs)
-- [Work-with-attachments-in-PDF-using-PDF-input](./Work-with-attachments-in-PDF-using-PDF-input.cs)
-- [Work-with-vector-graphics-ZUGFeRD-JavaScript-and-compare-PDF-navigation-using-PDF-input-and-save](./Work-with-vector-graphics-ZUGFeRD-JavaScript-and-compare-PDF-navigation-using-PDF-input-and-save.cs)
-- [Working-with-PDF-file-metadata-in-C-heading-using-PDF-input](./Working-with-PDF-file-metadata-in-C-heading-using-PDF-input.cs)
+## Required Namespaces
 
+- `using Aspose.Pdf;` (74/95 files) ← category-specific
+- `using Aspose.Pdf.Facades;` (38/95 files)
+- `using Aspose.Pdf.Annotations;` (11/95 files)
+- `using Aspose.Pdf.Text;` (5/95 files)
+- `using Aspose.Pdf.LogicalStructure;` (3/95 files)
+- `using Aspose.Pdf.Tagged;` (3/95 files)
+- `using Aspose.Pdf.Drawing;` (1/95 files)
+- `using System;` (95/95 files)
+- `using System.IO;` (95/95 files)
+- `using System.Collections.Generic;` (9/95 files)
+- `using System.Drawing;` (1/95 files)
+
+## Common Code Pattern
+
+Most files follow this pattern:
+
+```csharp
+using (Document doc = new Document("input.pdf"))
+{
+    // ... operations ...
+    doc.Save("output.pdf");
+}
+```
+
+## Files in this folder
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [Add-an-attachment-to-a-PDF-document-and-extract-and-save-an-...](./Add-an-attachment-to-a-PDF-document-and-extract-and-save-an-attachment-using-PDF-input-and-save-as-P.cs) | `PdfContentEditor`, `PdfExtractor` | Add an attachment to a PDF document and extract and save an attachment using ... |
+| [Add-an-attachment-to-a-PDF-document-using-PDF-input-and-save...](./Add-an-attachment-to-a-PDF-document-using-PDF-input-and-save-as-PDF.cs) | `FileAttachmentAnnotation` | Add an attachment to a PDF document using PDF input and save as PDF |
+| [Add-an-attachment-to-a-tagged-PDF-then-extract-and-save-that...](./Add-an-attachment-to-a-tagged-PDF-then-extract-and-save-that-attachment-as-a-separate-PDF-file.cs) | `PdfContentEditor`, `PdfExtractor` | Add an attachment to a tagged PDF then extract and save that attachment as a ... |
+| [Aspose.PDF-allows-you-to-access-a-PDF-file-s-XMP-metadata-to...](./Aspose.PDF-allows-you-to-access-a-PDF-file-s-XMP-metadata-to-get-a-PDF-file-s-metadata-use-PDF-inpu.cs) |  | Aspose.PDF allows you to access a PDF file s XMP metadata to get a PDF file s... |
+| [Aspose.PDF-allows-you-to-set-metadata-in-a-PDF-file-to-set-t...](./Aspose.PDF-allows-you-to-set-metadata-in-a-PDF-file-to-set-this-use-PDF-input-and-save-as-PDF.cs) |  | Aspose.PDF allows you to set metadata in a PDF file to set this use PDF input... |
+| [Aspose.PDF-can-remove-attachments-from-PDF-files-a-PDF-docum...](./Aspose.PDF-can-remove-attachments-from-PDF-files-a-PDF-document-s-attachments-are-held-in-the-Docum.cs) |  | Aspose.PDF can remove attachments from PDF files a PDF document s attachments... |
+| [Aspose.PDF-for-.NET-allows-you-to-set-file-specific-informat...](./Aspose.PDF-for-.NET-allows-you-to-set-file-specific-information-such-as-author-creation-date-subje.cs) |  | Aspose.PDF for .NET allows you to set file specific information such as autho... |
+| [Assign-a-custom-XMP-metadata-heading-to-a-PDF-document-using...](./Assign-a-custom-XMP-metadata-heading-to-a-PDF-document-using-the-source-PDF-as-input.cs) |  | Assign a custom XMP metadata heading to a PDF document using the source PDF a... |
+| [Assign-custom-metadata-to-a-PDF-document-using-its-Metadata-...](./Assign-custom-metadata-to-a-PDF-document-using-its-Metadata-property-and-output-the-modified-file-as.cs) | `PdfFileInfo` | Assign custom metadata to a PDF document using its Metadata property and outp... |
+| [Assign-property-values-from-an-input-PDF-and-write-the-updat...](./Assign-property-values-from-an-input-PDF-and-write-the-updated-document-back-to-PDF-format.cs) |  | Assign property values from an input PDF and write the updated document back ... |
+| [Attach-a-file-to-a-PDF-then-retrieve-and-save-the-embedded-a...](./Attach-a-file-to-a-PDF-then-retrieve-and-save-the-embedded-attachment-as-a-separate-PDF-document.cs) | `PdfContentEditor`, `PdfExtractor` | Attach a file to a PDF then retrieve and save the embedded attachment as a se... |
+| [Attach-an-external-PDF-file-to-an-existing-PDF-document-and-...](./Attach-an-external-PDF-file-to-an-existing-PDF-document-and-save-the-result-as-a-new-PDF.cs) | `PdfContentEditor` | Attach an external PDF file to an existing PDF document and save the result a... |
+| [Call-the-EmbeddedFiles-collection-s-Delete-method-using-PDF-...](./Call-the-EmbeddedFiles-collection-s-Delete-method-using-PDF-input-and-save-as-PDF.cs) |  | Call the EmbeddedFiles collection s Delete method using PDF input and save as... |
+| [Create-a-Document-object-and-open-the-input-PDF-file-using-P...](./Create-a-Document-object-and-open-the-input-PDF-file-using-PDF-input-and-save-as-PDF.cs) |  | Create a Document object and open the input PDF file using PDF input and save... |
+| [Create-a-Document-object-using-PDF-input-and-save-as-PDF](./Create-a-Document-object-using-PDF-input-and-save-as-PDF.cs) |  | Create a Document object using PDF input and save as PDF |
+| [Create-a-DocumentInfo-object-using-PDF-input-and-save-as-PDF](./Create-a-DocumentInfo-object-using-PDF-input-and-save-as-PDF.cs) |  | Create a DocumentInfo object using PDF input and save as PDF |
+| [Create-a-custom-metadata-namespace-with-a-prefix-add-prefixe...](./Create-a-custom-metadata-namespace-with-a-prefix-add-prefixed-metadata-to-a-PDF-then-save-the-outp.cs) |  | Create a custom metadata namespace with a prefix add prefixed metadata to a P... |
+| [Delete-a-specific-attachment-from-a-PDF-file-and-save-the-mo...](./Delete-a-specific-attachment-from-a-PDF-file-and-save-the-modified-document-as-a-new-PDF.cs) |  | Delete a specific attachment from a PDF file and save the modified document a... |
+| [Delete-all-attachments-associated-with-a-PDF-file-using-PDF-...](./Delete-all-attachments-associated-with-a-PDF-file-using-PDF-input-and-save-as-PDF.cs) |  | Delete all attachments associated with a PDF file using PDF input and save as... |
+| [Execute-advanced-PDF-attachment-manipulations-delete-a-speci...](./Execute-advanced-PDF-attachment-manipulations-delete-a-specified-attachment-and-save-the-updated-d.cs) |  | Execute advanced PDF attachment manipulations delete a specified attachment a... |
+| [Execute-advanced-attachment-manipulations-delete-a-specified...](./Execute-advanced-attachment-manipulations-delete-a-specified-attachment-from-a-PDF-and-save-the-mo.cs) |  | Execute advanced attachment manipulations delete a specified attachment from ... |
+| [Execute-advanced-attachment-manipulations-extracting-a-PDF-a...](./Execute-advanced-attachment-manipulations-extracting-a-PDF-attachment-from-a-source-PDF-and-saving.cs) | `PdfExtractor` | Execute advanced attachment manipulations extracting a PDF attachment from a ... |
+| [Extract-all-embedded-PDF-attachments-from-an-input-PDF-and-w...](./Extract-all-embedded-PDF-attachments-from-an-input-PDF-and-write-each-attachment-to-separate-PDF-fil.cs) | `PdfExtractor` | Extract all embedded PDF attachments from an input PDF and write each attachm... |
+| [Extract-an-attachment-from-a-PDF-portfolio-save-it-as-PDF-an...](./Extract-an-attachment-from-a-PDF-portfolio-save-it-as-PDF-and-remove-it-from-the-original-PDF.cs) |  | Extract an attachment from a PDF portfolio save it as PDF and remove it from ... |
+| [Extract-an-embedded-PDF-attachment-from-a-source-PDF-documen...](./Extract-an-embedded-PDF-attachment-from-a-source-PDF-document-and-save-it-as-a-separate-PDF-file.cs) | `PdfExtractor` | Extract an embedded PDF attachment from a source PDF document and save it as ... |
+| [Extract-and-save-an-attachment-and-remove-an-attachment-from...](./Extract-and-save-an-attachment-and-remove-an-attachment-from-an-existing-PDF-portfolio-file-using-PD.cs) | `PdfContentEditor` | Extract and save an attachment and remove an attachment from an existing PDF ... |
+| [Extract-and-save-an-attachment-heading-using-PDF-input](./Extract-and-save-an-attachment-heading-using-PDF-input.cs) |  | Extract and save an attachment heading using PDF input |
+| [Extract-and-save-an-attachment-using-PDF-input-and-save-as-P...](./Extract-and-save-an-attachment-using-PDF-input-and-save-as-PDF.cs) | `PdfExtractor` | Extract and save an attachment using PDF input and save as PDF |
+| [Extract-every-attachment-from-the-supplied-PDF-document-incl...](./Extract-every-attachment-from-the-supplied-PDF-document-including-those-associated-with-heading-ele.cs) |  | Extract every attachment from the supplied PDF document including those assoc... |
+| [Extract-the-embedded-attachment-from-a-PDF-file-and-save-it-...](./Extract-the-embedded-attachment-from-a-PDF-file-and-save-it-to-a-specified-location.cs) | `PdfExtractor` | Extract the embedded attachment from a PDF file and save it to a specified lo... |
+| ... | | *and 65 more files* |
 
 ## Category Statistics
 - Total examples: 95
 
+## Category-Specific Tips
+
+### Key API Surface
+- `Aspose.Pdf.Document`
+- `Aspose.Pdf.EmbeddedFileCollection`
+- `Aspose.Pdf.EmbeddedFilesCollection`
+- `Aspose.Pdf.Facades.PdfContentEditor`
+- `Aspose.Pdf.FileEncoding`
+- `Aspose.Pdf.FileSpecification`
+- `Aspose.Pdf.FileSpecification.Params`
+- `Aspose.Pdf.FileSpecificationParams`
+- `PdfContentEditor.AddDocumentAttachment`
+- `PdfContentEditor.BindPdf`
+- `PdfContentEditor.Save`
+
+### Rules
+- Create a {attachment_file} FileSpecification with a {string_literal} description and add it to {doc}.EmbeddedFiles via the Add method to embed the file in the PDF.
+- After modifying the attachment collection, persist changes by calling {doc}.Save({output_pdf}).
+- Bind a PDF document with PdfContentEditor.BindPdf({input_pdf}) before performing any edit operations.
+- Add a file attachment using PdfContentEditor.AddDocumentAttachment({attachment_file}, {string_literal}) where the second argument is the attachment description.
+- Persist the changes by calling PdfContentEditor.Save({output_pdf}).
+
+### Warnings
+- The EmbeddedFiles collection is lazily instantiated; ensure {doc}.EmbeddedFiles is not null before adding.
+- FileSpecification constructor expects the source file to exist on disk.
+- AddDocumentAttachment only supports attaching external files; other attachment types are not covered in this example.
+- The example assumes the PDF contains an EmbeddedFiles collection; calling Delete() on an empty collection is safe but may be unnecessary.
+- The source file referenced in the FileSpecification must exist on disk; otherwise an exception will be thrown.
+
 ## General Tips
-- See parent [agents.md](../agents.md) for repository-level patterns, conventions, and anti-patterns
+- See parent [agents.md](../agents.md) for:
+  - **Boundaries** — Always / Ask First / Never rules for all examples
+  - **Common Mistakes** — verified anti-patterns that cause build failures
+  - **Domain Knowledge** — cross-cutting API-specific gotchas
+  - **Testing Guide** — build and run verification steps
 - Review code examples in this folder for working-with-attachments patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_105743_f05edb`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

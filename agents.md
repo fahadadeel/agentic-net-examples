@@ -1,40 +1,33 @@
+---
+name: aspose-pdf-examples
+description: AI-friendly C# code examples for Aspose.PDF for .NET
+language: csharp
+framework: net10.0
+package: Aspose.PDF 26.2.0
+---
+
 # Aspose.PDF for .NET Examples
 
 AI-friendly repository containing validated C# examples for Aspose.PDF for .NET API.
 
+## Persona
+
+You are a C# developer specializing in PDF processing using Aspose.PDF for .NET.
+When working in this repository:
+- Each `.cs` file is a **standalone Console Application** — do not create multi-file projects
+- All examples must **compile and run** without errors using `dotnet build` and `dotnet run`
+- Follow the conventions, boundaries, and anti-patterns documented below exactly
+- Use the **Command Reference** section for build/run commands
+
 ## Repository Overview
 
-This repository contains **1402** working code examples demonstrating Aspose.PDF for .NET capabilities.
+This repository contains **1730** working code examples demonstrating Aspose.PDF for .NET capabilities.
 
-**Statistics** (as of 2026-03-10):
-- Total Examples: 1402
-- Categories: 22
+**Statistics** (as of 2026-03-11):
+- Total Examples: 1730
+- Categories: 33
 
 ## Category Details
-
-### Conversion
-- Examples: 230
-- Guide: [agents.md](./conversion/agents.md)
-
-### Document
-- Examples: 72
-- Guide: [agents.md](./document/agents.md)
-
-### JavaScript
-- Examples: 9
-- Guide: [agents.md](./javascript/agents.md)
-
-### Operators
-- Examples: 7
-- Guide: [agents.md](./operators/agents.md)
-
-### Pages
-- Examples: 45
-- Guide: [agents.md](./pages/agents.md)
-
-### Stamping
-- Examples: 17
-- Guide: [agents.md](./stamping/agents.md)
 
 ### accessibility-and-tagged-pdfs
 - Examples: 70
@@ -48,9 +41,61 @@ This repository contains **1402** working code examples demonstrating Aspose.PDF
 - Examples: 30
 - Guide: [agents.md](./compare-pdf/agents.md)
 
+### conversion
+- Examples: 230
+- Guide: [agents.md](./conversion/agents.md)
+
+### document
+- Examples: 72
+- Guide: [agents.md](./document/agents.md)
+
 ### facades-acroforms
 - Examples: 35
 - Guide: [agents.md](./facades-acroforms/agents.md)
+
+### facades-annotations
+- Examples: 9
+- Guide: [agents.md](./facades-annotations/agents.md)
+
+### facades-bookmarks
+- Examples: 23
+- Guide: [agents.md](./facades-bookmarks/agents.md)
+
+### facades-convert-documents
+- Examples: 28
+- Guide: [agents.md](./facades-convert-documents/agents.md)
+
+### facades-documents
+- Examples: 56
+- Guide: [agents.md](./facades-documents/agents.md)
+
+### facades-edit-document
+- Examples: 60
+- Guide: [agents.md](./facades-edit-document/agents.md)
+
+### facades-extract-images-and-text
+- Examples: 12
+- Guide: [agents.md](./facades-extract-images-and-text/agents.md)
+
+### facades-fill-forms
+- Examples: 12
+- Guide: [agents.md](./facades-fill-forms/agents.md)
+
+### facades-forms
+- Examples: 24
+- Guide: [agents.md](./facades-forms/agents.md)
+
+### facades-metadata
+- Examples: 59
+- Guide: [agents.md](./facades-metadata/agents.md)
+
+### facades-secure-documents
+- Examples: 31
+- Guide: [agents.md](./facades-secure-documents/agents.md)
+
+### facades-sign-documents
+- Examples: 14
+- Guide: [agents.md](./facades-sign-documents/agents.md)
 
 ### facades-texts-and-images
 - Examples: 22
@@ -60,6 +105,18 @@ This repository contains **1402** working code examples demonstrating Aspose.PDF
 - Examples: 9
 - Guide: [agents.md](./graphs-zugferd-operators/agents.md)
 
+### javascript
+- Examples: 9
+- Guide: [agents.md](./javascript/agents.md)
+
+### operators
+- Examples: 7
+- Guide: [agents.md](./operators/agents.md)
+
+### pages
+- Examples: 45
+- Guide: [agents.md](./pages/agents.md)
+
 ### parse-pdf
 - Examples: 76
 - Guide: [agents.md](./parse-pdf/agents.md)
@@ -67,6 +124,10 @@ This repository contains **1402** working code examples demonstrating Aspose.PDF
 ### securing-and-signing-pdf
 - Examples: 25
 - Guide: [agents.md](./securing-and-signing-pdf/agents.md)
+
+### stamping
+- Examples: 17
+- Guide: [agents.md](./stamping/agents.md)
 
 ### working-with-annotations
 - Examples: 252
@@ -100,11 +161,13 @@ This repository contains **1402** working code examples demonstrating Aspose.PDF
 - Examples: 16
 - Guide: [agents.md](./working-with-xml/agents.md)
 
-## Code Conventions
+## Boundaries
 
-### Explicit Types (No `var`)
-Always use explicit type declarations. Never use `var`.
+### ✅ Always
 
+These rules are mandatory for every example.
+
+#### Use explicit types — never use `var`
 ```csharp
 // CORRECT
 Document document = new Document("input.pdf");
@@ -116,9 +179,7 @@ TextFragmentAbsorber absorber = new TextFragmentAbsorber("search");
 // var page = document.Pages[1];
 ```
 
-### One-Based Indexing
-Aspose.PDF uses 1-based indexing for Pages, Annotations, and EmbeddedFiles.
-
+#### Use 1-based indexing for Pages, Annotations, EmbeddedFiles
 ```csharp
 // CORRECT — first page is index 1
 Page firstPage = document.Pages[1];
@@ -129,9 +190,7 @@ FileSpecification firstFile = document.EmbeddedFiles[1];
 // Page page = document.Pages[0];
 ```
 
-### Fully Qualified Ambiguous Types
-When using both `Aspose.Pdf` and `Aspose.Pdf.Drawing`, qualify ambiguous types.
-
+#### Fully qualify ambiguous types (Rectangle, Color, Path, Image, Point, Matrix)
 ```csharp
 // CORRECT
 Aspose.Pdf.Rectangle rect = new Aspose.Pdf.Rectangle(100, 200, 300, 400);
@@ -143,9 +202,7 @@ Aspose.Pdf.Color pdfColor = Aspose.Pdf.Color.Blue;
 // Color color = Color.Blue;
 ```
 
-### Resource Cleanup
-Always use `using` blocks or explicit `Dispose()` for IDisposable objects.
-
+#### Use `using` blocks for IDisposable objects
 ```csharp
 // CORRECT
 using (Document document = new Document("input.pdf"))
@@ -155,14 +212,31 @@ using (Document document = new Document("input.pdf"))
 }
 ```
 
-### Save Pattern
-Always save the document after modifications.
-
+#### Save the document after all modifications
 ```csharp
 Document document = new Document("input.pdf");
 // ... make modifications ...
 document.Save("output.pdf");
 ```
+
+### ⚠️ Ask First
+
+Check with a human before doing any of these:
+- **Creating multi-file projects** — each example must be a single `.cs` file
+- **Using deprecated APIs** — check the Aspose.PDF changelog for the current API surface
+- **Adding NuGet packages** beyond `Aspose.PDF` — the `.csproj` template only includes Aspose.PDF
+- **Modifying shared infrastructure** — `.csproj` templates, `agents.md` files, CI configs
+
+### 🚫 Never
+
+See the full **Common Mistakes** section below for code-level prohibitions with examples.
+- Never use `var` for variable declarations
+- Never use 0-based indexing for `Pages`, `Annotations`, or `EmbeddedFiles`
+- Never use unqualified type names for `Rectangle`, `Color`, `Path`, `Image`, `Matrix`, `Point`
+- Never use `Aspose.Pdf.Saving` namespace (it does not exist)
+- Never mix `Aspose.Pdf.LogicalStructure` and `Aspose.Pdf.Structure` namespaces
+- Never modify `agents.md` files — they are auto-generated
+- Never modify the `.csproj` template — it is generated
 
 ## Common Mistakes (Anti-Patterns)
 
@@ -363,22 +437,22 @@ Aspose.Pdf.Drawing.Ellipse ellipse = new Aspose.Pdf.Drawing.Ellipse(300.0F, 600.
 
 ## Domain Knowledge
 
-Cross-cutting rules that apply across multiple categories.
+Cross-cutting rules and API-specific gotchas.
 
-- **Save the modified {doc} to {output_pdf}.**
-  _(Applies to: Annotations, Stamps-Watermarks, Tables (+1 more))_
-- **Persist the changes by calling {doc}.Save({output_pdf}).**
-  _(Applies to: Links-Actions, Pages, Stamps-Watermarks)_
-- **Persist the PDF by calling {doc}.Save({output_pdf}).**
-  _(Applies to: DocumentConversion, Images, Text)_
-- **Load a PDF document: Document {doc} = new Document({input_pdf});**
-  _(Applies to: Annotations, Forms, Images)_
-- **Load a PDF into {doc} using new Document({input_pdf}).**
-  _(Applies to: Bookmarks, Links-Actions, Security-Signatures)_
-- **Save the modified document to {output_pdf}.**
-  _(Applies to: Annotations, Forms, Tables)_
-- **Load a PDF by creating a {doc} = new Document({input_pdf});**
-  _(Applies to: DocumentConversion, Stamps-Watermarks)_
+- **Create a new {doc} and add a {page} via {doc}.Pages.Add().**
+  _(Applies to: Graphs, Working-Document)_
+- **Set {table}.ColumnWidths to a space‑separated string of column widths (e.g., "40 100 100") and assign {table}.DefaultCellBorder = new BorderInfo(BorderSide.All, {float}) to apply a uniform border to all cells.**
+  _(Applies to: Tables)_
+- **Populate the table from a System.Data.DataTable using {table}.ImportDataTable({data_table}, true, 0, 0, {int}, {int}) where the last two integers represent the total number of rows (including header) and the number of columns.**
+  _(Applies to: Tables)_
+- **Iterate over {row}.Cells to customize appearance: set {cell}.BackgroundColor, {cell}.DefaultCellTextState.Font, {cell}.DefaultCellTextState.ForegroundColor, and {cell}.DefaultCellTextState.HorizontalAlignment.**
+  _(Applies to: Tables)_
+- **Apply distinct styling to the header row (row index 0) versus data rows (row index >= 1) by using separate loops or conditional logic.**
+  _(Applies to: Tables)_
+- **Instantiate a PdfFileEditor and call Concatenate({input_pdf_stream1}, {input_pdf_stream2}, {output_pdf_stream}) to merge PDFs provided as streams.**
+  _(Applies to: TechnicalArticles)_
+- **When PDFs are available as byte arrays, wrap each byte array in a MemoryStream ({memory_stream}) before passing to PdfFileEditor.**
+  _(Applies to: TechnicalArticles)_
 
 ## Command Reference
 
@@ -416,6 +490,37 @@ dotnet run
 - All examples are standalone Console Applications
 - Each `.cs` file can be compiled and run independently
 
+## Testing Guide
+
+Every example must pass these verification steps.
+
+### Build Verification
+```bash
+dotnet build --configuration Release --verbosity minimal
+```
+- **Success**: Exit code 0, no `CS` error codes in output
+- **Failure**: Any `error CS####` line indicates a build failure
+
+### Run Verification
+```bash
+dotnet run
+```
+- **Success**: Exit code 0, no unhandled exception stack traces
+- **Failure**: `Unhandled exception`, `System.Exception`, or non-zero exit code
+
+### Expected Output Patterns
+- Console output confirming the operation (e.g., "PDF saved successfully")
+- Output files created in the working directory (e.g., `output.pdf`)
+- No `NullReferenceException`, `IndexOutOfRangeException`, or `FileNotFoundException`
+
+### Common Error Codes
+| Code | Meaning | Fix |
+|------|---------|-----|
+| `CS0104` | Ambiguous type reference | Use fully qualified name (`Aspose.Pdf.Rectangle`) |
+| `CS1061` | Member does not exist on type | Check API docs for correct property/method |
+| `CS0246` | Type or namespace not found | Add missing `using` directive |
+| `CS0029` | Cannot convert type | Cast explicitly or use correct type |
+
 ## How to Use These Examples
 
 ### Prerequisites
@@ -433,9 +538,9 @@ dotnet run
    ```
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_191202_db0088`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b` | Examples: 1730 | Categories: 33
 <!-- AUTOGENERATED:END -->
 
 ---
 
-*This repository is maintained by automated code generation. Last updated: 2026-03-10 | Total examples: 1402*
+*This repository is maintained by automated code generation. Last updated: 2026-03-11 | Total examples: 1730*

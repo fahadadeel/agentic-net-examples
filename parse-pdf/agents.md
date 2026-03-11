@@ -1,95 +1,102 @@
+---
+name: parse-pdf
+description: C# examples for parse-pdf using Aspose.PDF for .NET
+language: csharp
+framework: net10.0
+parent: ../agents.md
+---
+
 # AGENTS - parse-pdf
+
+## Persona
+
+You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
+working within the **parse-pdf** category.
+This folder contains standalone C# examples for parse-pdf operations.
+See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
 - This folder contains examples for **parse-pdf**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
-## Files in this folder
-- [Demonstrate-parsing-a-PDF-to-retrieve-images-with-configurable-extraction-options-providing-a-code](./Demonstrate-parsing-a-PDF-to-retrieve-images-with-configurable-extraction-options-providing-a-code.cs)
-- [Extract-a-specific-table-identified-by-its-index-from-a-PDF-document-and-return-its-data](./Extract-a-specific-table-identified-by-its-index-from-a-PDF-document-and-return-its-data.cs)
-- [Extract-text-from-every-stamp-annotation-within-a-PDF-file-by-parsing-the-document](./Extract-text-from-every-stamp-annotation-within-a-PDF-file-by-parsing-the-document.cs)
-- [Implement-PDF-parsing-functionality-that-extracts-and-displays-all-formats-supported-by-the-library](./Implement-PDF-parsing-functionality-that-extracts-and-displays-all-formats-supported-by-the-library.cs)
-- [Instantiate-a-Document-object-and-load-the-target-PDF-file-to-parse-its-content-programmatically](./Instantiate-a-Document-object-and-load-the-target-PDF-file-to-parse-its-content-programmatically.cs)
-- [Iterate-sequentially-through-each-page-of-a-PDF-document-to-programmatically-parse-its-contents](./Iterate-sequentially-through-each-page-of-a-PDF-document-to-programmatically-parse-its-contents.cs)
-- [Iterate-through-PDF-pages-to-extract-and-aggregate-paragraph-content-into-a-structured-collection](./Iterate-through-PDF-pages-to-extract-and-aggregate-paragraph-content-into-a-structured-collection.cs)
-- [Parse-PDF-documents-gather-detected-text-fragments-and-store-them-securely-for-subsequent-processi](./Parse-PDF-documents-gather-detected-text-fragments-and-store-them-securely-for-subsequent-processi.cs)
-- [Parse-PDF-documents-to-detect-and-extract-all-tables-preserving-the-original-PDF-format](./Parse-PDF-documents-to-detect-and-extract-all-tables-preserving-the-original-PDF-format.cs)
-- [Parse-PDF-documents-to-locate-and-extract-designated-font-resources-preserving-their-format-specifi](./Parse-PDF-documents-to-locate-and-extract-designated-font-resources-preserving-their-format-specifi.cs)
-- [Parse-PDF-documents-with-the-provided-example-to-extract-their-textual-content-efficiently-programma](./Parse-PDF-documents-with-the-provided-example-to-extract-their-textual-content-efficiently-programma.cs)
-- [Parse-PDF-files-to-identify-and-retrieve-superscript-and-subscript-text-elements-preserving-their-f](./Parse-PDF-files-to-identify-and-retrieve-superscript-and-subscript-text-elements-preserving-their-f.cs)
-- [Parse-PDF-files-to-programmatically-retrieve-all-vector-graphics-outputting-them-in-PDF-format](./Parse-PDF-files-to-programmatically-retrieve-all-vector-graphics-outputting-them-in-PDF-format.cs)
-- [Parse-a-PDF-document-and-append-its-extracted-text-to-a-StringBuilder-or-write-it-directly-to-a-file](./Parse-a-PDF-document-and-append-its-extracted-text-to-a-StringBuilder-or-write-it-directly-to-a-file.cs)
-- [Parse-a-PDF-document-and-configure-the-TextAbsorber-s-ExtractionOptions-to-extract-text-organized-by](./Parse-a-PDF-document-and-configure-the-TextAbsorber-s-ExtractionOptions-to-extract-text-organized-by.cs)
-- [Parse-a-PDF-document-and-export-its-images-in-a-specified-format-such-as-PNG-or-JPEG](./Parse-a-PDF-document-and-export-its-images-in-a-specified-format-such-as-PNG-or-JPEG.cs)
-- [Parse-a-PDF-document-and-extract-its-images-utilizing-configurable-image-extraction-options-illustr](./Parse-a-PDF-document-and-extract-its-images-utilizing-configurable-image-extraction-options-illustr.cs)
-- [Parse-a-PDF-document-and-extract-its-images-utilizing-configurable-image-extraction-options-while-pr](./Parse-a-PDF-document-and-extract-its-images-utilizing-configurable-image-extraction-options-while-pr.cs)
-- [Parse-a-PDF-document-and-extract-tables-employing-configurable-table-extraction-options-preserving](./Parse-a-PDF-document-and-extract-tables-employing-configurable-table-extraction-options-preserving.cs)
-- [Parse-a-PDF-document-and-extract-vector-graphics-from-a-designated-page-while-retaining-their-vector](./Parse-a-PDF-document-and-extract-vector-graphics-from-a-designated-page-while-retaining-their-vector.cs)
-- [Parse-a-PDF-document-and-filter-extracted-images-based-on-their-MIME-type-specifications](./Parse-a-PDF-document-and-filter-extracted-images-based-on-their-MIME-type-specifications.cs)
-- [Parse-a-PDF-document-and-generate-a-concise-summary-of-its-concluding-section-for-further-analysis](./Parse-a-PDF-document-and-generate-a-concise-summary-of-its-concluding-section-for-further-analysis.cs)
-- [Parse-a-PDF-document-and-programmatically-extract-all-superscript-and-subscript-characters-as-define](./Parse-a-PDF-document-and-programmatically-extract-all-superscript-and-subscript-characters-as-define.cs)
-- [Parse-a-PDF-document-and-retrieve-all-embedded-fonts-outputting-them-in-PDF-format](./Parse-a-PDF-document-and-retrieve-all-embedded-fonts-outputting-them-in-PDF-format.cs)
-- [Parse-a-PDF-document-and-retrieve-its-textual-content-programmatically-for-downstream-data-processin](./Parse-a-PDF-document-and-retrieve-its-textual-content-programmatically-for-downstream-data-processin.cs)
-- [Parse-a-PDF-document-and-retrieve-paragraphs-grouped-under-each-heading-while-preserving-hierarchica](./Parse-a-PDF-document-and-retrieve-paragraphs-grouped-under-each-heading-while-preserving-hierarchica.cs)
-- [Parse-a-PDF-document-and-retrieve-text-from-every-page-according-to-the-specified-heading](./Parse-a-PDF-document-and-retrieve-text-from-every-page-according-to-the-specified-heading.cs)
-- [Parse-a-PDF-document-and-retrieve-the-text-content-from-each-page-in-sequential-order](./Parse-a-PDF-document-and-retrieve-the-text-content-from-each-page-in-sequential-order.cs)
-- [Parse-a-PDF-document-and-retrieve-the-text-content-of-a-designated-stamp-annotation](./Parse-a-PDF-document-and-retrieve-the-text-content-of-a-designated-stamp-annotation.cs)
-- [Parse-a-PDF-document-and-store-the-extracted-text-into-a-string-variable-or-write-it-to-a-file](./Parse-a-PDF-document-and-store-the-extracted-text-into-a-string-variable-or-write-it-to-a-file.cs)
-- [Parse-a-PDF-document-extract-its-form-data-and-serialize-the-information-into-an-XML-file](./Parse-a-PDF-document-extract-its-form-data-and-serialize-the-information-into-an-XML-file.cs)
-- [Parse-a-PDF-document-extract-its-form-data-and-write-the-extracted-values-to-a-plain-text-file](./Parse-a-PDF-document-extract-its-form-data-and-write-the-extracted-values-to-a-plain-text-file.cs)
-- [Parse-a-PDF-document-extract-its-vector-graphics-and-export-each-as-an-SVG-file](./Parse-a-PDF-document-extract-its-vector-graphics-and-export-each-as-an-SVG-file.cs)
-- [Parse-a-PDF-document-to-determine-the-scaling-factor-applied-to-extracted-vector-graphics](./Parse-a-PDF-document-to-determine-the-scaling-factor-applied-to-extracted-vector-graphics.cs)
-- [Parse-a-PDF-document-to-extract-all-form-fields-and-return-them-in-PDF-format](./Parse-a-PDF-document-to-extract-all-form-fields-and-return-them-in-PDF-format.cs)
-- [Parse-a-PDF-document-to-extract-all-images-located-on-a-specified-page-while-preserving-their-origin](./Parse-a-PDF-document-to-extract-all-images-located-on-a-specified-page-while-preserving-their-origin.cs)
-- [Parse-a-PDF-document-to-extract-its-fonts-according-to-configurable-font-extraction-options](./Parse-a-PDF-document-to-extract-its-fonts-according-to-configurable-font-extraction-options.cs)
-- [Parse-a-PDF-document-to-extract-its-vector-graphics-data-while-maintaining-PDF-format-integrity](./Parse-a-PDF-document-to-extract-its-vector-graphics-data-while-maintaining-PDF-format-integrity.cs)
-- [Parse-a-PDF-document-to-extract-tabular-data-demonstrating-the-process-with-a-PDF-file-example](./Parse-a-PDF-document-to-extract-tabular-data-demonstrating-the-process-with-a-PDF-file-example.cs)
-- [Parse-a-PDF-document-to-extract-vector-graphics-from-a-specified-page-while-preserving-their-vector](./Parse-a-PDF-document-to-extract-vector-graphics-from-a-specified-page-while-preserving-their-vector.cs)
-- [Parse-a-PDF-document-to-identify-and-extract-all-superscript-and-subscript-characters-for-further-pr](./Parse-a-PDF-document-to-identify-and-extract-all-superscript-and-subscript-characters-for-further-pr.cs)
-- [Parse-a-PDF-document-to-locate-and-extract-a-designated-table-while-maintaining-PDF-format-integrity](./Parse-a-PDF-document-to-locate-and-extract-a-designated-table-while-maintaining-PDF-format-integrity.cs)
-- [Parse-a-PDF-document-to-programmatically-extract-all-superscript-and-subscript-characters-for-furthe](./Parse-a-PDF-document-to-programmatically-extract-all-superscript-and-subscript-characters-for-furthe.cs)
-- [Parse-a-PDF-document-to-programmatically-extract-all-tables-in-PDF-format-preserving-their-structur](./Parse-a-PDF-document-to-programmatically-extract-all-tables-in-PDF-format-preserving-their-structur.cs)
-- [Parse-a-PDF-document-to-programmatically-extract-embedded-images-while-maintaining-the-original-PDF](./Parse-a-PDF-document-to-programmatically-extract-embedded-images-while-maintaining-the-original-PDF.cs)
-- [Parse-a-PDF-document-to-programmatically-extract-its-vector-graphics-data-for-further-processing](./Parse-a-PDF-document-to-programmatically-extract-its-vector-graphics-data-for-further-processing.cs)
-- [Parse-a-PDF-document-to-programmatically-extract-tabular-data-preserving-the-original-PDF-format](./Parse-a-PDF-document-to-programmatically-extract-tabular-data-preserving-the-original-PDF-format.cs)
-- [Parse-a-PDF-document-to-programmatically-retrieve-its-textual-paragraphs-while-maintaining-original](./Parse-a-PDF-document-to-programmatically-retrieve-its-textual-paragraphs-while-maintaining-original.cs)
-- [Parse-a-PDF-document-to-retrieve-a-designated-form-field-s-value-using-the-PDF-format](./Parse-a-PDF-document-to-retrieve-a-designated-form-field-s-value-using-the-PDF-format.cs)
-- [Parse-a-PDF-document-to-retrieve-all-AcroForm-field-values-for-subsequent-data-processing](./Parse-a-PDF-document-to-retrieve-all-AcroForm-field-values-for-subsequent-data-processing.cs)
-- [Parse-a-PDF-document-to-retrieve-all-embedded-fonts-preserving-font-data-in-the-original-PDF-format](./Parse-a-PDF-document-to-retrieve-all-embedded-fonts-preserving-font-data-in-the-original-PDF-format.cs)
-- [Parse-a-PDF-document-to-retrieve-all-form-field-values-preserving-the-original-PDF-format](./Parse-a-PDF-document-to-retrieve-all-form-field-values-preserving-the-original-PDF-format.cs)
-- [Parse-a-PDF-document-to-retrieve-all-stamped-text-outputting-the-results-in-PDF-format](./Parse-a-PDF-document-to-retrieve-all-stamped-text-outputting-the-results-in-PDF-format.cs)
-- [Parse-a-PDF-document-to-retrieve-fonts-of-a-specified-type-TrueType-or-OpenType](./Parse-a-PDF-document-to-retrieve-fonts-of-a-specified-type-TrueType-or-OpenType.cs)
-- [Parse-a-PDF-document-to-retrieve-form-field-data-utilizing-configurable-form-extraction-options](./Parse-a-PDF-document-to-retrieve-form-field-data-utilizing-configurable-form-extraction-options.cs)
-- [Parse-a-PDF-document-to-retrieve-form-field-values-demonstrating-extraction-of-form-data](./Parse-a-PDF-document-to-retrieve-form-field-values-demonstrating-extraction-of-form-data.cs)
-- [Parse-a-PDF-document-to-retrieve-its-paragraphs-while-maintaining-their-original-ordering-and-format](./Parse-a-PDF-document-to-retrieve-its-paragraphs-while-maintaining-their-original-ordering-and-format.cs)
-- [Parse-a-PDF-document-to-retrieve-specific-fonts-by-providing-their-names-within-the-PDF-file](./Parse-a-PDF-document-to-retrieve-specific-fonts-by-providing-their-names-within-the-PDF-file.cs)
-- [Parse-a-PDF-document-to-retrieve-stamped-text-by-applying-configurable-text-extraction-options](./Parse-a-PDF-document-to-retrieve-stamped-text-by-applying-configurable-text-extraction-options.cs)
-- [Parse-a-PDF-document-to-retrieve-stamped-text-fragments-demonstrating-the-approach-using-PDF-files](./Parse-a-PDF-document-to-retrieve-stamped-text-fragments-demonstrating-the-approach-using-PDF-files.cs)
-- [Parse-a-PDF-document-to-retrieve-vector-graphics-utilizing-the-available-vector-extraction-options](./Parse-a-PDF-document-to-retrieve-vector-graphics-utilizing-the-available-vector-extraction-options.cs)
-- [Parse-a-PDF-document-using-the-provided-sample-code-to-programmatically-extract-all-textual-paragrap](./Parse-a-PDF-document-using-the-provided-sample-code-to-programmatically-extract-all-textual-paragrap.cs)
-- [Parse-a-PDF-file-and-export-its-embedded-fonts-to-a-designated-folder-in-their-original-PDF-format](./Parse-a-PDF-file-and-export-its-embedded-fonts-to-a-designated-folder-in-their-original-PDF-format.cs)
-- [Parse-a-PDF-file-to-adjust-its-embedded-image-resolution-producing-an-updated-PDF-with-the-specifie](./Parse-a-PDF-file-to-adjust-its-embedded-image-resolution-producing-an-updated-PDF-with-the-specifie.cs)
-- [Parse-a-PDF-file-to-extract-all-embedded-images-preserving-their-original-format-and-quality](./Parse-a-PDF-file-to-extract-all-embedded-images-preserving-their-original-format-and-quality.cs)
-- [Parse-a-PDF-file-to-extract-all-embedded-images-preserving-their-original-formats-and-resolution](./Parse-a-PDF-file-to-extract-all-embedded-images-preserving-their-original-formats-and-resolution.cs)
-- [Parse-a-PDF-file-to-extract-all-text-content-while-preserving-its-original-formatting-and-layout](./Parse-a-PDF-file-to-extract-all-text-content-while-preserving-its-original-formatting-and-layout.cs)
-- [Parse-a-PDF-file-to-extract-embedded-font-resources-preserving-their-metadata-and-characteristics](./Parse-a-PDF-file-to-extract-embedded-font-resources-preserving-their-metadata-and-characteristics.cs)
-- [Parse-a-PDF-file-to-programmatically-extract-all-embedded-vector-graphics-while-retaining-their-orig](./Parse-a-PDF-file-to-programmatically-extract-all-embedded-vector-graphics-while-retaining-their-orig.cs)
-- [Parse-a-PDF-file-to-programmatically-extract-stamp-annotation-text-while-preserving-the-PDF-format](./Parse-a-PDF-file-to-programmatically-extract-stamp-annotation-text-while-preserving-the-PDF-format.cs)
-- [Parse-a-PDF-file-to-retrieve-all-embedded-fonts-outputting-them-in-their-original-format](./Parse-a-PDF-file-to-retrieve-all-embedded-fonts-outputting-them-in-their-original-format.cs)
-- [Parse-a-PDF-file-to-retrieve-text-from-a-specific-stamp-identified-by-its-zero-based-index](./Parse-a-PDF-file-to-retrieve-text-from-a-specific-stamp-identified-by-its-zero-based-index.cs)
-- [Parse-a-PDF-file-to-retrieve-the-text-of-a-named-stamp-extracting-only-its-associated-content](./Parse-a-PDF-file-to-retrieve-the-text-of-a-named-stamp-extracting-only-its-associated-content.cs)
-- [Parse-a-PDF-using-TextFragmentAbsorber-and-customized-TextSearchOptions-to-detect-superscript-and-su](./Parse-a-PDF-using-TextFragmentAbsorber-and-customized-TextSearchOptions-to-detect-superscript-and-su.cs)
-- [Parse-a-PDF-using-the-provided-sample-to-accurately-retrieve-superscript-and-subscript-characters](./Parse-a-PDF-using-the-provided-sample-to-accurately-retrieve-superscript-and-subscript-characters.cs)
-- [Read-a-PDF-document-and-retrieve-the-value-of-a-named-form-field-using-the-PDF-API](./Read-a-PDF-document-and-retrieve-the-value-of-a-named-form-field-using-the-PDF-API.cs)
+## Required Namespaces
 
+- `using Aspose.Pdf;` (76/76 files) ← category-specific
+- `using Aspose.Pdf.Text;` (46/76 files) ← category-specific
+- `using Aspose.Pdf.Forms;` (8/76 files)
+- `using Aspose.Pdf.Annotations;` (6/76 files)
+- `using Aspose.Pdf.Vector;` (6/76 files)
+- `using Aspose.Pdf.Devices;` (3/76 files)
+- `using Aspose.Pdf.Facades;` (3/76 files)
+- `using Aspose.Pdf.AI;` (1/76 files)
+- `using Aspose.Pdf.Tagged;` (1/76 files)
+- `using System;` (76/76 files)
+- `using System.IO;` (75/76 files)
+- `using System.Collections.Generic;` (11/76 files)
+- `using System.Text;` (3/76 files)
+- `using System.Data;` (1/76 files)
+- `using System.Drawing.Imaging;` (1/76 files)
+- `using System.Threading.Tasks;` (1/76 files)
+
+## Common Code Pattern
+
+Most files follow this pattern:
+
+```csharp
+using (Document doc = new Document("input.pdf"))
+{
+    // ... operations ...
+    doc.Save("output.pdf");
+}
+```
+
+## Files in this folder
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [Demonstrate-parsing-a-PDF-to-retrieve-images-with-configurab...](./Demonstrate-parsing-a-PDF-to-retrieve-images-with-configurable-extraction-options-providing-a-code.cs) | `ImagePlacementAbsorber` | Demonstrate parsing a PDF to retrieve images with configurable extraction opt... |
+| [Extract-a-specific-table-identified-by-its-index-from-a-PDF-...](./Extract-a-specific-table-identified-by-its-index-from-a-PDF-document-and-return-its-data.cs) | `TableAbsorber`, `StringBuilder` | Extract a specific table identified by its index from a PDF document and retu... |
+| [Extract-text-from-every-stamp-annotation-within-a-PDF-file-b...](./Extract-text-from-every-stamp-annotation-within-a-PDF-file-by-parsing-the-document.cs) |  | Extract text from every stamp annotation within a PDF file by parsing the doc... |
+| [Implement-PDF-parsing-functionality-that-extracts-and-displa...](./Implement-PDF-parsing-functionality-that-extracts-and-displays-all-formats-supported-by-the-library.cs) |  | Implement PDF parsing functionality that extracts and displays all formats su... |
+| [Instantiate-a-Document-object-and-load-the-target-PDF-file-t...](./Instantiate-a-Document-object-and-load-the-target-PDF-file-to-parse-its-content-programmatically.cs) | `TextAbsorber` | Instantiate a Document object and load the target PDF file to parse its conte... |
+| [Iterate-sequentially-through-each-page-of-a-PDF-document-to-...](./Iterate-sequentially-through-each-page-of-a-PDF-document-to-programmatically-parse-its-contents.cs) | `TextAbsorber`, `ImagePlacementAbsorber` | Iterate sequentially through each page of a PDF document to programmatically ... |
+| [Iterate-through-PDF-pages-to-extract-and-aggregate-paragraph...](./Iterate-through-PDF-pages-to-extract-and-aggregate-paragraph-content-into-a-structured-collection.cs) | `ParagraphAbsorber` | Iterate through PDF pages to extract and aggregate paragraph content into a s... |
+| [Parse-PDF-documents-gather-detected-text-fragments-and-store...](./Parse-PDF-documents-gather-detected-text-fragments-and-store-them-securely-for-subsequent-processi.cs) | `TextFragmentAbsorber`, `TextFragment` | Parse PDF documents gather detected text fragments and store them securely fo... |
+| [Parse-PDF-documents-to-detect-and-extract-all-tables-preserv...](./Parse-PDF-documents-to-detect-and-extract-all-tables-preserving-the-original-PDF-format.cs) | `TableAbsorber` | Parse PDF documents to detect and extract all tables preserving the original ... |
+| [Parse-PDF-documents-to-locate-and-extract-designated-font-re...](./Parse-PDF-documents-to-locate-and-extract-designated-font-resources-preserving-their-format-specifi.cs) | `FontAbsorber` | Parse PDF documents to locate and extract designated font resources preservin... |
+| [Parse-PDF-documents-with-the-provided-example-to-extract-the...](./Parse-PDF-documents-with-the-provided-example-to-extract-their-textual-content-efficiently-programma.cs) | `TextAbsorber` | Parse PDF documents with the provided example to extract their textual conten... |
+| [Parse-PDF-files-to-identify-and-retrieve-superscript-and-sub...](./Parse-PDF-files-to-identify-and-retrieve-superscript-and-subscript-text-elements-preserving-their-f.cs) | `TextFragmentAbsorber` | Parse PDF files to identify and retrieve superscript and subscript text eleme... |
+| [Parse-PDF-files-to-programmatically-retrieve-all-vector-grap...](./Parse-PDF-files-to-programmatically-retrieve-all-vector-graphics-outputting-them-in-PDF-format.cs) |  | Parse PDF files to programmatically retrieve all vector graphics outputting t... |
+| [Parse-a-PDF-document-and-append-its-extracted-text-to-a-Stri...](./Parse-a-PDF-document-and-append-its-extracted-text-to-a-StringBuilder-or-write-it-directly-to-a-file.cs) | `TextAbsorber`, `StringBuilder` | Parse a PDF document and append its extracted text to a StringBuilder or writ... |
+| [Parse-a-PDF-document-and-configure-the-TextAbsorber-s-Extrac...](./Parse-a-PDF-document-and-configure-the-TextAbsorber-s-ExtractionOptions-to-extract-text-organized-by.cs) | `TextAbsorber` | Parse a PDF document and configure the TextAbsorber s ExtractionOptions to ex... |
+| [Parse-a-PDF-document-and-export-its-images-in-a-specified-fo...](./Parse-a-PDF-document-and-export-its-images-in-a-specified-format-such-as-PNG-or-JPEG.cs) | `JpegDevice`, `PngDevice` | Parse a PDF document and export its images in a specified format such as PNG ... |
+| [Parse-a-PDF-document-and-extract-its-images-utilizing-config...](./Parse-a-PDF-document-and-extract-its-images-utilizing-configurable-image-extraction-options-illustr.cs) | `ImagePlacementAbsorber` | Parse a PDF document and extract its images utilizing configurable image extr... |
+| [Parse-a-PDF-document-and-extract-its-images-utilizing-config...](./Parse-a-PDF-document-and-extract-its-images-utilizing-configurable-image-extraction-options-while-pr.cs) | `PdfExtractor` | Parse a PDF document and extract its images utilizing configurable image extr... |
+| [Parse-a-PDF-document-and-extract-tables-employing-configurab...](./Parse-a-PDF-document-and-extract-tables-employing-configurable-table-extraction-options-preserving.cs) | `TableAbsorber` | Parse a PDF document and extract tables employing configurable table extracti... |
+| [Parse-a-PDF-document-and-extract-vector-graphics-from-a-desi...](./Parse-a-PDF-document-and-extract-vector-graphics-from-a-designated-page-while-retaining-their-vector.cs) | `SvgExtractor` | Parse a PDF document and extract vector graphics from a designated page while... |
+| [Parse-a-PDF-document-and-filter-extracted-images-based-on-th...](./Parse-a-PDF-document-and-filter-extracted-images-based-on-their-MIME-type-specifications.cs) | `ImagePlacementAbsorber` | Parse a PDF document and filter extracted images based on their MIME type spe... |
+| [Parse-a-PDF-document-and-generate-a-concise-summary-of-its-c...](./Parse-a-PDF-document-and-generate-a-concise-summary-of-its-concluding-section-for-further-analysis.cs) | `TextAbsorber` | Parse a PDF document and generate a concise summary of its concluding section... |
+| [Parse-a-PDF-document-and-programmatically-extract-all-supers...](./Parse-a-PDF-document-and-programmatically-extract-all-superscript-and-subscript-characters-as-define.cs) | `TextFragmentAbsorber` | Parse a PDF document and programmatically extract all superscript and subscri... |
+| [Parse-a-PDF-document-and-retrieve-all-embedded-fonts-outputt...](./Parse-a-PDF-document-and-retrieve-all-embedded-fonts-outputting-them-in-PDF-format.cs) | `TextFragmentAbsorber`, `TextFragment` | Parse a PDF document and retrieve all embedded fonts outputting them in PDF f... |
+| [Parse-a-PDF-document-and-retrieve-its-textual-content-progra...](./Parse-a-PDF-document-and-retrieve-its-textual-content-programmatically-for-downstream-data-processin.cs) | `TextAbsorber` | Parse a PDF document and retrieve its textual content programmatically for do... |
+| [Parse-a-PDF-document-and-retrieve-paragraphs-grouped-under-e...](./Parse-a-PDF-document-and-retrieve-paragraphs-grouped-under-each-heading-while-preserving-hierarchica.cs) | `ParagraphAbsorber` | Parse a PDF document and retrieve paragraphs grouped under each heading while... |
+| [Parse-a-PDF-document-and-retrieve-text-from-every-page-accor...](./Parse-a-PDF-document-and-retrieve-text-from-every-page-according-to-the-specified-heading.cs) | `TextAbsorber` | Parse a PDF document and retrieve text from every page according to the speci... |
+| [Parse-a-PDF-document-and-retrieve-the-text-content-from-each...](./Parse-a-PDF-document-and-retrieve-the-text-content-from-each-page-in-sequential-order.cs) | `TextAbsorber` | Parse a PDF document and retrieve the text content from each page in sequenti... |
+| [Parse-a-PDF-document-and-retrieve-the-text-content-of-a-desi...](./Parse-a-PDF-document-and-retrieve-the-text-content-of-a-designated-stamp-annotation.cs) |  | Parse a PDF document and retrieve the text content of a designated stamp anno... |
+| [Parse-a-PDF-document-and-store-the-extracted-text-into-a-str...](./Parse-a-PDF-document-and-store-the-extracted-text-into-a-string-variable-or-write-it-to-a-file.cs) | `TextAbsorber` | Parse a PDF document and store the extracted text into a string variable or w... |
+| ... | | *and 46 more files* |
 
 ## Category Statistics
 - Total examples: 76
 
 ## General Tips
-- See parent [agents.md](../agents.md) for repository-level patterns, conventions, and anti-patterns
+- See parent [agents.md](../agents.md) for:
+  - **Boundaries** — Always / Ask First / Never rules for all examples
+  - **Common Mistakes** — verified anti-patterns that cause build failures
+  - **Domain Knowledge** — cross-cutting API-specific gotchas
+  - **Testing Guide** — build and run verification steps
 - Review code examples in this folder for parse-pdf patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_105743_f05edb`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->

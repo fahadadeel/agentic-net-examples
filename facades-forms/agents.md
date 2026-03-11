@@ -1,49 +1,65 @@
 ---
-name: Facades - Forms
-description: C# examples for Facades - Forms using Aspose.PDF for .NET
+name: facades-forms
+description: C# examples for facades-forms using Aspose.PDF for .NET
 language: csharp
 framework: net10.0
 parent: ../agents.md
 ---
 
-# AGENTS - Facades - Forms
+# AGENTS - facades-forms
 
 ## Persona
 
 You are a C# developer specializing in PDF processing using Aspose.PDF for .NET,
-working within the **Facades - Forms** category.
-This folder contains standalone C# examples for Facades - Forms operations.
+working within the **facades-forms** category.
+This folder contains standalone C# examples for facades-forms operations.
 See the root [agents.md](../agents.md) for repository-wide conventions and boundaries.
 
 ## Scope
-- This folder contains examples for **Facades - Forms**.
+- This folder contains examples for **facades-forms**.
 - Files are standalone `.cs` examples stored directly in this folder.
 
+## Required Namespaces
+
+- `using Aspose.Pdf.Facades;` (23/24 files) ← category-specific
+- `using Aspose.Pdf;` (12/24 files) ← category-specific
+- `using Aspose.Pdf.Forms;` (1/24 files)
+- `using System;` (24/24 files)
+- `using System.IO;` (24/24 files)
+- `using System.Drawing;` (2/24 files)
+- `using System.Collections.Generic;` (1/24 files)
+- `using System.Drawing.Imaging;` (1/24 files)
+- `using System.Text;` (1/24 files)
+- `using System.Text.RegularExpressions;` (1/24 files)
+
 ## Files in this folder
-- [apply-visual-styling-to-a-specific-form-field-within-the-input-pdf-document-for-presentation](./apply-visual-styling-to-a-specific-form-field-within-the-input-pdf-document-for-presentation.cs)
-- [apply-visual-styling-to-every-field-of-a-specified-type-within-an-existing-pdf-document](./apply-visual-styling-to-every-field-of-a-specified-type-within-an-existing-pdf-document.cs)
-- [delete-a-specified-form-field-from-an-input-pdf-document-while-maintaining-the-remaining-content-s-i](./delete-a-specified-form-field-from-an-input-pdf-document-while-maintaining-the-remaining-content-s-i.cs)
-- [extract-both-images-and-textual-content-from-a-pdf-document-preserving-their-original-formats-and-l](./extract-both-images-and-textual-content-from-a-pdf-document-preserving-their-original-formats-and-l.cs)
-- [import-form-fields-from-a-pdf-file-and-export-them-to-an-external-format-for-further-manipulation](./import-form-fields-from-a-pdf-file-and-export-them-to-an-external-format-for-further-manipulation.cs)
-- [import-xml-data-from-a-pdf-via-a-file-stream-ensuring-proper-parsing-and-seamless-integration](./import-xml-data-from-a-pdf-via-a-file-stream-ensuring-proper-parsing-and-seamless-integration.cs)
-- [inject-fdf-form-data-into-an-existing-pdf-and-generate-an-updated-pdf-file](./inject-fdf-form-data-into-an-existing-pdf-and-generate-an-updated-pdf-file.cs)
-- [inject-javascript-into-a-push-button-field-of-an-input-pdf-to-define-its-interactive-behavior](./inject-javascript-into-a-push-button-field-of-an-input-pdf-to-define-its-interactive-behavior.cs)
-- [insert-a-new-bullet-list-item-into-an-existing-pdf-document-while-preserving-its-existing-content](./insert-a-new-bullet-list-item-into-an-existing-pdf-document-while-preserving-its-existing-content.cs)
-- [insert-a-new-form-field-into-an-existing-pdf-document-preserving-its-layout-and-interactivity](./insert-a-new-form-field-into-an-existing-pdf-document-preserving-its-layout-and-interactivity.cs)
-- [insert-interactive-form-fields-into-the-specified-pdf-document-to-enable-data-entry-and-collection](./insert-interactive-form-fields-into-the-specified-pdf-document-to-enable-data-entry-and-collection.cs)
-- [manipulate-list-items-within-a-pdf-document-to-read-modify-or-extract-specific-entry-data](./manipulate-list-items-within-a-pdf-document-to-read-modify-or-extract-specific-entry-data.cs)
-- [move-a-form-field-to-a-new-location-within-the-input-pdf-while-maintaining-its-existing-properties](./move-a-form-field-to-a-new-location-within-the-input-pdf-while-maintaining-its-existing-properties.cs)
-- [programmatically-apply-visual-styling-to-a-specific-form-field-in-a-given-pdf-document](./programmatically-apply-visual-styling-to-a-specific-form-field-in-a-given-pdf-document.cs)
-- [programmatically-insert-a-submit-button-with-a-specified-url-into-an-existing-pdf-document](./programmatically-insert-a-submit-button-with-a-specified-url-into-an-existing-pdf-document.cs)
-- [read-pdf-content-from-a-file-stream-and-import-it-into-the-application-for-further-processing](./read-pdf-content-from-a-file-stream-and-import-it-into-the-application-for-further-processing.cs)
-- [remove-a-specific-list-item-from-an-existing-pdf-document-while-preserving-the-remaining-content](./remove-a-specific-list-item-from-an-existing-pdf-document-while-preserving-the-remaining-content.cs)
-- [send-a-pdf-file-to-the-printer-api-to-generate-a-hard-copy-output-with-default-print-settings](./send-a-pdf-file-to-the-printer-api-to-generate-a-hard-copy-output-with-default-print-settings.cs)
-- [specify-how-to-process-an-input-pdf-including-loading-parsing-and-programmatically-accessing-its](./specify-how-to-process-an-input-pdf-including-loading-parsing-and-programmatically-accessing-its.cs)
-- [transfer-form-data-from-a-source-pdf-into-an-fdf-file-using-the-input-pdf-as-reference](./transfer-form-data-from-a-source-pdf-into-an-fdf-file-using-the-input-pdf-as-reference.cs)
-- [transform-an-input-pdf-file-into-a-new-pdf-output-applying-designated-processing-or-format-changes](./transform-an-input-pdf-file-into-a-new-pdf-output-applying-designated-processing-or-format-changes.cs)
-- [transform-data-from-a-source-pdf-into-several-pdf-output-formats-while-maintaining-content-fidelity](./transform-data-from-a-source-pdf-into-several-pdf-output-formats-while-maintaining-content-fidelity.cs)
-- [transform-pdf-content-into-a-new-pdf-document-while-preserving-all-original-data-fidelity-and-struct](./transform-pdf-content-into-a-new-pdf-document-while-preserving-all-original-data-fidelity-and-struct.cs)
-- [utilize-the-formeditor-class-to-manipulate-and-retrieve-data-from-an-input-pdf-document](./utilize-the-formeditor-class-to-manipulate-and-retrieve-data-from-an-input-pdf-document.cs)
+
+| File | Key APIs | Description |
+|------|----------|-------------|
+| [apply-visual-styling-to-a-specific-form-field-within-the-inp...](./apply-visual-styling-to-a-specific-form-field-within-the-input-pdf-document-for-presentation.cs) | `FormEditor` | Apply visual styling to a specific form field within the input pdf document f... |
+| [apply-visual-styling-to-every-field-of-a-specified-type-with...](./apply-visual-styling-to-every-field-of-a-specified-type-within-an-existing-pdf-document.cs) | `FormEditor` | Apply visual styling to every field of a specified type within an existing pd... |
+| [delete-a-specified-form-field-from-an-input-pdf-document-whi...](./delete-a-specified-form-field-from-an-input-pdf-document-while-maintaining-the-remaining-content-s-i.cs) | `FormEditor` | Delete a specified form field from an input pdf document while maintaining th... |
+| [extract-both-images-and-textual-content-from-a-pdf-document-...](./extract-both-images-and-textual-content-from-a-pdf-document-preserving-their-original-formats-and-l.cs) | `PdfExtractor` | Extract both images and textual content from a pdf document preserving their ... |
+| [import-form-fields-from-a-pdf-file-and-export-them-to-an-ext...](./import-form-fields-from-a-pdf-file-and-export-them-to-an-external-format-for-further-manipulation.cs) | `Form` | Import form fields from a pdf file and export them to an external format for ... |
+| [import-xml-data-from-a-pdf-via-a-file-stream-ensuring-proper...](./import-xml-data-from-a-pdf-via-a-file-stream-ensuring-proper-parsing-and-seamless-integration.cs) | `Form` | Import xml data from a pdf via a file stream ensuring proper parsing and seam... |
+| [inject-fdf-form-data-into-an-existing-pdf-and-generate-an-up...](./inject-fdf-form-data-into-an-existing-pdf-and-generate-an-updated-pdf-file.cs) | `Form` | Inject fdf form data into an existing pdf and generate an updated pdf file |
+| [inject-javascript-into-a-push-button-field-of-an-input-pdf-t...](./inject-javascript-into-a-push-button-field-of-an-input-pdf-to-define-its-interactive-behavior.cs) | `FormEditor` | Inject javascript into a push button field of an input pdf to define its inte... |
+| [insert-a-new-bullet-list-item-into-an-existing-pdf-document-...](./insert-a-new-bullet-list-item-into-an-existing-pdf-document-while-preserving-its-existing-content.cs) | `PdfContentEditor` | Insert a new bullet list item into an existing pdf document while preserving ... |
+| [insert-a-new-form-field-into-an-existing-pdf-document-preser...](./insert-a-new-form-field-into-an-existing-pdf-document-preserving-its-layout-and-interactivity.cs) | `FormEditor` | Insert a new form field into an existing pdf document preserving its layout a... |
+| [insert-interactive-form-fields-into-the-specified-pdf-docume...](./insert-interactive-form-fields-into-the-specified-pdf-document-to-enable-data-entry-and-collection.cs) | `FormEditor` | Insert interactive form fields into the specified pdf document to enable data... |
+| [manipulate-list-items-within-a-pdf-document-to-read-modify-o...](./manipulate-list-items-within-a-pdf-document-to-read-modify-or-extract-specific-entry-data.cs) | `PdfExtractor`, `PdfContentEditor` | Manipulate list items within a pdf document to read modify or extract specifi... |
+| [move-a-form-field-to-a-new-location-within-the-input-pdf-whi...](./move-a-form-field-to-a-new-location-within-the-input-pdf-while-maintaining-its-existing-properties.cs) | `FormEditor` | Move a form field to a new location within the input pdf while maintaining it... |
+| [programmatically-apply-visual-styling-to-a-specific-form-fie...](./programmatically-apply-visual-styling-to-a-specific-form-field-in-a-given-pdf-document.cs) | `FormEditor` | Programmatically apply visual styling to a specific form field in a given pdf... |
+| [programmatically-insert-a-submit-button-with-a-specified-url...](./programmatically-insert-a-submit-button-with-a-specified-url-into-an-existing-pdf-document.cs) | `FormEditor` | Programmatically insert a submit button with a specified url into an existing... |
+| [read-pdf-content-from-a-file-stream-and-import-it-into-the-a...](./read-pdf-content-from-a-file-stream-and-import-it-into-the-application-for-further-processing.cs) | `PdfExtractor` | Read pdf content from a file stream and import it into the application for fu... |
+| [remove-a-specific-list-item-from-an-existing-pdf-document-wh...](./remove-a-specific-list-item-from-an-existing-pdf-document-while-preserving-the-remaining-content.cs) | `FormEditor` | Remove a specific list item from an existing pdf document while preserving th... |
+| [send-a-pdf-file-to-the-printer-api-to-generate-a-hard-copy-o...](./send-a-pdf-file-to-the-printer-api-to-generate-a-hard-copy-output-with-default-print-settings.cs) |  | Send a pdf file to the printer api to generate a hard copy output with defaul... |
+| [specify-how-to-process-an-input-pdf-including-loading-parsin...](./specify-how-to-process-an-input-pdf-including-loading-parsing-and-programmatically-accessing-its.cs) | `PdfFileInfo`, `PdfExtractor` | Specify how to process an input pdf including loading parsing and programmati... |
+| [transfer-form-data-from-a-source-pdf-into-an-fdf-file-using-...](./transfer-form-data-from-a-source-pdf-into-an-fdf-file-using-the-input-pdf-as-reference.cs) | `Form` | Transfer form data from a source pdf into an fdf file using the input pdf as ... |
+| [transform-an-input-pdf-file-into-a-new-pdf-output-applying-d...](./transform-an-input-pdf-file-into-a-new-pdf-output-applying-designated-processing-or-format-changes.cs) | `PdfPageEditor` | Transform an input pdf file into a new pdf output applying designated process... |
+| [transform-data-from-a-source-pdf-into-several-pdf-output-for...](./transform-data-from-a-source-pdf-into-several-pdf-output-formats-while-maintaining-content-fidelity.cs) | `PdfFileEditor` | Transform data from a source pdf into several pdf output formats while mainta... |
+| [transform-pdf-content-into-a-new-pdf-document-while-preservi...](./transform-pdf-content-into-a-new-pdf-document-while-preserving-all-original-data-fidelity-and-struct.cs) | `PdfFileEditor` | Transform pdf content into a new pdf document while preserving all original d... |
+| [utilize-the-formeditor-class-to-manipulate-and-retrieve-data...](./utilize-the-formeditor-class-to-manipulate-and-retrieve-data-from-an-input-pdf-document.cs) |  | Utilize the formeditor class to manipulate and retrieve data from an input pd... |
 
 ## Category Statistics
 - Total examples: 24
@@ -87,8 +103,8 @@ See the root [agents.md](../agents.md) for repository-wide conventions and bound
   - **Common Mistakes** — verified anti-patterns that cause build failures
   - **Domain Knowledge** — cross-cutting API-specific gotchas
   - **Testing Guide** — build and run verification steps
-- Review code examples in this folder for Facades - Forms patterns
+- Review code examples in this folder for facades-forms patterns
 
 <!-- AUTOGENERATED:START -->
-Updated: 2026-03-10 | Run: `20260310_190822_2219ed`
+Updated: 2026-03-11 | Run: `20260311_113434_4e2f4b`
 <!-- AUTOGENERATED:END -->
