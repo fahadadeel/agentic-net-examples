@@ -1,38 +1,230 @@
-# Aspose.Imaging for .NET — Agent Index
+---
+name: aspose-imaging-examples
+description: AI-friendly C# code examples for Aspose.Imaging for .NET
+language: csharp
+framework: net8.0
+package: Aspose.Imaging
+---
 
-> AI-friendly master index for all validated C# examples in this repository.
-> Use this file to discover available categories, example counts, and entry points.
+# Aspose.Imaging for .NET Examples
 
-## Overview
+AI-friendly repository containing validated C# examples for Aspose.Imaging for .NET API.
 
-| Metric | Value |
-|--------|-------|
-| Total Examples | 396 |
-| Categories | 2 |
-| Overall Pass Rate | 100.0% |
-| Last Updated | 2026-03-06 |
+## Persona
 
-## Categories
+You are a C# developer specializing in image processing using Aspose.Imaging for .NET.
+When working in this repository:
+- Each `.cs` file is a **standalone Console Application** - do not create multi-file projects
+- All examples must **compile and run** without errors using `dotnet build` and `dotnet run`
+- Follow the conventions, boundaries, and anti-patterns documented below exactly
+- Use the **Command Reference** section for build/run commands
 
-| Category | Examples | Pass Rate | Detail |
-|----------|----------|-----------|--------|
-| [Conversion](./examples/Conversion/) | 162 | 100.0% | [detail](./examples/Conversion/agents.md) |
-| [Kernel Filters](./examples/Kernel_Filters/) | 234 | 100.0% | [detail](./examples/Kernel_Filters/agents.md) |
+## Repository Overview
 
-## How to Navigate
+This repository contains **396** working code examples demonstrating Aspose.Imaging for .NET capabilities.
 
-Each category folder contains:
-- `*.cs` — standalone C# console examples (compile and run directly)
-- `agents.md` — full task list with pass/fail status for that category
+**Statistics** (as of 2026-03-15):
+- Total Examples: 396
+- Categories: 2
+- Overall Pass Rate: 100.0%
 
-- [`examples/Conversion/`](./examples/Conversion/)
-- [`examples/Kernel_Filters/`](./examples/Kernel_Filters/)
+## Category Details
 
-## Code Conventions
+### conversion
+- Examples: 162
+- Guide: [agents.md](./conversion/agents.md)
 
-- No `var` keyword — all types explicitly declared
-- `using` blocks for all `IDisposable` objects
-- Each file is self-contained and independently runnable
+### kernel-filters
+- Examples: 234
+- Guide: [agents.md](./kernel-filters/agents.md)
+
+## Boundaries
+
+### Always
+
+These rules are mandatory for every example.
+
+#### Use explicit types - never use `var`
+```csharp
+// CORRECT
+using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png"))
+{
+    RasterImage raster = (RasterImage)image;
+    PngOptions options = new PngOptions();
+}
+
+// WRONG
+// var image = Aspose.Imaging.Image.Load("input.png");
+```
+
+#### Use `using` blocks for IDisposable objects
+```csharp
+// CORRECT
+using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png"))
+{
+    image.Save("output.png");
+}
+
+// WRONG - memory leak, file lock not released
+// Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png");
+// image.Save("output.png");
+```
+
+#### Fully qualify the Image class to avoid ambiguity
+```csharp
+// CORRECT
+using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png"))
+{ }
+
+// WRONG - ambiguous with System.Drawing.Image
+// using (Image image = Image.Load("input.png")) { }
+```
+
+#### Save the image after all modifications
+```csharp
+using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png"))
+{
+    // ... make modifications ...
+    image.Save("output.png");
+}
+```
+
+### Ask First
+
+Check with a human before doing any of these:
+- **Creating multi-file projects** - each example must be a single `.cs` file
+- **Using deprecated APIs** - check the Aspose.Imaging changelog for the current API surface
+- **Adding NuGet packages** beyond `Aspose.Imaging` - the `.csproj` template only includes Aspose.Imaging
+- **Modifying shared infrastructure** - `.csproj` templates, `agents.md` files, CI configs
+
+### Never
+
+- Never use `var` for variable declarations
+- Never use unqualified `Image` - always use `Aspose.Imaging.Image`
+- Never forget to dispose images - always use `using` blocks
+- Never modify `agents.md` files - they are auto-generated
+- Never modify the `.csproj` template - it is generated
+
+## Common Mistakes (Anti-Patterns)
+
+### Unqualified Image Type
+```csharp
+// WRONG - CS0104 ambiguous between System.Drawing.Image and Aspose.Imaging.Image
+Image image = Image.Load("input.png");
+```
+```csharp
+// CORRECT
+Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png");
+```
+
+### Missing using block
+```csharp
+// WRONG - memory leak, file lock not released
+Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png");
+image.Save("output.png");
+```
+```csharp
+// CORRECT
+using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png"))
+{
+    image.Save("output.png");
+}
+```
+
+### Using var
+```csharp
+// WRONG
+var image = Aspose.Imaging.Image.Load("input.png");
+var options = new PngOptions();
+```
+```csharp
+// CORRECT
+Aspose.Imaging.Image image = Aspose.Imaging.Image.Load("input.png");
+PngOptions options = new PngOptions();
+```
+
+## Repository Structure
+
+```
+agents.md
+README.md
++-- conversion/
++-- kernel-filters/
+```
+
+## Category Index
+
+| Category | Examples | Pass Rate | Details |
+|----------|----------|-----------|---------|
+| [Conversion](./conversion/) | 162 | 100.0% | [agents.md](./conversion/agents.md) |
+| [Kernel Filters](./kernel-filters/) | 234 | 100.0% | [agents.md](./kernel-filters/agents.md) |
+
+## Command Reference
+
+### Build and Run
+```bash
+# Create a new project (if needed)
+dotnet new console -n ExampleProject --framework net8.0
+
+# Add Aspose.Imaging NuGet package
+dotnet add package Aspose.Imaging
+
+# Build
+dotnet build --configuration Release --verbosity minimal
+
+# Run
+dotnet run
+```
+
+### Project File (.csproj)
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspose.Imaging" Version="*" />
+  </ItemGroup>
+</Project>
+```
+
+## Testing Guide
+
+Every example must pass these verification steps.
+
+### Build Verification
+```bash
+dotnet build --configuration Release --verbosity minimal
+```
+- **Success**: Exit code 0, no `CS` error codes in output
+- **Failure**: Any `error CS####` line indicates a build failure
+
+### Common Error Codes
+| Code | Meaning | Fix |
+|------|---------|-----|
+| `CS0104` | Ambiguous type reference | Use `Aspose.Imaging.Image` fully qualified |
+| `CS1061` | Member does not exist on type | Check Aspose.Imaging API docs |
+| `CS0246` | Type or namespace not found | Add missing `using` directive |
+| `CS0029` | Cannot convert type | Cast explicitly or use correct type |
+
+## How to Use These Examples
+
+### Prerequisites
+- .NET SDK (8.0 or higher)
+- Aspose.Imaging for .NET (via NuGet)
+
+### Running an Example
+1. Navigate to any category folder
+2. Each .cs file is a standalone Console Application
+3. Compile and run:
+   ```bash
+   dotnet run <example-file.cs>
+   ```
+
+<!-- AUTOGENERATED:START -->
+Updated: 2026-03-15 | Run: `20260315_101721` | Examples: 396 | Categories: 2
+<!-- AUTOGENERATED:END -->
 
 ---
-*Auto-generated by agent-aspose-imaging-examples | Run `20260306_162511` | 2026-03-06*
+*This repository is maintained by automated code generation. Last updated: 2026-03-15 | Total examples: 396*
