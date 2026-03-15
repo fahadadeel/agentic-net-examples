@@ -6,8 +6,8 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Examples | 554 |
-| Categories | 4 |
+| Total Examples | 722 |
+| Categories | 5 |
 | Overall Pass Rate | 100.0% |
 | Last Updated | 2026-03-15 |
 
@@ -19,6 +19,7 @@ README.md
 +-- conversion/
 +-- image-and-photo-filters/
 +-- kernel-filters/
++-- manipulate-different-image-file-formats/
 +-- merge-images/
 ```
 
@@ -29,6 +30,7 @@ README.md
 | [Conversion](./conversion/) | 162 | 100.0% | [agents.md](./conversion/agents.md) |
 | [Image and Photo Filters](./image-and-photo-filters/) | 64 | 100.0% | [agents.md](./image-and-photo-filters/agents.md) |
 | [Kernel Filters](./kernel-filters/) | 233 | 100.0% | [agents.md](./kernel-filters/agents.md) |
+| [Manipulate Different Image File Formats](./manipulate-different-image-file-formats/) | 168 | 100.0% | [agents.md](./manipulate-different-image-file-formats/agents.md) |
 | [Merge Images](./merge-images/) | 95 | 100.0% | [agents.md](./merge-images/agents.md) |
 
 ## How to Use
@@ -45,4 +47,4 @@ dotnet run <example-file.cs>
 - Aspose.Imaging for .NET (via NuGet)
 
 ---
-*Maintained by [agent-aspose-imaging-examples](https://github.com/agent-aspose-imaging-examples) | Run `20260315_151704` | 2026-03-15*
+*Maintained by [agent-aspose-imaging-examples](https://github.com/agent-aspose-imaging-examples) | Run `20260315_152739` | 2026-03-15*
