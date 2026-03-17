@@ -16,7 +16,7 @@ jobs:
       - name: Setup template
         run: |
           mkdir -p template
-          cat > template/template.csproj << 'EOF'
+          cat > template/template.csproj <<'EOF'
           <Project Sdk="Microsoft.NET.Sdk">
             <PropertyGroup>
               <OutputType>Exe</OutputType>
@@ -27,6 +27,8 @@ jobs:
             </ItemGroup>
           </Project>
           EOF
+          # Strip leading whitespace from the generated csproj
+          sed -i 's/^[[:space:]]*//' template/template.csproj
           echo 'class Program { static void Main() {} }' > template/Program.cs
           dotnet restore template/ --verbosity quiet
 
