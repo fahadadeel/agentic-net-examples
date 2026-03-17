@@ -49,18 +49,20 @@ jobs:
               PASS=$((PASS + 1))
             else
               FAIL=$((FAIL + 1))
+              # Replace "Program.cs" with the actual source filename in error output
+              ERRORS=$(echo "$BUILD_OUTPUT" | grep -E "error CS|error :" | sed "s|Program\.cs|$f|g" || true)
               echo ""
               echo "::error file=$f::Build failed"
               echo "========================================="
               echo "❌ FAIL: $f"
               echo "========================================="
-              echo "$BUILD_OUTPUT" | grep -E "error CS|error :" || true
+              echo "$ERRORS"
               echo ""
               # Add to summary
               echo "<details><summary>❌ $f</summary>" >> "$GITHUB_STEP_SUMMARY"
               echo "" >> "$GITHUB_STEP_SUMMARY"
               echo '```' >> "$GITHUB_STEP_SUMMARY"
-              echo "$BUILD_OUTPUT" | grep -E "error CS|error :" >> "$GITHUB_STEP_SUMMARY" || true
+              echo "$ERRORS" >> "$GITHUB_STEP_SUMMARY"
               echo '```' >> "$GITHUB_STEP_SUMMARY"
               echo "</details>" >> "$GITHUB_STEP_SUMMARY"
               echo "" >> "$GITHUB_STEP_SUMMARY"
