@@ -1,0 +1,47 @@
+name: Build All Examples
+
+on:
+  workflow_dispatch:  # Manual trigger only (Actions tab → Run workflow)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Setup template
+        run: |
+          mkdir -p template
+          cat > template/template.csproj << 'EOF'
+          <Project Sdk="Microsoft.NET.Sdk">
+            <PropertyGroup>
+              <OutputType>Exe</OutputType>
+              <TargetFramework>net9.0</TargetFramework>
+            </PropertyGroup>
+            <ItemGroup>
+              <PackageReference Include="Aspose.Imaging" Version="26.2.0" />
+            </ItemGroup>
+          </Project>
+          EOF
+          echo 'class Program { static void Main() {} }' > template/Program.cs
+          dotnet restore template/ --verbosity quiet
+
+      - name: Compile all examples
+        run: |
+          PASS=0; FAIL=0
+          while IFS= read -r f; do
+            cp "$f" template/Program.cs
+            if dotnet build template/ --no-restore --nologo -v quiet 2>/dev/null; then
+              ((PASS++))
+            else
+              ((FAIL++))
+              echo "::error file=$f::Build failed"
+            fi
+          done < <(find . -name '*.cs' -not -path './template/*' | sort)
+          echo "### Build Results" >> "$GITHUB_STEP_SUMMARY"
+          echo "✅ Passed: $PASS | ❌ Failed: $FAIL" >> "$GITHUB_STEP_SUMMARY"
+          [ "$FAIL" -eq 0 ] || exit 1
