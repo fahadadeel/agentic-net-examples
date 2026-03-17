@@ -21,6 +21,10 @@ When working in this repository:
 
 ## Repository Overview
 
+This repository contains **33** working code examples demonstrating Aspose.Words for .NET capabilities.
+
+**Statistics** (as of 2026-03-16):
+- Total Examples: 33
 This repository contains **32** working code examples demonstrating Aspose.Words for .NET capabilities.
 
 **Statistics** (as of 2026-03-16):
@@ -37,6 +41,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### vba-macros
+- Examples: 33
+- Guide: [AGENTS.md](./vba-macros/AGENTS.md)
 ### watermark
 - Examples: 32
 - Guide: [AGENTS.md](./watermark/AGENTS.md)
