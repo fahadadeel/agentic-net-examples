@@ -39,9 +39,9 @@ jobs:
           while IFS= read -r f; do
             cp "$f" template/Program.cs
             if dotnet build template/ --no-restore --nologo -v quiet 2>/dev/null; then
-              ((PASS++))
+              PASS=$((PASS + 1))
             else
-              ((FAIL++))
+              FAIL=$((FAIL + 1))
               echo "::error file=$f::Build failed"
             fi
           done < /tmp/cs_files.txt
