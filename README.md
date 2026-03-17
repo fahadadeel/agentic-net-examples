@@ -19,6 +19,9 @@ Top-level folders are categories. Examples are stored **directly inside category
 ### Categories
 
 - `vba-macros/`
+- `watermark/`
+- `working-with-table/`
+- `comments/`
 
 ## How to build
 
