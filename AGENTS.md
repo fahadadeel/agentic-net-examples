@@ -45,6 +45,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### split-document
+- Examples: 29
+- Guide: [AGENTS.md](./split-document/AGENTS.md)
 ### track-changes
 - Examples: 40
 - Guide: [AGENTS.md](./track-changes/AGENTS.md)
