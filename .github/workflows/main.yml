@@ -33,6 +33,7 @@ jobs:
       - name: Compile all examples
         run: |
           PASS=0; FAIL=0
+          find . -name '*.cs' -not -path './template/*' | sort > /tmp/cs_files.txt
           while IFS= read -r f; do
             cp "$f" template/Program.cs
             if dotnet build template/ --no-restore --nologo -v quiet 2>/dev/null; then
@@ -41,7 +42,8 @@ jobs:
               ((FAIL++))
               echo "::error file=$f::Build failed"
             fi
-          done < <(find . -name '*.cs' -not -path './template/*' | sort)
+          done < /tmp/cs_files.txt
           echo "### Build Results" >> "$GITHUB_STEP_SUMMARY"
           echo "✅ Passed: $PASS | ❌ Failed: $FAIL" >> "$GITHUB_STEP_SUMMARY"
           [ "$FAIL" -eq 0 ] || exit 1
+
