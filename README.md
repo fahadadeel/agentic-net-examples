@@ -18,6 +18,7 @@ Top-level folders are categories. Examples are stored **directly inside category
 
 ### Categories
 
+- `watermark/`
 - `working-with-table/`
 - `comments/`
 
