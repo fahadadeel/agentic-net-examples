@@ -36,16 +36,41 @@ jobs:
         run: |
           PASS=0; FAIL=0
           find . -name '*.cs' -not -path './template/*' | sort > /tmp/cs_files.txt
+          TOTAL=$(wc -l < /tmp/cs_files.txt)
+          echo "Found $TOTAL examples to compile"
+          echo ""
+          # Start summary table
+          echo "### Build Results" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
           while IFS= read -r f; do
             cp "$f" template/Program.cs
-            if dotnet build template/ --no-restore --nologo -v quiet 2>/dev/null; then
+            BUILD_OUTPUT=$(dotnet build template/ --no-restore --nologo 2>&1) || true
+            if echo "$BUILD_OUTPUT" | grep -q "Build succeeded"; then
               PASS=$((PASS + 1))
             else
               FAIL=$((FAIL + 1))
+              echo ""
               echo "::error file=$f::Build failed"
+              echo "========================================="
+              echo "❌ FAIL: $f"
+              echo "========================================="
+              echo "$BUILD_OUTPUT" | grep -E "error CS|error :" || true
+              echo ""
+              # Add to summary
+              echo "<details><summary>❌ $f</summary>" >> "$GITHUB_STEP_SUMMARY"
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+              echo "$BUILD_OUTPUT" | grep -E "error CS|error :" >> "$GITHUB_STEP_SUMMARY" || true
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+              echo "</details>" >> "$GITHUB_STEP_SUMMARY"
+              echo "" >> "$GITHUB_STEP_SUMMARY"
             fi
           done < /tmp/cs_files.txt
-          echo "### Build Results" >> "$GITHUB_STEP_SUMMARY"
-          echo "✅ Passed: $PASS | ❌ Failed: $FAIL" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**✅ Passed: $PASS | ❌ Failed: $FAIL | Total: $TOTAL**" >> "$GITHUB_STEP_SUMMARY"
+          echo ""
+          echo "========================================="
+          echo "✅ Passed: $PASS | ❌ Failed: $FAIL | Total: $TOTAL"
+          echo "========================================="
           [ "$FAIL" -eq 0 ] || exit 1
 
