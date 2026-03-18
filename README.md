@@ -14,6 +14,7 @@ Examples are organized by feature category:
 - `comments-and-notes/` - 25 example(s)
 - `conversion/` - 199 example(s)
 - `design-presentations/` - 139 example(s)
+- `manage-presentation/` - 90 example(s)
 - `manage-presentation-content/` - 233 example(s)
 - `manage-presentation-media-files/` - 180 example(s)
 - `manage-presentation-text/` - 141 example(s)
