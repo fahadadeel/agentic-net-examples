@@ -21,6 +21,10 @@ When working in this repository:
 
 ## Repository Overview
 
+This repository contains **39** working code examples demonstrating Aspose.Words for .NET capabilities.
+
+**Statistics** (as of 2026-03-16):
+- Total Examples: 39
 This repository contains **88** working code examples demonstrating Aspose.Words for .NET capabilities.
 
 **Statistics** (as of 2026-03-16):
@@ -77,6 +81,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### hyphenation
+- Examples: 39
+- Guide: [AGENTS.md](./hyphenation/AGENTS.md)
 ### images
 - Examples: 88
 - Guide: [AGENTS.md](./images/AGENTS.md)
