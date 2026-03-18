@@ -26,11 +26,11 @@ When working in this repository:
 
 ## Repository Overview
 
-This repository contains **1747** working code examples demonstrating Aspose.Slides for .NET capabilities.
+This repository contains **1837** working code examples demonstrating Aspose.Slides for .NET capabilities.
 
 **Statistics** (as of 2026-03-18):
-- Total Examples: 1747
-- Categories: 15
+- Total Examples: 1837
+- Categories: 16
 
 ## Category Details
 
@@ -53,6 +53,10 @@ This repository contains **1747** working code examples demonstrating Aspose.Sli
 ### design-presentations
 - Examples: 139
 - Guide: [agents.md](./design-presentations/agents.md)
+
+### manage-presentation
+- Examples: 90
+- Guide: [agents.md](./manage-presentation/agents.md)
 
 ### manage-presentation-content
 - Examples: 233
