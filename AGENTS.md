@@ -81,6 +81,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### form-fields
+- Examples: 30
+- Guide: [AGENTS.md](./form-fields/AGENTS.md)
 ### hyphenation
 - Examples: 39
 - Guide: [AGENTS.md](./hyphenation/AGENTS.md)
