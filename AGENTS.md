@@ -65,6 +65,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### ole-objects
+- Examples: 29
+- Guide: [AGENTS.md](./ole-objects/AGENTS.md)
 ### paragraphs
 - Examples: 34
 - Guide: [AGENTS.md](./paragraphs/AGENTS.md)
