@@ -69,6 +69,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### mail-merge
+- Examples: 30
+- Guide: [AGENTS.md](./mail-merge/AGENTS.md)
 ### officemath
 - Examples: 30
 - Guide: [AGENTS.md](./officemath/AGENTS.md)
