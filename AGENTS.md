@@ -73,6 +73,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### join-documents
+- Examples: 34
+- Guide: [AGENTS.md](./join-documents/AGENTS.md)
 ### linq-reporting
 - Examples: 395
 - Guide: [AGENTS.md](./linq-reporting/AGENTS.md)
