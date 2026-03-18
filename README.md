@@ -19,6 +19,18 @@ Top-level folders are categories. Examples are stored **directly inside category
 ### Categories
 
 - `ole-objects/`
+- `paragraphs/`
+- `programming-with-documents/`
+- `range/`
+- `rendering/`
+- `security-and-protection/`
+- `shapes/`
+- `split-document/`
+- `track-changes/`
+- `vba-macros/`
+- `watermark/`
+- `working-with-table/`
+- `comments/`
 
 ## How to build
 
