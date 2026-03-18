@@ -85,6 +85,9 @@ This repository contains **29** working code examples demonstrating Aspose.Words
 
 ## Category Details
 
+### extraction
+- Examples: 30
+- Guide: [AGENTS.md](./extraction/AGENTS.md)
 ### find-and-replace
 - Examples: 62
 - Guide: [AGENTS.md](./find-and-replace/AGENTS.md)
