@@ -36,67 +36,67 @@ This repository contains **1837** working code examples demonstrating Aspose.Sli
 
 ### 3d-presentations
 - Examples: 11
-- Guide: [agents.md](./3d-presentations/agents.md)
+- Guide: [AGENTS.md](./3d-presentations/AGENTS.md)
 
 ### animations
 - Examples: 20
-- Guide: [agents.md](./animations/agents.md)
+- Guide: [AGENTS.md](./animations/AGENTS.md)
 
 ### comments-and-notes
 - Examples: 25
-- Guide: [agents.md](./comments-and-notes/agents.md)
+- Guide: [AGENTS.md](./comments-and-notes/AGENTS.md)
 
 ### conversion
 - Examples: 199
-- Guide: [agents.md](./conversion/agents.md)
+- Guide: [AGENTS.md](./conversion/AGENTS.md)
 
 ### design-presentations
 - Examples: 139
-- Guide: [agents.md](./design-presentations/agents.md)
+- Guide: [AGENTS.md](./design-presentations/AGENTS.md)
 
 ### manage-presentation
 - Examples: 90
-- Guide: [agents.md](./manage-presentation/agents.md)
+- Guide: [AGENTS.md](./manage-presentation/AGENTS.md)
 
 ### manage-presentation-content
 - Examples: 233
-- Guide: [agents.md](./manage-presentation-content/agents.md)
+- Guide: [AGENTS.md](./manage-presentation-content/AGENTS.md)
 
 ### manage-presentation-media-files
 - Examples: 180
-- Guide: [agents.md](./manage-presentation-media-files/agents.md)
+- Guide: [AGENTS.md](./manage-presentation-media-files/AGENTS.md)
 
 ### manage-presentation-text
 - Examples: 141
-- Guide: [agents.md](./manage-presentation-text/agents.md)
+- Guide: [AGENTS.md](./manage-presentation-text/AGENTS.md)
 
 ### manage-tags-and-custom-data
 - Examples: 17
-- Guide: [agents.md](./manage-tags-and-custom-data/agents.md)
+- Guide: [AGENTS.md](./manage-tags-and-custom-data/AGENTS.md)
 
 ### math-equations
 - Examples: 35
-- Guide: [agents.md](./math-equations/agents.md)
+- Guide: [AGENTS.md](./math-equations/AGENTS.md)
 
 ### vba-macros
 - Examples: 23
-- Guide: [agents.md](./vba-macros/agents.md)
+- Guide: [AGENTS.md](./vba-macros/AGENTS.md)
 
 ### working-with-charts
 - Examples: 329
-- Guide: [agents.md](./working-with-charts/agents.md)
+- Guide: [AGENTS.md](./working-with-charts/AGENTS.md)
 
 ### working-with-shapes
 - Examples: 166
-- Guide: [agents.md](./working-with-shapes/agents.md)
+- Guide: [AGENTS.md](./working-with-shapes/AGENTS.md)
 
 ### working-with-slides
 - Examples: 111
-- Guide: [agents.md](./working-with-slides/agents.md)
+- Guide: [AGENTS.md](./working-with-slides/AGENTS.md)
 
 ### working-with-tables
 - Examples: 118
-- Guide: [agents.md](./working-with-tables/agents.md)
+- Guide: [AGENTS.md](./working-with-tables/AGENTS.md)
 
 
 
