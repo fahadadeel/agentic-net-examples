@@ -11,7 +11,7 @@ jobs:
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: '10.0.x'
 
       - name: Setup template
         run: |
@@ -19,12 +19,11 @@ jobs:
           cat > template/template.csproj <<'EOF'
           <Project Sdk="Microsoft.NET.Sdk">
             <PropertyGroup>
-            <OutputType>Exe</OutputType>
-              <TargetFramework>net9.0</TargetFramework>
-            <LangVersion>latest</LangVersion>
-          </PropertyGroup>
+              <OutputType>Exe</OutputType>
+              <TargetFramework>net10.0</TargetFramework>
+            </PropertyGroup>
             <ItemGroup>
-              <PackageReference Include="Aspose.Slides.NET6.CrossPlatform" Version="26.1.0" />
+              <PackageReference Include="Aspose.Slides.NET" Version="26.3.0" />
             </ItemGroup>
           </Project>
           EOF
